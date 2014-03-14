@@ -1,0 +1,3 @@
+<?php
+
+Kint::enabled(true);
