@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'jjl',
 			'username'  => 'root',
-			'password'  => 'zhimatech',
+			'password'  => '6399998',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
