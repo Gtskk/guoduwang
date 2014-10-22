@@ -67,6 +67,8 @@ return array(
 
 	'key' => 'ILe3ieS8D3gerppmlCYuHw9MZJW2icCY',
 
+	'cipher' => MCRYPT_RIJNDAEL_256,
+
 	/*
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
@@ -115,6 +117,7 @@ return array(
 		'Torann\Currency\CurrencyServiceProvider',
 		'Flatten\FlattenServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Rock\Gtskk\GtskkServiceProvider',
 
 	),
 

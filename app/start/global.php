@@ -81,3 +81,9 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+View::addNamespace('theme', [
+    base_path().'/themes/default/views',
+    app_path().'/views'
+]);

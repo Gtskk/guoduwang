@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'jjl',
-			'username'  => 'root',
-			'password'  => '6399998',
+			'database'  => 'gdw',
+			'username'  => $_ENV['DATABASE_USER'],
+			'password'  => $_ENV['DATABASE_PASS'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -77,7 +77,7 @@ return array(
 		'sqlsrv' => array(
 			'driver'   => 'sqlsrv',
 			'host'     => '58.215.75.168,223',
-			'database' => 'jjl',
+			'database' => 'gdw',
 			'username' => 'sa',
 			'password' => 'lon@123456',
 			'prefix'   => '',
