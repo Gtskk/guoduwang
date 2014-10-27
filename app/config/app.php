@@ -54,6 +54,8 @@ return array(
 
 	'locale' => 'zh',
 
+	'fallback_locale' => 'en',
+
 	/*
 	|--------------------------------------------------------------------------
 	| Encryption Key
