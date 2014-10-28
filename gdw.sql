@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2014-10-27 04:01:05
+-- Generation Time: 2014-10-28 12:32:48
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -102,11 +102,19 @@ CREATE TABLE IF NOT EXISTS `members` (
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `phone` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `status` int(11) NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `members_period_id_foreign` (`period_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `members`
+--
+
+INSERT INTO `members` (`id`, `name`, `period_id`, `username`, `password`, `email`, `phone`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'rock', 1, 'rock', '$2y$10$86YIO2kk3.tlRpc9g5xqMuz/h1kOSYcsFB/9AxSR2/tT01/yuWpZG', '1071040729@qq.com', '15212230025', 1, 'O6zuVEkHCrHX0bZfaNeT2w5m7dUYWZk4INGxW8um1LxtDrgYv49JS28yKZ9A', '2014-10-28 01:05:41', '2014-10-28 02:44:07');
 
 -- --------------------------------------------------------
 
@@ -158,7 +166,14 @@ CREATE TABLE IF NOT EXISTS `periods` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `period` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `periods`
+--
+
+INSERT INTO `periods` (`id`, `period`) VALUES
+(1, 'October');
 
 -- --------------------------------------------------------
 
@@ -363,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
-(1, 'tttt6399998@126.com', '$2y$10$jVfH7i6tXdsgrdQrI4SJAOqrrRdywWZl7DbAEP8AYMnUH5AktGxWe', '{"superuser":1}', 1, NULL, '2014-10-21 23:17:44', '2014-10-22 18:00:55', '$2y$10$HD2Ph7FQ1a71aQ99BBTMa.4gMa81hUvOvDymcqqbHkloINTXYN/dy', NULL, 'Rock', 'Zhang', '2014-10-21 23:17:44', '2014-10-22 18:00:55');
+(1, 'tttt6399998@126.com', '$2y$10$jVfH7i6tXdsgrdQrI4SJAOqrrRdywWZl7DbAEP8AYMnUH5AktGxWe', '{"superuser":1}', 1, NULL, '2014-10-21 23:17:44', '2014-10-27 22:27:06', '$2y$10$yiDuKJz.RVka1yAgl6iWKeJMc/s1hBhM.Ixok0ztJqQOchisQQIX6', NULL, 'Rock', 'Zhang', '2014-10-21 23:17:44', '2014-10-27 22:27:06');
 
 -- --------------------------------------------------------
 
