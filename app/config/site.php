@@ -12,4 +12,5 @@ return array(
         '优选品牌' => array('type' => 'single'),
         '装修设计' => array('type' => 'single'),
     ),
+    'theme' => 'gtskk',
 );

@@ -12,22 +12,24 @@ class LoginController extends BaseController {
 		if(Auth::check()){
 			return Redirect::to('/');
 		}else{
-			return View::make('members.login');
+			return View::make('theme::members.login');
 		}
 	}
 
 	public function post_login(){
-		$user_details = Input::all();
+		$user_details = Input::only('username', 'password');
 		$rules = array('username' => 'required', 'password' => 'required');
 		$validation = Validator::make($user_details, $rules);
 		if($validation->fails()){
-			return Redirect::to('login')->with_errors($validation);
+			return Redirect::to('login')->withErrors($validation);
 		}
 
 		$user_details['status'] = 1;
+		$remember = Input::get('remember');
 
-		if(!Auth::attempt($user_details)){
-			return Redirect::to('login')->with_errors('error', '用户名或密码错误或账户被禁用');
+		if(!Auth::attempt($user_details, $remember)){
+			Session::flash('error', '用户名或密码错误或账户被禁用');
+			return Redirect::to('login');
 		}else{
 			$user = Auth::user();
 
@@ -66,6 +68,13 @@ class LoginController extends BaseController {
 	                ->with('error', '禁用的用户不能登陆');
 	        }
 		}*/
+	}
+
+
+	public function logout()
+	{
+		Auth::logout();
+		return Redirect::to('login');
 	}
 
 }

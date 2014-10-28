@@ -36,4 +36,5 @@ Route::group(array('before' => 'auth'), function(){
 	));
 });
 Route::get('login', 'LoginController@index');
-Route::post('login', 'LoginController@post_login');
+Route::post('login', array('before'=>'csrf', 'uses'=>'LoginController@post_login'));
+Route::get('logout', 'LoginController@logout');

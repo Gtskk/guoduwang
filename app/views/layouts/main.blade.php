@@ -30,7 +30,7 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                </button>
-	                <a class="navbar-brand" href="#">Project name</a>
+	                <a class="navbar-brand" href="#">{{ Config::get('site.site_name') }}</a>
 	            </div>
 
 	            <div id="navbar" class="navbar-collapse collapse">
@@ -70,15 +70,7 @@
 	                @if(Auth::check())
 	                    <h3 class="pull-right text-success">Hello, {{{ Auth::user()->name }}}</h3>
 	                @else
-	                <form action="{{ URL::action('LoginController@post_login') }}" method="post" class="navbar-form navbar-right" role="form">
-	                    <div class="form-group">
-	                        <input type="text" name="username" placeholder="Username" class="form-control">
-	                    </div>
-	                    <div class="form-group">
-	                        <input type="password" name="password" placeholder="Password" class="form-control">
-	                    </div>
-	                    <button type="submit" class="btn btn-success">Sign in</button>
-	                </form>
+	                	@yield('loginform')
 	                @endif
 	            </div><!--/.navbar-collapse -->
 
