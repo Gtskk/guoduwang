@@ -33,7 +33,8 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+// Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useDailyFiles(storage_path().'/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,14 @@ App::down(function()
 require app_path().'/filters.php';
 
 
+/*
+|--------------------------------------------------------------------------
+| Add namespace for themes
+|--------------------------------------------------------------------------
+|
+| Add add the theme functions.
+|
+*/
 View::addNamespace('theme', [
     base_path().'/themes/default/views',
     app_path().'/views'
