@@ -21,6 +21,7 @@ class CreateMembersTable extends Migration {
 			$table->string('email', 50);
 			$table->string('phone', 50);
 			$table->integer('status');
+			$table->rememberToken();
 			$table->timestamps();
 		});
 	}

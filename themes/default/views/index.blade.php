@@ -1,24 +1,40 @@
 @extends('layouts.main')
 
 @section('content')
-    <!-- banner -->
-    <div id="banner" class="w90 clearfix">
-        <div class="flexslider">
-            <span class="online"><a href="#">在线预约</a></span>
-            <ul class="slides">
-                <li>
-                  <a href="#"><img src="{{ asset('assets/t/banner1.jpg') }}" /></a>
-                </li>
-                <li>
-                  <a href="#"><img src="{{ asset('assets/t/banner2.jpg') }}" /></a>
-                </li>
-                <li>
-                  <a href="#"><img src="{{ asset('assets/t/banner3.jpg') }}" /></a>
-                </li>
-            </ul>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
         </div>
-        <!-- 广告 -->
-        <span class="advert"><a href="#"><img src="{{ asset('assets/t/guanggao.jpg') }}" /></a></span>
     </div>
-    这是测试主题用的哦
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Heading</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Heading</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Heading</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; Company 2014</p>
+        </footer>
+    </div> <!-- /container -->
 @stop
