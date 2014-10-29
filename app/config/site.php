@@ -8,8 +8,8 @@ return array(
 	//主菜单
 	//menu 2 type are available single or dropdown and it must be a route
     'main_menu' => array(
-        '家居乐服务' => array('type' => 'single'),
-        '优选品牌' => array('type' => 'single'),
+        '优选文章' => array('type' => 'single', 'route' => 'posts.index'),
+        '服务项目' => array('type' => 'single', 'route' => 'products.index'),
         '装修设计' => array('type' => 'single'),
     ),
     'theme' => 'gtskk',

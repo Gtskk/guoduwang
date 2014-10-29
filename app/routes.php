@@ -26,15 +26,12 @@ App::missing(function($exception)
 });*/
 
 //前台路由
-Route::group(array('before' => 'auth'), function(){
-	Route::get('/', 'HomeController@showWelcome');
+Route::group(array('before' => 'auth.cpanel:posts.view'), function(){
 	Route::resource('posts', 'PostsController', array('only' => array('index', 'show')));
-	Route::get('comment', 'HomeController@comment');
-	Route::post('/comment_ajax', array(
-		'as' => 'home.comment',
-		'uses' => 'HomeController@comment_ajax'
-	));
 });
+Route::get('products/{cat?}', array('before' => 'auth.cpanel:products.view', 'uses' => 'ProductsController@index', 'as' => 'products.index'));
+Route::get('products/show/{id}', array('before' => 'auth.cpanel:products.view', 'uses' => 'ProductsController@show', 'as' => 'products.show'));
+Route::get('/', 'HomeController@showWelcome');
 Route::get('login', 'LoginController@index');
 Route::post('login', array('before'=>'csrf', 'uses'=>'LoginController@post_login'));
 Route::get('logout', 'LoginController@logout');

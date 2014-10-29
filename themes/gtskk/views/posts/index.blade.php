@@ -1,30 +1,35 @@
-@extends('layouts.main')
+@extends('theme::layouts.main')
 
 @section('content')
 <!--con-->
-<div id="main" class="w1000 mt20 clearfix">
+<div class="container">
 	@if(count($menus))
-	<ul class="activetit clearfix">
-		@foreach($menus as $title => $menu)
-		<li>
-			<a href="{{ route($menu['route'], $menu['param']) }}"@if(Input::get('type') ==$menu['param']['type']) class="current"@endif>
-				{{ $title }}
-			</a>
-		</li>
-		@endforeach
-		<li><a href="#">往期活动</a></li>
-	</ul>
+	<div class="row">
+		<ul class="nav nav-pills nav-justified" role="tablist">
+			@foreach($menus as $title => $menu)
+			<li role="presentation"@if(Input::get('type') == $menu['param']['type']) class="active"@endif>
+				<a href="{{ route($menu['route'], $menu['param']) }}">
+					{{ $title }}
+				</a>
+			</li>
+			@endforeach
+		</ul>
+	</div>
 	@endif
-	<div class="activephoto mt20">
+	<div class="row">
 		@if(count($posts))
 		@foreach($posts as $post)
-		<a href="{{ route('posts.show', $post->id) }}">
-			<img src="{{ asset($post->thumbnail) }}" />
-		</a>
+		<div class="col-xs-6 col-md-3">
+			<a href="{{ route('posts.show', $post->id) }}" class="thumbnail">
+				<img src="{{ asset($post->thumbnail) }}" />
+			</a>
+		</div>
 		@endforeach
+
+		{{ $posts->links() }}
 		@else
 		<h2>暂无新活动</h2>
 		@endif
 	</div>
 </div>
-@stop
+@overwrite

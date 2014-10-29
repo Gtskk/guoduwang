@@ -7,13 +7,13 @@ class ProductsController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index($cat)
+	public function index($cat = 0)
 	{
 		$cats = array($cat);
 		//当前类别信息
 		$curcat = Category::find($cat);
 		//当前类别父类
-		if($curcat->parent != 0){
+		if($curcat && $curcat->parent != 0){
 			$cats[] = $curcat->parent;
 			$curcat = Category::find($curcat->parent);
 		}
@@ -35,7 +35,17 @@ class ProductsController extends BaseController {
 		$datas['children'] = $menus;
 		$datas['products'] = $products;
 
-        return View::make('product', compact('datas'));
+        return View::make('theme::products.index', compact('datas'));
+	}
+
+	/**
+	 * Show a product
+	 *
+	 * @return Response
+	 */
+	public function show($id){
+		$product = Product::find($id);
+		return View::make('products.show', compact('product'));
 	}
 
 }

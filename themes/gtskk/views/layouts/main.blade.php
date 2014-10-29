@@ -30,7 +30,7 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                </button>
-	                <a class="navbar-brand" href="#">{{ Config::get('site.site_name') }}</a>
+	                <a class="navbar-brand" href="{{ URL::to('/') }}">{{ Config::get('site.site_name') }}</a>
 	            </div>
 
 	            <div id="navbar" class="navbar-collapse collapse">
@@ -67,9 +67,9 @@
 	                    @endforeach
 	                </ul>
 
-	                @if(Auth::check())
+	                @if(Sentry::check())
 	                    <h3 class="pull-right text-success">
-	                    	Hello, {{{ Auth::user()->name }}}
+	                    	Hello, {{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
 	                    	<a href="{{ URL::to('logout') }}">Logout</a>
 	                    </h3>
 	                @else
@@ -80,7 +80,7 @@
 	        </div>
 	    </nav>
 
-		@yield('content')
+		@section('content')
 			<div class="container">
 		        <!-- Example row of columns -->
 		        <div class="row">
