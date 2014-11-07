@@ -119,6 +119,8 @@ return array(
 		'Torann\Currency\CurrencyServiceProvider',
 		'Flatten\FlattenServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Zizaco\Confide\ServiceProvider',
+		'Zizaco\Entrust\EntrustServiceProvider',
 		'Rock\Gtskk\GtskkServiceProvider',
 
 	),
@@ -189,9 +191,11 @@ return array(
 		'Former'          => 'Former\Facades\Former',
 		'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Image' 		  => 'Intervention\Image\Facades\Image',
-		'Currency' => 'Torann\Currency\Facades\Currency',
-		'Flatten' => 'Flatten\Facades\Flatten',
-		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		'Currency' 		  => 'Torann\Currency\Facades\Currency',
+		'Flatten' 		  => 'Flatten\Facades\Flatten',
+		'Debugbar' 		  => 'Barryvdh\Debugbar\Facade',
+		'Confide'    	  => 'Zizaco\Confide\Facade',
+		'Entrust'    	  => 'Zizaco\Entrust\EntrustFacade',
 
 	),
 

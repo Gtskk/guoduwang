@@ -7,18 +7,19 @@ class MemberTableSeeder extends Seeder {
 		// Uncomment the below to wipe the table clean before populating
 		// DB::table('member')->truncate();
 
-		$member = array(
-			'name' => 'Rock Zhang',
-			'period_id' => 1,
-			'username' => 'gtskk',
-			'password' => Hash::make('6399998'),
-			'email' => 'tttt6399998@126.com',
-			'phone' => '15212230025',
-			'status' => 1
-		);
+		$member = new Member;
+	    $member->username = 'johndoe';
+	    $member->email = 'johndoe@site.dev';
+	    $member->phone = '15212230025';
+	    $member->password = 'foo_bar_1234';
+	    $member->password_confirmation = 'foo_bar_1234';
+	    $member->confirmation_code = md5(uniqid(mt_rand(), true));
 
-		// Uncomment the below to run the seeder
-		DB::table('members')->insert($member);
+	    if(! $member->save()) {
+	      Log::info('Unable to create member '.$member->username, (array)$member->errors());
+	    } else {
+	      Log::info('Created member "'.$member->username.'" <'.$member->email.'>');
+	    }
 	}
 
 }

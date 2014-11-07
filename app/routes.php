@@ -34,4 +34,16 @@ Route::get('products/show/{id}', array('before' => 'auth.cpanel:products.view', 
 Route::get('/', 'HomeController@showWelcome');
 Route::get('login', 'LoginController@index');
 Route::post('login', array('before'=>'csrf', 'uses'=>'LoginController@post_login'));
-Route::get('logout', 'LoginController@logout');
+Route::get('logout', 'LoginController@logout');//
+
+// Confide routes
+Route::get('members/create', 'MembersController@create');
+Route::post('members', 'MembersController@store');
+Route::get('members/login', 'MembersController@login');
+Route::post('members/login', 'MembersController@doLogin');
+Route::get('members/confirm/{code}', 'MembersController@confirm');
+Route::get('members/forgot_password', 'MembersController@forgotPassword');
+Route::post('members/forgot_password', 'MembersController@doForgotPassword');
+Route::get('members/reset_password/{token}', 'MembersController@resetPassword');
+Route::post('members/reset_password', 'MembersController@doResetPassword');
+Route::get('members/logout', 'MembersController@logout');

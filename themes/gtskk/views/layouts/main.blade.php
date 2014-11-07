@@ -67,13 +67,13 @@
 	                    @endforeach
 	                </ul>
 
-	                @if(Sentry::check())
+	                @if(Auth::check())
 	                    <h3 class="pull-right text-success">
-	                    	Hello, {{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
-	                    	<a href="{{ URL::to('logout') }}">Logout</a>
+	                    	Hello, {{ Confide::user()->username }}
+	                    	<a href="{{ URL::to('members/logout') }}">Logout</a>
 	                    </h3>
 	                @else
-	                	@yield('loginform')
+	                	@include('theme::members.login')
 	                @endif
 	            </div><!--/.navbar-collapse -->
 

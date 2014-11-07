@@ -14,7 +14,9 @@
 		"torann/currency": "dev-master",
 		"anahkiasen/flatten": "dev-master",
 		"raveren/kint": "dev-master",
-		"barryvdh/laravel-debugbar": "dev-master"
+		"barryvdh/laravel-debugbar": "dev-master",
+		"zizaco/confide": "~4.0@dev",
+		"zizaco/entrust": "1.2.*@dev"
 	},
 	"autoload": {
 		"classmap": [

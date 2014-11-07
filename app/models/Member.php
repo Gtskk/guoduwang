@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
+use Zizaco\Confide\ConfideUser;
+use Zizaco\Confide\ConfideUserInterface;
 
-class Member extends Eloquent implements UserInterface, RemindableInterface {
+class Member extends Eloquent implements ConfideUserInterface {
 	/**
 	 * The database table used by the model.
 	 *
@@ -20,46 +20,5 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password');
 
-	/**
-	 * Get the unique identifier for the user.
-	 *
-	 * @return mixed
-	 */
-	public function getAuthIdentifier()
-	{
-		return $this->getKey();
-	}
-
-	/**
-	 * Get the password for the user.
-	 *
-	 * @return string
-	 */
-	public function getAuthPassword()
-	{
-		return $this->password;
-	}
-
-	/**
-	 * Get the e-mail address where password reminders are sent.
-	 *
-	 * @return string
-	 */
-	public function getReminderEmail()
-	{
-		return $this->email;
-	}
-	public static $rules = array();
-
-	public function getRememberToken(){
-		return $this->remember_token;
-	}
-
-	public function setRememberToken($value){
-		$this->remember_token = $value;
-	}
-
-	public function getRememberTokenName(){
-		return 'remember_token';
-	}
+	use ConfideUser;
 }
