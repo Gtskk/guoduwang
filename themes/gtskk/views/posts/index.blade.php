@@ -7,7 +7,7 @@
 	<div class="row">
 		<ul class="nav nav-pills nav-justified" role="tablist">
 			@foreach($menus as $title => $menu)
-			<li role="presentation"@if(Input::get('type') == $menu['param']['type']) class="active"@endif>
+			<li role="presentation"@if(Input::get('type') == $menu['param']['type'] or !Input::get('type')) class="active"@endif>
 				<a href="{{ route($menu['route'], $menu['param']) }}">
 					{{ $title }}
 				</a>
