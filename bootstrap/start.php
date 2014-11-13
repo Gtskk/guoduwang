@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('DELL-PC'),
+	'local' => array('DELL-PC', 'LBWin7'),
 
 ));
 
