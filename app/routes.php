@@ -13,7 +13,7 @@
 
 
 //后台路由
-Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel'), function(){
+Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'=>'cache'), function(){
 	Route::resource('posts', 'AdminPostsController');
 	Route::resource('comments', 'AdminCommentsController');
 	Route::resource('products', 'AdminProductsController', array('except' => array('show')));
@@ -26,7 +26,7 @@ App::missing(function($exception)
 });*/
 
 //前台路由
-Route::group(array('before' => 'auth.cpanel:posts.view'), function(){
+Route::group(array('before' => 'auth.cpanel:posts.view|cache', 'after'=>'cache'), function(){
 	Route::resource('posts', 'PostsController', array('only' => array('index', 'show')));
 });
 Route::get('products/{cat?}', array('before' => 'auth.cpanel:products.view', 'uses' => 'ProductsController@index', 'as' => 'products.index'));

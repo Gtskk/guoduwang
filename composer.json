@@ -12,11 +12,11 @@
 		"stevemo/cpanel": "dev-develop",
 		"intervention/image": "dev-master",
 		"torann/currency": "dev-master",
-		"anahkiasen/flatten": "dev-master",
 		"raveren/kint": "dev-master",
 		"barryvdh/laravel-debugbar": "dev-master",
 		"zizaco/confide": "~4.0@dev",
-		"zizaco/entrust": "1.2.*@dev"
+		"zizaco/entrust": "1.2.*@dev",
+		"fitztrev/laravel-html-minify": "1.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -25,7 +25,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+			"app/classes"
 		]
 	},
 	"scripts": {
