@@ -12,12 +12,15 @@
         @endif
     </div>
     <div class="checkbox">
-    	<label><input type="checkbox" name="remember"><span class="text-info">Remember</span></label>
+    	<label><input type="checkbox" name="remember"><span class="text-info">{{ trans('common.remember') }}</span></label>
     </div>
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-    <button type="submit" tabindex="0" id="loginBtn" class="btn btn-success"@if(Session::has('error')) data-placement="bottom" data-title="Error" data-toggle="popover" data-trigger="manual" data-content="{{ Session::get('error') }}"@endif>Sign in</button>
+    <button type="submit" tabindex="0" id="loginBtn" class="btn btn-success"@if(Session::has('error')) data-placement="bottom" data-title="{{ trans('common.error') }}" data-toggle="popover" data-trigger="manual" data-content="{{ Session::get('error') }}"@endif>{{ trans('common.sign_in') }}</button>
 </form>
 
+@section('javascript')
+
+@parent
 @if(Session::has('error'))
 <script type="text/javascript">
     $('#loginBtn').popover('show');
@@ -30,3 +33,5 @@
     });
 </script>
 @endif
+
+@stop

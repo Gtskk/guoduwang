@@ -13,8 +13,6 @@
 
 		{{ stylesheet_link_tag() }}
 
-		{{ javascript_include_tag() }}
-
 	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!--[if lt IE 9]>
 	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -109,6 +107,10 @@
 		            <p>&copy; Company 2014</p>
 		        </footer>
 		    </div> <!-- /container -->
+		@show
+
+		@section('javascript')
+		{{ javascript_include_tag() }}
 		@show
 
 	</body>

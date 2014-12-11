@@ -1,7 +1,4 @@
 <?php
-
-
-
 /**
  * UsersController Class
  *
