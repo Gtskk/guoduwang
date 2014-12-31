@@ -5,11 +5,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="all" />
-		<meta name="author" content="{{ Config::get('site.author') }}" />
-		<meta name="copyright" content="http://www.tfwk.cn" />
-		<meta name="description" content="{{ Config::get('site.description') }}" />
-		<meta name="keywords" content="{{ Config::get('site.keywords') }}" />
-		<title>{{ Config::get('site.site_name') }}</title>
+		<meta name="author" content="{{ Config::get('site.site_config.author') }}" />
+		<meta name="copyright" content="http://gtskk.tumblr.com" />
+		<meta name="description" content="{{ Config::get('site.site_config.description') }}" />
+		<meta name="keywords" content="{{ Config::get('site.site_config.keywords') }}" />
+		<title>{{ Config::get('site.site_config.site_name') }}</title>
 
 		{{ stylesheet_link_tag() }}
 
@@ -30,7 +30,7 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                </button>
-	                <a class="navbar-brand" href="{{ URL::to('/') }}">{{ Config::get('site.site_name') }}</a>
+	                <a class="navbar-brand" href="{{ URL::to('/') }}">{{ Config::get('site.site_config.site_name') }}</a>
 	            </div>
 
 	            <div id="navbar" class="navbar-collapse collapse">

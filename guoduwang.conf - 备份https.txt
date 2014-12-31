@@ -1,0 +1,14 @@
+Listen 443
+<VirtualHost *:443>
+ServerName guoduwang
+DocumentRoot "D:\wamp\www\guoduwang\public"
+SSLCertificateFile D:/wamp/bin/apache/apache2.4.9/conf/server.crt
+SSLCertificateKeyFile D:/wamp/bin/apache/apache2.4.9/conf/server.key 
+SSLEngine on
+<Directory "D:\wamp\www\guoduwang\public">
+    DirectoryIndex index.php index.html index.htm
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
+</VirtualHost>

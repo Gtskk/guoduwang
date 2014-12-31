@@ -25,6 +25,7 @@ App::missing(function($exception)
     return Response::view('errors.404', array(), 404);
 });*/
 
+
 //前台路由
 Route::group(array('before' => 'auth.cpanel:posts.view|cache', 'after'=>'cache'), function(){
 	Route::resource('posts', 'PostsController', array('only' => array('index', 'show')));
