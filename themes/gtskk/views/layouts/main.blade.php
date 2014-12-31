@@ -111,6 +111,9 @@
 
 		@section('javascript')
 		{{ javascript_include_tag() }}
+	    <script type="text/javascript">
+	    	$(document).snowfall({flakeCount : 400, maxSpeed : 10});
+	    </script>
 		@show
 
 	</body>
