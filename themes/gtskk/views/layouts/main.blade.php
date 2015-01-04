@@ -6,12 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="all" />
 		<meta name="author" content="{{ Config::get('site.site_config.author') }}" />
-		<meta name="copyright" content="http://gtskk.tumblr.com" />
 		<meta name="description" content="{{ Config::get('site.site_config.description') }}" />
 		<meta name="keywords" content="{{ Config::get('site.site_config.keywords') }}" />
 		<title>{{ Config::get('site.site_config.site_name') }}</title>
 
-		{{ stylesheet_link_tag() }}
+		<link rel="stylesheet" href="{{ asset('assets/css/'.get_css_js_file('frontend.styles')) }}">
+		@yield('styles')
 
 	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!--[if lt IE 9]>
@@ -110,7 +110,7 @@
 		@show
 
 		@section('javascript')
-		{{ javascript_include_tag() }}
+		<script src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
 	    <script type="text/javascript">
 	    	$(document).snowfall({flakeCount : 400});
 	    </script>

@@ -14,11 +14,11 @@ class Comment extends Ardent {
 	 * Get latest comments
 	 */
 	public static function getNewCommentsCountOfDay(){
-		$comments = Comment::where('created_at', '>=', Helpers::_getStartTime(mktime(0, 0, 0)))->where('created_at', '<=', Helpers::_getEndTime(mktime(0, 0, 0)))->orderby('created_at', 'desc')->lists('created_at');
+		$comments = Comment::where('created_at', '>=', _getStartTime(mktime(0, 0, 0)))->where('created_at', '<=', _getEndTime(mktime(0, 0, 0)))->orderby('created_at', 'desc')->lists('created_at');
 
 		// Process the create time
 		foreach ($comments as &$value) {
-			$value = Helpers::convertTimeElapsedAsText(strtotime($value));
+			$value = convertTimeElapsedAsText(strtotime($value));
 		}
 
 		return $comments;

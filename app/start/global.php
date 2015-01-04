@@ -1,6 +1,5 @@
 <?php
-// Forbid Kint when in production
-Kint::enabled(false);
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader

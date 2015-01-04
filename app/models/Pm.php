@@ -17,7 +17,7 @@ class Pm extends Eloquent {
 
 		// Process the create time
 		foreach ($messages as &$message) {
-			$message->created_at = Helpers::convertTimeElapsedAsText(strtotime($message->created_at));
+			$message->created_at = convertTimeElapsedAsText(strtotime($message->created_at));
 		}
 
 		return $messages;

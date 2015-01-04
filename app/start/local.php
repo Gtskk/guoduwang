@@ -1,3 +1,3 @@
 <?php
 
-Kint::enabled(true);
+//

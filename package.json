@@ -1,0 +1,35 @@
+{
+  "name": "Guoduwang",
+  "version": "1.0.0",
+  "description": "过渡网",
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.8.10"
+  },
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "gulp-asset-manifest": "0.0.6",
+    "gulp-concat": "^2.4.3",
+    "gulp-minify-css": "^0.3.11",
+    "gulp-rev": "^2.0.1",
+    "gulp-uglify": "^1.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://Gtskk@github.com/Gtskk/guoduwang.git"
+  },
+  "keywords": [
+    "laravel",
+    "大学生"
+  ],
+  "author": "Gtskk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gtskk/guoduwang/issues"
+  },
+  "homepage": "https://github.com/Gtskk/guoduwang"
+}

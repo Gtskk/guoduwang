@@ -5,7 +5,6 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"codesleeve/asset-pipeline": "dev-master",
 		"way/generators": "~2.0",
 		"laravelbook/ardent": "dev-master",
 		"anahkiasen/former": "dev-master",
@@ -25,9 +24,11 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php",
-			"app/classes"
-		]
+			"app/tests/TestCase.php"
+		],
+		"files": [
+            "app/helpers.php"
+        ]
 	},
 	"scripts": {
 		"post-install-cmd": [

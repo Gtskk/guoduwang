@@ -15,5 +15,6 @@ return array(
         '服务项目' => array('type' => 'single', 'route' => 'products.index'),
         '装修设计' => array('type' => 'single'),
     ),
-    'theme' => 'gtskk',
+    'theme' => 'gtskk'
+
 );
