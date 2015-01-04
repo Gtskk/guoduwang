@@ -5,13 +5,13 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="all" />
-		<meta name="author" content="{{ Config::get('site.author') }}" />
-		<meta name="copyright" content="http://www.tfwk.cn" />
-		<meta name="description" content="{{ Config::get('site.description') }}" />
-		<meta name="keywords" content="{{ Config::get('site.keywords') }}" />
-		<title>{{ Config::get('site.site_name') }}</title>
+		<meta name="author" content="{{ Config::get('site.site_config.author') }}" />
+		<meta name="description" content="{{ Config::get('site.site_config.description') }}" />
+		<meta name="keywords" content="{{ Config::get('site.site_config.keywords') }}" />
+		<title>{{ Config::get('site.site_config.site_name') }}</title>
 
-		{{ stylesheet_link_tag() }}
+		<link rel="stylesheet" href="{{ asset('assets/css/'.get_css_js_file('frontend.styles')) }}">
+		@yield('styles')
 
 	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                </button>
-	                <a class="navbar-brand" href="#">{{ Config::get('site.site_name') }}</a>
+	                <a class="navbar-brand" href="{{ URL::to('/') }}">{{ Config::get('site.site_config.site_name') }}</a>
 	            </div>
 
 	            <div id="navbar" class="navbar-collapse collapse">
@@ -68,17 +68,53 @@
 	                </ul>
 
 	                @if(Auth::check())
-	                    <h3 class="pull-right text-success">Hello, {{{ Auth::user()->name }}}</h3>
+	                    <h3 class="pull-right text-success">
+	                    	Hello, {{ Confide::user()->username }}
+	                    	<a href="{{ URL::to('members/logout') }}">Logout</a>
+	                    </h3>
 	                @else
-	                	@yield('loginform')
+	                	@include('theme::members.login')
 	                @endif
 	            </div><!--/.navbar-collapse -->
 
 	        </div>
 	    </nav>
 
-		@yield('content')
+		@section('content')
+			<div class="container">
+		        <!-- Example row of columns -->
+		        <div class="row">
+		            <div class="col-md-4">
+		                <h2>Heading</h2>
+		                <p>Donec id elit non mi porta gravida adfdt eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+		                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+		            </div>
+		            <div class="col-md-4">
+		                <h2>Heading</h2>
+		                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+		                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+		            </div>
+		            <div class="col-md-4">
+		                <h2>Heading</h2>
+		                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+		                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+		            </div>
+		        </div>
 
-	    {{ javascript_include_tag() }}
+		        <hr>
+
+		        <footer>
+		            <p>&copy; Company 2014</p>
+		        </footer>
+		    </div> <!-- /container -->
+		@show
+
+		@section('javascript')
+		<script src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
+	    <script type="text/javascript">
+	    	$(document).snowfall({flakeCount : 400});
+	    </script>
+		@show
+
 	</body>
 </html>
