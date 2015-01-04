@@ -112,7 +112,7 @@
 		@section('javascript')
 		{{ javascript_include_tag() }}
 	    <script type="text/javascript">
-	    	$(document).snowfall({flakeCount : 400, maxSpeed : 10});
+	    	$(document).snowfall({flakeCount : 400});
 	    </script>
 		@show
 

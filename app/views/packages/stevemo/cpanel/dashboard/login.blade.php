@@ -16,10 +16,10 @@
             </div>
             @endif
             <div class="form-group">
-                <input type="text" name="login_attribute" class="form-control" placeholder="{{{ ucfirst($login_attribute) }}}"/>
+                <input type="text" name="login_attribute" class="form-control" placeholder="{{ trans('common.'.$login_attribute) }}"/>
             </div>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Password"/>
+                <input type="password" name="password" class="form-control" placeholder="{{ trans('common.password') }}"/>
             </div>
             <div class="form-group">
                 <input type="checkbox" name="remember_me" value="true"/> {{ trans('common.remember') }}

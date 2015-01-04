@@ -1,12 +1,12 @@
 <form action="{{ URL::action('MembersController@doLogin') }}" method="post" class="navbar-form navbar-right" role="form">
     <div class="form-group @if($errors->has('username') || Session::has('error')) has-error has-feedback @endif">
-        <input type="text" name="username" placeholder="Username" class="form-control">
+        <input type="text" name="username" placeholder="{{ trans('common.username') }}" class="form-control">
         @if(Session::has('error'))
         <span class="glyphicon glyphicon-remove form-control-feedback"></span>
         @endif
     </div>
     <div class="form-group @if($errors->has('password') || Session::has('error')) has-error has-feedback @endif">
-        <input type="password" name="password" placeholder="Password" class="form-control">
+        <input type="password" name="password" placeholder="{{ trans('common.password') }}" class="form-control">
         @if(Session::has('error'))
         <span class="glyphicon glyphicon-remove form-control-feedback"></span>
         @endif
