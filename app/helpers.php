@@ -105,3 +105,9 @@ function get_css_js_file($part)
 
     return isset($obj[$part]) ? $obj[$part][0] : null;
 }
+
+
+function lang($text)
+{
+    return str_replace('gtskk.', '', trans('gtskk.'.$text));
+}

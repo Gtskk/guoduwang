@@ -15,6 +15,7 @@ class ConfideSetupUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
+            $table->string('img_url')->nullable();
             $table->string('password');
             $table->string('confirmation_code');
             $table->string('remember_token')->nullable();

@@ -4,8 +4,14 @@
  *
  * Implements actions regarding user management
  */
-class MembersController extends Controller
+class MembersController extends BaseController
 {
+
+    public function index()
+    {
+        $members = Member::recent()->take(48)->get();
+        return View::make('theme::members.index', compact('members'));
+    }    
 
     /**
      * Displays the form for account creation

@@ -15,7 +15,12 @@
 		"barryvdh/laravel-debugbar": "dev-master",
 		"zizaco/confide": "~4.0@dev",
 		"zizaco/entrust": "1.2.*@dev",
-		"fitztrev/laravel-html-minify": "1.*"
+		"fitztrev/laravel-html-minify": "1.*",
+		"laracasts/presenter": "0.1.*",
+		"laracasts/validation": "~1.0"
+	},
+	"require-dev": {
+		"fzaninotto/faker": "1.4.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -28,7 +33,10 @@
 		],
 		"files": [
             "app/helpers.php"
-        ]
+        ],
+        "psr-4": {
+            "Gtskk\\": "app/Gtskk"
+        }
 	},
 	"scripts": {
 		"post-install-cmd": [

@@ -4,6 +4,7 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rev = require('gulp-rev');
 var filename = require('gulp-asset-manifest');
+var imagemin = require('gulp-imagemin');
 var minifycss = require('gulp-minify-css');
 
 // Paths to your asset files
@@ -67,7 +68,7 @@ gulp.task('image', ['clean'], function() {
     .pipe(gulp.dest('public/assets/img'));
 });
 
-gulp.task('build', ['css', 'js']);
+gulp.task('build', ['css', 'js', 'image']);
 
 gulp.task('watch', ['build'],  function(){
     gulp.watch(paths.frontend.styles, ['css']);

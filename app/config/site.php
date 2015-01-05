@@ -11,10 +11,11 @@ return array(
 	//主菜单
 	//menu 2 type are available single or dropdown and it must be a route
     'main_menu' => array(
-        '优选文章' => array('type' => 'single', 'route' => 'posts.index'),
-        '服务项目' => array('type' => 'single', 'route' => 'products.index'),
-        '装修设计' => array('type' => 'single'),
+        '话题' => array('type' => 'single', 'route' => 'topics.index'),
+        '会员' => array('type' => 'single', 'route' => 'members.index'),
     ),
+
+    // 网站主题
     'theme' => 'gtskk'
 
 );

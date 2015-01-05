@@ -2,6 +2,13 @@
 
 class BaseController extends Controller {
 
+	public function __construct()
+    {
+
+        // csrf check for every post request
+        $this->beforeFilter('csrf', ['on' => 'post']);
+    }
+
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -16,6 +23,8 @@ class BaseController extends Controller {
 		//share the config option to all the views
         $site = Config::get('site.site_config',array());
         View::share('site', $site);
+        View::share('siteStat', App::make('Gtskk\SiteStats\Stat')->getSiteStat());
+		// View::share('siteTip', Tip::getRandTip());
 	}
 
 }
