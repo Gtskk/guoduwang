@@ -81,6 +81,14 @@ App::down(function()
 |
 */
 
+/**
+ * 注册pjax的监听器
+ */
+Event::listen('turbo.pjax', function($request, $response)
+{
+    $response->header('X-PJAX-URL', Request::getUri());
+});
+
 require app_path().'/filters.php';
 
 

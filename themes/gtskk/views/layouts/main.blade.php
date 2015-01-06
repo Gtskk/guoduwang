@@ -117,9 +117,6 @@
 
 		@section('javascript')
 		<script src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
-	    <script type="text/javascript">
-	    	$(document).snowfall({flakeCount : 400});
-	    </script>
 		@show
 
 	</body>

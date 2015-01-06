@@ -121,7 +121,8 @@ return array(
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Fitztrev\LaravelHtmlMinify\LaravelHtmlMinifyServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
-		'Mews\Purifier\PurifierServiceProvider'
+		'Mews\Purifier\PurifierServiceProvider',
+		'Turbo\Provider\Laravel\TurboServiceProvider'
 
 	),
 

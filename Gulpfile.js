@@ -15,11 +15,21 @@ var paths = {
             'app/assets/javascripts/bootstrap.min.js',
             'app/assets/javascripts/jquery.ad-gallery.js',
             'app/assets/javascripts/snowfall.jquery.min.js',
-            'app/assets/javascripts/Validform_v5.3.2_min.js'
+            'app/assets/javascripts/Validform_v5.3.2_min.js',
+            'app/assets/javascripts/moment.min.js',
+            'app/assets/javascripts/emojify.min.js',
+            'app/assets/javascripts/jquery.pjax.js',
+            'app/assets/javascripts/nprogress.js',
+            'app/assets/javascripts/jquery.textcomplete.js',
+            'app/assets/javascripts/emoji.js',
+            'app/assets/javascripts/marked.min.js',
+            'app/assets/javascripts/ekko-lightbox.js',
+            'app/assets/javascripts/front.js'
         ],
         styles: [
             'app/assets/stylesheets/bootstrap.min.css',
-            'app/assets/stylesheets/style.css'
+            'app/assets/stylesheets/style.css',
+            'app/assets/stylesheets/nprogress.css'
         ],
         fonts: [
             'app/assets/fonts/**/*'
