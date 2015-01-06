@@ -17,7 +17,8 @@
 		"zizaco/entrust": "1.2.*@dev",
 		"fitztrev/laravel-html-minify": "1.*",
 		"laracasts/presenter": "0.1.*",
-		"laracasts/validation": "~1.0"
+		"laracasts/validation": "~1.0",
+		"mews/purifier": "dev-master"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "1.4.*"

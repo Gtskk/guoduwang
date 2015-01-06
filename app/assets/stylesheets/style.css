@@ -2,5 +2,14 @@
 body {
   padding-top: 50px;
   padding-bottom: 20px;
-  background: url(../img/bg.jpg);
+  background-color: #ccc;
+}
+
+.navbar-inverse .nav>li>a.current{
+	background-color: #e7e7e7;
+	color: #555;
+}
+
+.selected{
+	color: silver;
 }

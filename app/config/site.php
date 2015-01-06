@@ -13,6 +13,7 @@ return array(
     'main_menu' => array(
         '话题' => array('type' => 'single', 'route' => 'topics.index'),
         '会员' => array('type' => 'single', 'route' => 'members.index'),
+        '关于' => array('type' => 'single', 'route' => 'about'),
     ),
 
     // 网站主题

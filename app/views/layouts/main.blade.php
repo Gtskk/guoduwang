@@ -75,6 +75,12 @@
 	                @else
 	                	@include('theme::members.login')
 	                @endif
+					
+					<!-- 搜索 -->
+	                <form class="navbar-form navbar-right" action="{{ URL::to('search') }}" accetp-charset="UTF-8">
+			            <input type="text" class="form-control" placeholder="搜索" name="q">
+			        </form>
+
 	            </div><!--/.navbar-collapse -->
 
 	        </div>

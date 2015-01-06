@@ -32,5 +32,9 @@
         @endif
 
     </div>
+
+    <!-- Nodes Listing -->
+    @include('theme::nodes.partials.list')
+
 </div>
 @stop

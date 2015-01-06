@@ -35,7 +35,11 @@ App::missing(function($exception)
 
 
 //前台路由
-Route::get('/', 'HomeController@showWelcome');
+Route::get('/', 'PagesController@showWelcome');
+Route::get('/about', array(
+	'as' => 'about',
+	'uses' => 'PagesController@about'
+));
 // Confide routes
 Route::get('members/login', 'MembersController@login');
 Route::post('members/login', 'MembersController@doLogin');

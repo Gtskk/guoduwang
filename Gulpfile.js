@@ -21,6 +21,9 @@ var paths = {
             'app/assets/stylesheets/bootstrap.min.css',
             'app/assets/stylesheets/style.css'
         ],
+        fonts: [
+            'app/assets/fonts/**/*'
+        ],
         images: [
         	'app/assets/images/**/*'
         ]
@@ -60,6 +63,15 @@ gulp.task('js', ['clean'], function() {
         .pipe(gulp.dest('public/assets/js'));
 });
 
+// JavaScript task
+gulp.task('font', ['clean'], function() {
+
+    // Concat and uglify the JavaScript assets
+    // Afterwards add the MD5 hash to the filename
+    return gulp.src(paths.frontend.fonts)
+        .pipe(gulp.dest('public/assets/fonts'));
+});
+
 // 静态图像
 gulp.task('image', ['clean'], function() {
   return gulp.src(paths.frontend.images)
@@ -68,7 +80,7 @@ gulp.task('image', ['clean'], function() {
     .pipe(gulp.dest('public/assets/img'));
 });
 
-gulp.task('build', ['css', 'js', 'image']);
+gulp.task('build', ['css', 'js', 'font', 'image']);
 
 gulp.task('watch', ['build'],  function(){
     gulp.watch(paths.frontend.styles, ['css']);

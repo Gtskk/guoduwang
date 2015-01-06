@@ -61,7 +61,7 @@ class Topic extends \Eloquent
 	{
 		return $this->applyFilter($filter)
 					->where('node_id', '=', $node_id)
-					->with('member', 'node', 'lastReplyUser')
+					->with('member', 'node')
 					->paginate($limit);
 	}
 

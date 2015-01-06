@@ -120,7 +120,8 @@ return array(
 		'Zizaco\Confide\ServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Fitztrev\LaravelHtmlMinify\LaravelHtmlMinifyServiceProvider',
-		'Laracasts\Validation\ValidationServiceProvider'
+		'Laracasts\Validation\ValidationServiceProvider',
+		'Mews\Purifier\PurifierServiceProvider'
 
 	),
 
@@ -195,6 +196,7 @@ return array(
 		'Confide'    	  => 'Zizaco\Confide\Facade',
 		'Entrust'    	  => 'Zizaco\Entrust\EntrustFacade',
         'Carbon'          => 'Carbon\Carbon',
+        'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
 
 	),
 
