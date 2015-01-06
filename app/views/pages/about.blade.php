@@ -11,9 +11,9 @@
 				<p>过渡网 是专为学生服务的友好社区</p>
 				<p>我们是一个公益组织, 致力于帮助在校学生、毕业生学习一些能够在社会上获取一份肯定的知识与技能.</p>
 				<p>在这里没有灌水, 没有千篇一律的问答, 有的是关于技术的学习、讨论和分享. </p>
-				<p>本项目基于 MIT Licence 开源, <a href="https://Gtskk@github.com/Gtskk/guoduwang.git" target="_blank">源代码在此 at Github</a>, 欢迎贡献代码, Feature Request 和 Bug Report <a href="https://Gtskk@github.com/Gtskk/guoduwang/issues" target="_blank">请到此发表</a>.</p>
+				<p>本项目基于 MIT Licence 开源, <a href="https://Gtskk@github.com/Gtskk/guoduwang.git">源代码在此 at Github</a>, 欢迎贡献代码, Feature Request 和 Bug Report <a href="https://Gtskk@github.com/Gtskk/guoduwang/issues">请到此发表</a>.</p>
 				<p>在学习上遇到问题的时候, 请先 Google. </p>
-				<p>如果觉得你的问题比较独占, 需要单独提问的话, 请到 <a href="http://segmentfault.com/t/php" target="_blank">Segmentfault 的 PHP 节点下</a> 发表你的问题, 谢谢. </p>
+				<p>如果觉得你的问题比较独占, 需要单独提问的话, 请到 <a href="http://segmentfault.com/t/php">Segmentfault 的 PHP 节点下</a> 发表你的问题, 谢谢. </p>
 				<h2 id="toc_3">愿景</h2>
 				<blockquote>
 					<p>下面是 过渡网 创建的初衷, 与君共勉. </p>

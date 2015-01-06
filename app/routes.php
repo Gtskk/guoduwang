@@ -49,3 +49,9 @@ Route::post('members/forgot_password', 'MembersController@doForgotPassword');
 Route::get('members/reset_password/{token}', 'MembersController@resetPassword');
 Route::post('members/reset_password', 'MembersController@doResetPassword');
 Route::get('members/logout', 'MembersController@logout');
+
+Route::post('upload_image', [
+    'as' => 'upload_image',
+    'uses' => 'TopicsController@uploadImage',
+    'before' => 'auth'
+]);

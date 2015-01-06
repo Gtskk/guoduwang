@@ -10,6 +10,16 @@
 		<meta name="keywords" content="{{ Config::get('site.site_config.keywords') }}" />
 		<title>{{ Config::get('site.site_config.site_name') }}</title>
 
+		<script>
+            Config = {
+                'routes': {
+                    'notificationsCount' : '{{ route('notifications.count') }}',
+                    'upload_image' : '{{ route('upload_image') }}'
+                },
+                'token': '{{ csrf_token() }}',
+            };
+        </script>
+
 		<link rel="stylesheet" href="{{ asset('assets/css/'.get_css_js_file('frontend.styles')) }}">
 		@yield('styles')
 
