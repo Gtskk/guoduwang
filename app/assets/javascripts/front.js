@@ -80,7 +80,10 @@
          * Scroll to top in one click.
          */
         initScrollToTop: function(){
-            $.scrollUp();
+            $.scrollUp.init({
+                animation: 'fade',
+                scrollImg: true
+            });
         },
 
         /**

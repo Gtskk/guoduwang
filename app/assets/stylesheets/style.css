@@ -13,3 +13,12 @@ body {
 .selected{
 	color: silver;
 }
+
+/* ScrollUp Style */
+#scrollUp {
+    background-image: url("../img/returntop.png");
+    bottom: 20px;
+    right: 20px;
+    width: 50px;    /* Width of image */
+    height: 66px;   /* Height of image */
+}
