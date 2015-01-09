@@ -121,4 +121,6 @@ return array(
     'Learning Resources' => '推荐学习资源',
     'Create New Topic' => '创建新主题',
     'Can not vote your feedback' => '不允许给自己点赞',
+    'Up Vote' => '顶',
+    'Down Vote' => '踩',
 );

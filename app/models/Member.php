@@ -33,7 +33,7 @@ class Member extends Eloquent implements ConfideUserInterface {
 
     public function topics()
     {
-        return $this->hasMany('Topic', 'user_id');
+        return $this->hasMany('Topic');
     }
 
     public function replies()

@@ -33,13 +33,26 @@ class Topic extends \Eloquent
 
 	public function member()
 	{
-		return $this->belongsTo('Member', 'user_id');
+		return $this->belongsTo('Member');
 	}
 
 	public function replies()
 	{
 		return $this->hasMany('Reply');
 	}
+
+	public function lastReplyUser()
+	{
+		return $this->belongsTo('Member', 'last_reply_user_id');
+	}
+
+	public function generateLastReplyUserInfo()
+    {
+        $lastReply = $this->replies()->recent()->first();
+
+        $this->last_reply_user_id = $lastReply ? $lastReply->user_id : 0;
+        $this->save();
+    }
 
 	public function getRepliesWithLimit($limit = 30)
 	{
@@ -53,7 +66,7 @@ class Topic extends \Eloquent
 	public function getTopicsWithFilter($filter, $limit = 20)
 	{
 		return $this->applyFilter($filter)
-					->with('member', 'node')
+					->with('member', 'node', 'lastReplyUser')
 					->paginate($limit);
 	}
 
@@ -61,7 +74,7 @@ class Topic extends \Eloquent
 	{
 		return $this->applyFilter($filter)
 					->where('node_id', '=', $node_id)
-					->with('member', 'node')
+					->with('member', 'node', 'lastReplyUser')
 					->paginate($limit);
 	}
 

@@ -40,7 +40,7 @@
             @if ($topic->reply_count == 0)
                 <span> • </span>
                 <a href="{{ route('members.show', [$topic->user_id]) }}" title="{{{ $topic->member->name }}}">
-                    {{{ $topic->member->name }}}
+                    {{{ $topic->member->username }}}
                 </a>
                 <span> • </span>
                 <span class="timeago">{{ $topic->created_at }}</span>
@@ -49,7 +49,7 @@
             @if ($topic->reply_count > 0 && count($topic->lastReplymember))
                 <span> • </span>{{ lang('Last Reply by') }}
                 <a href="{{{ URL::route('members.show', [$topic->lastReplymember->id]) }}}">
-                  {{{ $topic->lastReplymember->name }}}
+                  {{{ $topic->lastReplymember->username }}}
                 </a>
                 <span> • </span>
                 <span class="timeago">{{ $topic->updated_at }}</span>

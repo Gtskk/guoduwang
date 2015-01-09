@@ -16,8 +16,30 @@ Route::pattern('id', '[0-9]+');
 
 
 Route::resource('topics', 'TopicsController');
+# ------------------ Topic Votes ------------------------
+
+Route::group(['before' => 'auth'], function(){
+	Route::post('/topics/{id}/upvote', [
+		'as' => 'topics.upvote',
+		'uses' => 'TopicsController@upvote',
+	]);
+
+	Route::post('/topics/{id}/downvote', [
+		'as' => 'topics.downvote',
+		'uses' => 'TopicsController@downvote',
+	]);
+
+	Route::post('/replies/{id}/vote', [
+		'as' => 'replies.vote',
+		'uses' => 'RepliesController@vote',
+	]);
+});
+
+
 Route::resource('members', 'MembersController');
 Route::resource('nodes', 'NodesController');
+
+Route::resource('replies', 'RepliesController', ['only' => ['store']]);
 
 
 //后台路由

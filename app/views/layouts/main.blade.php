@@ -12,6 +12,7 @@
 
 		<script>
             Config = {
+                'user_id': {{ $currentUser ? $currentUser->id : 0 }},
                 'routes': {
                     'notificationsCount' : '{{ route('notifications.count') }}',
                     'upload_image' : '{{ route('upload_image') }}'

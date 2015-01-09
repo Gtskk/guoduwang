@@ -25,6 +25,7 @@ class BaseController extends Controller {
         View::share('site', $site);
         View::share('siteStat', App::make('Gtskk\SiteStats\Stat')->getSiteStat());
 		// View::share('siteTip', Tip::getRandTip());
+		View::share('currentUser', Confide::user());
 	}
 
 }
