@@ -34,6 +34,7 @@ var paths = {
         ],
         styles: [
             'app/assets/stylesheets/bootstrap.min.css',
+            'app/assets/stylesheets/font-awesome.min.css',
             'app/assets/stylesheets/style.css',
             'app/assets/stylesheets/nprogress.css'
         ],

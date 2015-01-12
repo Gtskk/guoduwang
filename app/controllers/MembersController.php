@@ -11,7 +11,15 @@ class MembersController extends BaseController
     {
         $members = Member::recent()->take(48)->get();
         return View::make('theme::members.index', compact('members'));
-    }    
+    }
+
+    public function show($id)
+    {
+        $member = Member::findOrFail($id);
+        $topics = Topic::whose($member->id)->recent()->limit(10)->get();
+        $replies = Reply::whose($member->id)->recent()->limit(10)->get();
+        return View::make('members.show', compact('member', 'topics', 'replies'));
+    }
 
     /**
      * Displays the form for account creation

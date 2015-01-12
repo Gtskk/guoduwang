@@ -279,19 +279,26 @@ $(document).ready(function()
 // reply a reply
 function replyOne(username){
     replyContent = $("#reply_content");
-	oldContent = replyContent.val();
-	prefix = "@" + username + " ";
-	newContent = ''
-	if(oldContent.length > 0){
-	    if (oldContent != prefix) {
-	        newContent = oldContent + "\n" + prefix;
-	    }
-	} else {
-	    newContent = prefix
-	}
-	replyContent.focus();
-	replyContent.val(newContent);
-	moveEnd($("#reply_content"));
+    if(replyContent.length)
+    {
+        oldContent = replyContent.val();
+        prefix = "@" + username + " ";
+        newContent = ''
+        if(oldContent.length > 0){
+            if (oldContent != prefix) {
+                newContent = oldContent + "\n" + prefix;
+            }
+        } else {
+            newContent = prefix
+        }
+        replyContent.focus();
+        replyContent.val(newContent);
+        moveEnd($("#reply_content"));
+    }
+	else
+    {
+        alert('请先登录');
+    }
 }
 
 var moveEnd = function(obj){

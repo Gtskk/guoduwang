@@ -46,7 +46,7 @@ class TopicsController extends BaseController implements CreatorListener
 
         $topic->increment('view_count', 1);
 
-        return View::make('topics.show', compact('topic', 'replies', 'nodeTopics', 'node'));
+        return View::make('theme::topics.show', compact('topic', 'replies', 'nodeTopics', 'node'));
     }
 
     public function edit($id)

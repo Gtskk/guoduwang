@@ -15,6 +15,16 @@
 Route::pattern('id', '[0-9]+');
 
 
+Route::post('/attentions/{id}', [
+	'as' => 'attentions.createOrDelete',
+	'uses' => 'AttentionsController@createOrDelete',
+	'before' => 'auth'
+]);
+Route::post('/favorites/{id}', [
+	'as' => 'favorites.createOrDelete',
+	'uses' => 'FavoritesController@createOrDelete',
+	'before' => 'auth'
+]);
 Route::resource('topics', 'TopicsController');
 # ------------------ Topic Votes ------------------------
 
@@ -71,6 +81,14 @@ Route::post('members/forgot_password', 'MembersController@doForgotPassword');
 Route::get('members/reset_password/{token}', 'MembersController@resetPassword');
 Route::post('members/reset_password', 'MembersController@doResetPassword');
 Route::get('members/logout', 'MembersController@logout');
+
+Route::get('login-required', [
+	'as' => 'login-required',
+	'uses' => 'AuthController@loginRequired'
+]);
+
+
+
 
 Route::post('upload_image', [
     'as' => 'upload_image',

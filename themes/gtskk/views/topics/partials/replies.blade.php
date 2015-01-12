@@ -4,7 +4,7 @@
    <li class="list-group-item media" style="margin-top: 0px;">
 
     <div class="avatar pull-left">
-      <a href="{{ route('members.show', [$reply->member_id]) }}">
+      <a href="{{ route('members.show', [$reply->user_id]) }}">
         <img class="media-object img-thumbnail avatar" alt="{{{ $reply->member->username }}}" src="{{ $reply->member->present()->gravatar }}"  style="width:48px;height:48px;"/>
       </a>
     </div>
@@ -13,7 +13,7 @@
 
       <div class="media-heading meta">
 
-        <a href="{{ route('members.show', [$reply->member_id]) }}" title="{{{ $reply->member->username }}}" class="remove-padding-left author">
+        <a href="{{ route('members.show', [$reply->user_id]) }}" title="{{{ $reply->member->username }}}" class="remove-padding-left author">
             {{{ $reply->member->username }}}
         </a>
         <span> •  </span>
@@ -22,9 +22,12 @@
         <a name="reply{{ $reply->id }}" class="anchor" href="#reply{{ $reply->id }}" aria-hidden="true">#{{ $reply->id }}</a>
 
         <span class="operate pull-right">
+          <a data-method="post" id="reply-up-vote-{{ $reply->id }}" href="javascript:void(0);" data-url="{{ route('replies.vote', $reply->id) }}" title="{{ lang('Vote Up') }}">
+             <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> {{ $reply->vote_count ?: '' }}
+          </a>
           <span> •  </span>
 
-          @if ($currentUser && ($currentUser->can("manage_topics") || $currentUser->id == $reply->member_id) )
+          @if ($currentUser && ($currentUser->can("manage_topics") || $currentUser->id == $reply->user_id) )
             <a id="reply-delete-{{ $reply->id }}" data-method="delete"  href="javascript:void(0);" data-url="{{ route('replies.destroy', [$reply->id]) }}" title="{{ lang('Delete') }}">
                 <i class="fa fa-trash-o"></i>
             </a>
