@@ -22,3 +22,25 @@ body {
     width: 50px;    /* Width of image */
     height: 66px;   /* Height of image */
 }
+
+.box{
+  background-color: #fff;
+  padding: 10px;
+  margin: 0 0 20px;
+  border-radius: 3px;
+  box-shadow: 0 .2em 0 0 #ddd,0 0 0 1px #ddd;
+}
+.users-show .dl-horizontal dt{
+  width: 50px;
+  white-space: 50px;
+  font-weight: 400;
+  color: #999;
+}
+.users-show .dl-horizontal dd{
+  margin-left: 58px;
+}
+.users-show dl dd,.user-show dl dt{
+  font-size: 13px;
+  line-height: 150%;
+  border-bottom: 1px dashed #eee;
+}

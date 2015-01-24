@@ -29,9 +29,9 @@ class Reply extends Eloquent {
 		return $this->belongsTo('Topic');
 	}
 
-	public function scopeWhose($query, $user_id)
+	public function scopeWhose($query, $member_id)
 	{
-        return $query->where('user_id','=',$user_id)->with('topic');
+        return $query->where('member_id','=',$member_id)->with('topic');
     }
 
     public function scopeRecent($query)

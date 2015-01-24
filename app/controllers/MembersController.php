@@ -18,7 +18,7 @@ class MembersController extends BaseController
         $member = Member::findOrFail($id);
         $topics = Topic::whose($member->id)->recent()->limit(10)->get();
         $replies = Reply::whose($member->id)->recent()->limit(10)->get();
-        return View::make('members.show', compact('member', 'topics', 'replies'));
+        return View::make('theme::members.show', compact('member', 'topics', 'replies'));
     }
 
     /**

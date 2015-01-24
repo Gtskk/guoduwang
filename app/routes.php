@@ -14,6 +14,33 @@
 # ------------------ Route patterns---------------------
 Route::pattern('id', '[0-9]+');
 
+//前台路由
+Route::get('/', 'PagesController@showWelcome');
+Route::get('/about', array(
+	'as' => 'about',
+	'uses' => 'PagesController@about'
+));
+// Confide routes
+Route::get('members/login', 'MembersController@login');
+Route::post('members/login', 'MembersController@doLogin');
+Route::get('members/confirm/{code}', 'MembersController@confirm');
+Route::get('members/forgot_password', 'MembersController@forgotPassword');
+Route::post('members/forgot_password', 'MembersController@doForgotPassword');
+Route::get('members/reset_password/{token}', 'MembersController@resetPassword');
+Route::post('members/reset_password', 'MembersController@doResetPassword');
+Route::get('members/logout', 'MembersController@logout');
+Route::resource('members', 'MembersController');
+
+Route::get('login-required', [
+	'as' => 'login-required',
+	'uses' => 'AuthController@loginRequired'
+]);
+
+Route::post('upload_image', [
+    'as' => 'upload_image',
+    'uses' => 'TopicsController@uploadImage',
+    'before' => 'auth'
+]);
 
 Route::post('/attentions/{id}', [
 	'as' => 'attentions.createOrDelete',
@@ -45,8 +72,6 @@ Route::group(['before' => 'auth'], function(){
 	]);
 });
 
-
-Route::resource('members', 'MembersController');
 Route::resource('nodes', 'NodesController');
 
 Route::resource('replies', 'RepliesController', ['only' => ['store']]);
@@ -64,34 +89,3 @@ App::missing(function($exception)
 {
     return Response::view('errors.404', array(), 404);
 });*/
-
-
-//前台路由
-Route::get('/', 'PagesController@showWelcome');
-Route::get('/about', array(
-	'as' => 'about',
-	'uses' => 'PagesController@about'
-));
-// Confide routes
-Route::get('members/login', 'MembersController@login');
-Route::post('members/login', 'MembersController@doLogin');
-Route::get('members/confirm/{code}', 'MembersController@confirm');
-Route::get('members/forgot_password', 'MembersController@forgotPassword');
-Route::post('members/forgot_password', 'MembersController@doForgotPassword');
-Route::get('members/reset_password/{token}', 'MembersController@resetPassword');
-Route::post('members/reset_password', 'MembersController@doResetPassword');
-Route::get('members/logout', 'MembersController@logout');
-
-Route::get('login-required', [
-	'as' => 'login-required',
-	'uses' => 'AuthController@loginRequired'
-]);
-
-
-
-
-Route::post('upload_image', [
-    'as' => 'upload_image',
-    'uses' => 'TopicsController@uploadImage',
-    'before' => 'auth'
-]);

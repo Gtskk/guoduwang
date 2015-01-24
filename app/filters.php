@@ -79,9 +79,11 @@ Route::filter('csrf', function()
 	}
 });
 
-Route::filter('cache', function($route, $request, $response = null)
+
+if(!App::isLocal())
 {
-	if(!App::isLocal())
+	// 缓存视图
+	Route::filter('cache', function($route, $request, $response = null)
 	{
 		$key = 'route-'.Str::slug(Request::url());
 		if(is_null($response) && Cache::has($key))
@@ -92,30 +94,31 @@ Route::filter('cache', function($route, $request, $response = null)
 		{
 		    Cache::put($key, $response->getContent(), 30);
 		}
-	}
-});
+	});
 
-// 存储sql到日志中
-Event::listen('illuminate.query', function($query, $bindings, $time, $name)
-{
-    $data = compact('bindings', 'time', 'name');
 
-    // Format binding data for sql insertion
-    foreach ($bindings as $i => $binding)
-    {
-        if ($binding instanceof \DateTime)
-        {
-            $bindings[$i] = $binding->format('\'Y-m-d H:i:s\'');
-        }
-        else if (is_string($binding))
-        {
-            $bindings[$i] = "'$binding'";
-        }
-    }
+	// 存储sql到日志中
+	Event::listen('illuminate.query', function($query, $bindings, $time, $name)
+	{
+	    $data = compact('bindings', 'time', 'name');
 
-    // Insert bindings into query
-    $query = str_replace(array('%', '?'), array('%%', '%s'), $query);
-    $query = vsprintf($query, $bindings);
+	    // Format binding data for sql insertion
+	    foreach ($bindings as $i => $binding)
+	    {
+	        if ($binding instanceof \DateTime)
+	        {
+	            $bindings[$i] = $binding->format('\'Y-m-d H:i:s\'');
+	        }
+	        else if (is_string($binding))
+	        {
+	            $bindings[$i] = "'$binding'";
+	        }
+	    }
 
-    Log::info($query, $data);
-});
+	    // Insert bindings into query
+	    $query = str_replace(array('%', '?'), array('%%', '%s'), $query);
+	    $query = vsprintf($query, $bindings);
+
+	    Log::info($query, $data);
+	});
+}

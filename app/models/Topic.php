@@ -33,7 +33,7 @@ class Topic extends \Eloquent
 
 	public function member()
 	{
-		return $this->belongsTo('Member');
+		return $this->belongsTo('Member', 'member_id');
 	}
 
 	public function replies()
@@ -111,9 +111,9 @@ class Topic extends \Eloquent
 						->get();
 	}
 
-	public function scopeWhose($query, $user_id)
+	public function scopeWhose($query, $member_id)
 	{
-        return $query->where('user_id','=',$user_id)->with('node');
+        return $query->where('member_id','=',$member_id)->with('node');
     }
 
     public function scopeRecent($query)
