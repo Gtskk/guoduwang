@@ -47,15 +47,11 @@ var paths = {
     }
 };
 
-// Not all tasks need to use streams
-// A gulpfile is just another node program and you can use all packages available on npm
-gulp.task('clean', function(cb) {
-  // You can use multiple globbing patterns as you would with `gulp.src`
-  del(['public/assets'], cb);
-});
-
 // CSS task
-gulp.task('css', ['clean'], function() {
+gulp.task('css', function() {
+
+    // Cleanup old assets
+    del(['public/assets/css'], function(err){});
 
     // Prefix, compress and concat the CSS assets
     // Afterwards add the MD5 hash to the filename
@@ -68,7 +64,10 @@ gulp.task('css', ['clean'], function() {
 });
 
 // JavaScript task
-gulp.task('js', ['clean'], function() {
+gulp.task('js', function() {
+
+    // Cleanup old assets
+    del(['public/assets/js'], function(err){});
 
     // Concat and uglify the JavaScript assets
     // Afterwards add the MD5 hash to the filename
@@ -81,7 +80,10 @@ gulp.task('js', ['clean'], function() {
 });
 
 // JavaScript task
-gulp.task('font', ['clean'], function() {
+gulp.task('font', function() {
+
+    // Cleanup old assets
+    del(['public/assets/fonts'], function(err){});
 
     // Concat and uglify the JavaScript assets
     // Afterwards add the MD5 hash to the filename
@@ -90,11 +92,15 @@ gulp.task('font', ['clean'], function() {
 });
 
 // 静态图像
-gulp.task('image', ['clean'], function() {
-  return gulp.src(paths.frontend.images)
-    // Pass in options to the task
-    .pipe(imagemin({optimizationLevel: 5}))
-    .pipe(gulp.dest('public/assets/img'));
+gulp.task('image', function() {
+
+    // Cleanup old assets
+    del(['public/assets/img'], function(err){});
+
+    return gulp.src(paths.frontend.images)
+        // Pass in options to the task
+        .pipe(imagemin({optimizationLevel: 5}))
+        .pipe(gulp.dest('public/assets/img'));
 });
 
 gulp.task('build', ['css', 'js', 'font', 'image']);
@@ -102,6 +108,7 @@ gulp.task('build', ['css', 'js', 'font', 'image']);
 gulp.task('watch', ['build'],  function(){
     gulp.watch(paths.frontend.styles, ['css']);
     gulp.watch(paths.frontend.scripts, ['js']);
+    gulp.watch(paths.frontend.fonts, ['font']);
     gulp.watch(paths.frontend.images, ['image']);
 });
 
