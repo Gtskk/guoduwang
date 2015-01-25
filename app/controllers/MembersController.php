@@ -76,7 +76,7 @@ class MembersController extends BaseController
         if (Confide::user()) {
             return Redirect::to('/');
         } else {
-            return View::make('theme::index');
+            return View::make('theme::members.login_require');
         }
     }
 

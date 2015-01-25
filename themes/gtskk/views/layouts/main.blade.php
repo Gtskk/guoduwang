@@ -81,13 +81,14 @@
 	                    	Hello, {{ Confide::user()->username }}
 	                    	<a href="{{ URL::to('members/logout') }}">Logout</a>
 	                    </h3>
+	                @elseif(Request::is('members/login'))
 	                @else
 	                	@include('theme::members.login')
 	                @endif
 					
 					<!-- 搜索 -->
 	                <form class="navbar-form navbar-right" action="{{ URL::to('search') }}" accetp-charset="UTF-8">
-			            <input type="text" class="form-control" placeholder="搜索" name="q">
+			            <input id="searchkey" type="text" class="form-control" placeholder="搜索" name="q">
 			        </form>
 
 	            </div><!--/.navbar-collapse -->

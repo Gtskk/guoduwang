@@ -44,3 +44,38 @@ body {
   line-height: 150%;
   border-bottom: 1px dashed #eee;
 }
+
+/** 登录所需页面样式 */
+.login_require{
+  width: 360px;
+  margin: 20px auto 0 auto;
+}
+.login_require .panel-heading{
+  background-color: #3d9970;
+  box-shadow: inset 0px -3px 0px rgba(0,0,0,0.2);
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 300;
+  color: #fff;
+}
+.login_require .panel-body{
+  padding: 0;
+}
+.login_require .body, .login_require .footer{
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #444;
+}
+.login_require .bg-gray{
+  background-color: #eaeaec !important;
+}
+.login_require .btn.btn-block{
+  font-size: 15px;
+  padding: 10px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.login_require .bg-olive{
+  background-color: #3d9970 !important;
+}

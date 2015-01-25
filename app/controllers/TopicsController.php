@@ -1,7 +1,7 @@
 <?php
 
 use Gtskk\Core\CreatorListener;
-use Phphub\FormValidators\TopicCreationForm;
+use Gtskk\FormValidators\TopicCreationForm;
 
 class TopicsController extends BaseController implements CreatorListener
 {
@@ -84,21 +84,22 @@ class TopicsController extends BaseController implements CreatorListener
 
     /**
      * ----------------------------------------
-     * User Topic Vote function
+     * Member Topic Vote function
      * ----------------------------------------
      */
 
     public function upvote($id)
     {
         $topic = Topic::find($id);
-        App::make('Phphub\Vote\Voter')->topicUpVote($topic);
+        dd($topic);
+        App::make('Gtskk\Vote\Voter')->topicUpVote($topic);
         return Redirect::route('topics.show', $topic->id);
     }
 
     public function downvote($id)
     {
         $topic = Topic::find($id);
-        App::make('Phphub\Vote\Voter')->topicDownVote($topic);
+        App::make('Gtskk\Vote\Voter')->topicDownVote($topic);
         return Redirect::route('topics.show', $topic->id);
     }
 

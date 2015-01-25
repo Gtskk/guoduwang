@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="panel panel-default">
 
-	    <div class="panel-heading text-center">
+	    <div class="panel-heading">
 	        {{ lang('Newly Registered User List') }} ( {{ lang('Total User') }} {{ $siteStat->member_count }} )
 	    </div>
 

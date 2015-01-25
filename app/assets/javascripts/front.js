@@ -36,6 +36,7 @@
             self.initDeleteForm();
             self.initInlineAttach();
             self.snowing();
+            self.search();
         },
 
         /**
@@ -266,6 +267,45 @@
                 });
             }
         },
+        search: function() {
+            //focusblurmenu
+            jQuery.focusblurmenu = function(focusdom,focuswidthnew,animatetime) 
+            {
+                var focusblurmenuid = $(focusdom);
+                var searchform = focusblurmenuid.parent().prev('.navbar-form');
+                var defval = focusblurmenuid.val();
+                var defwidth = focusblurmenuid.width();
+                focusblurmenuid.focus(function(){
+                    // 如果前面存在元素
+                    if(searchform.length)
+                    {
+                        searchform.hide();
+                    }
+                    var thisval = $(this).val();
+                    if(thisval==defval){
+                        $(this).val("");
+                        $(this).animate({width:"+"+focuswidthnew}, animatetime).addClass("searchkeyfocus");
+                    }
+                });
+                focusblurmenuid.blur(function(){
+                    var thisval = $(this).val();
+                    if(thisval==""){
+                        $(this).val(defval);
+                    }
+                    $(this).animate({width:"+"+defwidth}, animatetime, function()
+                    {
+                        // 如果前面存在元素
+                        if(searchform.length)
+                        {
+                            searchform.show();
+                        }
+                    }).removeClass("searchkeyfocus");
+                });
+                
+            };
+            $.focusblurmenu("#searchkey","500px","300");
+
+        }
 
     }
     window.Gtskk = Gtskk;
