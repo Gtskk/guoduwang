@@ -19,7 +19,9 @@
 		"laracasts/presenter": "0.1.*",
 		"laracasts/validation": "~1.0",
 		"mews/purifier": "dev-master",
-		"rcrowe/turbo": "0.2.*"
+		"rcrowe/turbo": "0.2.*",
+		"phpunit/phpunit": "~4.4.0@stable",
+		"codeception/codeception": "*"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "1.4.*"
