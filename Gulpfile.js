@@ -30,6 +30,7 @@ var paths = {
             'app/assets/javascripts/localforage.min.js',
             'app/assets/javascripts/jquery.inline-attach.min.js',
             'app/assets/javascripts/ekko-lightbox.js',
+            'app/assets/javascripts/rainyday.min.js',
             'app/assets/javascripts/front.js'
         ],
         styles: [
@@ -51,7 +52,7 @@ var paths = {
 gulp.task('css', function() {
 
     // Cleanup old assets
-    del.sync(['public/assets/css/style-*.css']);
+    del.sync(['public/assets/css/styles-*.css']);
 
     // Prefix, compress and concat the CSS assets
     // Afterwards add the MD5 hash to the filename

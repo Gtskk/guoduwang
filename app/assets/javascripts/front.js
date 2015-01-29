@@ -260,19 +260,34 @@
 
             // 获取南京天气 
             $.getJSON('api/weather', function(dat){
-                console.log(dat);
-                if (dat && dat.indexOf('雪') !== -1)
+                if (dat)
                 {
-                    $(document).snowfall({
-                        flakeCount: 100,
-                        minSize: 2,
-                        maxSize:5,
-                        round: true
-                    });
+                    var $image = '';
+                    var $speed = 5;
+                    if(dat.indexOf('雪') !== -1)
+                    {
+                        $image = 'assets/img/flake.png';
+                    }
+                    else if(dat.indexOf('雨') !== -1)
+                    {
+                        $image = 'assets/img/raindrop.png';
+                        $speed = 10;
+                    }
+                    if($image)
+                    {
+                        $(document).snowfall({
+                            image: $image,
+                            flakeCount: 100,
+                            minSize: 5,
+                            maxSize:20,
+                            minSpeed: $speed
+                        });
+                    }
                 }
             });
 
         },
+
         search: function() {
             //focusblurmenu
             jQuery.focusblurmenu = function(focusdom,focuswidthnew,animatetime) 
