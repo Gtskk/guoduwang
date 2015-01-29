@@ -51,7 +51,7 @@ var paths = {
 gulp.task('css', function() {
 
     // Cleanup old assets
-    del(['public/assets/css'], function(err){});
+    del.sync(['public/assets/css']);
 
     // Prefix, compress and concat the CSS assets
     // Afterwards add the MD5 hash to the filename
@@ -67,7 +67,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
 
     // Cleanup old assets
-    del(['public/assets/js'], function(err){});
+    del.sync(['public/assets/js']);
 
     // Concat and uglify the JavaScript assets
     // Afterwards add the MD5 hash to the filename
@@ -83,7 +83,7 @@ gulp.task('js', function() {
 gulp.task('font', function() {
 
     // Cleanup old assets
-    del(['public/assets/fonts'], function(err){});
+    del.sync(['public/assets/fonts']);
 
     // Concat and uglify the JavaScript assets
     // Afterwards add the MD5 hash to the filename
@@ -95,7 +95,7 @@ gulp.task('font', function() {
 gulp.task('image', function() {
 
     // Cleanup old assets
-    del(['public/assets/img'], function(err){});
+    del.sync(['public/assets/img']);
 
     return gulp.src(paths.frontend.images)
         // Pass in options to the task
