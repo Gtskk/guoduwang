@@ -79,7 +79,7 @@ gulp.task('js', function() {
         .pipe(gulp.dest('public/assets/js'));
 });
 
-// JavaScript task
+/*// Font task
 gulp.task('font', function() {
 
     // Cleanup old assets
@@ -101,15 +101,15 @@ gulp.task('image', function() {
         // Pass in options to the task
         .pipe(imagemin({optimizationLevel: 5}))
         .pipe(gulp.dest('public/assets/img'));
-});
+});*/
 
-gulp.task('build', ['css', 'js', 'font', 'image']);
+gulp.task('build', ['css', 'js']);
 
 gulp.task('watch', ['build'],  function(){
     gulp.watch(paths.frontend.styles, ['css']);
     gulp.watch(paths.frontend.scripts, ['js']);
-    gulp.watch(paths.frontend.fonts, ['font']);
-    gulp.watch(paths.frontend.images, ['image']);
+    // gulp.watch(paths.frontend.fonts, ['font']);
+    // gulp.watch(paths.frontend.images, ['image']);
 });
 
 // The default task (called when you run `gulp` from cli)

@@ -24,7 +24,7 @@
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 </div>
                 <div class="footer">
-                    <button type="submit" class="btn bg-olive btn-block">{{ trans('common.sign_in') }}</button>
+                    <button type="submit" name="login_require" class="btn bg-olive btn-block">{{ trans('common.sign_in') }}</button>
                     <p><a href="{{ route('cpanel.password.forgot')}}">{{ trans('common.forgot_passwd') }}</a></p>
                     <a href="{{route('cpanel.register')}}" class="text-center">{{ trans('common.register') }}</a>
                 </div>

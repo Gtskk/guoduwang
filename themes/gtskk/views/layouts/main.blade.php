@@ -75,22 +75,37 @@
 	                        <?php $num--;?>
 	                    @endforeach
 	                </ul>
-
-	                @if(Auth::check())
-	                    <h3 class="pull-right text-success">
-	                    	Hello, {{ Confide::user()->username }}
-	                    	<a href="{{ URL::to('members/logout') }}">Logout</a>
-	                    </h3>
-	                @elseif(Request::is('members/login'))
-	                @else
-	                	@include('theme::members.login')
-	                @endif
 					
-					<!-- 搜索 -->
-	                <form class="navbar-form navbar-right" action="{{ URL::to('search') }}" accetp-charset="UTF-8">
-			            <input id="searchkey" type="text" class="form-control" placeholder="搜索" name="q">
-			        </form>
+					<div class="navbar-right">
+		                <!-- 搜索 -->
+		                <form class="navbar-form navbar-left" action="{{ URL::to('search') }}" accetp-charset="UTF-8">
+				            <input id="searchkey" type="text" class="form-control" placeholder="搜索" name="q">
+				        </form>
 
+		                @if(Auth::check())
+		                <ul class="nav navbar-nav">
+		                    <li>
+		                  	<a href="https://phphub.org/notifications" class="text-warning">
+		                      	<span class="badge badge-fade" id="notification-count">0</span>
+		                  	</a>
+		              		</li>
+		              		<li>
+		                  		<a href="{{ URL::to('members', Confide::user()->id) }}">
+		                      		<i class="fa fa-user"></i> {{ Confide::user()->username }}
+		                  		</a>
+		              		</li>
+		              		<li>
+		                  		<a class="button" href="{{ URL::to('members/logout') }}" onclick=" return confirm('{{ lang("Are you sure want to logout?") }}')">
+		                      	<i class="fa fa-sign-out"></i> {{ lang('Logout') }}
+		                  	</a>
+		              		</li>
+		                </ul>
+		                @elseif(Request::is('members/login'))
+		                @else
+		                	@include('theme::members.login')
+		                @endif
+					</div>
+					
 	            </div><!--/.navbar-collapse -->
 
 	        </div>
