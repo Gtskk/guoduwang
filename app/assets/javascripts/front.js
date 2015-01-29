@@ -257,30 +257,30 @@
             // only show snow in Christmas
             var today = new Date();
             var christmas = new Date(today.getFullYear(), 11, 25); // Month is 0-11 in JavaScript
-            if (today.getMonth() == 11 && (today.getDate() > 22 && today.getDate() < 30))
-            {
-                $(document).snowfall({
-                    flakeCount: 100,
-                    minSize: 2,
-                    maxSize:5,
-                    round: true
-                });
-            }
+
+            // 获取南京天气 
+            $.getJSON('api/weather', function(dat){
+                console.log(dat);
+                if (dat && dat.indexOf('雪') !== -1)
+                {
+                    $(document).snowfall({
+                        flakeCount: 100,
+                        minSize: 2,
+                        maxSize:5,
+                        round: true
+                    });
+                }
+            });
+
         },
         search: function() {
             //focusblurmenu
             jQuery.focusblurmenu = function(focusdom,focuswidthnew,animatetime) 
             {
                 var focusblurmenuid = $(focusdom);
-                var searchform = focusblurmenuid.parent().next('.navbar-form');
                 var defval = focusblurmenuid.val();
                 var defwidth = focusblurmenuid.width();
                 focusblurmenuid.focus(function(){
-                    // 如果前面存在元素
-                    if(searchform.length)
-                    {
-                        searchform.hide();
-                    }
                     var thisval = $(this).val();
                     if(thisval==defval){
                         $(this).val("");
@@ -292,18 +292,11 @@
                     if(thisval==""){
                         $(this).val(defval);
                     }
-                    $(this).animate({width:"+"+defwidth}, animatetime, function()
-                    {
-                        // 如果前面存在元素
-                        if(searchform.length)
-                        {
-                            searchform.show();
-                        }
-                    }).removeClass("searchkeyfocus");
+                    $(this).animate({width:"+"+defwidth}, animatetime).removeClass("searchkeyfocus");
                 });
                 
             };
-            $.focusblurmenu("#searchkey","400px","300");
+            $.focusblurmenu("#searchkey","280px","300");
 
         }
 

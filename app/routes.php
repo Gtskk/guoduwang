@@ -89,3 +89,5 @@ App::missing(function($exception)
 {
     return Response::view('theme::errors.404', array(), 404);
 });
+// 获取天气接口
+Route::get('api/weather', 'ApiController@weather');
