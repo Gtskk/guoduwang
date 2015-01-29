@@ -20,7 +20,7 @@ class ApiController extends BaseController {
     		return '';
 		});
 
-		die(json_encode('大雨'));
+		die(json_encode($return));
 
 	}
 
