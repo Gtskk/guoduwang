@@ -84,8 +84,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	Route::resource('products', 'AdminProductsController', array('except' => array('show')));
 	Route::resource('categories', 'AdminCategoriesController', array('except' => array('show')));
 });
-/*//自定义404
+//自定义404
 App::missing(function($exception)
 {
-    return Response::view('errors.404', array(), 404);
-});*/
+    return Response::view('theme::errors.404', array(), 404);
+});
