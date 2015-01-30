@@ -1,13 +1,21 @@
 @extends('theme::layouts.main')
 
+@section('styles')
+{{ HTML::style('assets/css/component.css') }}
+@stop
+
 @section('content')
-<div class="container">
-    <div class="panel panel-default">
+<div class="container st-container" id="st-container">
+    <div class="panel panel-default st-pusher">
 
         <div class="panel-heading">
             @if (isset($node))
             <div class="pull-left panel-title">{{ lang('Current Node') }}: {{{ $node->name }}}</div>
             @endif
+
+            <div id="st-trigger-effects" class="nodeslist">
+                <button class="btn btn-success btn-sm" data-effect="st-effect-1">{{ lang('All Nodes') }}</button>
+            </div>
 
             @include('theme::topics.partials.filter')
 

@@ -37,6 +37,8 @@
             self.initInlineAttach();
             self.snowing();
             self.search();
+            // 初始化侧边栏效果
+            SidebarMenuEffects.sidebar();
         },
 
         /**
@@ -250,7 +252,7 @@
 
 
         /**
-         * Snowing around the world
+         * Snowing around the world（根据当地天气自动变化）
          */
         snowing: function() {
 
@@ -264,24 +266,36 @@
                 {
                     var $image = '';
                     var $speed = 5;
+                    var $bgImg = '';
                     if(dat.indexOf('雪') !== -1)
                     {
-                        $image = 'assets/img/flake.png';
+                        $image = 'flake.png';
+                        $bgImg = 'bgSnow.jpg';
                     }
                     else if(dat.indexOf('雨') !== -1)
                     {
-                        $image = 'assets/img/raindrop.png';
+                        $image = 'raindrop.png';
                         $speed = 10;
+                        $bgImg = 'bgRain.jpg';
+                    }
+                    else if(dat.indexOf('阴') !== -1)
+                    {
+                        $bgImg = 'bgYintian.jpg';
                     }
                     if($image)
                     {
                         $(document).snowfall({
-                            image: $image,
+                            image: 'assets/img/weather/'+$image,
                             flakeCount: 100,
                             minSize: 5,
                             maxSize:20,
                             minSpeed: $speed
                         });
+                    }
+                    // 改变背景图片
+                    if($bgImg)
+                    {
+                        $('body').css('background', '#ccc url(assets/img/weather/'+$bgImg+') no-repeat');
                     }
                 }
             });

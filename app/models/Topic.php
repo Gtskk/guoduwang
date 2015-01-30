@@ -63,14 +63,14 @@ class Topic extends \Eloquent
 					->paginate($limit);
 	}
 
-	public function getTopicsWithFilter($filter, $limit = 20)
+	public function getTopicsWithFilter($filter, $limit = 13)
 	{
 		return $this->applyFilter($filter)
 					->with('member', 'node', 'lastReplyUser')
 					->paginate($limit);
 	}
 
-	public function getNodeTopicsWithFilter($filter, $node_id, $limit = 20)
+	public function getNodeTopicsWithFilter($filter, $node_id, $limit = 13)
 	{
 		return $this->applyFilter($filter)
 					->where('node_id', '=', $node_id)

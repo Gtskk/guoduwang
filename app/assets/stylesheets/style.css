@@ -1,8 +1,18 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
+html, body{
+  height: 100%;
+}
 body {
   padding-top: 50px;
   padding-bottom: 20px;
   background-color: #ccc;
+}
+
+#wrap{
+  min-height: 100%;
+  height: auto;
+  margin: 20px auto -80px;
+  padding: 0 0 80px;
 }
 
 .navbar-inverse .nav>li>a.current{

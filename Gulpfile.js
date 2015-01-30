@@ -31,6 +31,8 @@ var paths = {
             'app/assets/javascripts/jquery.inline-attach.min.js',
             'app/assets/javascripts/ekko-lightbox.js',
             'app/assets/javascripts/rainyday.min.js',
+            'app/assets/javascripts/classie.js',
+            'app/assets/javascripts/sidebarEffects.js',
             'app/assets/javascripts/front.js'
         ],
         styles: [
