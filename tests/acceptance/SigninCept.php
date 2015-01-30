@@ -1,8 +1,8 @@
 <?php 
 $I = new AcceptanceTester($scenario);
-$I->am('网站用户');
-$I->wantTo('登陆这个网站');
-$I->lookForwardTo('看到我想看到的，玩到我想玩的');
+$I->am('a website user');
+$I->wantTo('login in');
+$I->lookForwardTo('can see and play what I want');
 $I->amOnPage('/members/login');
 $I->fillField('username', 'gtskk');
 $I->fillField('password', '6399998');

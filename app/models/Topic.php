@@ -26,6 +26,11 @@ class Topic extends \Eloquent
 		'updated_at'
 	];
 
+	public function votes()
+	{
+		return $this->morphMany('Vote', 'votable');
+	}
+
 	public function node()
 	{
 		return $this->belongsTo('Node');

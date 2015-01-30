@@ -4,6 +4,7 @@ use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\ConfideUserInterface;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Zizaco\Entrust\HasRole;
 
 class Member extends Eloquent implements ConfideUserInterface {
 	/**
@@ -17,7 +18,13 @@ class Member extends Eloquent implements ConfideUserInterface {
 	use PresentableTrait;
     public $presenter = 'Gtskk\Presenters\MemberPresenter';
 
-    // Enable soft delete
+    // 启用 hasRole( $name ), can( $permission ),
+    //   and ability($roles, $permissions, $options)等一些Entrust包的功能
+    use HasRole;
+
+    use ConfideUser;
+
+    // 启用软删除功能
     use SoftDeletingTrait;
     protected $dates = ['deleted_at'];
 
@@ -28,9 +35,6 @@ class Member extends Eloquent implements ConfideUserInterface {
 	 */
 	protected $hidden = array('password');
 
-	use ConfideUser;
-
-
     public function topics()
     {
         return $this->hasMany('Topic', 'member_id');
@@ -39,6 +43,16 @@ class Member extends Eloquent implements ConfideUserInterface {
     public function replies()
     {
         return $this->hasMany('Reply');
+    }
+
+    public function attentions()
+    {
+    	return $this->hasMany('Attention');
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany('Favorite');
     }
 
 
