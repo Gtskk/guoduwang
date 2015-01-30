@@ -260,8 +260,8 @@
             var today = new Date();
             var christmas = new Date(today.getFullYear(), 11, 25); // Month is 0-11 in JavaScript
 
-            // 获取南京天气 
-            $.getJSON('api/weather', function(dat){
+            // 获取南京天气
+            $.getJSON(location.protocol+'//'+location.hostname+'/api/weather', function(dat){
                 if (dat)
                 {
                     var $image = '';

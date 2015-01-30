@@ -9,5 +9,5 @@ composer.lock
 Thumbs.db
 .env.local.php
 /node_modules
-asset_mainfest.json
+asset_manifest.json
 /public/assets
