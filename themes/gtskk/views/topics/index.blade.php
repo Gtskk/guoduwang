@@ -1,9 +1,5 @@
 @extends('theme::layouts.main')
 
-@section('styles')
-{{ HTML::style('assets/css/component.css') }}
-@stop
-
 @section('content')
 <div class="container st-container" id="st-container">
     <div class="panel panel-default st-pusher">

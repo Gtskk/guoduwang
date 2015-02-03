@@ -12,6 +12,7 @@
             });
             $(document).on('pjax:complete', function() {
                 NProgress.done();
+                SidebarMenuEffects.sidebar(); // 初始化侧边栏节点列表样式
                 self.siteBootUp();
             });
 
@@ -37,8 +38,6 @@
             self.initInlineAttach();
             self.snowing();
             self.search();
-            // 初始化侧边栏效果
-            SidebarMenuEffects.sidebar();
         },
 
         /**
@@ -295,7 +294,7 @@
                     // 改变背景图片
                     if($bgImg)
                     {
-                        $('body').css('background', '#ccc url(assets/img/weather/'+$bgImg+') no-repeat');
+                        $('body').css('background', '#ccc url(../assets/img/weather/'+$bgImg+') no-repeat');
                     }
                 }
             });
