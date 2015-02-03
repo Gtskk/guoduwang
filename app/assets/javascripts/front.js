@@ -4,18 +4,13 @@
         init: function(){
             var self = this;
             $(document).pjax('a:not(a[target="_blank"])', 'body');
-            $(document).on('pjax:start', function() {
+            $(document).on('pjax:send', function() {
                 NProgress.start();
             });
             $(document).on('pjax:end', function() {
                 NProgress.done();
-            });
-            $(document).on('pjax:complete', function() {
-                NProgress.done();
-                SidebarMenuEffects.sidebar(); // 初始化侧边栏节点列表样式
                 self.siteBootUp();
             });
-
             self.siteBootUp();
             self.initLightBox();
         },
@@ -38,6 +33,7 @@
             self.initInlineAttach();
             self.snowing();
             self.search();
+            //SidebarMenuEffects.sidebar(); // 初始化侧边栏节点列表样式
         },
 
         /**
@@ -101,13 +97,7 @@
         initLightBox: function(){
             $(document).delegate('.content-body img:not(.emoji)', 'click', function(event) {
                 event.preventDefault();
-                return $(this).ekkoLightbox({
-                    onShown: function() {
-                        if (window.console) {
-                            // return console.log('Checking our the events huh?');
-                        }
-                    }
-                });
+                return $(this).ekkoLightbox();
             });
         },
 
@@ -251,9 +241,10 @@
 
 
         /**
-         * Snowing around the world（根据当地天气自动变化）
+         * Showing weather（根据当地天气自动变化）
          */
         snowing: function() {
+            var self = this;
 
             // only show snow in Christmas
             var today = new Date();
@@ -273,8 +264,6 @@
                     }
                     else if(dat.indexOf('雨') !== -1)
                     {
-                        $image = 'raindrop.png';
-                        $speed = 10;
                         $bgImg = 'bgRain.jpg';
                     }
                     else if(dat.indexOf('阴') !== -1)
@@ -295,6 +284,7 @@
                     if($bgImg)
                     {
                         $('body').css('background', '#ccc url(../assets/img/weather/'+$bgImg+') no-repeat');
+                        $('body').css('background-size', '100% 100%');
                     }
                 }
             });

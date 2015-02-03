@@ -123,4 +123,5 @@ return array(
     'Can not vote your feedback' => '不允许给自己点赞',
     'Vote Up' => '顶',
     'Vote Down' => '踩',
+    'Recomended Resources' => '推荐资源',
 );

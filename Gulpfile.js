@@ -13,7 +13,6 @@ var paths = {
         scripts: [
             'app/assets/javascripts/jquery.min.js',
             'app/assets/javascripts/bootstrap.min.js',
-            'app/assets/javascripts/jquery.ad-gallery.js',
             'app/assets/javascripts/snowfall.jquery.min.js',
             'app/assets/javascripts/Validform_v5.3.2_min.js',
             'app/assets/javascripts/moment.min.js',
@@ -30,9 +29,6 @@ var paths = {
             'app/assets/javascripts/localforage.min.js',
             'app/assets/javascripts/jquery.inline-attach.min.js',
             'app/assets/javascripts/ekko-lightbox.js',
-            'app/assets/javascripts/rainyday.min.js',
-            'app/assets/javascripts/classie.js',
-            'app/assets/javascripts/sidebarEffects.js',
             'app/assets/javascripts/front.js'
         ],
         styles: [

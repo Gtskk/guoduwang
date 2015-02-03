@@ -124,4 +124,5 @@ return array (
     'Can not vote your feedback' => 'You can\'t vote on your own feedback.',
     'Vote Up' => 'Vote Up',
     'Vote Down' => 'Vote Down',
+    'Recomended Resources' => 'Recomended Resources',
 );

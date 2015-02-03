@@ -29,6 +29,7 @@
 	    <![endif]-->
 	</head>
 	<body>
+
 		<div id="wrap">
 		    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		        <div class="container">
@@ -111,7 +112,10 @@
 		        </div>
 		    </nav>
 
-			@yield('content')
+			
+			<div class="container">
+				@yield('content')
+			</div>
 
 		</div>
 
