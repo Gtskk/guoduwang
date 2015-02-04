@@ -198,6 +198,7 @@ return array(
 		'Entrust'    	  => 'Zizaco\Entrust\EntrustFacade',
         'Carbon'          => 'Carbon\Carbon',
         'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
+        'Markdown'        => 'Gtskk\Markdown\Markdown',
 
 	),
 

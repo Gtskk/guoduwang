@@ -12,7 +12,7 @@
 		"intervention/image": "dev-master",
 		"torann/currency": "dev-master",
 		"raveren/kint": "dev-master",
-		"barryvdh/laravel-debugbar": "dev-master",
+		"barryvdh/laravel-debugbar": "1.*",
 		"zizaco/confide": "~4.0@dev",
 		"zizaco/entrust": "1.2.*@dev",
 		"fitztrev/laravel-html-minify": "1.*",
@@ -21,7 +21,8 @@
 		"mews/purifier": "dev-master",
 		"rcrowe/turbo": "0.2.*",
 		"phpunit/phpunit": "~4.4.0@stable",
-		"codeception/codeception": "*"
+		"codeception/codeception": "*",
+        "nickcernis/html-to-markdown": "2.1.*"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "1.4.*"
