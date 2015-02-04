@@ -17,13 +17,13 @@ class Voter
 		elseif($topic->votes()->ByWhom(Confide::user()->id)->WithType('downvote')->count())
 		{
 			$topic->votes()->ByWhom(Confide::user()->id)->WithType('downvote')->delete();
-			$topic->votes()->create(['user_id' => Confide::user()->id, 'is' => 'upvote']);
+			$topic->votes()->create(['member_id' => Confide::user()->id, 'typeIs' => 'upvote']);
 			$topic->increment('vote_count', 2);
 		}
 		else
 		{
 			// 点击一次更新顶状态
-			$topic->votes()->create(['user_id' => Confide::user()->id, 'is' => 'upvote']);
+			$topic->votes()->create(['member_id' => Confide::user()->id, 'typeIs' => 'upvote']);
 			$topic->increment('vote_count', 1);
 
 			Notification::notify('topic_upvote', Confide::user(), $topic->member, $topic);
@@ -42,13 +42,13 @@ class Voter
         {
             // 用户已经点击了顶状态
             $topic->votes()->ByWhom(Confide::user()->id)->WithType('upvote')->delete();
-            $topic->votes()->create(['user_id' => Confide::user()->id, 'is' => 'downvote']);
+            $topic->votes()->create(['member_id' => Confide::user()->id, 'typeIs' => 'downvote']);
             $topic->decrement('vote_count', 2);
         } 
         else 
         {
             // 点击一次添加踩状态
-            $topic->votes()->create(['user_id' => Confide::user()->id, 'is' => 'downvote']);
+            $topic->votes()->create(['member_id' => Confide::user()->id, 'typeIs' => 'downvote']);
             $topic->decrement('vote_count', 1);
         }
 	}
@@ -56,7 +56,7 @@ class Voter
 
 	public function replyUpVote(Reply $reply)
 	{
-		if(Confide::user()->id == $reply->user_id)
+		if(Confide::user()->id == $reply->member_id)
 		{
 			return \Flash::warning(lang('Can not vote your feedback'));
 		}
@@ -64,23 +64,23 @@ class Voter
 		if($reply->votes()->ByWhom(Confide::user()->id)->WithType('upvote')->count())
 		{
 			// click twice for remove upvote
-            $reply->votes()->ByWhom(Auth::user()->id)->WithType('upvote')->delete();
+            $reply->votes()->ByWhom(Confide::user()->id)->WithType('upvote')->delete();
             $reply->decrement('vote_count', 1);
 		}
-		elseif ($reply->votes()->ByWhom(Auth::user()->id)->WithType('downvote')->count())
+		elseif ($reply->votes()->ByWhom(Confide::user()->id)->WithType('downvote')->count())
 		{
             // user already clicked downvote once
-            $reply->votes()->ByWhom(Auth::user()->id)->WithType('downvote')->delete();
-            $reply->votes()->create(['user_id' => Auth::user()->id, 'is' => 'upvote']);
+            $reply->votes()->ByWhom(Confide::user()->id)->WithType('downvote')->delete();
+            $reply->votes()->create(['member_id' => Confide::user()->id, 'typeIs' => 'upvote']);
             $reply->increment('vote_count', 2);
         } 
         else 
         {
             // first time click
-            $reply->votes()->create(['user_id' => Auth::user()->id, 'is' => 'upvote']);
+            $reply->votes()->create(['member_id' => Confide::user()->id, 'typeIs' => 'upvote']);
             $reply->increment('vote_count', 1);
 
-            Notification::notify('reply_upvote', Auth::user(), $reply->user, $reply->topic, $reply);
+            Notification::notify('reply_upvote', Confide::user(), $reply->member, $reply->topic, $reply);
         }
 	}
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-01-30 08:32:21
+-- Generation Time: 2015-02-04 06:36:23
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `gdw`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `attentions`
+--
+
+CREATE TABLE IF NOT EXISTS `attentions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_id` int(10) unsigned NOT NULL,
+  `member_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `attentions_topic_id_index` (`topic_id`),
+  KEY `attentions_member_id_index` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -59,6 +76,83 @@ CREATE TABLE IF NOT EXISTS `comments` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `favorites`
+--
+
+CREATE TABLE IF NOT EXISTS `favorites` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_id` int(10) unsigned NOT NULL,
+  `member_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `favorites_topic_id_index` (`topic_id`),
+  KEY `favorites_member_id_index` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `front_assigned_roles`
+--
+
+CREATE TABLE IF NOT EXISTS `front_assigned_roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `front_assigned_roles_member_id_foreign` (`member_id`),
+  KEY `front_assigned_roles_role_id_foreign` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `front_permissions`
+--
+
+CREATE TABLE IF NOT EXISTS `front_permissions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `front_permission_role`
+--
+
+CREATE TABLE IF NOT EXISTS `front_permission_role` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `permission_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `front_permission_role_permission_id_foreign` (`permission_id`),
+  KEY `front_permission_role_role_id_foreign` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `front_roles`
+--
+
+CREATE TABLE IF NOT EXISTS `front_roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `front_roles_name_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `groups`
 --
 
@@ -70,21 +164,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `groups_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `memberlogs`
---
-
-CREATE TABLE IF NOT EXISTS `memberlogs` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `member_id` int(11) NOT NULL,
-  `member` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `transaction` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `dateandtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -103,9 +182,9 @@ CREATE TABLE IF NOT EXISTS `members` (
   `confirmation_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `confirmed` tinyint(1) NOT NULL DEFAULT '0',
-  `deleted_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `members_username_unique` (`username`),
   UNIQUE KEY `members_email_unique` (`email`),
@@ -116,37 +195,37 @@ CREATE TABLE IF NOT EXISTS `members` (
 -- 转存表中的数据 `members`
 --
 
-INSERT INTO `members` (`id`, `username`, `email`, `phone`, `img_url`, `password`, `confirmation_code`, `remember_token`, `confirmed`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'johndoe', 'johndoe@site.dev', '15212230025', NULL, '$2y$10$jxySwbUJ9TDz6pZlwMMf6eL8L3UXntz0PPl4g0kysJJnKi8kXRaRO', 'f1a2a08a1df563fd13a06047d1085173', NULL, 0, NULL, '2015-01-04 19:41:00', '2015-01-04 19:41:00'),
-(2, 'ldouglas', 'tad.greenholt@gmail.com', '353-716-4123', NULL, '$2y$10$UUJGcR.V8tSToEEMWbGQyupLBUl1j3pB6nJm6QLDZv6rHvsovQGpO', '9498fa68a286ca4729fc2c6a39892ab3', NULL, 0, NULL, '2015-01-28 18:27:24', '2015-01-28 18:27:24'),
-(3, 'ocie40', 'ryann.gutmann@ortiz.org', '+65(1)8146054216', NULL, '$2y$10$YJTFoPp3JlryB2ws3ta8UeLhhI.cScPQs3zLNl0r2lqmXhUa/rtRW', '44d952f96e110766813fff378346b75f', NULL, 0, NULL, '2015-01-28 18:27:24', '2015-01-28 18:27:24'),
-(4, 'claudie32', 'esmeralda28@vandervort.com', '07390991192', NULL, '$2y$10$1QfqcQhuy6qAtyscOOaeBOP6joy962cJV8tAGgCiLu4TFeHmmJIaW', '87710dab7fc4d71f1be3a670a46ff763', NULL, 0, NULL, '2015-01-28 18:27:25', '2015-01-28 18:27:25'),
-(5, 'westley20', 'jeanie.koss@wilkinsonstoltenberg.com', '591-294-2033', NULL, '$2y$10$uxBrKYbNRfOg3fKXyqcBh.nxFaXS22cj.IjdZ1VU1TGdoEThnZMrW', '77273c4ba59b8e76d7ed6e51b48d621c', NULL, 0, NULL, '2015-01-28 18:27:25', '2015-01-28 18:27:25'),
-(6, 'aaufderhar', 'hansen.cordie@stracke.com', '02272897338', NULL, '$2y$10$nxam9AJx/p6gDWkbMgEpMOOp.eqgr/nCzqhshqFPo41efDiEchwlW', '85427a36df1307aa7bf8866b377a0478', NULL, 0, NULL, '2015-01-28 18:27:25', '2015-01-28 18:27:25'),
-(7, 'tianna50', 'ross.bailey@gmail.com', '350-790-0083x946', NULL, '$2y$10$jMjx5YrNQAzTs7UqM800buyTh3BMoZ5z.ga6KB1QZ44NGgd.WG9Lu', '5134d65d08e33aee8f2c441df29cc07a', 'K44Fu9cnRhaOFCUg8ekeeyaYQo7y8L8vUf3QYCw2YOy4P5c4K4ce7bx0kLk5', 1, NULL, '2015-01-28 18:27:25', '2015-01-28 22:27:00'),
-(8, 'francesco98', 'paris95@dibbert.com', '875-937-6360', NULL, '$2y$10$aFSrt3rycpSmBEaNQHEY4Os0UJR/gKk.v1eik30k4KzPw89XJLZea', '5b0a86d1a5b0d7b05bf0e128d9f5c0c9', NULL, 0, NULL, '2015-01-28 18:27:25', '2015-01-28 18:27:25'),
-(9, 'nrath', 'mylene80@kozey.com', '1-252-586-9559', NULL, '$2y$10$vW88ex8EorzfGl1cYUQpROeKuVuLK4x4QJzPVnBBh/7uCHbErrR8.', '6819d9dc6ae40adb2f7367b39b185ca5', NULL, 0, NULL, '2015-01-28 18:27:26', '2015-01-28 18:27:26'),
-(10, 'zgleichner', 'cormier.gayle@gmail.com', '01714819901', NULL, '$2y$10$WY1SZ3RZd4xTlH6InwqL/u4oP.8RHKysA7KX5LrV4c4ihZRyEIiNC', '4afc59c4615af35d0a3705ce3ba2b5dd', NULL, 0, NULL, '2015-01-28 18:27:26', '2015-01-28 18:27:26'),
-(11, 'mnicolas', 'pfannerstill.vern@hotmail.com', '+81(3)6378517054', NULL, '$2y$10$OP00PRxA6BVrlPc84GVY1OXjw30B8q79wliB.hRVDZxP0oKRjD4Xq', 'b8639771371a7802fdd5614d946a491e', NULL, 0, NULL, '2015-01-28 18:27:26', '2015-01-28 18:27:26'),
-(12, 'kbrekke', 'kiana.pollich@gorczany.info', '691-685-1522', NULL, '$2y$10$jVLAp7jhsQl9bPAuvTvtX.4DuB962ixNVKH9Ip3H3fyubYxeJzsB6', '45ac1550d20304d8853bf3724c6c2111', NULL, 0, NULL, '2015-01-28 18:27:26', '2015-01-28 18:27:26'),
-(13, 'qward', 'amara13@yahoo.com', '723.245.7007x79609', NULL, '$2y$10$XjshZIp8ZnOwE/ZMqdPmZeomkvT4wzVybBaEAAcL85lp7u/8aV.A2', '69d9092927545d3647a957d4d08a236a', NULL, 0, NULL, '2015-01-28 18:27:26', '2015-01-28 18:27:26'),
-(14, 'probel', 'pkuhn@gmail.com', '882.159.3566x3905', NULL, '$2y$10$OORBIxuvVVfgjnAqiPFtwevBVdirm1.irLCdXstZgd1Uo./o7xrS6', '9d549c58c54edd0ede4cde3a608838f4', NULL, 0, NULL, '2015-01-28 18:27:26', '2015-01-28 18:27:26'),
-(15, 'lkshlerin', 'adrienne90@hotmail.com', '00661734838', NULL, '$2y$10$Lt59YBuHXoUbUrIka48B3O4viUfCbcw9iJIms/iPW6wArVEnIod1C', '9ddfc7fa8964163a88fab0f09c1a1de8', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(16, 'catalina37', 'tschamberger@hilll.com', '355.250.8137', NULL, '$2y$10$erEuCj1MtP2vYshvK6BStupvtHTpkONSD/VBCNb11EXbEHDgiEi.y', '22573145a010ef57f04246b1d976a310', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(17, 'xkling', 'pmetz@vandervorthagenes.biz', '908-065-7713', NULL, '$2y$10$gK.zMX4eFhoZdu9JEwvQm.2e5T9Zq1mqRSnJOj/G8j5D2hTRVDY8y', 'c6eb0e454902c0be4e3bd8bf31d86f22', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(18, 'dlueilwitz', 'julien.ratke@hotmail.com', '293.692.7711x478', NULL, '$2y$10$yvv6l8dIqeXwNS5hql2o/.sW/Wi0T3QQ2bezoL.evw44lw2Phu/oa', 'e580ea26fc6cea22f3066744867ac7b3', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(19, 'tyson75', 'jhilll@yahoo.com', '1-036-006-0551', NULL, '$2y$10$88b6DNNPloNmpVaivgKLIusTIX77SdsikzkZSFxgmzSfamexm9kJG', '459097a30773dfb5b2dc2158556f9325', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(20, 'pdubuque', 'ezequiel26@kassulke.net', '(475)131-9793', NULL, '$2y$10$.tgAodXHJofI/boUkoseyeuvSuSEnGA0MTy5VDSWZrOpzW/3qzzBm', '0b1d0af9f6456787ca0f92820609b225', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(21, 'rahul92', 'samson47@franecki.com', '475.629.9712x06652', NULL, '$2y$10$tF6dTHvkZEW03qdapCsbIuyXir7/52qgDqaxBkGnhOJngbuwFbxSu', '10e773aec5c51f9b1166cb194237ca2f', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(22, 'zking', 'lueilwitz.briana@hotmail.com', '718-299-2780', NULL, '$2y$10$rnLUs8h2EBzm/ZjvEPP/4ecOsftlaJUAr0ZKGVymfqoUmR4yItJb2', 'c2b969f5778b03cbb4b398d8a9a01383', NULL, 0, NULL, '2015-01-28 18:27:27', '2015-01-28 18:27:27'),
-(23, 'mertie72', 'ukunze@binsrenner.com', '862-989-3492x6345', NULL, '$2y$10$mVfCcU7GwI5EiLCItvMR.e0/lSlD77PaJT5dFkCGXo1/AT8w0YJb6', '09b48466ef6182817bbb214e8934e8ed', NULL, 0, NULL, '2015-01-28 18:27:28', '2015-01-28 18:27:28'),
-(24, 'isabel93', 'pfeffer.westley@hotmail.com', '090.624.7776x00462', NULL, '$2y$10$SKGMEbHuFH16VUV7k1S6fO23EOKiAJ5A5sB8ZOhYbDTjJ1sbct1Fe', '8ecdf674543d6cc5a3681ddef280db12', NULL, 0, NULL, '2015-01-28 18:27:28', '2015-01-28 18:27:28'),
-(25, 'elnora33', 'jany.ritchie@gmail.com', '056-317-4675x8941', NULL, '$2y$10$b0uAVxlXU5og391qSDHhletw1MKjKbfprx/Zq472prmrrbUEtsOwO', '83bd3740c32648bc9e75c993976b2e7f', NULL, 0, NULL, '2015-01-28 18:27:28', '2015-01-28 18:27:28'),
-(26, 'valentina33', 'cbarrows@yahoo.com', '1-265-211-9155', NULL, '$2y$10$yVnj8IiNGmMKVDJuL9p5ee9jzP5eQrrAnegwRbvjkeaSCs7uGjH/S', '5bc5c556749d3f3643ea13860def008d', NULL, 0, NULL, '2015-01-28 18:27:28', '2015-01-28 18:27:28'),
-(27, 'ewehner', 'sporer.laverna@ritchie.com', '1-042-743-6717x62538', NULL, '$2y$10$UEl6sjtMm4hCaO3lAWye3eW5i9J09lbxYDv.LBY3vog6KTk85gD0K', 'f54769501158a3a71f7612e9b1ff0177', NULL, 0, NULL, '2015-01-28 18:27:28', '2015-01-28 18:27:28'),
-(28, 'zoey00', 'sawayn.brenna@stromanrempel.com', '642.511.2605x72881', NULL, '$2y$10$QzYOBkcJKvqFPRKUNWjzVey8osr52AXG.onWrW9RAl4RERta5vUmm', '80fa9a996790401f6cb5bc6a14063906', NULL, 0, NULL, '2015-01-28 18:27:29', '2015-01-28 18:27:29'),
-(29, 'owolf', 'daren25@gmail.com', '(815)314-1677', NULL, '$2y$10$GNxjlVJ2MS0zyP3Rney/We75HxLBXLo8SrRnrBmtwj.ecjKjDSX2m', '51302ed9f69938dfd326e691c78f8461', NULL, 0, NULL, '2015-01-28 18:27:29', '2015-01-28 18:27:29'),
-(30, 'prutherford', 'amparo.klein@gmail.com', '564-480-0283x87121', NULL, '$2y$10$kM3ifiI5d0PE4Mb8bP0ad.EHKHFJb8vQQeoIMvljorgTjDake2VJi', '8bc28e5d6b33359d004503d285669a47', NULL, 0, NULL, '2015-01-28 18:27:29', '2015-01-28 18:27:29');
+INSERT INTO `members` (`id`, `username`, `email`, `phone`, `img_url`, `password`, `confirmation_code`, `remember_token`, `confirmed`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'johndoe', 'johndoe@site.dev', '15212230025', NULL, '$2y$10$jxySwbUJ9TDz6pZlwMMf6eL8L3UXntz0PPl4g0kysJJnKi8kXRaRO', 'f1a2a08a1df563fd13a06047d1085173', NULL, 0, '2015-01-04 19:41:00', '2015-01-04 19:41:00', NULL),
+(2, 'ldouglas', 'tad.greenholt@gmail.com', '353-716-4123', NULL, '$2y$10$UUJGcR.V8tSToEEMWbGQyupLBUl1j3pB6nJm6QLDZv6rHvsovQGpO', '9498fa68a286ca4729fc2c6a39892ab3', NULL, 0, '2015-01-28 18:27:24', '2015-01-28 18:27:24', NULL),
+(3, 'ocie40', 'ryann.gutmann@ortiz.org', '+65(1)8146054216', NULL, '$2y$10$YJTFoPp3JlryB2ws3ta8UeLhhI.cScPQs3zLNl0r2lqmXhUa/rtRW', '44d952f96e110766813fff378346b75f', 'qWtGW64KLwvmcmHaevT2zm4gk6sARXMyZd0wmnpGCm52FxVXuFqGCMEqFIpB', 0, '2015-01-28 18:27:24', '2015-02-04 05:30:58', NULL),
+(4, 'claudie32', 'esmeralda28@vandervort.com', '07390991192', NULL, '$2y$10$1QfqcQhuy6qAtyscOOaeBOP6joy962cJV8tAGgCiLu4TFeHmmJIaW', '87710dab7fc4d71f1be3a670a46ff763', NULL, 0, '2015-01-28 18:27:25', '2015-01-28 18:27:25', NULL),
+(5, 'westley20', 'jeanie.koss@wilkinsonstoltenberg.com', '591-294-2033', NULL, '$2y$10$uxBrKYbNRfOg3fKXyqcBh.nxFaXS22cj.IjdZ1VU1TGdoEThnZMrW', '77273c4ba59b8e76d7ed6e51b48d621c', NULL, 0, '2015-01-28 18:27:25', '2015-01-28 18:27:25', NULL),
+(6, 'aaufderhar', 'hansen.cordie@stracke.com', '02272897338', NULL, '$2y$10$nxam9AJx/p6gDWkbMgEpMOOp.eqgr/nCzqhshqFPo41efDiEchwlW', '85427a36df1307aa7bf8866b377a0478', NULL, 0, '2015-01-28 18:27:25', '2015-01-28 18:27:25', NULL),
+(7, 'tianna50', 'ross.bailey@gmail.com', '350-790-0083x946', NULL, '$2y$10$jMjx5YrNQAzTs7UqM800buyTh3BMoZ5z.ga6KB1QZ44NGgd.WG9Lu', '5134d65d08e33aee8f2c441df29cc07a', 'MJzC6t5tDxRo1MDGOvtgIps3dyU1etaxW0jmBMbIP0wvUUjn2sAclrk2gE96', 0, '2015-01-28 18:27:25', '2015-02-04 03:54:19', NULL),
+(8, 'francesco98', 'paris95@dibbert.com', '875-937-6360', NULL, '$2y$10$aFSrt3rycpSmBEaNQHEY4Os0UJR/gKk.v1eik30k4KzPw89XJLZea', '5b0a86d1a5b0d7b05bf0e128d9f5c0c9', NULL, 0, '2015-01-28 18:27:25', '2015-01-28 18:27:25', NULL),
+(9, 'nrath', 'mylene80@kozey.com', '1-252-586-9559', NULL, '$2y$10$vW88ex8EorzfGl1cYUQpROeKuVuLK4x4QJzPVnBBh/7uCHbErrR8.', '6819d9dc6ae40adb2f7367b39b185ca5', NULL, 0, '2015-01-28 18:27:26', '2015-01-28 18:27:26', NULL),
+(10, 'zgleichner', 'cormier.gayle@gmail.com', '01714819901', NULL, '$2y$10$WY1SZ3RZd4xTlH6InwqL/u4oP.8RHKysA7KX5LrV4c4ihZRyEIiNC', '4afc59c4615af35d0a3705ce3ba2b5dd', NULL, 0, '2015-01-28 18:27:26', '2015-01-28 18:27:26', NULL),
+(11, 'mnicolas', 'pfannerstill.vern@hotmail.com', '+81(3)6378517054', NULL, '$2y$10$OP00PRxA6BVrlPc84GVY1OXjw30B8q79wliB.hRVDZxP0oKRjD4Xq', 'b8639771371a7802fdd5614d946a491e', NULL, 0, '2015-01-28 18:27:26', '2015-01-28 18:27:26', NULL),
+(12, 'kbrekke', 'kiana.pollich@gorczany.info', '691-685-1522', NULL, '$2y$10$jVLAp7jhsQl9bPAuvTvtX.4DuB962ixNVKH9Ip3H3fyubYxeJzsB6', '45ac1550d20304d8853bf3724c6c2111', NULL, 0, '2015-01-28 18:27:26', '2015-01-28 18:27:26', NULL),
+(13, 'qward', 'amara13@yahoo.com', '723.245.7007x79609', NULL, '$2y$10$XjshZIp8ZnOwE/ZMqdPmZeomkvT4wzVybBaEAAcL85lp7u/8aV.A2', '69d9092927545d3647a957d4d08a236a', NULL, 0, '2015-01-28 18:27:26', '2015-01-28 18:27:26', NULL),
+(14, 'probel', 'pkuhn@gmail.com', '882.159.3566x3905', NULL, '$2y$10$OORBIxuvVVfgjnAqiPFtwevBVdirm1.irLCdXstZgd1Uo./o7xrS6', '9d549c58c54edd0ede4cde3a608838f4', NULL, 0, '2015-01-28 18:27:26', '2015-01-28 18:27:26', NULL),
+(15, 'lkshlerin', 'adrienne90@hotmail.com', '00661734838', NULL, '$2y$10$Lt59YBuHXoUbUrIka48B3O4viUfCbcw9iJIms/iPW6wArVEnIod1C', '9ddfc7fa8964163a88fab0f09c1a1de8', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(16, 'catalina37', 'tschamberger@hilll.com', '355.250.8137', NULL, '$2y$10$erEuCj1MtP2vYshvK6BStupvtHTpkONSD/VBCNb11EXbEHDgiEi.y', '22573145a010ef57f04246b1d976a310', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(17, 'xkling', 'pmetz@vandervorthagenes.biz', '908-065-7713', NULL, '$2y$10$gK.zMX4eFhoZdu9JEwvQm.2e5T9Zq1mqRSnJOj/G8j5D2hTRVDY8y', 'c6eb0e454902c0be4e3bd8bf31d86f22', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(18, 'dlueilwitz', 'julien.ratke@hotmail.com', '293.692.7711x478', NULL, '$2y$10$yvv6l8dIqeXwNS5hql2o/.sW/Wi0T3QQ2bezoL.evw44lw2Phu/oa', 'e580ea26fc6cea22f3066744867ac7b3', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(19, 'tyson75', 'jhilll@yahoo.com', '1-036-006-0551', NULL, '$2y$10$88b6DNNPloNmpVaivgKLIusTIX77SdsikzkZSFxgmzSfamexm9kJG', '459097a30773dfb5b2dc2158556f9325', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(20, 'pdubuque', 'ezequiel26@kassulke.net', '(475)131-9793', NULL, '$2y$10$.tgAodXHJofI/boUkoseyeuvSuSEnGA0MTy5VDSWZrOpzW/3qzzBm', '0b1d0af9f6456787ca0f92820609b225', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(21, 'rahul92', 'samson47@franecki.com', '475.629.9712x06652', NULL, '$2y$10$tF6dTHvkZEW03qdapCsbIuyXir7/52qgDqaxBkGnhOJngbuwFbxSu', '10e773aec5c51f9b1166cb194237ca2f', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(22, 'zking', 'lueilwitz.briana@hotmail.com', '718-299-2780', NULL, '$2y$10$rnLUs8h2EBzm/ZjvEPP/4ecOsftlaJUAr0ZKGVymfqoUmR4yItJb2', 'c2b969f5778b03cbb4b398d8a9a01383', NULL, 0, '2015-01-28 18:27:27', '2015-01-28 18:27:27', NULL),
+(23, 'mertie72', 'ukunze@binsrenner.com', '862-989-3492x6345', NULL, '$2y$10$mVfCcU7GwI5EiLCItvMR.e0/lSlD77PaJT5dFkCGXo1/AT8w0YJb6', '09b48466ef6182817bbb214e8934e8ed', NULL, 0, '2015-01-28 18:27:28', '2015-01-28 18:27:28', NULL),
+(24, 'isabel93', 'pfeffer.westley@hotmail.com', '090.624.7776x00462', NULL, '$2y$10$SKGMEbHuFH16VUV7k1S6fO23EOKiAJ5A5sB8ZOhYbDTjJ1sbct1Fe', '8ecdf674543d6cc5a3681ddef280db12', NULL, 0, '2015-01-28 18:27:28', '2015-01-28 18:27:28', NULL),
+(25, 'elnora33', 'jany.ritchie@gmail.com', '056-317-4675x8941', NULL, '$2y$10$b0uAVxlXU5og391qSDHhletw1MKjKbfprx/Zq472prmrrbUEtsOwO', '83bd3740c32648bc9e75c993976b2e7f', NULL, 0, '2015-01-28 18:27:28', '2015-01-28 18:27:28', NULL),
+(26, 'valentina33', 'cbarrows@yahoo.com', '1-265-211-9155', NULL, '$2y$10$yVnj8IiNGmMKVDJuL9p5ee9jzP5eQrrAnegwRbvjkeaSCs7uGjH/S', '5bc5c556749d3f3643ea13860def008d', NULL, 0, '2015-01-28 18:27:28', '2015-01-28 18:27:28', NULL),
+(27, 'ewehner', 'sporer.laverna@ritchie.com', '1-042-743-6717x62538', NULL, '$2y$10$UEl6sjtMm4hCaO3lAWye3eW5i9J09lbxYDv.LBY3vog6KTk85gD0K', 'f54769501158a3a71f7612e9b1ff0177', NULL, 0, '2015-01-28 18:27:28', '2015-01-28 18:27:28', NULL),
+(28, 'zoey00', 'sawayn.brenna@stromanrempel.com', '642.511.2605x72881', NULL, '$2y$10$QzYOBkcJKvqFPRKUNWjzVey8osr52AXG.onWrW9RAl4RERta5vUmm', '80fa9a996790401f6cb5bc6a14063906', NULL, 0, '2015-01-28 18:27:29', '2015-01-28 18:27:29', NULL),
+(29, 'owolf', 'daren25@gmail.com', '(815)314-1677', NULL, '$2y$10$GNxjlVJ2MS0zyP3Rney/We75HxLBXLo8SrRnrBmtwj.ecjKjDSX2m', '51302ed9f69938dfd326e691c78f8461', NULL, 0, '2015-01-28 18:27:29', '2015-01-28 18:27:29', NULL),
+(30, 'prutherford', 'amparo.klein@gmail.com', '564-480-0283x87121', NULL, '$2y$10$kM3ifiI5d0PE4Mb8bP0ad.EHKHFJb8vQQeoIMvljorgTjDake2VJi', '8bc28e5d6b33359d004503d285669a47', NULL, 0, '2015-01-28 18:27:29', '2015-01-28 18:27:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -190,7 +269,12 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2014_11_07_082629_confide_setup_users_table', 4),
 ('2015_01_05_022810_create_topics_table', 5),
 ('2015_01_05_023451_create_nodes_table', 5),
-('2015_01_05_023507_create_replies_table', 5);
+('2015_01_05_023507_create_replies_table', 5),
+('2015_01_30_153126_create_votes_table', 6),
+('2015_01_30_165901_create_attention_table', 7),
+('2015_01_30_170328_create_favorites_table', 8),
+('2015_01_30_172219_entrust_setup_tables', 8),
+('2015_02_04_132720_add_deleted_at_to_members_table', 9);
 
 -- --------------------------------------------------------
 
@@ -296,22 +380,6 @@ INSERT INTO `periods` (`id`, `period`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `periods_transactions`
---
-
-CREATE TABLE IF NOT EXISTS `periods_transactions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `period_id` int(10) unsigned NOT NULL,
-  `transaction_id` int(10) unsigned NOT NULL,
-  `status` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `periods_transactions_period_id_foreign` (`period_id`),
-  KEY `periods_transactions_transaction_id_foreign` (`transaction_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `permissions`
 --
 
@@ -333,40 +401,6 @@ INSERT INTO `permissions` (`id`, `name`, `permissions`, `created_at`, `updated_a
 (2, 'Users', '["users.view","users.create","users.update","users.delete"]', '2014-10-21 23:17:20', '2014-10-21 23:17:20'),
 (3, 'Groups', '["groups.view","groups.create","groups.update","groups.delete"]', '2014-10-21 23:17:20', '2014-10-21 23:17:20'),
 (4, 'Permissions', '["permissions.view","permissions.create","permissions.update","permissions.delete"]', '2014-10-21 23:17:20', '2014-10-21 23:17:20');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `pms`
---
-
-CREATE TABLE IF NOT EXISTS `pms` (
-  `id` bigint(20) NOT NULL,
-  `id2` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `user1` bigint(20) NOT NULL,
-  `user2` bigint(20) NOT NULL,
-  `message` text COLLATE utf8_unicode_ci NOT NULL,
-  `user1read` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `user2read` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `pm_user`
---
-
-CREATE TABLE IF NOT EXISTS `pm_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `pm_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1002,19 +1036,6 @@ INSERT INTO `replies` (`id`, `body`, `member_id`, `topic_id`, `is_block`, `vote_
 -- --------------------------------------------------------
 
 --
--- 表的结构 `single_categories`
---
-
-CREATE TABLE IF NOT EXISTS `single_categories` (
-  `object_id` bigint(20) NOT NULL DEFAULT '0',
-  `category_id` bigint(20) NOT NULL DEFAULT '0',
-  `category_order` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`object_id`,`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `throttle`
 --
 
@@ -1030,7 +1051,7 @@ CREATE TABLE IF NOT EXISTS `throttle` (
   `banned_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `throttle_user_id_index` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `throttle`
@@ -1038,7 +1059,8 @@ CREATE TABLE IF NOT EXISTS `throttle` (
 
 INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, `banned`, `last_attempt_at`, `suspended_at`, `banned_at`) VALUES
 (1, 1, '127.0.0.1', 0, 0, 0, NULL, NULL, NULL),
-(2, 1, '172.16.13.162', 0, 0, 0, NULL, NULL, NULL);
+(2, 1, '172.16.13.162', 0, 0, 0, NULL, NULL, NULL),
+(3, 1, '172.16.13.194', 0, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1255,7 +1277,7 @@ INSERT INTO `topics` (`id`, `title`, `body`, `member_id`, `node_id`, `is_excelle
 (170, 'Quam est qui molestias eligendi facere voluptas voluptatem.', 'Cum doloremque saepe voluptas eos et vitae harum. Quia omnis perspiciatis occaecati nobis. Ut nulla consequatur laborum quod quam autem fugiat. Voluptatem esse eum qui.', 1, 31, 0, 0, 0, 1, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:07', '2015-01-04 19:41:07'),
 (171, 'Eos culpa molestiae est a enim vitae.', 'Iure velit dolor enim omnis sit illo architecto. Ratione quaerat et ea. Pariatur dolores rerum quis occaecati in animi officiis. Omnis veritatis fugiat est vero hic qui aut.', 1, 19, 0, 0, 0, 4, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:08', '2015-01-04 19:41:08'),
 (172, 'Magnam harum nam eius distinctio eveniet.', 'Aut velit neque alias sunt iure voluptatibus modi explicabo. Excepturi laudantium voluptates eum doloremque voluptatem voluptas. Dolores voluptatem aut ut recusandae quod.', 1, 13, 0, 0, 0, 2, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:08', '2015-01-04 19:41:08'),
-(173, 'Incidunt temporibus aspernatur est molestias.', 'Deserunt voluptates tenetur quibusdam sit et. Molestiae sit incidunt odit blanditiis. Illum et id corporis error.', 1, 11, 0, 0, 0, 1, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:08', '2015-01-04 19:41:08'),
+(173, 'Incidunt temporibus aspernatur est molestias.', 'Deserunt voluptates tenetur quibusdam sit et. Molestiae sit incidunt odit blanditiis. Illum et id corporis error.', 1, 11, 0, 0, 0, 1, 1, 0, 0, 0, 0, NULL, '2015-01-04 19:41:08', '2015-01-04 19:41:08'),
 (174, 'Atque temporibus magni accusamus porro sed aliquam dolorem eos.', 'Suscipit non repellendus et quaerat. Ullam debitis totam eos at ut quia aliquam rerum. Dicta nobis molestiae ipsum mollitia eos quae iure provident.', 1, 40, 0, 0, 0, 5, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:08', '2015-01-04 19:41:08');
 INSERT INTO `topics` (`id`, `title`, `body`, `member_id`, `node_id`, `is_excellent`, `is_wiki`, `is_blocked`, `reply_count`, `view_count`, `favorite_count`, `vote_count`, `last_reply_user_id`, `order`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (175, 'Esse numquam quo facere ut.', 'Numquam eos molestias quidem. Itaque omnis enim dolorem odio. Enim natus fuga et pariatur cumque quo enim qui.', 1, 25, 0, 0, 0, 4, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:08', '2015-01-04 19:41:08'),
@@ -1273,7 +1295,7 @@ INSERT INTO `topics` (`id`, `title`, `body`, `member_id`, `node_id`, `is_excelle
 (187, 'Unde dicta at sint aut sed officia.', 'Excepturi iste consequatur id. Perspiciatis provident consequatur qui inventore et facere. Dolor aliquam vel minima impedit quis harum.', 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:08', '2015-01-04 19:41:08'),
 (188, 'Sit pariatur ad odio sunt reiciendis.', 'Praesentium aut soluta consequatur rerum accusantium. Et architecto ea ipsa earum nihil. Rerum libero pariatur tempore labore omnis repellendus. Deleniti itaque ducimus consequatur et et.', 1, 25, 0, 0, 0, 2, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
 (189, 'Delectus et voluptas non impedit.', 'Excepturi facilis ad voluptas id. Soluta hic tempora aliquam voluptatem reiciendis et itaque. Nostrum sapiente ullam vel aliquid illo.', 1, 20, 0, 0, 0, 2, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
-(190, 'Temporibus sint incidunt eos quo minima quaerat.', 'Quae velit ut velit doloribus consequatur. Nisi nemo deserunt et error. Ducimus quia at doloremque minus est consequatur.', 1, 19, 0, 0, 0, 3, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
+(190, 'Temporibus sint incidunt eos quo minima quaerat.', 'Quae velit ut velit doloribus consequatur. Nisi nemo deserunt et error. Ducimus quia at doloremque minus est consequatur.', 1, 19, 0, 0, 0, 3, 3, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
 (191, 'Repellat quasi delectus consequatur rerum sit.', 'Voluptas quia aut quo est id. Molestiae cum et est unde rem quisquam. Eum voluptatem numquam eaque. Sed accusantium nihil maxime tempore distinctio dolores perspiciatis.', 1, 19, 0, 0, 0, 5, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
 (192, 'Harum ut aut qui animi incidunt ducimus.', 'Veritatis odit voluptas dolorem voluptas. Aut exercitationem quod non nulla accusamus velit dolorum eum.', 1, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
 (193, 'Consequuntur reiciendis maiores quia modi non.', 'Ducimus expedita et quidem est. Deleniti dolor temporibus et explicabo quos est eum. Voluptates facilis veniam magni maiores earum.', 1, 9, 0, 0, 0, 3, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
@@ -1291,16 +1313,16 @@ INSERT INTO `topics` (`id`, `title`, `body`, `member_id`, `node_id`, `is_excelle
 (205, 'Laudantium sunt aperiam ipsam et.', 'Omnis nihil non voluptatum minima nihil autem. Enim iure cupiditate iste aspernatur. Earum corrupti quo est ut.', 1, 15, 0, 0, 0, 5, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
 (206, 'Porro id dolorum eligendi deleniti ipsam repudiandae minus.', 'Modi dolorem perspiciatis earum dicta eum laborum blanditiis modi. Alias perferendis laborum officia qui cumque. Dolor et totam vitae omnis placeat.', 1, 20, 0, 0, 0, 1, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
 (207, 'Suscipit nihil dolor dolore.', 'Illum earum harum voluptas velit eum provident est. Dolores aut qui laudantium quas deleniti iure. Magnam illo eos dolore in explicabo sunt quos quibusdam. Et neque at accusamus rerum error.', 1, 13, 0, 0, 0, 3, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:09', '2015-01-04 19:41:09'),
-(208, 'Ipsa in modi a blanditiis voluptatem non quisquam.', 'Sit qui quam ea. Autem eum ad quidem temporibus. Impedit fugiat consectetur neque facilis voluptas illum eos. Quasi nihil rerum tempore maxime maxime molestiae iusto.', 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
+(208, 'Ipsa in modi a blanditiis voluptatem non quisquam.', 'Sit qui quam ea. Autem eum ad quidem temporibus. Impedit fugiat consectetur neque facilis voluptas illum eos. Quasi nihil rerum tempore maxime maxime molestiae iusto.', 1, 2, 0, 0, 0, 2, 1, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (209, 'Voluptas quasi quod nisi quia nulla dignissimos inventore.', 'Et qui quia qui et sed dignissimos est. Voluptatem quam vel nobis. Quo quod ex in voluptatem illum a voluptas. Cum a sequi molestiae autem in quam.', 1, 15, 0, 0, 0, 1, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (210, 'Qui earum voluptatum qui consequatur ea ut voluptas.', 'Quo qui ut quod et corrupti facilis ut. Ad eius ducimus sapiente asperiores nisi. Autem eaque quibusdam quisquam laudantium est expedita omnis. Dolor ipsam mollitia inventore.', 1, 5, 0, 0, 0, 1, 12, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
-(211, 'Aut animi enim esse.', 'Est rerum expedita fugiat et error fugit autem. Non suscipit consectetur deserunt. Esse rem perspiciatis minima exercitationem ipsa eveniet itaque.', 1, 7, 0, 0, 0, 5, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
+(211, 'Aut animi enim esse.', 'Est rerum expedita fugiat et error fugit autem. Non suscipit consectetur deserunt. Esse rem perspiciatis minima exercitationem ipsa eveniet itaque.', 1, 7, 0, 0, 0, 5, 2, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (212, 'Exercitationem ipsa deleniti perspiciatis ea quidem dicta.', 'Fugit at voluptatum est ut aliquam qui officiis. Iste quas aut cupiditate sunt et illo. Exercitationem quis atque et et eum enim.', 1, 27, 0, 0, 0, 2, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (213, 'Eos velit architecto enim assumenda.', 'Odio magni voluptatem deserunt deleniti est doloribus. Necessitatibus voluptate sint accusamus numquam labore mollitia. Dolores laudantium cumque quibusdam inventore.', 1, 28, 0, 0, 0, 1, 2, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (214, 'Sint et voluptate voluptatibus.', 'Est soluta voluptatem error animi consequatur aut iste. Totam harum consequatur sequi ipsam. Dolorum fuga iste ex ut soluta non molestiae. Ea sit qui reprehenderit optio quam ut quidem.', 1, 23, 0, 0, 0, 1, 1, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (215, 'In ut error praesentium cupiditate ipsum.', 'Fuga omnis quam illum neque dolorum odio. Nihil repellat odit reiciendis beatae facere accusamus. Deleniti tempore perspiciatis et culpa eligendi. Consequatur quia veritatis doloremque in.', 1, 38, 0, 0, 0, 2, 2, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (216, 'Deleniti atque odit nisi ipsam vel.', 'Perferendis neque quam voluptas temporibus fugiat rem fugit. Ipsam pariatur qui quisquam perspiciatis delectus minus minima. Odio suscipit hic voluptatem nisi dolore.', 1, 28, 0, 0, 0, 1, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
-(217, 'Vel asperiores amet est ad distinctio.', 'Et temporibus nulla assumenda rerum. Exercitationem saepe magnam saepe commodi cupiditate corporis. Placeat quisquam qui aut alias veniam. Excepturi soluta officiis voluptatem qui qui occaecati.', 1, 20, 0, 0, 0, 3, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
+(217, 'Vel asperiores amet est ad distinctio.', 'Et temporibus nulla assumenda rerum. Exercitationem saepe magnam saepe commodi cupiditate corporis. Placeat quisquam qui aut alias veniam. Excepturi soluta officiis voluptatem qui qui occaecati.', 1, 20, 0, 0, 0, 3, 5, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (218, 'Quidem quo possimus sint illum est aliquid est occaecati.', 'Qui distinctio deserunt eum dolorum maxime et sed. Doloribus quasi dicta earum autem. Aut ipsum maxime autem vitae ullam laboriosam.', 1, 23, 0, 0, 0, 2, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (219, 'Quo nisi molestias doloribus rem sint voluptas.', 'Vero dicta aut dignissimos et rerum. Corporis vel qui officia nulla. Deserunt repellendus asperiores fuga cupiditate saepe officiis. Voluptate ratione vero omnis distinctio possimus.', 1, 5, 0, 0, 0, 4, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (220, 'Assumenda non exercitationem aut.', 'Dolores deleniti cumque est cumque minima sit eum. Dolores explicabo aut ea quasi et sequi. Totam dicta tempora nihil consequatur quasi occaecati vero. Et et veniam sint et.', 1, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
@@ -1310,24 +1332,10 @@ INSERT INTO `topics` (`id`, `title`, `body`, `member_id`, `node_id`, `is_excelle
 (224, 'Tenetur nulla eveniet consequatur dolores.', 'Alias molestiae recusandae quia rem expedita unde facilis. Error suscipit vitae repellendus nesciunt optio minima. Quae ea excepturi dicta adipisci. Fugit odio dicta vel iure labore.', 1, 35, 0, 0, 0, 2, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (225, 'Aut qui vel numquam at pariatur molestiae.', 'Consectetur nulla dolor cumque vitae tempora sed voluptates et. Et enim soluta dicta fuga suscipit. Sint dolore asperiores officia. Ut voluptas sequi in accusamus est modi. Et non laudantium ea quae.', 1, 39, 0, 0, 0, 3, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
 (226, 'Qui quis consequatur incidunt.', 'Tempore id exercitationem quo est. Quam consequatur officia maiores aut eveniet architecto. Dignissimos minus modi reiciendis debitis. Ex ut atque quia qui.', 1, 29, 0, 0, 0, 5, 0, 0, 0, 0, 0, NULL, '2015-01-04 19:41:10', '2015-01-04 19:41:10'),
-(227, 'Et dolorum eveniet est repudiandae.', 'Sed impedit odio adipisci vel. Quibusdam ad suscipit distinctio. Qui veritatis consequatur voluptas totam voluptatem. Sequi et temporibus et possimus quia id molestias iste.', 1, 9, 0, 0, 0, 3, 98, 0, 0, 0, 0, NULL, '2015-01-04 19:41:11', '2015-01-04 19:41:11'),
+(227, 'Et dolorum eveniet est repudiandae.', 'Sed impedit odio adipisci vel. Quibusdam ad suscipit distinctio. Qui veritatis consequatur voluptas totam voluptatem. Sequi et temporibus et possimus quia id molestias iste.', 1, 9, 0, 0, 0, 3, 137, 0, 0, 0, 0, NULL, '2015-01-04 19:41:11', '2015-01-04 19:41:11'),
 (228, 'Cumque sed harum nostrum libero est et et.', 'Dicta provident ipsam eveniet dicta enim aut. Eos quibusdam quia eveniet quas. Nemo dolor et blanditiis accusantium repellat. Similique impedit iste hic quo est voluptatem inventore sed.', 1, 18, 0, 0, 0, 1, 5, 0, 0, 0, 0, NULL, '2015-01-04 19:41:11', '2015-01-04 19:41:11'),
-(229, 'Id aut et ut doloremque reiciendis.', 'Ipsum corporis earum commodi. Sunt accusamus in quia architecto ea. Aut non corporis rerum recusandae et quam. Possimus eaque blanditiis sit ut velit fugiat.', 1, 5, 0, 0, 0, 2, 7, 0, 0, 0, 0, NULL, '2015-01-04 19:41:11', '2015-01-04 19:41:11'),
+(229, 'Id aut et ut doloremque reiciendis.', 'Ipsum corporis earum commodi. Sunt accusamus in quia architecto ea. Aut non corporis rerum recusandae et quam. Possimus eaque blanditiis sit ut velit fugiat.', 1, 5, 0, 0, 0, 2, 11, 0, 0, 0, 0, NULL, '2015-01-04 19:41:11', '2015-01-04 19:41:11'),
 (230, 'Adipisci enim consequatur ea voluptas.', 'Officia laudantium et quis quo dolores molestiae. Adipisci ut soluta aliquam. Quia quia error dolor excepturi molestiae.', 1, 9, 0, 0, 0, 5, 6, 0, 0, 0, 0, NULL, '2015-01-04 19:41:11', '2015-01-04 19:41:11');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `transactions`
---
-
-CREATE TABLE IF NOT EXISTS `transactions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `main_menu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `menu_text` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1361,7 +1369,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `first_name`, `last_name`, `created_at`, `updated_at`) VALUES
-(1, 'tttt6399998@126.com', '$2y$10$jVfH7i6tXdsgrdQrI4SJAOqrrRdywWZl7DbAEP8AYMnUH5AktGxWe', '{"superuser":1}', 1, NULL, '2014-10-21 23:17:44', '2015-01-04 19:53:18', '$2y$10$ctBnKOKJ6i2YjMGcbfearu30xgWnu2An1NnV2vPgmqDcYsYObXDte', NULL, 'Rock', 'Zhang', '2014-10-21 23:17:44', '2015-01-04 19:53:18');
+(1, 'tttt6399998@126.com', '$2y$10$jVfH7i6tXdsgrdQrI4SJAOqrrRdywWZl7DbAEP8AYMnUH5AktGxWe', '{"superuser":1}', 1, NULL, '2014-10-21 23:17:44', '2015-01-30 10:43:24', '$2y$10$JMl0hZud.rjyCXbFxKUEyuntKfZhiFLqMtLD.HUoIKL4JgQXaTaxq', NULL, 'Rock', 'Zhang', '2014-10-21 23:17:44', '2015-01-30 10:43:24');
 
 -- --------------------------------------------------------
 
@@ -1375,16 +1383,64 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   PRIMARY KEY (`user_id`,`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `votes`
+--
+
+CREATE TABLE IF NOT EXISTS `votes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(10) unsigned NOT NULL,
+  `votable_id` int(11) NOT NULL,
+  `votable_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `typeIs` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `votes_member_id_index` (`member_id`),
+  KEY `votes_votable_id_index` (`votable_id`),
+  KEY `votes_votable_type_index` (`votable_type`),
+  KEY `votes_typeis_index` (`typeIs`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
 --
 -- 限制导出的表
 --
 
 --
--- 限制表 `periods_transactions`
+-- 限制表 `attentions`
 --
-ALTER TABLE `periods_transactions`
-  ADD CONSTRAINT `periods_transactions_period_id_foreign` FOREIGN KEY (`period_id`) REFERENCES `periods` (`id`),
-  ADD CONSTRAINT `periods_transactions_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`);
+ALTER TABLE `attentions`
+  ADD CONSTRAINT `attentions_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `attentions_topic_id_foreign` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `favorites`
+--
+ALTER TABLE `favorites`
+  ADD CONSTRAINT `favorites_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `favorites_topic_id_foreign` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `front_assigned_roles`
+--
+ALTER TABLE `front_assigned_roles`
+  ADD CONSTRAINT `front_assigned_roles_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`),
+  ADD CONSTRAINT `front_assigned_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `front_roles` (`id`);
+
+--
+-- 限制表 `front_permission_role`
+--
+ALTER TABLE `front_permission_role`
+  ADD CONSTRAINT `front_permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `front_permissions` (`id`),
+  ADD CONSTRAINT `front_permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `front_roles` (`id`);
+
+--
+-- 限制表 `votes`
+--
+ALTER TABLE `votes`
+  ADD CONSTRAINT `votes_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `members` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

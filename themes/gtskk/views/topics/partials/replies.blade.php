@@ -23,7 +23,7 @@
 
         <span class="operate pull-right">
           <a data-method="post" id="reply-up-vote-{{ $reply->id }}" href="javascript:void(0);" data-url="{{ route('replies.vote', $reply->id) }}" title="{{ lang('Vote Up') }}">
-             <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> {{ $reply->vote_count ?: '' }}
+             <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> <span>{{ $reply->vote_count ?: '' }}</span>
           </a>
           <span> •  </span>
 

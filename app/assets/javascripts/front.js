@@ -154,20 +154,23 @@
          * See this answer: http://stackoverflow.com/a/23082278/689832
          */
         initDeleteForm: function() {
-            $('[data-method]').append(function(){
-                return "\n"+
-                "<form action='"+$(this).attr('data-url')+"' method='POST' style='display:none'>\n"+
-                "   <input type='hidden' name='_method' value='"+$(this).attr('data-method')+"'>\n"+
-                "   <input type='hidden' name='_token' value='"+Config.token+"'>\n"+
-                "</form>\n"
-                })
+            $('[data-method]')
                 .attr('style','cursor:pointer;')
                 .click(function() {
-                    if ($(this).attr('data-method') == 'post') {
-                        $(this).find("form").submit();
+                    var current = $(this);
+                    if (current.attr('data-method') == 'post') {
+                        $.post(current.attr('data-url'), {
+                            _method: 'post',
+                            _token: Config.token
+                        }, function(res){
+                            if(res != 0)
+                                current.find('span').text(res);
+                            else
+                                current.find('span').text('');
+                        });
                     }
                     if ($(this).attr('data-method') == 'delete' && confirm("Are you sure want to proceed?")) {
-                        $(this).find("form").submit();
+                        // $(this).find("form").submit();
                     }
                 });
            // attr('onclick',' if (confirm("Are you sure want to proceed?")) { $(this).find("form").submit(); };');

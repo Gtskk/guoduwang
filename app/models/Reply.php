@@ -19,6 +19,11 @@ class Reply extends Eloquent {
         });
     }*/
 
+    public function votes()
+    {
+    	return $this->morphMany('Vote', 'votable');
+    }
+
 	public function member()
 	{
 		return $this->belongsTo('Member');

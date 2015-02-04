@@ -19,7 +19,8 @@ class RepliesController extends BaseController implements CreatorListener
     {
         $reply = Reply::find($id);
         App::make('Gtskk\Vote\Voter')->replyUpVote($reply);
-        return Redirect::route('theme::topics.show', [$reply->topic_id, '#reply'.$reply->id]);
+        die(json_encode($reply->vote_count));
+        // return Redirect::route('theme::topics.show', [$reply->topic_id, '#reply'.$reply->id]);
     }
 
     public function destroy($id)
