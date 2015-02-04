@@ -91,6 +91,11 @@ class MembersController extends BaseController
         $input = Input::all();
 
         if ($repo->login($input)) {
+            $intended = Session::get('url.intended');
+            $jaxPos = strpos($intended, '?_pjax');
+            if($jaxPos !== false) {
+                Session::put('url.intended', substr($intended, 0, $jaxPos));
+            }
             return Redirect::intended('/');
         } else {
             if ($repo->isThrottled($input)) {
