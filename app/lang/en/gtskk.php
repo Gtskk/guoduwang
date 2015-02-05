@@ -122,6 +122,7 @@ return array (
     'Learning Resources' => 'Learning Resources',
     'Create New Topic' => 'Create a New Topic',
     'Can not vote your feedback' => 'You can\'t vote on your own feedback.',
+    'Can not downvote your feedback' => 'You can\'t vote down your own feedback.',
     'Vote Up' => 'Vote Up',
     'Vote Down' => 'Vote Down',
     'Recomended Resources' => 'Recomended Resources',

@@ -182,7 +182,16 @@
                                             $li.remove();
                                         });
                                     }else{
-                                        current.find('span').text(res.message);
+                                        if(current.hasClass('vote')){
+                                            current.toggleClass('active');
+                                            var sib = current.siblings()[0];
+                                            if($(sib).hasClass('active'))
+                                                $(sib).removeClass('active');
+                                            $('#up-vote').find('span').text(res.message);
+                                        }else{
+                                            current.find('span').text(res.message);
+                                        }
+
                                     }
                                 }else{
                                     alert(res.message);

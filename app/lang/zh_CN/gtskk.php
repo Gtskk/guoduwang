@@ -121,6 +121,7 @@ return array(
     'Learning Resources' => '推荐学习资源',
     'Create New Topic' => '创建新主题',
     'Can not vote your feedback' => '不允许给自己点赞',
+    'Can not downvote your feedback' => '不允许踩自己的文章',
     'Vote Up' => '顶',
     'Vote Down' => '踩',
     'Recomended Resources' => '推荐资源',

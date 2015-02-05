@@ -13,11 +13,11 @@
 		<h1 class="panel-title topic-title">{{{ $topic->title }}}</h1>
 
 		<div class="votes">
-		  	<a data-method="post" href="javascript:void(0);" data-url="{{ route('topics.upvote', $topic->id) }}" title="{{ lang('Vote Up') }}" id="up-vote" class="vote {{ $currentUser && $topic->votes()->ByWhom(Auth::user()->id)->WithType('upvote')->count() ? 'active' :''; }} btn btn-default btn-xs">
-		      	<span class="glyphicon glyphicon-chevron-up"></span> {{ $topic->vote_count }}
+		  	<a data-method="post" href="javascript:void(0);" data-url="{{ route('topics.upvote', $topic->id) }}" title="{{ lang('Vote Up') }}" id="up-vote" class="vote {{ $currentUser && $topic->votes()->ByWhom(Confide::user()->id)->WithType('upvote')->count() ? 'active' :''; }} btn btn-default btn-xs">
+		      	<span class="glyphicon glyphicon-chevron-up">{{ $topic->vote_count ?: '' }}</span>
 		  	</a>
 		   &nbsp;
-		  	<a data-method="post" href="javascript:void(0);" data-url="{{ route('topics.downvote', $topic->id) }}" title="{{ lang('Vote Down') }}" id="down-vote" class="vote {{ $currentUser && $topic->votes()->ByWhom(Auth::user()->id)->WithType('downvote')->count() ? 'active' :''; }} btn btn-default btn-xs">
+		  	<a data-method="post" href="javascript:void(0);" data-url="{{ route('topics.downvote', $topic->id) }}" title="{{ lang('Vote Down') }}" id="down-vote" class="vote {{ $currentUser && $topic->votes()->ByWhom(Confide::user()->id)->WithType('downvote')->count() ? 'active' :''; }} btn btn-default btn-xs">
 		      	<span class="glyphicon glyphicon-chevron-down"></span>
 		  	</a>
 		</div>

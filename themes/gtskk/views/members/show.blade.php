@@ -50,7 +50,7 @@
 
 					<div class="tab-pane" id="recent_topics">
 						@if (count($topics))
-							@include('members.partials.topics')
+							@include('theme::members.partials.topics')
 						@else
 							<div class="empty-block">{{ lang('Dont have any data Yet') }}~~</div>
 						@endif

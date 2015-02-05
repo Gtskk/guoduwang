@@ -122,12 +122,12 @@
 		<div class="footer">
 		    <div class="container">
 		      	<p class="pull-left">
-		      		<i class="fa fa-heart-o"></i> Made With Love By The EST Group. <br>
-					&nbsp;<i class="fa fa-lightbulb-o"></i> Inspired by v2ex &amp; ruby-china.
+		      		<i class="fa fa-heart-o"></i> Made With Love By The YOHO Group. <br>
+					&nbsp;<i class="fa fa-lightbulb-o"></i> Inspired by <a href="https://phphub.org">Phphub</a>.
 		      	</p>
 
 		      	<p class="pull-right">
-		      		<i class="fa fa-cloud"></i> Powered by <a href="http://laravel.com" target="_blank">Laravel <i class="fa fa-external-link"></i></a>.
+		      		<i class="fa fa-cloud"></i> Powered by <a href="http://laravel.com">Laravel <i class="fa fa-external-link"></i></a>.
 		      	</p>
 		    </div>
 		</div>

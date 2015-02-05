@@ -90,17 +90,40 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function upvote($id)
     {
+        $resp = array();
         $topic = Topic::find($id);
-        dd($topic);
-        App::make('Gtskk\Vote\Voter')->topicUpVote($topic);
-        return Redirect::route('topics.show', $topic->id);
+        if(Confide::user()->id == $topic->member_id)
+        {
+            $resp['status'] = 'fail';
+            $resp['message'] = lang('Can not vote your feedback');
+        }
+        else
+        {
+            App::make('Gtskk\Vote\Voter')->topicUpVote($topic);
+            $resp['status'] = 'success';
+            $resp['message'] = $topic->vote_count ?: '';
+        }
+        
+        die(json_encode($resp));
     }
 
     public function downvote($id)
     {
+        $resp = array();
         $topic = Topic::find($id);
-        App::make('Gtskk\Vote\Voter')->topicDownVote($topic);
-        return Redirect::route('topics.show', $topic->id);
+        if(Confide::user()->id == $topic->member_id)
+        {
+            $resp['status'] = 'fail';
+            $resp['message'] = lang('Can not downvote your feedback');
+        }
+        else
+        {
+            App::make('Gtskk\Vote\Voter')->topicDownVote($topic);
+            $resp['status'] = 'success';
+            $resp['message'] = $topic->vote_count ?: '';
+        }
+        
+        die(json_encode($resp));
     }
 
     /**
