@@ -65,7 +65,7 @@ class Topic extends \Eloquent
     {
         $lastReply = $this->replies()->recent()->first();
 
-        $this->last_reply_user_id = $lastReply ? $lastReply->user_id : 0;
+        $this->last_reply_user_id = $lastReply ? $lastReply->member_id : 0;
         $this->save();
     }
 

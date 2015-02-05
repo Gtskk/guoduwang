@@ -27,4 +27,13 @@ class BaseController extends Controller {
 		View::share('currentUser', Confide::user());
 	}
 
+	public function authorOrAdminPermissioinRequire($author_id)
+	{
+		if (! Entrust::can('manage_topics') && $author_id != Confide::user()->id)
+		{
+			return false;
+		}
+		return true;
+	}
+
 }

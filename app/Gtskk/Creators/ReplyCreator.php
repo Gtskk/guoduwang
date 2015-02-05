@@ -24,8 +24,8 @@ class ReplyCreator
         $data['body'] = $this->mentionParser->parse($data['body']);
 
         $markdown = new Markdown;
-        $data['body'] = $data['body'];
-        $data['body_original'] = $markdown->convertMarkdownToHtml($data['body']);
+        $data['body_original'] = $data['body'];
+        $data['body'] = $markdown->convertMarkdownToHtml($data['body']);
 
         // Validation
         try
@@ -33,18 +33,18 @@ class ReplyCreator
             $this->form->validate($data);
 
             $reply = Reply::create($data);
-            $reply->member()->associate(Confide::user());
-            $reply->save();
             if ( ! $reply)
             {
                 return $observer->creatorFailed($reply->getErrors());
             }
+            $reply->member()->associate(Confide::user());
+            $reply->save();
 
-            // Add the reply user
+            // Add the reply user to topic table
             $topic = Topic::find($data['topic_id']);
-            $topic->last_reply_user_id = Confide::user()->id;
             $topic->reply_count++;
             $topic->updated_at = Carbon::now()->toDateTimeString();
+            $topic->last_reply_user_id = $data['member_id'];
             $topic->save();
 
             Confide::user()->increment('reply_count', 1);

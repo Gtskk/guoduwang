@@ -79,6 +79,22 @@ Route::filter('csrf', function()
 	}
 });
 
+Route::filter('manage_topics', function()
+{
+    if (! Entrust::can('manage_topics') ) // Checks the current user
+    {
+        return Redirect::to('members/login');
+    }
+});
+
+Route::filter('manage_users', function()
+{
+    if (! Entrust::can('manage_users') ) // Checks the current user
+    {
+        return Redirect::to('members/login');
+    }
+});
+
 
 if(!App::isLocal())
 {

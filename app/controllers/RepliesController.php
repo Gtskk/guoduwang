@@ -17,25 +17,39 @@ class RepliesController extends BaseController implements CreatorListener
 
     public function vote($id)
     {
+        $resp = array();
         $reply = Reply::find($id);
-        App::make('Gtskk\Vote\Voter')->replyUpVote($reply);
-        die(json_encode($reply->vote_count));
-        // return Redirect::route('theme::topics.show', [$reply->topic_id, '#reply'.$reply->id]);
+        if(Confide::user()->id == $reply->member_id)
+        {
+            $resp['status'] = 'fail';
+            $resp['message'] = lang('Can not vote your feedback');
+        }
+        else
+        {
+            App::make('Gtskk\Vote\Voter')->replyUpVote($reply);
+            $resp['status'] = 'success';
+            $resp['message'] = $reply->vote_count ?: '';
+        }
+
+        die(json_encode($resp));
     }
 
     public function destroy($id)
     {
+        $resp = array('status'=>'fail','message'=>lang('permission_required'));
         $reply = Reply::findOrFail($id);
-        $this->authorOrAdminPermissioinRequire($reply->user_id);
-        $reply->delete();
+        if($this->authorOrAdminPermissioinRequire($reply->user_id))
+        {
+            $reply->delete();
 
-        $reply->topic->decrement('reply_count', 1);
+            $reply->topic->decrement('reply_count', 1);
+            $reply->topic->generateLastReplyUserInfo();
 
-        Flash::success(lang('Operation succeeded.'));
-
-        $reply->topic->generateLastReplyUserInfo();
-
-        return Redirect::route('topics.show', $reply->topic_id);
+            $resp['status'] = 'success';
+            $resp['message'] = $reply->topic->reply_count;
+        }
+        
+        die(json_encode($resp));
     }
 
     /**

@@ -157,20 +157,37 @@
             $('[data-method]')
                 .attr('style','cursor:pointer;')
                 .click(function() {
-                    var current = $(this);
-                    if (current.attr('data-method') == 'post') {
-                        $.post(current.attr('data-url'), {
-                            _method: 'post',
-                            _token: Config.token
-                        }, function(res){
-                            if(res != 0)
-                                current.find('span').text(res);
-                            else
-                                current.find('span').text('');
-                        });
+                    var current = $(this),
+                        $li = current.closest('li'),
+                        $method = current.attr('data-method'),
+                        flag = true;
+                    if($method == 'delete'){
+                        flag = false;
+                        if(confirm('确定要删除？'))
+                            flag = true;
                     }
-                    if ($(this).attr('data-method') == 'delete' && confirm("Are you sure want to proceed?")) {
-                        // $(this).find("form").submit();
+                    if (flag) {
+                        $.post(current.attr('data-url'), {
+                                _method: 'post',
+                                _token: Config.token
+                            }, function(res){
+                                if(res.status === 'success'){
+                                    if($method === 'delete'){
+                                        //发送请求前改变背景色
+                                        $li.css("backgroundColor", "#FB6C6C");
+                                        //删除成功
+                                        $li.slideUp(300, function() {
+                                            $('.replies .total b').text(res.message);
+                                            //移除父级div
+                                            $li.remove();
+                                        });
+                                    }else{
+                                        current.find('span').text(res.message);
+                                    }
+                                }else{
+                                    alert(res.message);
+                                }
+                            }, 'json');
                     }
                 });
            // attr('onclick',' if (confirm("Are you sure want to proceed?")) { $(this).find("form").submit(); };');

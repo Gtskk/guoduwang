@@ -124,4 +124,5 @@ return array(
     'Vote Up' => '顶',
     'Vote Down' => '踩',
     'Recomended Resources' => '推荐资源',
+    'permission_required' => '权限不允许',
 );

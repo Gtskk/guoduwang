@@ -125,4 +125,5 @@ return array (
     'Vote Up' => 'Vote Up',
     'Vote Down' => 'Vote Down',
     'Recomended Resources' => 'Recomended Resources',
+    'permission_required' => 'Permission Required',
 );

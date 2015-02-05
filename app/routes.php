@@ -76,11 +76,41 @@ Route::resource('nodes', 'NodesController');
 
 /** Reply Routes */
 Route::resource('replies', 'RepliesController', ['only' => ['store']]);
-Route::delete('replies/delete/{id}',  [
+Route::post('replies/delete/{id}',  [
 	'as' => 'replies.destroy',
 	'uses' => 'RepliesController@destroy',
 	'before' => 'auth'
 ]);
+
+# ------------------ 前台需要管理权限的路由 ------------------------
+Route::group(['before' => 'manage_topics'], function(){
+    Route::post('topics/recomend/{id}',  [
+        'as' => 'topics.recomend',
+        'uses' => 'TopicsController@recomend',
+    ]);
+
+    Route::post('topics/pin/{id}',  [
+        'as' => 'topics.pin',
+        'uses' => 'TopicsController@pin',
+    ]);
+
+    Route::delete('topics/delete/{id}',  [
+        'as' => 'topics.destroy',
+        'uses' => 'TopicsController@destroy',
+    ]);
+
+    Route::post('topics/sink/{id}',  [
+        'as' => 'topics.sink',
+        'uses' => 'TopicsController@sink',
+    ]);
+});
+
+Route::group(['before' => 'manage_users'], function(){
+	Route::post('users/blocking/{id}',  [
+		'as' => 'users.blocking',
+		'uses' => 'UsersController@blocking',
+	]);
+});
 
 
 //后台路由

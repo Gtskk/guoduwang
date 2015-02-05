@@ -19,6 +19,9 @@
 		</div>
 	</div>
 
+	<!-- Nodes Listing -->
+	@include('theme::nodes.partials.list')
+
 	@if (isset($links) && count($links))
 		<div class="panel panel-default corner-radius">
 			<div class="panel-heading text-center">
@@ -68,9 +71,6 @@
 			</div>
 		</div>
 	@endif
-
-	<!-- Nodes Listing -->
-	@include('theme::nodes.partials.list')
 
 	<div class="panel panel-default corner-radius">
 		<div class="panel-heading text-center">

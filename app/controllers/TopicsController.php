@@ -34,7 +34,7 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function store()
     {
-        return App::make('Phphub\Creators\TopicCreator')->create($this, Input::except('_token'));
+        return App::make('Gtskk\Creators\TopicCreator')->create($this, Input::except('_token'));
     }
 
     public function show($id)
@@ -115,17 +115,7 @@ class TopicsController extends BaseController implements CreatorListener
         $topic->is_excellent = (!$topic->is_excellent);
         $topic->save();
         Flash::success(lang('Operation succeeded.'));
-        Notification::notify('topic_mark_excellent', Auth::user(), $topic->user, $topic);
-        return Redirect::route('topics.show', $topic->id);
-    }
-
-    public function wiki($id)
-    {
-        $topic = Topic::findOrFail($id);
-        $topic->is_wiki = (!$topic->is_wiki);
-        $topic->save();
-        Flash::success(lang('Operation succeeded.'));
-        Notification::notify('topic_mark_wiki', Auth::user(), $topic->user, $topic);
+        Notification::notify('topic_mark_excellent', Confide::user(), $topic->user, $topic);
         return Redirect::route('topics.show', $topic->id);
     }
 

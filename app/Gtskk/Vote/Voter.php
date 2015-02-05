@@ -56,11 +56,6 @@ class Voter
 
 	public function replyUpVote(Reply $reply)
 	{
-		if(Confide::user()->id == $reply->member_id)
-		{
-			return \Flash::warning(lang('Can not vote your feedback'));
-		}
-
 		if($reply->votes()->ByWhom(Confide::user()->id)->WithType('upvote')->count())
 		{
 			// click twice for remove upvote
