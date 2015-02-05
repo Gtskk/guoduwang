@@ -27,7 +27,7 @@
 					</a>
 					<span> •  </span>
 
-					@if ($currentUser && ($currentUser->can("manage_topics") || $currentUser->id == $reply->user_id) )
+					@if ($currentUser && ($currentUser->can("manage_topics") || $currentUser->id == $reply->member_id) )
 						<a id="reply-delete-{{ $reply->id }}" data-method="delete"  href="javascript:void(0);" data-url="{{ route('replies.destroy', [$reply->id]) }}" title="{{ lang('Delete') }}">
 								<i class="fa fa-trash-o"></i>
 						</a>

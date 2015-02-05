@@ -31,6 +31,16 @@ class Topic extends \Eloquent
 		return $this->morphMany('Vote', 'votable');
 	}
 
+	public function favoritedBy()
+	{
+		return $this->belongsToMany('Member', 'favorites');
+	}
+
+	public function attentedBy()
+	{
+		return $this->belongsToMany('Member', 'attentions');
+	}
+
 	public function node()
 	{
 		return $this->belongsTo('Node');

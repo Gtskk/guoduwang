@@ -74,7 +74,13 @@ Route::group(['before' => 'auth'], function(){
 
 Route::resource('nodes', 'NodesController');
 
+/** Reply Routes */
 Route::resource('replies', 'RepliesController', ['only' => ['store']]);
+Route::delete('replies/delete/{id}',  [
+	'as' => 'replies.destroy',
+	'uses' => 'RepliesController@destroy',
+	'before' => 'auth'
+]);
 
 
 //后台路由

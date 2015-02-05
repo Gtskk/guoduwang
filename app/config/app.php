@@ -122,7 +122,8 @@ return array(
 		'Fitztrev\LaravelHtmlMinify\LaravelHtmlMinifyServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Mews\Purifier\PurifierServiceProvider',
-		'Turbo\Provider\Laravel\TurboServiceProvider'
+		'Turbo\Provider\Laravel\TurboServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider'
 
 	),
 
@@ -199,6 +200,7 @@ return array(
         'Carbon'          => 'Carbon\Carbon',
         'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
         'Markdown'        => 'Gtskk\Markdown\Markdown',
+        'Flash' 		  => 'Laracasts\Flash\Flash'
 
 	),
 
