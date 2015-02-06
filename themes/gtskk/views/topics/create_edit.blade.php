@@ -1,9 +1,5 @@
 @extends('theme::layouts.main')
 
-@section('title')
-{{ lang('Create New Topic') }}_@parent
-@stop
-
 @section('content')
 
 <div class="topic_create">

@@ -15,6 +15,9 @@
 
 		<script>
             Config = {
+            	'login_url': '{{ route('login-required') }}',
+            	'login_url': '{{ Config::get('app.url') }}',
+                'user_id': {{ isset($currentUser) ? $currentUser->id : 0 }},
                 'routes': {
                     'upload_image' : '{{ route('upload_image') }}'
                 },
@@ -111,8 +114,8 @@
 
 		        </div>
 		    </nav>
-
 			
+			@yield('content404')
 			<div class="container">
 				@yield('content')
 			</div>

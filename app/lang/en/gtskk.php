@@ -127,4 +127,6 @@ return array (
     'Vote Down' => 'Vote Down',
     'Recomended Resources' => 'Recomended Resources',
     'permission_required' => 'Permission Required',
+    'Github Name' => 'Github Name',
+    'Since' => 'Since'
 );

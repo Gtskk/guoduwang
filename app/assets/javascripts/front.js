@@ -33,7 +33,6 @@
             self.initInlineAttach();
             self.snowing();
             self.search();
-            //SidebarMenuEffects.sidebar(); // 初始化侧边栏节点列表样式
         },
 
         /**
@@ -157,47 +156,55 @@
             $('[data-method]')
                 .attr('style','cursor:pointer;')
                 .click(function() {
-                    var current = $(this),
-                        $li = current.closest('li'),
-                        $method = current.attr('data-method'),
-                        flag = true;
-                    if($method == 'delete'){
-                        flag = false;
-                        if(confirm('确定要删除？'))
+                    if(Config.user_id !== 0)
+                    {
+                        var current = $(this),
+                            $li = current.closest('li'),
+                            $method = current.attr('data-method'),
                             flag = true;
-                    }
-                    if (flag) {
-                        $.post(current.attr('data-url'), {
-                                _method: 'post',
-                                _token: Config.token
-                            }, function(res){
-                                if(res.status === 'success'){
-                                    if($method === 'delete'){
-                                        //发送请求前改变背景色
-                                        $li.css("backgroundColor", "#FB6C6C");
-                                        //删除成功
-                                        $li.slideUp(300, function() {
-                                            $('.replies .total b').text(res.message);
-                                            //移除父级div
-                                            $li.remove();
-                                        });
-                                    }else{
-                                        if(current.hasClass('vote')){
-                                            current.toggleClass('active');
-                                            var sib = current.siblings()[0];
-                                            if($(sib).hasClass('active'))
-                                                $(sib).removeClass('active');
-                                            $('#up-vote').find('span').text(res.message);
+                        if($method == 'delete'){
+                            flag = false;
+                            if(confirm('确定要删除？'))
+                                flag = true;
+                        }
+                        if (flag) {
+                            $.post(current.attr('data-url'), {
+                                    _method: 'post',
+                                    _token: Config.token
+                                }, function(res){
+                                    if(res.status === 'success'){
+                                        if($method === 'delete'){
+                                            //发送请求前改变背景色
+                                            $li.css("backgroundColor", "#FB6C6C");
+                                            //删除成功
+                                            $li.slideUp(300, function() {
+                                                $('.replies .total b').text(res.message);
+                                                //移除父级div
+                                                $li.remove();
+                                            });
                                         }else{
-                                            current.find('span').text(res.message);
-                                        }
+                                            if(current.hasClass('vote')){
+                                                current.toggleClass('active');
+                                                var sib = current.siblings()[0];
+                                                if($(sib).hasClass('active'))
+                                                    $(sib).removeClass('active');
+                                                $('#up-vote').find('span').text(res.message);
+                                            }else{
+                                                current.find('span').text(res.message);
+                                            }
 
+                                        }
+                                    }else{
+                                        alert(res.message);
                                     }
-                                }else{
-                                    alert(res.message);
-                                }
-                            }, 'json');
+                                }, 'json');
+                        }
                     }
+                    else
+                    {
+                        location.href = Config.login_url;
+                    }
+                    
                 });
            // attr('onclick',' if (confirm("Are you sure want to proceed?")) { $(this).find("form").submit(); };');
         },
@@ -377,7 +384,7 @@ function replyOne(username){
     }
 	else
     {
-        alert('请先登录');
+        location.href = Config.login_url;
     }
 }
 

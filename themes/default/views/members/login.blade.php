@@ -20,7 +20,6 @@
 
 @section('javascript')
 
-@parent
 @if(Session::has('error'))
 <script type="text/javascript">
     $('#loginBtn').popover('show');

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'Topics' => '社区',
+    'Topics' => '话题',
     'Wiki' => 'Wiki',
     'Users' => '会员',
     'About' => '关于',
@@ -80,7 +80,6 @@ return array(
     'Signature' => '签名',
     'Edit Profile' => '编辑个人资料',
     'Basic Info' => '个人信息',
-    'Topics' => '社区',
     'Favorites' => '收藏',
     'Replies' => '回复',
     'avatar_notice' => '如需修改头像, 请到 <a href="https://github.com/settings/profile" target="_blank">Github 的个人设置</a> 页面修改, 注意头像会有缓存, 估计一个小时内会见效.',
@@ -126,4 +125,6 @@ return array(
     'Vote Down' => '踩',
     'Recomended Resources' => '推荐资源',
     'permission_required' => '权限不允许',
+    'Github Name' => 'Github用户名',
+    'Since' => '自从'
 );

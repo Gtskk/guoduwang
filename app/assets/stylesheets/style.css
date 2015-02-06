@@ -45,6 +45,7 @@ body {
   white-space: 50px;
   font-weight: 400;
   color: #999;
+  float: left;
 }
 .users-show .dl-horizontal dd{
   margin-left: 58px;
@@ -109,4 +110,13 @@ body {
 
 .topiclist.panel-default>.panel-heading {
   background-color: #fff;
+}
+
+
+/** 头像上传样式 */
+#upload-form{
+  position: relative;
+  width: 0;
+  height: 0;
+  opacity: 0;
 }

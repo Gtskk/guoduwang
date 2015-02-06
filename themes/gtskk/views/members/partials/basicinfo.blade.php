@@ -1,25 +1,32 @@
 <div style="text-align: center;">
 	<a href="">
-		<img src="{{ $member->present()->gravatar(180) }}" class="img-thumbnail users-show-avatar" style="width: 206px;margin: 4px 4px 15px;min-height:190px">
+		<img id="avatar_src" src="{{ $member->present()->gravatar(180) }}" class="img-thumbnail users-show-avatar" style="width: 206px;margin: 4px 4px 15px;min-height:190px">
 	</a>
+	@if ($currentUser && ($currentUser->id == $member->id || Entrust::can('manage_users')))
+	<a class="btn btn-mini btn-success" id="avatar_uploader" href="javascript:;">
+		上传头像
+	</a>
+	<span id="avatar_uploading_status" class="hide" style="display: none;">
+	</span>
+	@endif
 </div>
 
 <dl class="dl-horizontal">
 
-	<dt><lable>&nbsp; </lable></dt><dd> {{ lang('User ID:') }} {{ $member->id }}</dd>
-
-	<dt><label>Name:</label></dt><dd><strong>{{{ $member->name }}}</strong></dd>
+	<dt><label>{{ lang('Username') }}:</label></dt><dd><strong>{{{ $member->username }}}</strong></dd>
 
 	@if ($member->real_name)
 		<dt class="adr"><label> {{ lang('Real Name') }}:</label></dt><dd><span class="org">{{{ $member->real_name }}}</span></dd>
 	@endif
 
+	@if ($member->github_name)
 	<dt><label>Github:</label></dt>
 	<dd>
-		<a href="https://github.com/{{ $member->github_name }}" target="_blank">
+		<a href="https://github.com/{{ $member->github_name }}">
 			<i class="fa fa-github-alt"></i> {{ $member->github_name }}
 		</a>
 	</dd>
+	@endif
 
 	@if ($member->company)
 		<dt class="adr"><label> {{ lang('Company') }}:</label></dt><dd><span class="org">{{{ $member->company }}}</span></dd>
@@ -27,14 +34,6 @@
 
 	@if ($member->city)
 		<dt class="adr"><label> {{ lang('City') }}:</label></dt><dd><span class="org"><i class="fa fa-map-marker"></i> {{{ $member->city }}}</span></dd>
-	@endif
-
-	@if ($member->twitter_account)
-	<dt><label><span>Twitter</span>:</label></dt>
-	<dd>
-		<a href="https://twitter.com/{{ $member->twitter_account }}" rel="nofollow" class="twitter" target="_blank"><i class="fa fa-twitter"></i> {{{ '@' . $member->twitter_account }}}
-		</a>
-	</dd>
 	@endif
 
 	@if ($member->personal_website)
@@ -51,7 +50,7 @@
 	@endif
 
 	<dt>
-		<label>Since:</label>
+		<label>{{ lang('Since') }}:</label>
 	</dt>
 	<dd><span>{{ $member->created_at }}</span></dd>
 </dl>

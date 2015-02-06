@@ -90,21 +90,24 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function upvote($id)
     {
-        $resp = array();
-        $topic = Topic::find($id);
-        if(Confide::user()->id == $topic->member_id)
+        if(Request::ajax())
         {
-            $resp['status'] = 'fail';
-            $resp['message'] = lang('Can not vote your feedback');
+            $resp = array();
+            $topic = Topic::find($id);
+            if(Confide::user()->id == $topic->member_id)
+            {
+                $resp['status'] = 'fail';
+                $resp['message'] = lang('Can not vote your feedback');
+            }
+            else
+            {
+                App::make('Gtskk\Vote\Voter')->topicUpVote($topic);
+                $resp['status'] = 'success';
+                $resp['message'] = $topic->vote_count ?: '';
+            }
+            
+            die(json_encode($resp));
         }
-        else
-        {
-            App::make('Gtskk\Vote\Voter')->topicUpVote($topic);
-            $resp['status'] = 'success';
-            $resp['message'] = $topic->vote_count ?: '';
-        }
-        
-        die(json_encode($resp));
     }
 
     public function downvote($id)
@@ -176,7 +179,7 @@ class TopicsController extends BaseController implements CreatorListener
 
             $fileName        = $file->getClientOriginalName();
             $extension       = $file->getClientOriginalExtension() ?: 'png';
-            $folderName      = '/uploads/images/' . date("Ym", time()) .'/'.date("d", time()) .'/'. Auth::user()->id;
+            $folderName      = '/uploads/images/' . date("Ym", time()) .'/'.date("d", time()) .'/'. Confide::user()->id;
             $destinationPath = public_path() . $folderName;
             $safeName        = str_random(10).'.'.$extension;
             $file->move($destinationPath, $safeName);
@@ -195,11 +198,11 @@ class TopicsController extends BaseController implements CreatorListener
                 $img->save();
             }
 
-            $data['filename'] = getUserStaticDomain() . $folderName .'/'. $safeName;
+            $data['filename'] = Config::get('app.url') . $folderName .'/'. $safeName;
         }
         else
         {
-            $data['error'] = 'Error while uploading file';
+            $data['error'] = '上传文件出错';
         }
         return $data;
     }

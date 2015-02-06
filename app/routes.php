@@ -20,8 +20,10 @@ Route::get('/about', array(
 	'as' => 'about',
 	'uses' => 'PagesController@about'
 ));
-// Confide routes
-Route::get('members/login', 'MembersController@login');
+Route::get('members/login', array(
+	'as' => 'login-required',
+	'uses' => 'MembersController@login'
+));
 Route::post('members/login', 'MembersController@doLogin');
 Route::get('members/confirm/{code}', 'MembersController@confirm');
 Route::get('members/forgot_password', 'MembersController@forgotPassword');
@@ -30,12 +32,18 @@ Route::get('members/reset_password/{token}', 'MembersController@resetPassword');
 Route::post('members/reset_password', 'MembersController@doResetPassword');
 Route::get('members/logout', 'MembersController@logout');
 Route::resource('members', 'MembersController');
-
-Route::get('login-required', [
-	'as' => 'login-required',
-	'uses' => 'AuthController@loginRequired'
+Route::get('/members/{id}/replies', [
+	'as' => 'members.replies',
+	'uses' => 'MembersController@replies'
 ]);
-
+Route::get('/members/{id}/topics', [
+	'as' => 'members.topics',
+	'uses' => 'MembersController@topics'
+]);
+Route::get('/members/{id}/favorites', [
+	'as' => 'members.favorites',
+	'uses' => 'MembersController@favorites'
+]);
 Route::post('upload_image', [
     'as' => 'upload_image',
     'uses' => 'TopicsController@uploadImage',
@@ -111,6 +119,7 @@ Route::group(['before' => 'manage_users'], function(){
 		'uses' => 'UsersController@blocking',
 	]);
 });
+
 
 
 //后台路由

@@ -67,6 +67,43 @@ class MembersController extends BaseController
     }
 
     /**
+     * Edit the member info
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $member = Member::findOrFail($id);
+        if($this->authorOrAdminPermissioinRequire($id))
+        {
+            return View::make('theme::members.edit', compact('member'));
+        }
+        else
+        {
+            return 'error';
+        }
+        
+    }
+
+    /**
+     * Update a member data
+     * @param  integer $id
+     * @return Illuminate\Http\Response
+     */
+    public function update($id)
+    {
+        $member = Member::findOrFail($id);
+        $this->authorOrAdminPermissioinRequire($id);
+        $data = Input::only('real_name', 'github_name', 'city', 'company', 'personal_website', 'signature', 'introduction');
+        App::make('Gtskk\Forms\MemberUpdateForm')->validate($data);
+
+        $member->update($data);
+
+        Flash::success(lang('Operation succeeded.'));
+        return Redirect::route('members.show', $id);
+    }
+
+    /**
      * Displays the login form
      *
      * @return  Illuminate\Http\Response
@@ -79,6 +116,43 @@ class MembersController extends BaseController
             return View::make('theme::members.login_require');
         }
     }
+
+    /**
+     * 获取指定用户的回复
+     * @param  integer $id
+     * @return Illuminate\Http\Response
+     */
+    public function replies($id)
+    {
+        $member = Member::findOrFail($id);
+        $replies = Reply::whose($id)->recent()->paginate(15);
+        return View::make('theme::members.replies', compact('member', 'replies'));
+    }
+
+    /**
+     * 获取指定用户的话题
+     * @param  integer $id
+     * @return Illuminate\Http\Response
+     */
+    public function topics($id)
+    {
+        $member = Member::findOrFail($id);
+        $topics = Topic::whose($id)->recent()->paginate(15);
+        return View::make('theme::members.topics', compact('member', 'topics'));
+    }
+
+    /**
+     * 获取指定用户的收藏
+     * @param  integer $id
+     * @return Illuminate\Http\Response
+     */
+    public function favorites($id)
+    {
+        $member = Member::findOrFail($id);
+        $topics = $member->favoriteTopics()->paginate(15);
+        return View::make('theme::members.topics', compact('member', 'topics'));
+    }
+
 
     /**
      * Attempt to do login

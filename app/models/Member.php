@@ -55,6 +55,12 @@ class Member extends Eloquent implements ConfideUserInterface {
         return $this->hasMany('Favorite');
     }
 
+    public function FavoriteTopics()
+    {
+        return $this->belongsToMany('Topic', 'favorites');
+    }
+
+
 
 	public function scopeRecent($query)
     {

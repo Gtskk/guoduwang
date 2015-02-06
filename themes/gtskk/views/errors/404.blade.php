@@ -1,11 +1,10 @@
 @extends('theme::layouts.main')
 
 @section('styles')
-<meta http-equiv="refresh" content="5; url=/" />
 {{ HTML::style('assets/css/404.css') }}
 @stop
 
-@section('content')
+@section('content404')
 <!--con-->
 <div id="wrapper">
 	<div id="main">

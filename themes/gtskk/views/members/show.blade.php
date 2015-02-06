@@ -1,9 +1,5 @@
 @extends('theme::layouts.main')
 
-@section('title')
-{{{ $member->username }}} {{ lang('Basic Info') }}_@parent
-@stop
-
 @section('content')
 <div class="users-show">
 
@@ -24,7 +20,7 @@
 		<div class="panel panel-default">
 			@include('theme::members.partials.infonav', ['current' => 'basicinfo'])
 
-			<iframe src="https://dn-phphub.qbox.me/github-card.html?user=Gtskk&client_id=11c9bc2d6969d7e17f10&client_secret=eab1c76e1fd3c32623c5c22c57a7b2b5e771f279&target=blank" frameborder="0" scrolling="0" width="100%" height="146px" allowtransparency></iframe>
+			<!-- <iframe src="https://dn-phphub.qbox.me/github-card.html?user=Gtskk&client_id=11c9bc2d6969d7e17f10&client_secret=eab1c76e1fd3c32623c5c22c57a7b2b5e771f279&target=blank" frameborder="0" scrolling="0" width="100%" height="146px" allowtransparency></iframe> -->
 		</div>
 
 		<div class="panel panel-default">
