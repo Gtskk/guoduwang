@@ -123,7 +123,8 @@ return array(
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Mews\Purifier\PurifierServiceProvider',
 		'Turbo\Provider\Laravel\TurboServiceProvider',
-		'Laracasts\Flash\FlashServiceProvider'
+		'Laracasts\Flash\FlashServiceProvider',
+		'Artdarek\OAuth\OAuthServiceProvider'
 
 	),
 
@@ -200,7 +201,8 @@ return array(
         'Carbon'          => 'Carbon\Carbon',
         'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
         'Markdown'        => 'Gtskk\Markdown\Markdown',
-        'Flash' 		  => 'Laracasts\Flash\Flash'
+        'Flash' 		  => 'Laracasts\Flash\Flash',
+        'OAuth' 		  => 'Artdarek\OAuth\Facade\OAuth'
 
 	),
 

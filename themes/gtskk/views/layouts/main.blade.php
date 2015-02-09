@@ -16,7 +16,6 @@
 		<script>
             Config = {
             	'login_url': '{{ route('login-required') }}',
-            	'login_url': '{{ Config::get('app.url') }}',
                 'user_id': {{ isset($currentUser) ? $currentUser->id : 0 }},
                 'routes': {
                     'upload_image' : '{{ route('upload_image') }}'
@@ -104,7 +103,7 @@
 			                  	</a>
 			              		</li>
 			                </ul>
-			                @elseif(Request::is('members/login'))
+			                @elseif(Request::is('members/login') or Request::is('members/create'))
 			                @else
 			                	@include('theme::members.login')
 			                @endif
@@ -134,10 +133,9 @@
 		      	</p>
 		    </div>
 		</div>
-
-		@section('javascript')
+		
 		<script src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
-		@show
+		@yield('javascript')
 
 	</body>
 </html>

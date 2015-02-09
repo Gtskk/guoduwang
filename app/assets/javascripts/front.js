@@ -33,7 +33,8 @@
             self.initInlineAttach();
             self.snowing();
             self.search();
-            self.avatarUpload();
+            if(Config.user_id !== 0)
+                self.avatarUpload();
         },
 
         /**

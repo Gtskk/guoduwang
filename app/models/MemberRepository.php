@@ -21,6 +21,12 @@ class MemberRepository
     {
         $user = new Member;
 
+        // Github账户有关
+        $user->image_url = array_get($input, 'image_url');
+        $user->github_id = array_get($input, 'github_id');
+        $user->github_url = array_get($input, 'github_url');
+        $user->github_name = array_get($input, 'username');
+
         $user->username = array_get($input, 'username');
         $user->email    = array_get($input, 'email');
         $user->password = array_get($input, 'password');
@@ -31,7 +37,7 @@ class MemberRepository
         $user->password_confirmation = array_get($input, 'password_confirmation');
 
         // Generate a random confirmation code
-        $user->confirmation_code     = md5(uniqid(mt_rand(), true));
+        $user->confirmation_code = md5(uniqid(mt_rand(), true));
 
         // Save if valid. Password field will be hashed before save
         $this->save($user);

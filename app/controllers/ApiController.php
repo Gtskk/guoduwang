@@ -4,8 +4,6 @@ class ApiController extends BaseController {
 
 	public function weather()
 	{
-		
-
 		$return = Cache::remember('user_weather', 30, function()
 		{
 		    $url = Config::get('site.weather_url');
@@ -31,8 +29,6 @@ class ApiController extends BaseController {
 	{
 		$citycodes = Config::get('site.citycodes');
 		$city = $this->getCity('218.94.75.50');
-		Log::info(Request::ip());
-		Log::info($city);
 		$city = rtrim($city, '市');
 		$code = isset($citycodes[$city]) ? $citycodes[$city] : '';
 

@@ -11,6 +11,9 @@
                     {{ Session::get('error') }}
                 </div>
                 @endif
+                @if (Session::get('notice'))
+                    <div class="alert">{{ Session::get('notice') }}</div>
+                @endif
                 <div class="form-group">
                     <input type="text" name="username" class="form-control" placeholder="{{ trans('common.username') }}"/>
                 </div>
@@ -24,8 +27,9 @@
             </div>
             <div class="footer">
                 <button type="submit" name="login_require" class="btn bg-olive btn-block">{{ trans('common.sign_in') }}</button>
-                <p><a href="{{ route('cpanel.password.forgot')}}">{{ trans('common.forgot_passwd') }}</a></p>
-                <a href="{{route('cpanel.register')}}" class="text-center">{{ trans('common.register') }}</a>
+                <p><a href="{{ route('forgot_password')}}">{{ trans('common.forgot_passwd') }}</a></p>
+                <a href="{{route('members.create')}}" class="text-center">{{ trans('common.register') }}</a>
+                <a href="{{ route('githublogin') }}" class="btn bg-olive btn-block"><i class="fa fa-github-alt"></i> {{ lang('Github_login') }}</a>
             </div>
         </form>            
     </div>

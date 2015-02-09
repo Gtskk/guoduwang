@@ -204,7 +204,7 @@ class TopicsController extends BaseController implements CreatorListener
             if($folder == 'avatars') {
                 $img->resize(206, 206);
                 // 自动保存到数据库
-                Member::where('id', '=', Input::get('_userid'))->update(array('img_url'=>$filename));
+                Member::where('id', '=', Input::get('_userid'))->update(array('image_url'=>$filename));
             }
 
             $data['filename'] = $filename;

@@ -20,7 +20,7 @@ return array(
     'theme' => 'gtskk',
 
     // 天气API地址
-    'weather_url' => 'http://www.weather.com.cn/data/cityinfo',
+    'weather_url' => 'http://m.weather.com.cn/data',
     // 天气城市代码对应
     'citycodes' => array(
 			'北京'=>'101010100',

@@ -24,7 +24,8 @@
 		"codeception/codeception": "*",
         "nickcernis/html-to-markdown": "2.1.*",
         "erusev/parsedown": "~1.1",
-        "laracasts/flash": "~1.0"
+        "laracasts/flash": "~1.0",
+        "artdarek/oauth-4-laravel": "dev-master"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "1.4.*"

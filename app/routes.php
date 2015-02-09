@@ -15,23 +15,39 @@
 Route::pattern('id', '[0-9]+');
 
 //前台路由
+
 Route::get('/', 'PagesController@showWelcome');
 Route::get('/about', array(
 	'as' => 'about',
 	'uses' => 'PagesController@about'
 ));
+
+/***************************************************/
+/**************  Members Routes *******************/
+/*************************************************/
 Route::get('members/login', array(
 	'as' => 'login-required',
 	'uses' => 'MembersController@login'
 ));
+Route::get('/members/githublogin', [
+	'as' => 'githublogin',
+	'uses' => 'MembersController@githublogin'
+]);
 Route::post('members/login', 'MembersController@doLogin');
 Route::get('members/confirm/{code}', 'MembersController@confirm');
-Route::get('members/forgot_password', 'MembersController@forgotPassword');
+Route::get('members/forgot_password', array(
+	'as' => 'forgot_password',
+	'uses' => 'MembersController@forgotPassword'
+));
 Route::post('members/forgot_password', 'MembersController@doForgotPassword');
 Route::get('members/reset_password/{token}', 'MembersController@resetPassword');
 Route::post('members/reset_password', 'MembersController@doResetPassword');
 Route::get('members/logout', 'MembersController@logout');
 Route::resource('members', 'MembersController');
+Route::get('member-banned', [
+    'as' => 'member-banned',
+    'uses' => 'MembersController@memberBanned'
+]);
 Route::get('/members/{id}/replies', [
 	'as' => 'members.replies',
 	'uses' => 'MembersController@replies'

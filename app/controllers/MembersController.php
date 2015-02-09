@@ -1,10 +1,8 @@
 <?php
-/**
- * UsersController Class
- *
- * Implements actions regarding user management
- */
-class MembersController extends BaseController
+
+use Gtskk\Listeners\GithubAuthenticatorListener;
+
+class MembersController extends BaseController implements GithubAuthenticatorListener
 {
 
     public function index()
@@ -28,7 +26,8 @@ class MembersController extends BaseController
      */
     public function create()
     {
-        return View::make(Config::get('confide::signup_form'));
+        $member = array_merge(Session::get('userGithubData'), Session::get('_old_input', []));
+        return View::make(Config::get('confide::signup_form'), compact('member'));
     }
 
     /**
@@ -38,8 +37,13 @@ class MembersController extends BaseController
      */
     public function store()
     {
+        $inputData = Input::all();
+        if(Session::has('userGithubData'))
+        {
+            $inputData = array_merge(Session::get('userGithubData'), $inputData);
+        }
         $repo = App::make('MemberRepository');
-        $user = $repo->signup(Input::all());
+        $user = $repo->signup($inputData);
 
         if ($user->id) {
             if (Config::get('confide::signup_email')) {
@@ -101,6 +105,65 @@ class MembersController extends BaseController
 
         Flash::success(lang('Operation succeeded.'));
         return Redirect::route('members.show', $id);
+    }
+
+
+    /**
+     * Github登陆方式
+     * @return Illuminate\Http\Redirect
+     */
+    public function githublogin()
+    {
+        if(Input::has('code'))
+        {
+            return App::make('Gtskk\Github\GithubAuthenticator')->authByCode($this, Input::get('code'));
+        }
+        if (!Session::has('url.intended'))
+        {
+            Session::put('url.intended', URL::previous());
+        }
+        // redirect to the github authentication url
+        return Redirect::to((string) OAuth::consumer('GitHub')->getAuthorizationUri());
+    }
+
+    /**
+     * ----------------------------------------
+     * GithubAuthenticatorListener Delegate
+     * ----------------------------------------
+     */
+
+    // 数据库找不到用户, 执行新用户注册
+    public function userNotFound($githubData)
+    {
+        Session::put('userGithubData', $githubData);
+        return Redirect::route('members.create');
+    }
+
+    // 数据库有用户信息, 登录用户
+    public function userFound($user)
+    {
+        Auth::login($user, true);
+        Session::forget('userGithubData');
+
+        Flash::success(lang('Operation succeeded.'));
+
+        return Redirect::intended();
+    }
+
+    // 用户被屏蔽
+    public function userIsBanned($user)
+    {
+        return Redirect::route('member-banned');
+    }
+
+
+    public function memberBanned()
+    {
+        if (Auth::check() && !Auth::user()->is_banned)
+        {
+            return Redirect::to('/');
+        }
+        return View::make('members.memberbanned');
     }
 
     /**

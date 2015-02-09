@@ -13,7 +13,6 @@ class Member extends Eloquent implements ConfideUserInterface {
 	 * @var string
 	 */
 	protected $table = 'members';
-	protected $guarded = array();
 
 	use PresentableTrait;
     public $presenter = 'Gtskk\Presenters\MemberPresenter';
@@ -33,7 +32,8 @@ class Member extends Eloquent implements ConfideUserInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password');
+	protected $hidden = array('password', 'github_id');
+    protected $guarded = array('id', 'notifications', 'is_banned');
 
     public function topics()
     {
@@ -43,6 +43,11 @@ class Member extends Eloquent implements ConfideUserInterface {
     public function replies()
     {
         return $this->hasMany('Reply');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany('Notification')->recent()->with('topic', 'fromMember')->paginate(20);
     }
 
     public function attentions()
@@ -58,6 +63,11 @@ class Member extends Eloquent implements ConfideUserInterface {
     public function FavoriteTopics()
     {
         return $this->belongsToMany('Topic', 'favorites');
+    }
+
+    public function getByGithubId($githubid)
+    {
+        return $this->where('github_id', '=', $githubid)->first();
     }
 
 

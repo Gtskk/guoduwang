@@ -1,6 +1,6 @@
 <div class="avatar">
 	<a href="javascript:void(0);">
-		<img id="avatar-src" src="{{ $member->img_url or $member->present()->gravatar(180) }}" class="img-thumbnail users-show-avatar" style="width: 206px;margin: 4px 4px 15px;min-height:190px">
+		<img id="avatar-src" src="{{ $member->image_url or $member->present()->gravatar(180) }}" class="img-thumbnail users-show-avatar" style="width: 206px;margin: 4px 4px 15px;min-height:190px">
 		<span class="hide">{{ lang('Click to change avatar') }}</span>
 	</a>
 	@if ($currentUser && ($currentUser->id == $member->id || Entrust::can('manage_users')))
@@ -23,7 +23,7 @@
 	@if ($member->github_name)
 	<dt><label>Github:</label></dt>
 	<dd>
-		<a href="https://github.com/{{ $member->github_name }}">
+		<a href="{{ $member->github_url }}">
 			<i class="fa fa-github-alt"></i> {{ $member->github_name }}
 		</a>
 	</dd>
