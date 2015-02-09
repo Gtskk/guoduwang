@@ -170,16 +170,17 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function uploadImage()
     {
-        if ($file = Input::file('file'))
+        if (Input::get('_folder') && $file = Input::file('file'))
         {
+            $folder = Input::get('_folder');
             $allowed_extensions = ["png", "jpg", "gif"];
             if ( $file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions) ){
-                return ['error' => 'You may only upload png, jpg or gif.'];
+                return ['error' => '只能上传jpg，png或者gif格式的.'];
             }
 
             $fileName        = $file->getClientOriginalName();
             $extension       = $file->getClientOriginalExtension() ?: 'png';
-            $folderName      = '/uploads/images/' . date("Ym", time()) .'/'.date("d", time()) .'/'. Confide::user()->id;
+            $folderName      = '/uploads/'.$folder.'/'.date("Ym", time()) .'/'.date("d", time()) .'/'. Confide::user()->id;
             $destinationPath = public_path() . $folderName;
             $safeName        = str_random(10).'.'.$extension;
             $file->move($destinationPath, $safeName);
@@ -194,11 +195,19 @@ class TopicsController extends BaseController implements CreatorListener
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
+                
                 // finally we save the image as a new file
                 $img->save();
             }
+            $filename = $folderName .'/'. $safeName;
 
-            $data['filename'] = Config::get('app.url') . $folderName .'/'. $safeName;
+            if($folder == 'avatars') {
+                $img->resize(206, 206);
+                // 自动保存到数据库
+                Member::where('id', '=', Input::get('_userid'))->update(array('img_url'=>$filename));
+            }
+
+            $data['filename'] = $filename;
         }
         else
         {

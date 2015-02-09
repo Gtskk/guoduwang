@@ -29,11 +29,13 @@ var paths = {
             'app/assets/javascripts/localforage.min.js',
             'app/assets/javascripts/jquery.inline-attach.min.js',
             'app/assets/javascripts/ekko-lightbox.js',
+            'app/assets/javascripts/dropzone.js',
             'app/assets/javascripts/front.js'
         ],
         styles: [
             'app/assets/stylesheets/bootstrap.min.css',
             'app/assets/stylesheets/font-awesome.min.css',
+            'app/assets/stylesheets/dropzone.css',
             'app/assets/stylesheets/style.css',
             'app/assets/stylesheets/nprogress.css'
         ],

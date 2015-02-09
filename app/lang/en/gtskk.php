@@ -129,4 +129,5 @@ return array (
     'permission_required' => 'Permission Required',
     'Github Name' => 'Github Name',
     'Since' => 'Since'
+    'Click to change avatar' => 'Click to change avatar'
 );

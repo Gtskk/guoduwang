@@ -33,6 +33,7 @@
             self.initInlineAttach();
             self.snowing();
             self.search();
+            self.avatarUpload();
         },
 
         /**
@@ -268,6 +269,7 @@
                 uploadUrl: Config.routes.upload_image,
                 extraParams: {
                   '_token': Config.token,
+                  '_folder': 'images'
                 },
                 onUploadedFile: function(response) {
                     setTimeout(self.runPreview, 200);
@@ -352,6 +354,31 @@
             };
             $.focusblurmenu("#searchkey","280px","300");
 
+        },
+        avatarUpload: function(){
+            // 头像下面指示字的显示隐藏
+            $('.avatar a').mouseover(function(){
+                $(this).find('span').toggleClass('hide');
+            }).mouseout(function(){
+                $(this).find('span').toggleClass('hide');
+            })
+            Dropzone.options.avatarUpload = {
+                paramName: "file",
+                maxFilesize: 1,
+                maxFiles: 1,
+                maxfilesexceeded: function(file){
+                    alert('最多只能传一张图片.');
+                },
+                uploadMultiple: false,
+                addRemoveLinks: true,
+                clickable: '#avatar-src',
+                init: function(){
+                    this.on('success', function(file, res){
+                        $('#avatar-src').attr('src', res.filename);
+                    });
+                    this.removeAllFiles();
+                }
+            }
         }
 
     }

@@ -1,13 +1,14 @@
-<div style="text-align: center;">
-	<a href="">
-		<img id="avatar_src" src="{{ $member->present()->gravatar(180) }}" class="img-thumbnail users-show-avatar" style="width: 206px;margin: 4px 4px 15px;min-height:190px">
+<div class="avatar">
+	<a href="javascript:void(0);">
+		<img id="avatar-src" src="{{ $member->img_url or $member->present()->gravatar(180) }}" class="img-thumbnail users-show-avatar" style="width: 206px;margin: 4px 4px 15px;min-height:190px">
+		<span class="hide">{{ lang('Click to change avatar') }}</span>
 	</a>
 	@if ($currentUser && ($currentUser->id == $member->id || Entrust::can('manage_users')))
-	<a class="btn btn-mini btn-success" id="avatar_uploader" href="javascript:;">
-		上传头像
-	</a>
-	<span id="avatar_uploading_status" class="hide" style="display: none;">
-	</span>
+	<form id="avatarUpload" action="{{ route('upload_image') }}" class="dropzone">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+		<input type="hidden" name="_folder" value="avatars" />
+		<input type="hidden" name="_userid" value="{{ Confide::user()->id }}" />
+	</form>
 	@endif
 </div>
 

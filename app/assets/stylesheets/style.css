@@ -40,6 +40,25 @@ body {
   border-radius: 3px;
   box-shadow: 0 .2em 0 0 #ddd,0 0 0 1px #ddd;
 }
+.users-show .avatar{
+  text-align: center;
+}
+.users-show .avatar a{
+  position: relative;
+  display: inline-block;
+}
+.users-show .avatar a span{
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  margin: 0 5px;
+  width: 96%;
+  background-color: #000;
+  color: #fff;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 0 0 4px 4px;
+}
 .users-show .dl-horizontal dt{
   width: 50px;
   white-space: 50px;
@@ -113,10 +132,6 @@ body {
 }
 
 
-/** 头像上传样式 */
-#upload-form{
-  position: relative;
-  width: 0;
-  height: 0;
-  opacity: 0;
+.hide{
+  display: none;
 }
