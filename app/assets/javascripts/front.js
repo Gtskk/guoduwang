@@ -31,7 +31,7 @@
             self.initReplyOnPressKey();
             self.initDeleteForm();
             self.initInlineAttach();
-            self.snowing();
+            // self.snowing();
             self.search();
             if(Config.user_id !== 0)
                 self.avatarUpload();
@@ -184,7 +184,11 @@
                                                 //移除父级div
                                                 $li.remove();
                                             });
-                                        }else{
+                                        }else if(current.attr('id') === 'user-edit-button')
+                                        {
+                                            location.reload();
+                                        }
+                                        else{
                                             if(current.hasClass('vote')){
                                                 current.toggleClass('active');
                                                 var sib = current.siblings()[0];
@@ -208,7 +212,6 @@
                     }
                     
                 });
-           // attr('onclick',' if (confirm("Are you sure want to proceed?")) { $(this).find("form").submit(); };');
         },
 
         /**
@@ -362,8 +365,9 @@
                 $(this).find('span').toggleClass('hide');
             }).mouseout(function(){
                 $(this).find('span').toggleClass('hide');
-            })
-            Dropzone.options.avatarUpload = {
+            });
+            Dropzone.autoDiscover = false;
+            $('#avatarUpload').dropzone({
                 paramName: "file",
                 maxFilesize: 1,
                 maxFiles: 1,
@@ -371,7 +375,6 @@
                     alert('最多只能传一张图片.');
                 },
                 uploadMultiple: false,
-                addRemoveLinks: true,
                 clickable: '#avatar-src',
                 init: function(){
                     this.on('success', function(file, res){
@@ -379,7 +382,7 @@
                     });
                     this.removeAllFiles();
                 }
-            }
+            });
         }
 
     }

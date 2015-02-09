@@ -107,6 +107,17 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
         return Redirect::route('members.show', $id);
     }
 
+    public function memberBlock($id)
+    {
+        if(Request::ajax())
+        {
+            $member = Member::findOrFail($id);
+            $member->is_banned = (!$member->is_banned);
+            $member->save();
+            die(json_encode(array('status'=>'success', 'message'=>lang('Operation succeeded.'))));
+        }
+    }
+
 
     /**
      * Github登陆方式
@@ -292,7 +303,7 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
                 ->with('notice', $notice_msg);
         } else {
             $error_msg = Lang::get('confide::confide.alerts.wrong_password_forgot');
-            return Redirect::action('MembersController@doForgotPassword')
+            return Redirect::action('MembersController@forgotPassword')
                 ->withInput()
                 ->with('error', $error_msg);
         }

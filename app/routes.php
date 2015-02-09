@@ -48,6 +48,11 @@ Route::get('member-banned', [
     'as' => 'member-banned',
     'uses' => 'MembersController@memberBanned'
 ]);
+Route::post('members/blocking/{id}',  [
+	'as' => 'members.blocking',
+	'uses' => 'MembersController@memberBlock',
+	'before' => 'manage_users'
+]);
 Route::get('/members/{id}/replies', [
 	'as' => 'members.replies',
 	'uses' => 'MembersController@replies'
@@ -151,4 +156,4 @@ App::missing(function($exception)
     return Response::view('theme::errors.404', array(), 404);
 });
 // 获取天气接口
-Route::get('api/weather', 'ApiController@weather');
+// Route::get('api/weather', 'ApiController@weather');

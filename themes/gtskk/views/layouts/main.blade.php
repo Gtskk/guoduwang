@@ -103,7 +103,7 @@
 			                  	</a>
 			              		</li>
 			                </ul>
-			                @elseif(Request::is('members/login') or Request::is('members/create'))
+			                @elseif(Request::is('members/*'))
 			                @else
 			                	@include('theme::members.login')
 			                @endif
