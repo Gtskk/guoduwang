@@ -15,9 +15,10 @@
 
 		<script>
             Config = {
-            	'login_url': '{{ route('login-required') }}',
                 'user_id': {{ isset($currentUser) ? $currentUser->id : 0 }},
                 'routes': {
+                	'topic_url': '{{ route('topics.index') }}',
+                	'login_url': '{{ route('login-required') }}',
                     'upload_image' : '{{ route('upload_image') }}'
                 },
                 'token': '{{ csrf_token() }}',

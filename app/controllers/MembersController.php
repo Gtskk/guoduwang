@@ -26,7 +26,10 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
      */
     public function create()
     {
-        $member = array_merge(Session::get('userGithubData'), Session::get('_old_input', []));
+        if(http_response_code() === 302)
+        {
+            $member = array_merge(Session::get('userGithubData'), Session::get('_old_input', []));
+        }
         return View::make(Config::get('confide::signup_form'), compact('member'));
     }
 
@@ -46,6 +49,8 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
         $user = $repo->signup($inputData);
 
         if ($user->id) {
+            $message = Lang::get('confide::confide.alerts.account_created');
+
             if (Config::get('confide::signup_email')) {
                 Mail::queueOn(
                     Config::get('confide::email_queue'),
@@ -57,10 +62,11 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
                             ->subject(Lang::get('confide::confide.email.account_confirmation.subject'));
                     }
                 );
+                $message .= Lang::get('confide::confide.alerts.not_confirmed');
             }
 
             return Redirect::action('MembersController@login')
-                ->with('notice', Lang::get('confide::confide.alerts.account_created'));
+                ->with('notice', $message);
         } else {
             $error = $user->errors()->all(':message');
 

@@ -130,5 +130,8 @@ return array (
     'Github Name' => 'Github Name',
     'Since' => 'Since',
     'Click to change avatar' => 'Click to change avatar',
-    'Github_login' => 'Github Login'
+    'Github_login' => 'Github Login',
+    'Can not attention your topic' => 'Can not attention your topic',
+    'Pin it on Top' => 'Pin it on Top',
+    'Sink This Topic' => 'Sink This Topic',
 );

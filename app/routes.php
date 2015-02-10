@@ -105,7 +105,7 @@ Route::resource('nodes', 'NodesController');
 
 /** Reply Routes */
 Route::resource('replies', 'RepliesController', ['only' => ['store']]);
-Route::post('replies/delete/{id}',  [
+Route::delete('replies/delete/{id}',  [
 	'as' => 'replies.destroy',
 	'uses' => 'RepliesController@destroy',
 	'before' => 'auth'

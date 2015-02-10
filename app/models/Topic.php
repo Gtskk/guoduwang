@@ -20,7 +20,7 @@ class Topic extends \Eloquent
         'body',
         'excerpt',
 		'body_original',
-		'user_id',
+		'member_id',
 		'node_id',
 		'created_at',
 		'updated_at'
@@ -143,7 +143,7 @@ class Topic extends \Eloquent
 
     public function scopeRecentReply($query)
     {
-        return $query->where('created_at', '>', Carbon::today()->subMonth())->orderBy('updated_at', 'desc');
+        return $query->where('created_at', '>', Carbon::today()->subMonths(6))->orderBy('updated_at', 'desc');
     }
 
     public function scopeExcellent($query)

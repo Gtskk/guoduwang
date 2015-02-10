@@ -128,5 +128,8 @@ return array(
     'Github Name' => 'Github用户名',
     'Since' => '自从',
     'Click to change avatar' => '点击修改头像',
-    'Github_login' => 'Github登录'
+    'Github_login' => 'Github登录',
+    'Can not attention your topic' => '不允许关注自己的文章',
+    'Pin it on Top' => '设为置顶主题',
+    'Sink This Topic' => '置底主题',
 );

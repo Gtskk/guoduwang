@@ -171,10 +171,14 @@
                         }
                         if (flag) {
                             $.post(current.attr('data-url'), {
-                                    _method: 'post',
+                                    _method: $method,
                                     _token: Config.token
                                 }, function(res){
                                     if(res.status === 'success'){
+                                        if(current.attr('id') === 'topic-delete-button')
+                                        {
+                                            location.href = Config.routes.topic_url;
+                                        }
                                         if($method === 'delete'){
                                             //发送请求前改变背景色
                                             $li.css("backgroundColor", "#FB6C6C");
@@ -184,11 +188,14 @@
                                                 //移除父级div
                                                 $li.remove();
                                             });
-                                        }else if(current.attr('id') === 'user-edit-button')
+                                        }
+                                        else if(current.attr('id') === 'user-edit-button' || current.hasClass('pinSink'))
+                                        // 用户禁用状态编辑或者文章置顶
                                         {
                                             location.reload();
-                                        }
-                                        else{
+                                        } 
+                                        else
+                                        {
                                             if(current.hasClass('vote')){
                                                 current.toggleClass('active');
                                                 var sib = current.siblings()[0];
@@ -208,7 +215,7 @@
                     }
                     else
                     {
-                        location.href = Config.login_url;
+                        location.href = Config.routes.login_url;
                     }
                     
                 });
@@ -415,7 +422,7 @@ function replyOne(username){
     }
 	else
     {
-        location.href = Config.login_url;
+        location.href = Config.routes.login_url;
     }
 }
 

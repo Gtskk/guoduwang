@@ -114,6 +114,9 @@ body {
   color: #fff;
   border: 1px solid #e7e7e7;
 }
+.pinSink.active{
+  color:#ce8a81;
+}
 
 
 /** Sidebar component CSS*/

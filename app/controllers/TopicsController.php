@@ -58,7 +58,7 @@ class TopicsController extends BaseController implements CreatorListener
 
         $topic->body = $topic->body_original;
 
-        return View::make('topics.create_edit', compact('topic', 'nodes', 'node'));
+        return View::make('theme::topics.create_edit', compact('topic', 'nodes', 'node'));
     }
 
     public function update($id)
@@ -74,7 +74,7 @@ class TopicsController extends BaseController implements CreatorListener
         $data['excerpt'] = Topic::makeExcerpt($data['body']);
 
         // Validation
-        App::make('Phphub\Forms\TopicCreationForm')->validate($data);
+        App::make('Gtskk\Forms\TopicCreationForm')->validate($data);
 
         $topic->update($data);
 
@@ -140,32 +140,29 @@ class TopicsController extends BaseController implements CreatorListener
         $topic = Topic::findOrFail($id);
         $topic->is_excellent = (!$topic->is_excellent);
         $topic->save();
-        Flash::success(lang('Operation succeeded.'));
-        Notification::notify('topic_mark_excellent', Confide::user(), $topic->user, $topic);
-        return Redirect::route('topics.show', $topic->id);
+        Notification::notify('topic_mark_excellent', Confide::user(), $topic->member, $topic);
+        die(json_encode(array('status'=>'success', 'message'=>'')));
     }
 
     public function pin($id)
     {
         $topic = Topic::findOrFail($id);
         ($topic->order > 0) ? $topic->decrement('order', 1) : $topic->increment('order', 1);
-        return Redirect::route('topics.show', $topic->id);
+        die(json_encode(array('status'=>'success', 'message'=>'')));
     }
 
     public function sink($id)
     {
         $topic = Topic::findOrFail($id);
         ($topic->order >= 0) ? $topic->decrement('order', 1) : $topic->increment('order', 1);
-        return Redirect::route('topics.show', $topic->id);
+        die(json_encode(array('status'=>'success', 'message'=>'')));
     }
 
     public function destroy($id)
     {
         $topic = Topic::findOrFail($id);
         $topic->delete();
-        Flash::success(lang('Operation succeeded.'));
-
-        return Redirect::route('topics.index');
+        die(json_encode(array('status'=>'success', 'message'=>'')));
     }
 
     public function uploadImage()

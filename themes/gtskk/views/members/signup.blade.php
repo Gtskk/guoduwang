@@ -28,8 +28,8 @@
                 </div>
                 @endif
                 <div class="form-group">
-                    <label for="github_name">{{{ Lang::get('confide::confide.username') }}}</label>
-                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="github_name" id="github_name" value="{{{ $member['username'] or Input::old('github_name') }}}">
+                    <label for="github_name">{{ lang('Github Name') }}</label>
+                    <input class="form-control" placeholder="{{ lang('Github Name') }}" type="text" name="github_name" id="github_name" value="{{{ $member['username'] or Input::old('github_name') }}}">
                 </div>
                 <div class="form-group">
                     <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
