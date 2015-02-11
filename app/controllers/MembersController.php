@@ -143,6 +143,51 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
         return Redirect::to((string) OAuth::consumer('GitHub')->getAuthorizationUri());
     }
 
+    public function ghostloginpage()
+    {
+        if(Session::has('ghostlogindata'))
+        {
+            Log::info(Session::get('ghostlogindata'));
+            return Redirect::to('/');
+        }
+            
+        return View::make('theme::members.ghostloginpage');
+    }
+
+
+    /**
+     * Ghost登陆方式
+     * @return Illuminate\Http\Redirect
+     */
+    public function ghostlogin()
+    {
+        if (Input::has('ghostlogin') && Input::has('ghostpassword'))
+        {
+            $ghostService = OAuth::consumer('Ghost');
+
+            $token = $ghostService->requestGhostAccessToken(Input::get('ghostlogin'), Input::get('ghostpassword'));
+            $result = json_decode($ghostService->request('/users/me/'), true);
+            $ghostuserdata = $this->formatData($result['users'][0]);
+            Session::put('ghostlogindata', $ghostuserdata);
+
+            return Redirect::intended('/');
+        }
+            
+        return Redirect::route('ghostloginpage');
+        
+    }
+
+    private function formatData($data)
+    {
+        return [
+            'id'         => $data['id'],
+            'username'   => $data['name'],
+            'email'      => $data['email'],
+            'ghost_id'  => $data['id'],
+            'image_url'  => $data['image'],
+        ];
+    }
+
     /**
      * ----------------------------------------
      * GithubAuthenticatorListener Delegate

@@ -33,6 +33,14 @@ Route::get('/members/githublogin', [
 	'as' => 'githublogin',
 	'uses' => 'MembersController@githublogin'
 ]);
+Route::post('/members/ghostlogin', [
+	'as' => 'ghostlogin',
+	'uses' => 'MembersController@ghostlogin'
+]);
+Route::get('/members/ghostloginpage', [
+	'as' => 'ghostloginpage',
+	'uses' => 'MembersController@ghostloginpage'
+]);
 Route::post('members/login', 'MembersController@doLogin');
 Route::get('members/confirm/{code}', 'MembersController@confirm');
 Route::get('members/forgot_password', array(
