@@ -27,17 +27,25 @@
                     </div>
                 </div>
                 @endif
+                @if (isset($member['github_name']))
                 <div class="form-group">
                     <label for="github_name">{{ lang('Github Name') }}</label>
-                    <input class="form-control" placeholder="{{ lang('Github Name') }}" type="text" name="github_name" id="github_name" value="{{{ $member['username'] or Input::old('github_name') }}}">
+                    <input class="form-control" placeholder="{{ lang('Github Name') }}" type="text" name="github_name" id="github_name" value="{{{ $member['github_name'] }}}" readonly='readonly' />
                 </div>
+                @endif
+                @if (isset($member['ghost_name']))
+                <div class="form-group">
+                    <label for="ghost_name">{{ lang('Ghost Name') }}</label>
+                    <input class="form-control" placeholder="{{ lang('Ghost Name') }}" type="text" name="ghost_name" id="ghost_name" value="{{{ $member['ghost_name'] }}}" readonly='readonly' />
+                </div>
+                @endif
                 <div class="form-group">
                     <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
                     <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ $member['username'] or Input::old('username') }}}">
                 </div>
                 <div class="form-group">
                     <label for="email">{{{ Lang::get('confide::confide.e_mail') }}} <!-- <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small> --></label>
-                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ $member['email'] or Input::old('email') }}}">
+                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ $member['email'] or Input::old('email') }}}" @if(isset($member['github_name']) or isset($member['ghost_name']))readonly='readonly' @endif>
                 </div>
                 <div class="form-group">
                     <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>

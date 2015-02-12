@@ -1,6 +1,6 @@
 <?php namespace Gtskk\Github;
 
-use Gtskk\Listeners\GithubAuthenticatorListener;
+use Gtskk\Listeners\LoginAuthenticatorListener;
 use Member;
 
 class GithubAuthenticator{
@@ -12,24 +12,24 @@ class GithubAuthenticator{
         $this->reader = $reader;
     }
 
-    public function authByCode(GithubAuthenticatorListener $listener, $code)
+    public function authByCode(LoginAuthenticatorListener $listener, $code)
     {
         $githubData = $this->reader->getDataFromCode($code);
         $user = $this->userModel->getByGithubId($githubData['id']);
 
         if ($user) {
-            return $this->loginUser($listener, $user, $githubData);
+            return $this->loginMember($listener, $user, $githubData);
         }
 
-        return $listener->userNotFound($githubData);
+        return $listener->userNotFound('githublogindata', $githubData);
     }
 
-    private function loginUser($listener, $user, $githubData)
+    private function loginMember($listener, $user, $githubData)
     {
         if ($user->is_banned) {
             return $listener->userIsBanned($user);
         }
 
-        return $listener->userFound($user);
+        return $listener->userFound('githublogindata', $user);
     }
 }

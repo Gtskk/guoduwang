@@ -24,6 +24,7 @@ class GithubUserDataReader
         return [
             'id'         => $data['id'],
             'username'   => $data['login'],
+            'github_name'   => $data['login'],
             'email'      => $data['email'],
             'github_id'  => $data['id'],
             'github_url' => $data['html_url'],

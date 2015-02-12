@@ -1,8 +1,8 @@
 <?php
 
-use Gtskk\Listeners\GithubAuthenticatorListener;
+use Gtskk\Listeners\LoginAuthenticatorListener;
 
-class MembersController extends BaseController implements GithubAuthenticatorListener
+class MembersController extends BaseController implements LoginAuthenticatorListener
 {
 
     public function index()
@@ -26,10 +26,17 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
      */
     public function create()
     {
-        if(http_response_code() === 302)
+        if(Session::has('ghostlogindata'))
         {
-            $member = array_merge(Session::get('userGithubData'), Session::get('_old_input', []));
+
+            Log::info(Session::get('ghostlogindata'));
+            $member = array_merge(Session::get('ghostlogindata'), Session::get('_old_input', []));
         }
+        else if(Session::has('githublogindata'))
+        {
+            $member = array_merge(Session::get('githublogindata'), Session::get('_old_input', []));
+        }
+
         return View::make(Config::get('confide::signup_form'), compact('member'));
     }
 
@@ -143,17 +150,20 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
         return Redirect::to((string) OAuth::consumer('GitHub')->getAuthorizationUri());
     }
 
+
+    /**
+     * Ghost登陆页面
+     * @return Illuminate\Http\Redirect
+     */
     public function ghostloginpage()
     {
         if(Session::has('ghostlogindata'))
         {
-            Log::info(Session::get('ghostlogindata'));
             return Redirect::to('/');
         }
             
         return View::make('theme::members.ghostloginpage');
     }
-
 
     /**
      * Ghost登陆方式
@@ -163,53 +173,34 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
     {
         if (Input::has('ghostlogin') && Input::has('ghostpassword'))
         {
-            $ghostService = OAuth::consumer('Ghost');
-
-            $token = $ghostService->requestGhostAccessToken(Input::get('ghostlogin'), Input::get('ghostpassword'));
-            $result = json_decode($ghostService->request('/users/me/'), true);
-            $ghostuserdata = $this->formatData($result['users'][0]);
-            Session::put('ghostlogindata', $ghostuserdata);
-
-            return Redirect::intended('/');
+            return App::make('Gtskk\Ghost\GhostAuthenticator')->authByCredentials($this, Input::get('ghostlogin'), Input::get('ghostpassword'));
         }
             
         return Redirect::route('ghostloginpage');
-        
-    }
-
-    private function formatData($data)
-    {
-        return [
-            'id'         => $data['id'],
-            'username'   => $data['name'],
-            'email'      => $data['email'],
-            'ghost_id'  => $data['id'],
-            'image_url'  => $data['image'],
-        ];
     }
 
     /**
      * ----------------------------------------
-     * GithubAuthenticatorListener Delegate
+     * LoginAuthenticatorListener Delegate
      * ----------------------------------------
      */
 
     // 数据库找不到用户, 执行新用户注册
-    public function userNotFound($githubData)
+    public function userNotFound($type, $loginData)
     {
-        Session::put('userGithubData', $githubData);
+        Session::put($type, $loginData);
         return Redirect::route('members.create');
     }
 
     // 数据库有用户信息, 登录用户
-    public function userFound($user)
+    public function userFound($type, $user)
     {
         Auth::login($user, true);
-        Session::forget('userGithubData');
+        Session::forget($type);
 
         Flash::success(lang('Operation succeeded.'));
 
-        return Redirect::intended();
+        return Redirect::intended('/');
     }
 
     // 用户被屏蔽
@@ -219,6 +210,12 @@ class MembersController extends BaseController implements GithubAuthenticatorLis
     }
 
 
+
+
+    /**
+     * 禁用用户
+     * @return View 禁用会员视图
+     */
     public function memberBanned()
     {
         if (Auth::check() && !Auth::user()->is_banned)

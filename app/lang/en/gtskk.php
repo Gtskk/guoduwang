@@ -128,6 +128,7 @@ return array (
     'Recomended Resources' => 'Recomended Resources',
     'permission_required' => 'Permission Required',
     'Github Name' => 'Github Name',
+    'Ghost Name' => 'Ghost Name',
     'Since' => 'Since',
     'Click to change avatar' => 'Click to change avatar',
     'Github_login' => 'Github Login',

@@ -70,6 +70,11 @@ class Member extends Eloquent implements ConfideUserInterface {
         return $this->where('github_id', '=', $githubid)->first();
     }
 
+    public function getByGhostId($ghostid)
+    {
+        return $this->where('ghost_id', '=', $ghostid)->first();
+    }
+
 
 
 	public function scopeRecent($query)

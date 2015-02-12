@@ -126,6 +126,7 @@ return array(
     'Recomended Resources' => '推荐资源',
     'permission_required' => '权限不允许',
     'Github Name' => 'Github用户名',
+    'Ghost Name' => 'Ghost用户名',
     'Since' => '自从',
     'Click to change avatar' => '点击修改头像',
     'Github_login' => 'Github登录',
