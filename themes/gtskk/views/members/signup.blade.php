@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label class="control-label" for="name">{{ lang('Avatar') }}</label>
                     <div style="text-align:center" class="form-group">
-                        <img src="{{ $member['image_url'] }}" />
+                        <img src="{{ $member['image_url'] }}" style="width: 200px;heigth:auto" />
                     </div>
                 </div>
                 @endif

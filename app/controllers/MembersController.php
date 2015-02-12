@@ -32,7 +32,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
             Log::info(Session::get('ghostlogindata'));
             $member = array_merge(Session::get('ghostlogindata'), Session::get('_old_input', []));
         }
-        else if(Session::has('githublogindata'))
+        if(Session::has('githublogindata'))
         {
             $member = array_merge(Session::get('githublogindata'), Session::get('_old_input', []));
         }
@@ -48,9 +48,13 @@ class MembersController extends BaseController implements LoginAuthenticatorList
     public function store()
     {
         $inputData = Input::all();
-        if(Session::has('userGithubData'))
+        if(Session::has('githublogindata'))
         {
-            $inputData = array_merge(Session::get('userGithubData'), $inputData);
+            $inputData = array_merge(Session::get('githublogindata'), $inputData);
+        }
+        if(Session::has('ghostlogindata'))
+        {
+            $inputData = array_merge(Session::get('ghostlogindata'), $inputData);
         }
         $repo = App::make('MemberRepository');
         $user = $repo->signup($inputData);
@@ -131,6 +135,19 @@ class MembersController extends BaseController implements LoginAuthenticatorList
         }
     }
 
+    /**
+     * 被禁用用户看到的视图
+     * @return View 禁用会员视图
+     */
+    public function memberBanned()
+    {
+        if (Auth::check() && !Auth::user()->is_banned)
+        {
+            return Redirect::to('/');
+        }
+        return View::make('members.memberbanned');
+    }
+
 
     /**
      * Github登陆方式
@@ -157,7 +174,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
      */
     public function ghostloginpage()
     {
-        if(Session::has('ghostlogindata'))
+        if(Confide::user())
         {
             return Redirect::to('/');
         }
@@ -209,22 +226,6 @@ class MembersController extends BaseController implements LoginAuthenticatorList
         return Redirect::route('member-banned');
     }
 
-
-
-
-    /**
-     * 禁用用户
-     * @return View 禁用会员视图
-     */
-    public function memberBanned()
-    {
-        if (Auth::check() && !Auth::user()->is_banned)
-        {
-            return Redirect::to('/');
-        }
-        return View::make('members.memberbanned');
-    }
-
     /**
      * Displays the login form
      *
@@ -234,9 +235,9 @@ class MembersController extends BaseController implements LoginAuthenticatorList
     {
         if (Confide::user()) {
             return Redirect::to('/');
-        } else {
-            return View::make('theme::members.login_require');
         }
+
+        return View::make('theme::members.login_require');
     }
 
     /**
@@ -293,19 +294,19 @@ class MembersController extends BaseController implements LoginAuthenticatorList
                 Session::put('url.intended', substr($intended, 0, $jaxPos));
             }
             return Redirect::intended('/');
-        } else {
-            if ($repo->isThrottled($input)) {
-                $err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
-            } elseif ($repo->existsButNotConfirmed($input)) {
-                $err_msg = Lang::get('confide::confide.alerts.not_confirmed');
-            } else {
-                $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
-            }
-            Log::info($err_msg);
-            return Redirect::action('MembersController@login')
-                ->withInput(Input::except('password'))
-                ->with('error', $err_msg);
         }
+
+        if ($repo->isThrottled($input)) {
+            $err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
+        } elseif ($repo->existsButNotConfirmed($input)) {
+            $err_msg = Lang::get('confide::confide.alerts.not_confirmed');
+        } else {
+            $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
+        }
+        Log::info($err_msg);
+        return Redirect::action('MembersController@login')
+            ->withInput(Input::except('password'))
+            ->with('error', $err_msg);
     }
 
     /**
@@ -321,11 +322,11 @@ class MembersController extends BaseController implements LoginAuthenticatorList
             $notice_msg = Lang::get('confide::confide.alerts.confirmation');
             return Redirect::action('MembersController@login')
                 ->with('notice', $notice_msg);
-        } else {
-            $error_msg = Lang::get('confide::confide.alerts.wrong_confirmation');
-            return Redirect::action('MembersController@login')
-                ->with('error', $error_msg);
         }
+
+        $error_msg = Lang::get('confide::confide.alerts.wrong_confirmation');
+        return Redirect::action('MembersController@login')
+            ->with('error', $error_msg);
     }
 
     /**
@@ -349,12 +350,12 @@ class MembersController extends BaseController implements LoginAuthenticatorList
             $notice_msg = Lang::get('confide::confide.alerts.password_forgot');
             return Redirect::action('MembersController@login')
                 ->with('notice', $notice_msg);
-        } else {
-            $error_msg = Lang::get('confide::confide.alerts.wrong_password_forgot');
-            return Redirect::action('MembersController@forgotPassword')
-                ->withInput()
-                ->with('error', $error_msg);
         }
+
+        $error_msg = Lang::get('confide::confide.alerts.wrong_password_forgot');
+        return Redirect::action('MembersController@forgotPassword')
+            ->withInput()
+            ->with('error', $error_msg);
     }
 
     /**
@@ -389,12 +390,12 @@ class MembersController extends BaseController implements LoginAuthenticatorList
             $notice_msg = Lang::get('confide::confide.alerts.password_reset');
             return Redirect::action('MembersController@login')
                 ->with('notice', $notice_msg);
-        } else {
-            $error_msg = Lang::get('confide::confide.alerts.wrong_password_reset');
-            return Redirect::action('MembersController@resetPassword', array('token'=>$input['token']))
-                ->withInput()
-                ->with('error', $error_msg);
         }
+
+        $error_msg = Lang::get('confide::confide.alerts.wrong_password_reset');
+        return Redirect::action('MembersController@resetPassword', array('token'=>$input['token']))
+            ->withInput()
+            ->with('error', $error_msg);
     }
 
     /**
