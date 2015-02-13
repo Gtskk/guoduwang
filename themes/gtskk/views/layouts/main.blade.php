@@ -19,7 +19,8 @@
                 'routes': {
                 	'topic_url': '{{ route('topics.index') }}',
                 	'login_url': '{{ route('login-required') }}',
-                    'upload_image' : '{{ route('upload_image') }}'
+                    'upload_image' : '{{ route('upload_image') }}',
+                    'notificationsCount': '{{ route('notificationsCount') }}'
                 },
                 'token': '{{ csrf_token() }}',
             };

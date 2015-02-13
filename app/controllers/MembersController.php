@@ -409,4 +409,5 @@ class MembersController extends BaseController implements LoginAuthenticatorList
 
         return Redirect::to('/');
     }
+
 }

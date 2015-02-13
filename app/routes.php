@@ -73,6 +73,13 @@ Route::get('/members/{id}/favorites', [
 	'as' => 'members.favorites',
 	'uses' => 'MembersController@favorites'
 ]);
+Route::get('/notifications/count', array(
+	'as' => 'notificationsCount',
+	'uses' => 'NotificationsController@notificationsCount'
+));
+
+
+
 Route::post('upload_image', [
     'as' => 'upload_image',
     'uses' => 'TopicsController@uploadImage',

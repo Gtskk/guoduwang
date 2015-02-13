@@ -138,3 +138,11 @@ body {
 .hide{
   display: none;
 }
+
+/** 通知样式 */
+.badge-fade{
+  background-color: #ebe8eb;
+}
+.badge-important{
+  background-color: #d15b47 !important;
+}
