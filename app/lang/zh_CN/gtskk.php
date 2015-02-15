@@ -133,4 +133,5 @@ return array(
     'Can not attention your topic' => '不允许关注自己的文章',
     'Pin it on Top' => '设为置顶主题',
     'Sink This Topic' => '置底主题',
+    'profile' => '个人简介',
 );
