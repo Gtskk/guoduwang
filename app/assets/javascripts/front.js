@@ -406,6 +406,8 @@
                 $(this).find('span').toggleClass('hide');
             });
             Dropzone.autoDiscover = false;
+            var up = document.getElementById('avatarUpload');
+            if(!up || up.dropzone) return;
             $('#avatarUpload').dropzone({
                 paramName: "file",
                 maxFilesize: 1,
