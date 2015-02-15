@@ -10,7 +10,10 @@
 	<div class="main-col col-md-9 left-col">
 
 		@if ($member->introduction)
-			<div class="box text-center">{{{ $member->introduction }}}</div>
+			<div class="box text-center">
+				<span class="pull-left">{{ lang('profile') }}</span>
+				<p class="pull-right">{{{ $member->introduction }}}</p>
+			</div>
 		@endif
 
 		@if ($member->is_banned)
@@ -19,8 +22,9 @@
 
 		<div class="panel panel-default">
 			@include('theme::members.partials.infonav', ['current' => 'basicinfo'])
-
-			<!-- <iframe src="https://dn-phphub.qbox.me/github-card.html?user=Gtskk&client_id=11c9bc2d6969d7e17f10&client_secret=eab1c76e1fd3c32623c5c22c57a7b2b5e771f279&target=blank" frameborder="0" scrolling="0" width="100%" height="146px" allowtransparency></iframe> -->
+			@if($member->github_name)
+			<iframe src="https://dn-phphub.qbox.me/github-card.html?user={{ $member->github_name }}&client_id={{ getenv('client_id') }}&client_secret={{ getenv('client_secret') }}&target=blank" frameborder="0" scrolling="0" width="100%" height="146px" allowtransparency></iframe>
+			@endif
 		</div>
 
 		<div class="panel panel-default">

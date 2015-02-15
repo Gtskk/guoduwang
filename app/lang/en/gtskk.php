@@ -135,4 +135,5 @@ return array (
     'Can not attention your topic' => 'Can not attention your topic',
     'Pin it on Top' => 'Pin it on Top',
     'Sink This Topic' => 'Sink This Topic',
+    'profile' => 'Personal Profile',
 );
