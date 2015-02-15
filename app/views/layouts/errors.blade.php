@@ -1,17 +1,10 @@
-<div class="row">
-	<div class="nine columns">
-		@if($errors->any())
-			<div class="alert-box alert">
-				@foreach($errors->all() as $e)
-					<li>{{ $e }}</li>
-				@endforeach
-				<a href="" class="close">&times;</a>
-			</div>
-		@endif
-		@if(!empty($error))
-			<div class="alert-box alert">
-				<li>{{ $error }}</li>
-			</div>
-		@endif
-	</div>
-</div>
+@if( $errors->any())
+    <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

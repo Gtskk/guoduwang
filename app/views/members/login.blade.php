@@ -16,11 +16,11 @@
     </div>
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
     <button type="submit" tabindex="0" id="loginBtn" class="btn btn-success"@if(Session::has('error')) data-placement="bottom" data-title="{{ trans('common.error') }}" data-toggle="popover" data-trigger="manual" data-content="{{ Session::get('error') }}"@endif>{{ trans('common.sign_in') }}</button>
+    <a title="{{ lang('Github_login') }}" href="{{ route('githublogin') }}" class="btn btn-success"><i class="fa fa-github-alt"></i></a>
 </form>
 
 @section('javascript')
 
-@parent
 @if(Session::has('error'))
 <script type="text/javascript">
     $('#loginBtn').popover('show');

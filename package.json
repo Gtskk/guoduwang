@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "过渡网",
   "main": "Gulpfile.js",
-  "dependencies": {
-    "gulp": "^3.8.10"
-  },
   "devDependencies": {
     "del": "^1.1.1",
     "gulp": "^3.8.11",
