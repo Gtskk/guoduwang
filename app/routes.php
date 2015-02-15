@@ -76,6 +76,7 @@ Route::get('/members/{id}/favorites', [
 
 /****   Notifications Routes **/
 Route::get('/notifications/count', [
+	'before' => 'auth',
 	'as' => 'notificationsCount',
 	'uses' => 'NotificationsController@notificationsCount'
 ]);
