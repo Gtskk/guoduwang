@@ -13,7 +13,6 @@
             });
             self.siteBootUp();
             self.initLightBox();
-            self.initNotificationsCount();
         },
 
         /*
@@ -36,6 +35,7 @@
             self.search();
             if(Config.user_id !== 0)
                 self.avatarUpload();
+            self.initNotificationsCount();
         },
 
         /**
@@ -163,6 +163,7 @@
                         }
                     });
                 }
+                scheduleGetNotification();
                 setInterval(scheduleGetNotification, 15000);
             }
         },

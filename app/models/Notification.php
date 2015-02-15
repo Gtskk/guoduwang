@@ -5,7 +5,7 @@ use Laracasts\Presenter\PresentableTrait;
 class Notification extends \Eloquent
 {
     use PresentableTrait;
-    public $presenter = 'Gtskk\Presenters\NotificationPresenter';
+    public $presenter = 'Gtskk\Presenters\MemberPresenter';
 
 	// Don't forget to fill this array
 	protected $fillable = [

@@ -47,7 +47,7 @@ class Member extends Eloquent implements ConfideUserInterface {
 
     public function notifications()
     {
-        return $this->hasMany('Notification')->recent()->with('topic', 'fromMember')->paginate(20);
+        return $this->hasMany('Notification')->recent()->with('topic', 'fromMember');
     }
 
     public function attentions()

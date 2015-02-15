@@ -30,7 +30,7 @@
 				<li><a href="#recent_topics" role="tab" data-toggle="tab">{{ lang('Recent Topics') }}</a></li>
 			</ul>
 
-			<div class="panel-body remove-padding-vertically remove-padding-horizontal">
+			<div class="panel-body">
 				<!-- Tab panes -->
 				<div class="tab-content">
 

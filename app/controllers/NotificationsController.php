@@ -13,73 +13,37 @@ class NotificationsController extends \BaseController {
 
 
 	/**
-	 * 查看所有通知
+	 * 查看当前登录用户所有通知
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		//
+		Auth::user()->notification_count = 0;
+		Auth::user()->save();
+
+		$perpage = 10;
+		$new_reply_not = Auth::user()->notifications()->withType('new_reply')->paginate($perpage);
+		$reply_upvote_not = Auth::user()->notifications()->withType('reply_upvote')->paginate($perpage);
+		$topic_upvote_not = Auth::user()->notifications()->withType('topic_upvote')->paginate($perpage);
+		$topic_mark_excellent_not = Auth::user()->notifications()->withType('topic_mark_excellent')->paginate($perpage);
+
+		return View::make('theme::notifications.index', compact('new_reply_not', 'reply_upvote_not', 'topic_upvote_not', 'topic_mark_excellent_not'));
 	}
 
-
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified notification from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-		//
+		if(Request::ajax())
+		{
+			Notification::destroy($id);
+			die(json_encode(array('status'=>'success', 'message'=>'')));
+		}
 	}
-
 
 }

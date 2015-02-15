@@ -73,10 +73,21 @@ Route::get('/members/{id}/favorites', [
 	'as' => 'members.favorites',
 	'uses' => 'MembersController@favorites'
 ]);
-Route::get('/notifications/count', array(
+
+/****   Notifications Routes **/
+Route::get('/notifications/count', [
 	'as' => 'notificationsCount',
 	'uses' => 'NotificationsController@notificationsCount'
-));
+]);
+Route::get('/notifications', [
+	'as' => 'notifications.index',
+	'uses' => 'NotificationsController@index'
+]);
+
+Route::delete('/notifications/{id}', [
+	'as' => 'notifications.destroy',
+	'uses' => 'NotificationsController@destroy'
+]);
 
 
 

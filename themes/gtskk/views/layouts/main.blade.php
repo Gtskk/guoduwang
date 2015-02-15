@@ -90,7 +90,7 @@
 			                @if(Auth::check())
 			                <ul class="nav navbar-nav">
 			                    <li>
-			                  	<a href="https://phphub.org/notifications" class="text-warning">
+			                  	<a href="{{ route('notifications.index') }}" class="text-warning">
 			                      	<span class="badge badge-fade" id="notification-count">0</span>
 			                  	</a>
 			              		</li>
