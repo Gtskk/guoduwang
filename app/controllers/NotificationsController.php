@@ -8,7 +8,7 @@ class NotificationsController extends \BaseController {
      */
     public function notificationsCount()
     {
-        die(json_encode(Confide::user()->notification_count));
+        die(json_encode(Auth::user()->notification_count));
     }
 
 
