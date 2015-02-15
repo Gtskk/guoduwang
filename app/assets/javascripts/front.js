@@ -13,6 +13,7 @@
             });
             self.siteBootUp();
             self.initLightBox();
+            self.initNotificationsCount();
         },
 
         /*
@@ -35,7 +36,6 @@
             self.search();
             if(Config.user_id !== 0)
                 self.avatarUpload();
-            self.initNotificationsCount();
         },
 
         /**
@@ -146,7 +146,7 @@
             {
                 function scheduleGetNotification()
                 {
-                    $.get(Config.routes.notificationsCount, function(data){
+                    $.post(Config.routes.notificationsCount, function(data){
                         var nCount = parseInt(data);
                         if(nCount > 0)
                         {
