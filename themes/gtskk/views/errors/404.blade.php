@@ -1,9 +1,5 @@
 @extends('theme::layouts.main')
 
-@section('styles')
-<meta http-equiv="refresh" content="5;url=/">
-@stop
-
 @section('content404')
 <!--con-->
 <div id="wrapper">
