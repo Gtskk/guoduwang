@@ -10,4 +10,3 @@ Thumbs.db
 .env.*
 /node_modules
 asset_manifest.json
-/public/assets
