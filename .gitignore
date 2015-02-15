@@ -7,7 +7,7 @@ composer.phar
 composer.lock
 .DS_Store
 Thumbs.db
-.env.local.php
+.env.*
 /node_modules
 asset_manifest.json
 /public/assets
