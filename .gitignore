@@ -11,4 +11,4 @@ Thumbs.db
 /node_modules
 asset_manifest.json
 /public/assets/js/scripts-*.js
-/public/assets/js/styles-*.css
+/public/assets/css/styles-*.css
