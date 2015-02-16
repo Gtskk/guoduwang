@@ -136,7 +136,7 @@
 		    </div>
 		</div>
 		
-		<script src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
 		@yield('javascript')
 
 	</body>

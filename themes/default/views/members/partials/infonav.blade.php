@@ -1,7 +1,9 @@
 <ul class="nav nav-tabs user-info-nav" role="tablist">
+	@if($member->github_name)
 	<li class="{{ $member->present()->userinfoNavActive('members.show') }}">
 		<a href="{{ route('members.show', $member->id) }}" >{{ lang('Basic Info') }}</a>
 	</li>
+	@endif
 	<li class="{{ $member->present()->userinfoNavActive('members.replies') }}">
 		<a href="{{ route('members.replies', $member->id) }}" >{{ lang('Replies') }}</a>
 	</li>
