@@ -146,7 +146,7 @@
             {
                 function scheduleGetNotification()
                 {
-                    $.post(Config.routes.notificationsCount, function(data){
+                    $.get(Config.routes.notificationsCount, function(data){
                         var nCount = parseInt(data);
                         if(nCount > 0)
                         {
@@ -161,10 +161,10 @@
                             $('#notification-count').addClass('badge-fade');
                             $('#notification-count').removeClass('badge-important');
                         }
-                        setTimeout(scheduleGetNotification, 15000);
                     });
                 }
-                setTimeout(scheduleGetNotification, 15000);
+                scheduleGetNotification();
+                setInterval(scheduleGetNotification, 15000);
             }
         },
 
