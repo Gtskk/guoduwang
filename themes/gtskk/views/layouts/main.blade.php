@@ -35,10 +35,10 @@
 	<body>
 
 		<div id="wrap">
-		    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		    <nav class="navbar navbar-inverse navbar-fixed-top">
 		        <div class="container">
 		            <div class="navbar-header">
-		                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		                <button type="button" class="navbar-toggle" data-target="#navbar">
 		                    <span class="sr-only">Toggle navigation</span>
 		                    <span class="icon-bar"></span>
 		                    <span class="icon-bar"></span>
@@ -47,7 +47,7 @@
 		                <a class="navbar-brand" href="{{ URL::to('/') }}">{{ Config::get('site.site_config.site_name') }}</a>
 		            </div>
 
-		            <div id="navbar" class="navbar-collapse collapse">
+		            <div id="navbar" class="collapse navbar-collapse">
 		                <ul class="nav navbar-nav">
 		                    <?php $num = count(Config::get('site.main_menu'));?>
 		                    @foreach (Config::get('site.main_menu') as $title => $args)
@@ -83,12 +83,12 @@
 						
 						<div class="navbar-right">
 			                <!-- 搜索 -->
-			                <form class="navbar-form navbar-left" action="{{ URL::to('search') }}" accetp-charset="UTF-8">
+			                <form class="navbar-form navbar-left" action="{{ URL::to('search') }}" accetp-charset="UTF-8" role="search">
 					            <input id="searchkey" type="text" class="form-control" placeholder="搜索" name="q">
 					        </form>
 
 			                @if(Auth::check())
-			                <ul class="nav navbar-nav">
+			                <ul class="nav navbar-nav navbar-right">
 			                    <li>
 			                  	<a href="{{ route('notifications.index') }}" class="text-warning">
 			                      	<span class="badge badge-fade" id="notification-count">0</span>

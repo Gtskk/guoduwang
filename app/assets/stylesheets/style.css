@@ -1,18 +1,18 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 html, body{
-  height: 100%;
+	height: 100%;
 }
 body {
-  padding-top: 50px;
-  padding-bottom: 20px;
-  background-color: #ccc;
+	padding-top: 50px;
+	padding-bottom: 20px;
+	background-color: #ccc;
 }
 
 #wrap{
-  min-height: 100%;
-  height: auto;
-  margin: 20px auto -80px;
-  padding: 0 0 80px;
+	min-height: 100%;
+	height: auto;
+	margin: 20px auto -80px;
+	padding: 0 0 80px;
 }
 
 .navbar-inverse .nav>li>a.current{
@@ -26,128 +26,143 @@ body {
 
 /* ScrollUp Style */
 #scrollUp {
-    background-image: url("../img/returntop.png");
-    bottom: 20px;
-    right: 20px;
-    width: 50px;    /* Width of image */
-    height: 66px;   /* Height of image */
+		background-image: url("../img/returntop.png");
+		bottom: 20px;
+		right: 20px;
+		width: 50px;    /* Width of image */
+		height: 66px;   /* Height of image */
 }
 
 .box{
-  background-color: #fff;
-  padding: 10px;
-  margin: 0 0 20px;
-  border-radius: 3px;
-  box-shadow: 0 .2em 0 0 #ddd,0 0 0 1px #ddd;
+	background-color: #fff;
+	padding: 10px;
+	margin: 0 0 20px;
+	border-radius: 3px;
+	box-shadow: 0 .2em 0 0 #ddd,0 0 0 1px #ddd;
 }
 .users-show .avatar{
-  text-align: center;
+	text-align: center;
 }
 .users-show .avatar a{
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 .users-show .avatar a span{
-  position: absolute;
-  bottom: 16px;
-  left: 0;
-  margin: 0 5px;
-  width: 96%;
-  background-color: #000;
-  color: #fff;
-  height: 25px;
-  line-height: 25px;
-  border-radius: 0 0 4px 4px;
+	position: absolute;
+	bottom: 16px;
+	left: 0;
+	margin: 0 5px;
+	width: 96%;
+	background-color: #000;
+	color: #fff;
+	height: 25px;
+	line-height: 25px;
+	border-radius: 0 0 4px 4px;
 }
 .users-show .dl-horizontal dt{
-  width: 50px;
-  white-space: 50px;
-  font-weight: 400;
-  color: #999;
-  float: left;
+	width: 50px;
+	white-space: 50px;
+	font-weight: 400;
+	color: #999;
+	float: left;
 }
 .users-show .dl-horizontal dd{
-  margin-left: 58px;
+	margin-left: 58px;
 }
 .users-show dl dd,.user-show dl dt{
-  font-size: 13px;
-  line-height: 150%;
-  border-bottom: 1px dashed #eee;
+	font-size: 13px;
+	line-height: 150%;
+	border-bottom: 1px dashed #eee;
 }
 
 /** 登录所需页面样式 */
 .login_require{
-  width: 360px;
-  margin: 20px auto 0 auto;
+	width: 360px;
+	margin: 20px auto 0 auto;
 }
 .login_require .panel-heading{
-  background-color: #3d9970;
-  box-shadow: inset 0px -3px 0px rgba(0,0,0,0.2);
-  padding: 20px 10px;
-  text-align: center;
-  font-size: 26px;
-  font-weight: 300;
-  color: #fff;
+	background-color: #3d9970;
+	box-shadow: inset 0px -3px 0px rgba(0,0,0,0.2);
+	padding: 20px 10px;
+	text-align: center;
+	font-size: 26px;
+	font-weight: 300;
+	color: #fff;
 }
 .login_require .panel-body{
-  padding: 0;
+	padding: 0;
 }
 .login_require .body, .login_require .footer{
-  padding: 10px 20px;
-  background-color: #fff;
-  color: #444;
+	padding: 10px 20px;
+	background-color: #fff;
+	color: #444;
 }
 .login_require .bg-gray{
-  background-color: #eaeaec !important;
+	background-color: #eaeaec !important;
 }
 .login_require .btn.btn-block{
-  font-size: 15px;
-  padding: 10px;
-  color: #fff;
-  margin-bottom: 10px;
+	font-size: 15px;
+	padding: 10px;
+	color: #fff;
+	margin-bottom: 10px;
 }
 .login_require .bg-olive{
-  background-color: #3d9970 !important;
+	background-color: #3d9970 !important;
 }
 .vote.active{
-  background-color: #698ebf;
-  color: #fff;
-  border: 1px solid #e7e7e7;
+	background-color: #698ebf;
+	color: #fff;
+	border: 1px solid #e7e7e7;
 }
 .pinSink.active{
-  color:#ce8a81;
+	color:#ce8a81;
 }
-
-
-/** Sidebar component CSS*/
 
 .dl-horizontal dt{
-  text-align: center;
-  float: none;
-  width: auto;
+	text-align: center;
+	float: none;
+	width: auto;
 }
 .dl-horizontal dd{
-  margin-left: 0px;
+	margin-left: 0px;
 }
 
 .topiclist.panel-default>.panel-heading {
-  background-color: #fff;
+	background-color: #fff;
 }
 
 
 .hide{
-  display: none;
+	display: none;
 }
 
 /** 通知样式 */
 .badge-fade{
-  background-color: #ebe8eb;
+	background-color: #ebe8eb;
 }
 .badge-important{
-  background-color: #d15b47 !important;
+	background-color: #d15b47 !important;
 }
 .notificationsList .list-group-item:first-child{
-  border-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+	border-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+
+.member_lists .col-md-1{
+	float: left;
+}
+
+
+/* 话题详情页样式 */
+.ribbon{
+	margin-top: 20px;
+}
+.ribbon .ribbon-excellent{
+	background-color: #fffce9;
+	border-top: 1px solid #fff3e6;
+	border-bottom: 1px solid #fff3e6;
+	padding: 4px 15px;
+	color: #da974d;
 }

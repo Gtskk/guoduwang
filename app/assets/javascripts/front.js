@@ -17,8 +17,8 @@
         },
 
         /*
-        * Things to be execute when normal page load
-        * and pjax page load.
+        * 正常页面加载和pjax加载
+        * 后所执行的
         */
         siteBootUp: function(){
             var self = this;
@@ -32,6 +32,7 @@
             self.initReplyOnPressKey();
             self.initDeleteForm();
             self.initInlineAttach();
+            self.fixNavbarConflict();
             // self.snowing();
             self.search();
             if(Config.user_id !== 0)
@@ -39,7 +40,21 @@
         },
 
         /**
-         * Open External Links In New Window
+         *  修复pjax和collapse的冲突
+         *  （必须设置 data-toggle="false"）
+         */
+        fixNavbarConflict: function(){
+            $('.navbar-toggle').click(function(){
+                if($('#navbar').hasClass('in')){
+                    $('.collapse').collapse('hide');
+                }else{
+                    $('.collapse').collapse('show');
+                }
+            });
+        },
+
+        /**
+         * 在新窗口打开外部链接
          */
         initExternalLink: function(){
             $('a[href^="http://"], a[href^="https://"]').each(function() {

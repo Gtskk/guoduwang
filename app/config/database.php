@@ -54,8 +54,8 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '192.168.3.5',
-			'database'  => 'cf_0ad758d4_9001_4500_8823_3be29e90d2be',
+			'host'      => $_ENV['DATABASE_HOST'],
+			'database'  => $_ENV['DATABASE'],
 			'username'  => $_ENV['DATABASE_USER'],
 			'password'  => $_ENV['DATABASE_PASS'],
 			'charset'   => 'utf8',
