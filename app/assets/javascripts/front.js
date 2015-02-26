@@ -37,6 +37,9 @@
             self.search();
             if(Config.user_id !== 0)
                 self.avatarUpload();
+
+            // 百度分享
+            window._bd_share_main.init();
         },
 
         /**

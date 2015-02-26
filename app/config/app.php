@@ -124,7 +124,8 @@ return array(
 		'Mews\Purifier\PurifierServiceProvider',
 		'Turbo\Provider\Laravel\TurboServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
-		'Artdarek\OAuth\OAuthServiceProvider'
+		'Artdarek\OAuth\OAuthServiceProvider',
+		'Thujohn\Rss\RssServiceProvider',
 
 	),
 
@@ -202,7 +203,8 @@ return array(
         'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
         'Markdown'        => 'Gtskk\Markdown\Markdown',
         'Flash' 		  => 'Laracasts\Flash\Flash',
-        'OAuth' 		  => 'Artdarek\OAuth\Facade\OAuth'
+        'OAuth' 		  => 'Artdarek\OAuth\Facade\OAuth',
+        'Rss' 			  => 'Thujohn\Rss\RssFacade',
 
 	),
 
