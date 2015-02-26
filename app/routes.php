@@ -109,8 +109,9 @@ Route::post('/favorites/{id}', [
 	'before' => 'auth'
 ]);
 Route::resource('topics', 'TopicsController');
-# ------------------ Topic Votes ------------------------
 
+
+# ------------------ Topic Votes ------------------------
 Route::group(['before' => 'auth'], function(){
 	Route::post('/topics/{id}/upvote', [
 		'as' => 'topics.upvote',
@@ -127,6 +128,10 @@ Route::group(['before' => 'auth'], function(){
 		'uses' => 'RepliesController@vote',
 	]);
 });
+Route::get('feed', array(
+	'as' => 'feed',
+	'uses' => 'PagesController@feed'
+));
 
 Route::resource('nodes', 'NodesController');
 
