@@ -94,7 +94,7 @@ function cutStr($string,$start,$length,$encoding='utf-8') {
 
 function get_css_js_file($part)
 {
-    $filename = "../asset_manifest.json";
+    $filename = __DIR__."/../asset_manifest.json";
     $json_string = file_get_contents($filename);
     $obj=json_decode($json_string,true);
 

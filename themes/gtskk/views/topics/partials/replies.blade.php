@@ -13,7 +13,7 @@
 
 			<div class="media-heading meta">
 
-				<a href="{{ route('members.show', [$reply->user_id]) }}" title="{{{ $reply->member->username }}}" class="remove-padding-left author">
+				<a href="{{ route('members.show', [$reply->member_id]) }}" title="{{{ $reply->member->username }}}" class="remove-padding-left author">
 						{{{ $reply->member->username }}}
 				</a>
 				<span> •  </span>
