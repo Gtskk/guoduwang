@@ -48,6 +48,7 @@ class Notification extends \Eloquent
 
 		foreach ($members as $toMember)
 		{
+            // 对自己的主题进行操作不通知
 			if ($fromMember->id == $toMember->id)
 				continue;
 

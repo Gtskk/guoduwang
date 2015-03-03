@@ -27,9 +27,9 @@ class Mention
 	{
 		$this->body_parsed = $this->body_original;
 
-		foreach ($this->members as $user) {
-			$search = '@' . $user->name;
-			$place = '['.$search.']('.route('members.show', $user->id).')';
+		foreach ($this->members as $member) {
+			$search = '@' . $member->username;
+			$place = '['.$search.']('.route('members.show', $member->id).')';
 			$this->body_parsed = str_replace($search, $place, $this->body_parsed);
 		}
 	}
@@ -39,7 +39,7 @@ class Mention
 		$this->body_original = $body;
 
 		$this->membernames = $this->getMentionedMembername();
-		count($this->membernames) > 0 && $this->members = Member::whereIn('name', $this->membernames)->get();
+		count($this->membernames) > 0 && $this->members = Member::whereIn('username', $this->membernames)->get();
 			
 		$this->replace();
 		return $this->body_parsed;

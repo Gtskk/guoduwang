@@ -78,7 +78,7 @@ var emojies = [
   'jack_o_lantern', 'japan', 'japanese_castle', 'japanese_goblin',
   'japanese_ogre', 'jeans', 'joy', 'joy_cat', 'jp', 'key', 'keycap_ten',
   'kimono', 'kiss', 'kissing', 'kissing_cat', 'kissing_closed_eyes',
-  'kissing_heart', 'kissing_smiling_eyes', 'koala', 'koko', 'kr', 'lantern',
+  'kissing_heart', 'kissing_smiling_eyes', 'koala', 'koko', 'kr',
   'large_blue_circle', 'large_blue_diamond', 'large_orange_diamond',
   'last_quarter_moon', 'last_quarter_moon_with_face', 'laughing', 'leaves',
   'ledger', 'left_luggage', 'left_right_arrow', 'leftwards_arrow_with_hook',
