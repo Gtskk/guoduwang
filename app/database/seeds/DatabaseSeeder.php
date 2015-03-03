@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder {
     protected $seeders = [
     	'MemberTableSeeder',
         'TopicsTableSeeder',
-        'RepliesTableSeeder'
+        'RepliesTableSeeder',
+        'FrontRolesTableSeeder'
     ];
 
 	/**

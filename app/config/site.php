@@ -19,6 +19,15 @@ return array(
     // 网站主题
     'theme' => 'gtskk',
 
+    /****************************  推荐资源 *********************/
+    'recommend_resources' => array(
+    	array('name'=>'Laravel 中文文档', 'url'=>'http://www.golaravel.com/'),
+    	array('name'=>'PHP The Right Way 中文版', 'url'=>'http://wulijun.github.io/php-the-right-way/'),
+    	array('name'=>'Culttt', 'url'=>'http://culttt.com/'),
+    	array('name'=>'Sitepoint 技术网站', 'url'=>'http://www.sitepoint.com/'),
+    ),
+
+    /**************************** 天气有关  ********************/
     // 天气API地址
     'weather_url' => 'http://m.weather.com.cn/data',
     // 天气城市代码对应
@@ -470,6 +479,6 @@ return array(
 			'盘锦'=>'101071301',
 			'大连'=>'101070201',
 			'锦州'=>'101070701'
-		),
+	),
 
 );

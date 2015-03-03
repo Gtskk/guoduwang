@@ -21,9 +21,9 @@ class MemberTableSeeder extends Seeder {
 		    $member->confirmation_code = md5(uniqid(mt_rand(), true));
 
 		    if(! $member->save()) {
-		      Log::error('Unable to create member '.$member->username, (array)$member->errors());
+		      	Log::error('Unable to create member '.$member->username, (array)$member->errors());
 		    } else {
-		      Log::info('Created member "'.$member->username.'" <'.$member->email.'>');
+		      	Log::info('Created member "'.$member->username.'" <'.$member->email.'>');
 		    }
 		}
 	}
