@@ -24,6 +24,8 @@
             var self = this;
             self.initExternalLink();
             self.initTimeAgo();
+            self.initEmoji();
+            self.initAutocompleteAtUser();
             self.initScrollToTop();
             self.initTextareaAutoResize();
             self.initHeightLight();
@@ -39,7 +41,8 @@
                 self.avatarUpload();
 
             // 百度分享
-            window._bd_share_main.init();
+            if(window._bd_share_main)
+                window._bd_share_main.init();
         },
 
         /**
@@ -85,6 +88,74 @@
                     $(this).text(moment(time_str).fromNow());
                 }
             });
+        },
+
+        /**
+         * Enable emoji everywhere.
+         */
+        initEmoji: function(){
+            emojify.setConfig({
+                img_dir : Config.routes.site_url + '/assets/img/emoji',
+                ignored_tags : {
+                    'SCRIPT'  : 1,
+                    'TEXTAREA': 1,
+                    'A'       : 1,
+                    'PRE'     : 1,
+                    'CODE'    : 1
+                }
+            });
+            emojify.run();
+
+            $('#reply_content').textcomplete([
+                { // emoji strategy
+                    match: /\B:([\-+\w]*)$/,
+                    search: function (term, callback) {
+                        callback($.map(emojies, function (emoji) {
+                            return emoji.indexOf(term) === 0 ? emoji : null;
+                        }));
+                    },
+                    template: function (value) {
+                        return '<img class="emoji" src="' + Config.routes.site_url + '/assets/img/emoji/' + value + '.png"></img>' + value;
+                    },
+                    replace: function (value) {
+                        return ':' + value + ': ';
+                    },
+                    index: 1,
+                    maxCount: 5
+                }
+            ]);
+        },
+
+        /**
+         * 自动补全 @user
+         */
+        initAutocompleteAtUser: function() {
+            var at_users = [],
+                  user;
+            $users = $('.media-heading').find('a.author');
+            for (var i = 0; i < $users.length; i++) {
+                user = $users.eq(i).text().trim();
+                if ($.inArray(user, at_users) == -1) {
+                    at_users.push(user);
+                };
+            };
+
+            $('textarea').textcomplete([{
+                mentions: at_users,
+                match: /\B@(\w*)$/,
+                search: function(term, callback) {
+                    callback($.map(this.mentions, function(mention) {
+                        return mention.indexOf(term) === 0 ? mention : null;
+                    }));
+                },
+                index: 1,
+                replace: function(mention) {
+                    return '@' + mention + ' ';
+                }
+            }], {
+                appendTo: 'body'
+            });
+
         },
 
         /**

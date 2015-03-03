@@ -17,6 +17,7 @@
             Config = {
                 'user_id': {{ isset($currentUser) ? $currentUser->id : 0 }},
                 'routes': {
+                	'site_url': '{{ url('/') }}',
                 	'topic_url': '{{ route('topics.index') }}',
                 	'login_url': '{{ route('login-required') }}',
                     'upload_image' : '{{ route('upload_image') }}',

@@ -2,109 +2,125 @@
 
 @section('content')
 
-<div class="topic_create">
+<div class="row">
+	
+	<div class="col-md-8 main-col">
+		
+		<div class="reply-box form">
+			
+			<div class="alert alert-warning">
+					{{ lang('be_nice') }}
+			</div>
+			@if(count($nodes))
+			@include('theme::layouts.errors')
 
-  <div class="col-md-8 main-col">
+			@if (isset($topic))
+				{{ Form::model($topic, ['route' => ['topics.update', $topic->id], 'id' => 'topic-create-form', 'method' => 'patch']) }}
+			@else
+				{{ Form::open(['route' => 'topics.store','id' => 'topic-create-form', 'method' => 'post']) }}
+			@endif
 
-    <div class="reply-box form box-block">
+			<div class="form-group">
+				<select class="selectpicker form-control" name="node_id" >
 
-      <div class="alert alert-warning">
-          {{ lang('be_nice') }}
-      </div>
+					<option value="" disabled {{ App::make('Topic')->present()->haveDefaultNode($node, null) ?: 'selected'; }}>{{ lang('Pick a node') }}</option>
 
-      @include('theme::layouts.errors')
+					@foreach ($nodes['top'] as $top_node)
+						<optgroup label="{{{ $top_node->name }}}">
+							@foreach ($nodes['second'][$top_node->id] as $snode)
+								<option value="{{ $snode->id }}" {{ App::make('Topic')->present()->haveDefaultNode($node, $snode) ? 'selected' : ''; }} >{{ $snode->name }}</option>
+							@endforeach
+						</optgroup>
+					@endforeach
+				</select>
+			</div>
 
-      @if (isset($topic))
-        {{ Form::model($topic, ['route' => ['topics.update', $topic->id], 'id' => 'topic-create-form', 'method' => 'patch']) }}
-      @else
-        {{ Form::open(['route' => 'topics.store','id' => 'topic-create-form', 'method' => 'post']) }}
-      @endif
+			<div class="form-group">
+				{{ Form::text('title', null, [
+					'class' => 'form-control', 
+					'id' => 'topic-title', 
+					'placeholder' => lang('Please write down a topic')
+					]) 
+				}}
+			</div>
 
-        <div class="form-group">
-            <select class="selectpicker form-control" name="node_id" >
+			@include('topics.partials.composing_help_block')
 
-              <option value="" disabled {{ App::make('Topic')->present()->haveDefaultNode($node, null) ?: 'selected'; }}>{{ lang('Pick a node') }}</option>
+			<div class="form-group">
+				{{ Form::textarea('body', null, [
+					'class' => 'form-control',
+					'rows' => 20,
+					'style' => "overflow:hidden",
+					'id' => 'reply_content',
+					'placeholder' => lang('Please using markdown.')
+					]) 
+				}}
+			</div>
 
-              @foreach ($nodes['top'] as $top_node)
-                <optgroup label="{{{ $top_node->name }}}">
-                  @foreach ($nodes['second'][$top_node->id] as $snode)
-                    <option value="{{ $snode->id }}" {{ App::make('Topic')->present()->haveDefaultNode($node, $snode) ? 'selected' : ''; }} >{{ $snode->name }}</option>
-                  @endforeach
-                </optgroup>
-              @endforeach
-            </select>
-        </div>
+			<div class="form-group status-post-submit">
+				{{ Form::submit(lang('Publish'), [
+					'class' => 'btn btn-primary', 
+					'id' => 'topic-create-submit']) 
+				}}
+			</div>
 
-        <div class="form-group">
-          {{ Form::text('title', null, ['class' => 'form-control', 'id' => 'topic-title', 'placeholder' => lang('Please write down a topic')]) }}
-        </div>
+			<div class="box preview markdown-body" id="preview-box" style="display:none;"></div>
 
-        @include('topics.partials.composing_help_block')
+			{{ Form::close() }}
+			@else
+			<div class="jumbotron">
+				<p>请联系管理员添加节点 ^-^</p>
+			</div>
+			@endif
 
-        <div class="form-group">
-          {{ Form::textarea('body', null, ['class' => 'form-control',
-                                            'rows' => 20,
-                                            'style' => "overflow:hidden",
-                                            'id' => 'reply_content',
-                                            'placeholder' => lang('Please using markdown.')]) }}
-        </div>
+		</div>
+	</div>
 
-        <div class="form-group status-post-submit">
-          {{ Form::submit(lang('Publish'), ['class' => 'btn btn-primary', 'id' => 'topic-create-submit']) }}
-        </div>
+	<div class="col-md-4 side-bar">
 
-        <div class="box preview markdown-body" id="preview-box" style="display:none;"></div>
+		@if ( $node )
 
-      {{ Form::close() }}
+		<div class="panel panel-default corner-radius help-box">
+			<div class="panel-heading text-center">
+				<h3 class="panel-title">{{ lang('Current Node') }} : {{{ $node->name }}}</h3>
+			</div>
+			<div class="panel-body">
+				{{ $node->description }}
+			</div>
+		</div>
 
-    </div>
-  </div>
+		@endif
 
-  <div class="col-md-4 side-bar">
+		<div class="panel panel-default corner-radius help-box">
+			<div class="panel-heading text-center">
+				<h3 class="panel-title">{{ lang('This kind of topic is not allowed.') }}</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list">
+					<li>这里放一些关于论坛的基本说明</li>
+					<li>请尽量分享技术相关的话题, 谢绝发布社会, 政治等相关新闻</li>
+					<li>这里绝对不讨论任何有关盗版软件、音乐、电影如何获得的问题</li>
+					<li>这里绝对不会全文转载任何文章，而只会以链接方式分享</li>
+			</div>
+		</div>
 
-    @if ( $node )
+		<div class="panel panel-default corner-radius help-box">
+			<div class="panel-heading text-center">
+				<h3 class="panel-title">{{ lang('We can benefit from it.') }}</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="list">
+					<li>分享生活见闻, 分享知识</li>
+					<li>接触新技术, 讨论技术解决方案</li>
+					<li>为自己的创业项目找合伙人, 遇见志同道合的人</li>
+					<li>自发线下聚会, 加强社交</li>
+					<li>发现更好工作机会</li>
+					<li>甚至是开始另一个神奇的开源项目</li>
+				</ul>
+			</div>
+		</div>
 
-    <div class="panel panel-default corner-radius help-box">
-      <div class="panel-heading text-center">
-        <h3 class="panel-title">{{ lang('Current Node') }} : {{{ $node->name }}}</h3>
-      </div>
-      <div class="panel-body">
-        {{ $node->description }}
-      </div>
-    </div>
-
-    @endif
-
-    <div class="panel panel-default corner-radius help-box">
-      <div class="panel-heading text-center">
-        <h3 class="panel-title">{{ lang('This kind of topic is not allowed.') }}</h3>
-      </div>
-      <div class="panel-body">
-        <ul class="list">
-          <li>这里放一些关于论坛的基本说明</li>
-          <li>请尽量分享技术相关的话题, 谢绝发布社会, 政治等相关新闻</li>
-          <li>这里绝对不讨论任何有关盗版软件、音乐、电影如何获得的问题</li>
-          <li>这里绝对不会全文转载任何文章，而只会以链接方式分享</li>
-      </div>
-    </div>
-
-    <div class="panel panel-default corner-radius help-box">
-      <div class="panel-heading text-center">
-        <h3 class="panel-title">{{ lang('We can benefit from it.') }}</h3>
-      </div>
-      <div class="panel-body">
-        <ul class="list">
-          <li>分享生活见闻, 分享知识</li>
-          <li>接触新技术, 讨论技术解决方案</li>
-          <li>为自己的创业项目找合伙人, 遇见志同道合的人</li>
-          <li>自发线下聚会, 加强社交</li>
-          <li>发现更好工作机会</li>
-          <li>甚至是开始另一个神奇的开源项目</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
+	</div>
 </div>
 
 @stop

@@ -13,7 +13,7 @@ class Markdown
 
     public function __construct()
     {
-        $this->htmlParser = new HTML_To_markdown;
+        $this->htmlParser = new HTML_To_Markdown();
         $this->htmlParser->set_option('header_style', 'atx');
 
         $this->markdownParser = new Parsedown();
@@ -26,7 +26,8 @@ class Markdown
 
     public function convertMarkdownToHtml($markdown)
     {
-        $convertedHmtl = $this->markdownParser->text($markdown);
-        return Purifier::clean($convertedHmtl, 'user_topic_body');
+        $convertedHtml = $this->markdownParser->text($markdown);
+        \Log::info($convertedHtml);
+        return Purifier::clean($convertedHtml, 'user_topic_body');
     }
 }

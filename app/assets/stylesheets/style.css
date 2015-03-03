@@ -166,3 +166,10 @@ body {
 	padding: 4px 15px;
 	color: #da974d;
 }
+
+.emoji {
+    width: 1.8em;
+    height: 1.8em;
+    display: inline-block;
+    margin-bottom: .25em;
+}
