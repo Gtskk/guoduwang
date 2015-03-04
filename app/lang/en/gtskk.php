@@ -63,6 +63,7 @@ return array (
     'Please using markdown.' => 'Please use markdown.',
     'Current Node' => 'Current Node',
     'Pick a node' => 'Pick a node',
+    'noNodes' => 'Please contact admin to add nodes ^-^',
     'Please write down a topic' => 'Please write down a topic',
     'Writting Format Notice' => 'Writing Format Notice',
     'This kind of topic is not allowed.' => 'This kind of topic is not allowed.',
@@ -88,7 +89,7 @@ return array (
     'Recent Topics' => 'Recent Topics',
     'be_nice' => 'This is public place, please be nice. ;-)',
     'publish_typography' => 'Please be careful with the Chinese and English Typography <a href="https://github.com/sparanoid/chinese-copywriting-guidelines">take reference</a>',
-    'publish_markdown' => 'Support for Markdown format, <strong>**Strong**</strong>、~~Line Delete~~、<code>`Quick Code`</code>',
+    'publish_markdown' => 'Support for Markdown format, <strong>**Strong**</strong>、~~Line Delete~~、<code>`Quick Code`</code> ximalaya and youku video',
     'publish_emoji' => 'Support Emoji see <a href="http://www.emoji-cheat-sheet.com" target="_blank" rel="nofollow">Emoji cheat sheet</a>',
     'publish_at_user' => '@name link to the user, and send him a notification in the meantime.',
     'publish_image' => 'Upload image, support both `drag and drop` and `pasting from the clipboard`, format limited to - jpg, png, gif',
@@ -129,4 +130,6 @@ return array (
     'Pin it on Top' => 'Pin it on Top',
     'Sink This Topic' => 'Sink This Topic',
     'profile' => 'Personal Profile',
+    'recommend' => 'Recommend',
+    'top' => 'Top',
 );

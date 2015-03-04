@@ -69,7 +69,7 @@
 			{{ Form::close() }}
 			@else
 			<div class="jumbotron">
-				<p>请联系管理员添加节点 ^-^</p>
+				<p>{{ lang('noNodes') }}</p>
 			</div>
 			@endif
 

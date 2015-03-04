@@ -27,6 +27,11 @@ return array(
     	array('name'=>'Sitepoint 技术网站', 'url'=>'http://www.sitepoint.com/'),
     ),
 
+    /*************************** Pusher 相关 ******************/
+    'pusher_key' => '1bc9b80b828a5ca33f9a',
+    'pusher_secret' => '0b2b0751596e42dfa75f',
+    'pusher_app_id' => '109079',
+
     /**************************** 天气有关  ********************/
     // 天气API地址
     'weather_url' => 'http://m.weather.com.cn/data',

@@ -138,6 +138,20 @@
 		</div>
 		
 		<script type="text/javascript" src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
+		<script type="text/javascript">
+		    // Enable pusher logging - don't include this in production
+		    Pusher.log = function(message) {
+		      	if (window.console && window.console.log) {
+		        	window.console.log(message);
+		    	}
+		    };
+
+		    var pusher = new Pusher('1bc9b80b828a5ca33f9a');
+		    var channel = pusher.subscribe('notifications');
+		    channel.bind('count', function(data) {
+		      	alert(data.message);
+		    });
+	  	</script>
 		@yield('javascript')
 
 	</body>

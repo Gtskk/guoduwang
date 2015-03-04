@@ -63,6 +63,7 @@ return array(
     'Please using markdown.' => '请使用 Markdown 格式书写 ;-)',
     'Current Node' => '当前节点',
     'Pick a node' => '请选择节点',
+    'noNodes' => '请联系管理员添加节点 ^-^',
     'Please write down a topic' => '请填写标题',
     'Writting Format Notice' => '格式说明',
     'This kind of topic is not allowed.' => '以下类型的信息会污染我们的社区',
@@ -93,7 +94,7 @@ return array(
     'User Login Required for commenting.' => '需要登录后才能发表评论.',
     'be_nice' => '我们希望 过渡网 能够成为氛围最好的 学习 社区，而实现这个目标，需要我们所有人的共同努力：友善，公平，尊重知识和事实。',
     'publish_typography' => '请注意单词拼写，以及中英文排版，<a href="https://github.com/sparanoid/chinese-copywriting-guidelines">参考此页</a>',
-    'publish_markdown' => '支持 Markdown 格式, <strong>**粗体**</strong>、~~删除线~~、<code>`单行代码`</code>, 更多语法请见这里 <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md">Markdown 语法</a>',
+    'publish_markdown' => '支持 Markdown 格式, <strong>**粗体**</strong>、~~删除线~~、<code>`单行代码`</code>, 更多语法请见这里 <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md">Markdown 语法</a>，支持喜马拉雅、优酷视频iframe嵌入',
     'publish_emoji' => '支持表情，见 <a href="http://www.emoji-cheat-sheet.com" target="_blank" rel="nofollow">Emoji cheat sheet</a>',
     'publish_at_user' => '@name 会链接到用户页面，并会通知他',
     'publish_image' => '上传图片, 支持拖拽和剪切板黏贴上传, 格式限制 - jpg, png, gif',
@@ -127,4 +128,6 @@ return array(
     'Pin it on Top' => '设为置顶主题',
     'Sink This Topic' => '置底主题',
     'profile' => '个人简介',
+    'recommend' => '推荐',
+    'top' => '置顶',
 );

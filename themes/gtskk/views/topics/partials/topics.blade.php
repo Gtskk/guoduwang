@@ -18,10 +18,10 @@
 
             <div class="media-heading">
                 @if ($topic->is_excellent)
-                <span class="label label-danger">推荐</span>
+                <span class="label label-danger">{{ lang('recommend') }}</span>
                 @endif
                 @if ($topic->order > 0 && !Input::get('filter'))
-                <span class="label label-success">置顶</span>
+                <span class="label label-success">{{ lang('top') }}</span>
                 @endif
                 <a href="{{ route('topics.show', [$topic->id]) }}" title="{{{ $topic->title }}}">
                     {{{ $topic->title }}}
