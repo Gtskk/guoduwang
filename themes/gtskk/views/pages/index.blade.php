@@ -13,7 +13,7 @@
       </div>
 
       <div class="panel-body">
-        @include('topics.partials.topics', ['column' => true])
+        @include('theme::topics.partials.topics', ['column' => true])
       </div>
 
       <div class="panel-footer text-right">

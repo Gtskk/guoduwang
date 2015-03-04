@@ -27,7 +27,6 @@ class Markdown
     public function convertMarkdownToHtml($markdown)
     {
         $convertedHtml = $this->markdownParser->text($markdown);
-        \Log::info($convertedHtml);
         return Purifier::clean($convertedHtml, 'user_topic_body');
     }
 }

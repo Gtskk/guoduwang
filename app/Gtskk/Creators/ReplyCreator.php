@@ -22,7 +22,6 @@ class ReplyCreator
     {
         $data['member_id'] = Confide::user()->id;
         $data['body'] = $this->mentionParser->parse($data['body']);
-        Log::info($data['body']);
 
         $markdown = new Markdown;
         $data['body_original'] = $data['body'];

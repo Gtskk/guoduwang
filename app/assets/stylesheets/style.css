@@ -33,6 +33,12 @@ body {
 		height: 66px;   /* Height of image */
 }
 
+.topic-list .list-group-item{
+	border-radius: 0;
+	border-left: none;
+	border-right: none;
+}
+
 .box{
 	background-color: #fff;
 	padding: 10px;

@@ -6,7 +6,6 @@ class PagesController extends BaseController {
 	{
 		$topics = Topic::excellent()->recent()->limit(20)->get();
 		return View::make('theme::pages.index', compact('topics'));
-		// return View::make('index', compact('datas'));
 	}
 
 

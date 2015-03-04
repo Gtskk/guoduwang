@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-03-03 08:39:25
+-- Generation Time: 2015-03-04 05:58:24
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -247,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 INSERT INTO `members` (`id`, `username`, `email`, `phone`, `image_url`, `topic_count`, `reply_count`, `password`, `confirmation_code`, `remember_token`, `is_banned`, `confirmed`, `real_name`, `github_name`, `github_url`, `github_id`, `ghost_id`, `ghost_name`, `company`, `city`, `personal_website`, `signature`, `introduction`, `created_at`, `updated_at`, `deleted_at`, `notification_count`) VALUES
-(1, 'gtskk', 'tttt6399998@126.com', '15212230025', NULL, 0, 0, '$2y$10$Uz8Vvxy66Q5KoPgr9N0Ctu4iwUgwC/SlwXVNMCxJpTRDFw8vp7AnC', '6707b1779a7898496a5a906bfef822bc', NULL, 0, 0, '', '', NULL, NULL, NULL, '', '', '', '', '', '', '2015-03-03 07:19:32', '2015-03-03 07:19:32', NULL, 0);
+(1, 'gtskk', 'tttt6399998@126.com', '15212230025', NULL, 0, 5, '$2y$10$Uz8Vvxy66Q5KoPgr9N0Ctu4iwUgwC/SlwXVNMCxJpTRDFw8vp7AnC', '6707b1779a7898496a5a906bfef822bc', 'Nl7pz8bZfIs2FBqpNnsB3ae0qKfd5hdBLPgwEGddn0u22Od0wF4QU665drD5', 0, 0, '', '', NULL, NULL, NULL, '', '', '', '', '', '', '2015-03-03 07:19:32', '2015-03-03 09:30:14', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -326,7 +326,50 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   KEY `nodes_slug_index` (`slug`),
   KEY `nodes_parent_node_index` (`parent_node`),
   KEY `nodes_topic_count_index` (`topic_count`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
+
+--
+-- 转存表中的数据 `nodes`
+--
+
+INSERT INTO `nodes` (`id`, `name`, `slug`, `parent_node`, `description`, `topic_count`, `created_at`, `updated_at`) VALUES
+(1, 'PHP', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Web 开发', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, '移动开发', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, '其他语言', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, '社区', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, '经验分享', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'Wordpress', 'wordpress', 1, 'WordPress是一种使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站，有着非常丰富的插件库。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Laravel', 'laravel', 1, 'Laravel是一套简洁、优雅的PHP Web开发框架(PHP Web Framework)。它可以让你从面条一样杂乱的代码中解脱出来；它可以帮你构建一个完美的网络APP，而且每行代码都可以简洁、富于表达力。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'Composer', 'composer', 1, 'Composer是PHP中用来管理依赖（dependency）关系的工具。你可以在自己的项目中声明所依赖的外部工具库（libraries），Composer会帮你安装这些依赖的库文件。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, '设计模式', 'design-pattern', 1, '设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, '测试', 'testing', 1, '软件测试（英语：software testing），描述一种用来促进鉴定软件的正确性、完整性、安全性和质量的过程。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, '部署', 'deployment', 1, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, '开源项目', 'opensource-project', 1, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, '数据库', 'database', 2, '数据库（Database）是按照数据结构来组织、存储和管理数据的仓库，常见的数据库有Mysql、Oracle、Sqlite等', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'Git', 'git', 2, 'Git是一个开源的分布式版本控制系统，用以有效、高速的处理从很小到非常大的项目版本管理。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 'Linux', 'linux', 2, 'Linux是一种自由和开放源码的类Unix操作系统，存在着许多不同的Linux版本，但它们都使用了Linux内核。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 'WebServer', 'web-server', 2, 'WEB服务器也称为WWW(WORLD WIDE WEB)服务器，主要功能是提供网上信息浏览服务。常见的有 Nginx, Apache等', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, '算法', 'algrithm', 2, '算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(19, '网站安全', 'security', 2, '网站安全是指出于防止网站受到外来电脑入侵者对其网站进行挂马，篡改网页等行为而做出一系列的防御工作。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(20, '云服务', 'cloud-service', 2, '云服务开发这一概念包含几种不同的开发类型 - 软件即服务(SaaS), 平台即服务(PaaS), Web服务, 按需(on—demand)计算', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(21, 'iOS', 'ios-development', 3, 'iOS 开发', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 'Android', 'android-development', 3, 'Android 开发', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(23, 'JavaScript', 'javascript', 4, 'JavaScript是一种基于对象和事件驱动并具有相对安全性的客户端脚本语言，其中nodejs（iojs）是其一个比较流行的方向', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(24, 'CSS', 'css', 4, 'css（层叠样式表）是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言。', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(25, 'Python', 'python', 4, 'Python, 是一种面向对象、直译式计算机程序设计语言', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(26, 'Ruby', 'ruby', 4, 'Ruby，一种为简单快捷的面向对象编程（面向对象程序设计）而创的脚本语言', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(27, '公告', 'announcement', 5, '', 1, '0000-00-00 00:00:00', '2015-03-03 08:36:50'),
+(28, 'Bug反馈', 'feedback', 5, '对于社区的优化或者 bug report , 可以在此节点下提', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(29, '新功能', 'community-development', 5, '在该节点可以提出有关社区新功能的建议', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(30, '健康', 'health', 6, '身体是革命的本钱，所以健康很重要', 1, '0000-00-00 00:00:00', '2015-03-03 10:22:31'),
+(31, '理财', 'money', 6, '就是钱，让钱更值钱的密码^-^', 1, '0000-00-00 00:00:00', '2015-03-03 10:31:04'),
+(32, '工具', 'toolings', 6, '使用工具, 是人类文明的标志', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(33, '书籍', 'book-share', 6, '书籍是知识载体, 让我们一起站在巨人的肩膀上. ', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(34, '求职', 'request-a-job', 6, '介绍下你自己, 让大家帮你找到一份好的工作', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(35, '招聘', 'hire', 6, '这里有高质量的 PHPer, 记得认真填写你的需求, 薪资待遇是必须写的哦.', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(36, '创业', 'start-up', 6, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(37, '其他', 'other-share', 6, '抱歉, 如果你分享的话题不属于其他节点的话, 只能选择这里咯. ', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -452,7 +495,18 @@ CREATE TABLE IF NOT EXISTS `replies` (
   KEY `replies_topic_id_index` (`topic_id`),
   KEY `replies_is_block_index` (`is_block`),
   KEY `replies_vote_count_index` (`vote_count`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `replies`
+--
+
+INSERT INTO `replies` (`id`, `body`, `member_id`, `topic_id`, `is_block`, `vote_count`, `created_at`, `updated_at`, `body_original`) VALUES
+(1, '<p>:smile:</p>', 1, 1, 0, 0, '2015-03-03 08:53:04', '2015-03-03 08:53:04', ':smile:'),
+(2, '<p>:smile:</p>', 1, 1, 0, 0, '2015-03-03 09:04:06', '2015-03-03 09:04:07', ':smile:'),
+(3, '<p>:smile:</p>', 1, 1, 0, 0, '2015-03-03 09:10:51', '2015-03-03 09:10:51', ':smile:'),
+(4, '<p>:smile:</p>', 1, 1, 0, 0, '2015-03-03 09:20:08', '2015-03-03 09:20:08', ':smile:'),
+(5, '<p>:frowning:</p>', 1, 1, 0, 0, '2015-03-03 09:30:14', '2015-03-03 09:30:14', ':frowning:');
 
 -- --------------------------------------------------------
 
@@ -512,7 +566,16 @@ CREATE TABLE IF NOT EXISTS `topics` (
   KEY `topics_favorite_count_index` (`favorite_count`),
   KEY `topics_vote_count_index` (`vote_count`),
   KEY `topics_last_reply_user_id_index` (`last_reply_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `topics`
+--
+
+INSERT INTO `topics` (`id`, `title`, `body`, `member_id`, `node_id`, `is_excellent`, `is_wiki`, `is_blocked`, `reply_count`, `view_count`, `favorite_count`, `vote_count`, `last_reply_user_id`, `order`, `deleted_at`, `created_at`, `updated_at`, `body_original`, `excerpt`) VALUES
+(1, '网站开门啦', '<h3>网站开门红</h3>\r\n<p>大家好，今天过渡网正式和大家见面了，在这里你可以学习到学校中学不到的，所以的内容都是我自己的亲身经历，在此我分享给大家的原因是希望大家能更好的完成从学校到社会的<strong>过渡</strong>，希望大家都能做的更好，比我好 :smile:</p>\r\n<p>好了，废话不多说，网站尽量设计的简洁粗暴:frowning: ，让大家能一眼就看到，找到你说要的。</p>\r\n<p>所以，跟着我的脚步，Come on!</p>', 1, 27, 0, 0, 0, 5, 30, 0, 0, 1, 0, NULL, '2015-03-03 08:36:49', '2015-03-03 09:30:14', '### 网站开门红\r\n\r\n大家好，今天过渡网正式和大家见面了，在这里你可以学习到学校中学不到的，所以的内容都是我自己的亲身经历，在此我分享给大家的原因是希望大家能更好的完成从学校到社会的**过渡**，希望大家都能做的更好，比我好 :smile:\r\n\r\n好了，废话不多说，网站尽量设计的简洁粗暴:frowning: ，让大家能一眼就看到，找到你说要的。\r\n\r\n所以，跟着我的脚步，Come on!', '网站开门红 大家好，今天过渡网正式和大家见面了，在这里你可以学习到学校中学不到的，所以的内容都是我自己的亲身经历，在此我分享给大家的原因是希望大家能更好的完成从学校到社会的过渡，希望大家都能做的更好，比我好 :smile: 好了，废话不多说，网站尽量设计的简洁粗暴:frowning: ，让大家能一眼就看到，找到你说要的。 所以，跟着我的脚步，Come on!'),
+(2, '身体是革命的本钱', '<h2><code>身体是革命的本钱</code></h2>\r\n<p>作为一个程序员，坐在电脑前的时间几乎占据了一天时间的80%，时间一长会觉得身体多少有些不适，这个时候想到的就是应该锻炼身体了，没有好的身体何来<code>升职加薪，当上总经理，出任CEO，赢取白富美，走上人生巅峰呢”</code>:laughing: </p>\r\n<p><code>总之，身体是最重要的</code></p>\r\n<p>就个人而言,在小区跑跑步,锻炼个四五十分钟,\r\n坚持每天吃早饭，饮食中少些垃圾食品，营养均衡一些。\r\n最主要的是要<code>坚持</code></p>\r\n<p>同为程序员或者有将来作为程序员打算又或者有着坏生活习惯的你是否也有锻炼身体的习惯呢？</p>\r\n<p>而你除了锻炼身体外还会做一些什么事情况来改善自己的身体状态呢?</p>\r\n<p>大家可以把自己的好习惯分享出来，供大家参考学习。:smiley: </p>', 1, 30, 1, 0, 0, 0, 4, 0, 0, 0, 0, NULL, '2015-03-03 10:22:31', '2015-03-03 10:22:31', '##`身体是革命的本钱`##\r\n\r\n作为一个程序员，坐在电脑前的时间几乎占据了一天时间的80%，时间一长会觉得身体多少有些不适，这个时候想到的就是应该锻炼身体了，没有好的身体何来`升职加薪，当上总经理，出任CEO，赢取白富美，走上人生巅峰呢”`:laughing: \r\n\r\n``` 总之，身体是最重要的```\r\n\r\n就个人而言,在小区跑跑步,锻炼个四五十分钟,\r\n坚持每天吃早饭，饮食中少些垃圾食品，营养均衡一些。\r\n最主要的是要`坚持`\r\n\r\n同为程序员或者有将来作为程序员打算又或者有着坏生活习惯的你是否也有锻炼身体的习惯呢？\r\n\r\n而你除了锻炼身体外还会做一些什么事情况来改善自己的身体状态呢?\r\n\r\n大家可以把自己的好习惯分享出来，供大家参考学习。:smiley: ', NULL),
+(3, '小白理财', '<p>给大家推荐个小白理财入门教程，多些简七的倾情奉献。</p>\r\n<p><code>【简七读财】小白理财入门篇9堂课</code></p><p>\r\n<iframe height="230" width="260" src="http://www.ximalaya.com/swf/album/orange.swf?id=282259" frameborder="0"></iframe></p>', 1, 31, 1, 0, 0, 0, 38, 0, 0, 0, 1, NULL, '2015-03-03 10:31:04', '2015-03-03 10:31:04', '给大家推荐个小白理财入门教程，多些简七的倾情奉献。\r\n\r\n```【简七读财】小白理财入门篇9堂课```\r\n\r\n<iframe height="230" width="260" src="http://www.ximalaya.com/swf/album/orange.swf?id=282259" frameborder=0 allowfullscreen></iframe>', '给大家推荐个小白理财入门教程，多些简七的倾情奉献。 【简七读财】小白理财入门篇9堂课');
 
 -- --------------------------------------------------------
 
