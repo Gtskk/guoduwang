@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-03-04 05:58:24
+-- Generation Time: 2015-03-04 14:31:01
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -70,6 +70,21 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `failed_jobs`
+--
+
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `connection` text COLLATE utf8_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8_unicode_ci NOT NULL,
+  `payload` text COLLATE utf8_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -304,7 +319,8 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2015_02_06_162250_add_fields_to_members_table', 14),
 ('2015_02_09_132636_add_github_fields_to_members_table', 15),
 ('2015_02_10_163953_add_excerpt_field_to_topics_table', 16),
-('2015_02_12_095401_add_ghost_fields_to_members_table', 17);
+('2015_02_12_095401_add_ghost_fields_to_members_table', 17),
+('2015_03_04_142446_create_failed_jobs_table', 18);
 
 -- --------------------------------------------------------
 
@@ -575,7 +591,7 @@ CREATE TABLE IF NOT EXISTS `topics` (
 INSERT INTO `topics` (`id`, `title`, `body`, `member_id`, `node_id`, `is_excellent`, `is_wiki`, `is_blocked`, `reply_count`, `view_count`, `favorite_count`, `vote_count`, `last_reply_user_id`, `order`, `deleted_at`, `created_at`, `updated_at`, `body_original`, `excerpt`) VALUES
 (1, '网站开门啦', '<h3>网站开门红</h3>\r\n<p>大家好，今天过渡网正式和大家见面了，在这里你可以学习到学校中学不到的，所以的内容都是我自己的亲身经历，在此我分享给大家的原因是希望大家能更好的完成从学校到社会的<strong>过渡</strong>，希望大家都能做的更好，比我好 :smile:</p>\r\n<p>好了，废话不多说，网站尽量设计的简洁粗暴:frowning: ，让大家能一眼就看到，找到你说要的。</p>\r\n<p>所以，跟着我的脚步，Come on!</p>', 1, 27, 0, 0, 0, 5, 30, 0, 0, 1, 0, NULL, '2015-03-03 08:36:49', '2015-03-03 09:30:14', '### 网站开门红\r\n\r\n大家好，今天过渡网正式和大家见面了，在这里你可以学习到学校中学不到的，所以的内容都是我自己的亲身经历，在此我分享给大家的原因是希望大家能更好的完成从学校到社会的**过渡**，希望大家都能做的更好，比我好 :smile:\r\n\r\n好了，废话不多说，网站尽量设计的简洁粗暴:frowning: ，让大家能一眼就看到，找到你说要的。\r\n\r\n所以，跟着我的脚步，Come on!', '网站开门红 大家好，今天过渡网正式和大家见面了，在这里你可以学习到学校中学不到的，所以的内容都是我自己的亲身经历，在此我分享给大家的原因是希望大家能更好的完成从学校到社会的过渡，希望大家都能做的更好，比我好 :smile: 好了，废话不多说，网站尽量设计的简洁粗暴:frowning: ，让大家能一眼就看到，找到你说要的。 所以，跟着我的脚步，Come on!'),
 (2, '身体是革命的本钱', '<h2><code>身体是革命的本钱</code></h2>\r\n<p>作为一个程序员，坐在电脑前的时间几乎占据了一天时间的80%，时间一长会觉得身体多少有些不适，这个时候想到的就是应该锻炼身体了，没有好的身体何来<code>升职加薪，当上总经理，出任CEO，赢取白富美，走上人生巅峰呢”</code>:laughing: </p>\r\n<p><code>总之，身体是最重要的</code></p>\r\n<p>就个人而言,在小区跑跑步,锻炼个四五十分钟,\r\n坚持每天吃早饭，饮食中少些垃圾食品，营养均衡一些。\r\n最主要的是要<code>坚持</code></p>\r\n<p>同为程序员或者有将来作为程序员打算又或者有着坏生活习惯的你是否也有锻炼身体的习惯呢？</p>\r\n<p>而你除了锻炼身体外还会做一些什么事情况来改善自己的身体状态呢?</p>\r\n<p>大家可以把自己的好习惯分享出来，供大家参考学习。:smiley: </p>', 1, 30, 1, 0, 0, 0, 4, 0, 0, 0, 0, NULL, '2015-03-03 10:22:31', '2015-03-03 10:22:31', '##`身体是革命的本钱`##\r\n\r\n作为一个程序员，坐在电脑前的时间几乎占据了一天时间的80%，时间一长会觉得身体多少有些不适，这个时候想到的就是应该锻炼身体了，没有好的身体何来`升职加薪，当上总经理，出任CEO，赢取白富美，走上人生巅峰呢”`:laughing: \r\n\r\n``` 总之，身体是最重要的```\r\n\r\n就个人而言,在小区跑跑步,锻炼个四五十分钟,\r\n坚持每天吃早饭，饮食中少些垃圾食品，营养均衡一些。\r\n最主要的是要`坚持`\r\n\r\n同为程序员或者有将来作为程序员打算又或者有着坏生活习惯的你是否也有锻炼身体的习惯呢？\r\n\r\n而你除了锻炼身体外还会做一些什么事情况来改善自己的身体状态呢?\r\n\r\n大家可以把自己的好习惯分享出来，供大家参考学习。:smiley: ', NULL),
-(3, '小白理财', '<p>给大家推荐个小白理财入门教程，多些简七的倾情奉献。</p>\r\n<p><code>【简七读财】小白理财入门篇9堂课</code></p><p>\r\n<iframe height="230" width="260" src="http://www.ximalaya.com/swf/album/orange.swf?id=282259" frameborder="0"></iframe></p>', 1, 31, 1, 0, 0, 0, 38, 0, 0, 0, 1, NULL, '2015-03-03 10:31:04', '2015-03-03 10:31:04', '给大家推荐个小白理财入门教程，多些简七的倾情奉献。\r\n\r\n```【简七读财】小白理财入门篇9堂课```\r\n\r\n<iframe height="230" width="260" src="http://www.ximalaya.com/swf/album/orange.swf?id=282259" frameborder=0 allowfullscreen></iframe>', '给大家推荐个小白理财入门教程，多些简七的倾情奉献。 【简七读财】小白理财入门篇9堂课');
+(3, '小白理财', '<p>给大家推荐个小白理财入门教程，多些简七的倾情奉献。</p>\r\n<p><code>【简七读财】小白理财入门篇9堂课</code></p><p>\r\n<iframe height="230" width="260" src="http://www.ximalaya.com/swf/album/orange.swf?id=282259" frameborder="0"></iframe></p>', 1, 31, 1, 0, 0, 0, 39, 0, 0, 0, 1, NULL, '2015-03-03 10:31:04', '2015-03-03 10:31:04', '给大家推荐个小白理财入门教程，多些简七的倾情奉献。\r\n\r\n```【简七读财】小白理财入门篇9堂课```\r\n\r\n<iframe height="230" width="260" src="http://www.ximalaya.com/swf/album/orange.swf?id=282259" frameborder=0 allowfullscreen></iframe>', '给大家推荐个小白理财入门教程，多些简七的倾情奉献。 【简七读财】小白理财入门篇9堂课');
 
 -- --------------------------------------------------------
 
