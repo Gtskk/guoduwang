@@ -97,7 +97,7 @@ class Topic extends \Eloquent
 	{
 		switch ($filter) {
 			case 'noreply':
-				return $this->orderBy('reply_count', 'asc')->recent();
+				return $this->where('reply_count', 0)->recent();
 				break;
 			case 'vote':
 				return $this->orderBy('vote_count', 'desc')->recent();

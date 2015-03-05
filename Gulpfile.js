@@ -30,7 +30,6 @@ var paths = {
             'app/assets/javascripts/jquery.inline-attach.min.js',
             'app/assets/javascripts/ekko-lightbox.js',
             'app/assets/javascripts/dropzone.js',
-            'app/assets/javascripts/pusher.min.js',
             'app/assets/javascripts/front.js'
         ],
         styles: [

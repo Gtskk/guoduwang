@@ -13,7 +13,7 @@
             });
             self.siteBootUp();
             self.initLightBox();
-            // self.initNotificationsCount();
+            self.initNotificationsCount();
         },
 
         /*

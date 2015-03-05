@@ -138,7 +138,7 @@
 		</div>
 		
 		<script type="text/javascript" src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
-		<script type="text/javascript">
+		<!--<script type="text/javascript">
 		    // Enable pusher logging - don't include this in production
 		    // Pusher.log = function(message) {
 		    //   	if (window.console && window.console.log) {
@@ -170,7 +170,7 @@
 			      	}
 			    });
 			}
-	  	</script>
+	  	</script>-->
 		@yield('javascript')
 
 	</body>

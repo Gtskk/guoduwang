@@ -8,9 +8,8 @@ class NotificationsController extends \BaseController {
      */
     public function notificationsCount()
     {
-        // die(json_encode(Auth::user()->notification_count));
-        $count = Auth::user()->notification_count;
-        $count = 9;
+        die(json_encode(Auth::user()->notification_count));
+        /*$count = Auth::user()->notification_count;
 
         Queue::push(function($job) use ($count) {
 
@@ -18,7 +17,7 @@ class NotificationsController extends \BaseController {
 	        $pusher->trigger('notifications', 'count', array('count' => $count));
 
 	        $job->delete();
-	    });
+	    });*/
     }
 
 
