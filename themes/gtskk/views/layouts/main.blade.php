@@ -140,17 +140,36 @@
 		<script type="text/javascript" src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
 		<script type="text/javascript">
 		    // Enable pusher logging - don't include this in production
-		    Pusher.log = function(message) {
-		      	if (window.console && window.console.log) {
-		        	window.console.log(message);
-		    	}
-		    };
+		    // Pusher.log = function(message) {
+		    //   	if (window.console && window.console.log) {
+		    //     	window.console.log(message);
+		    // 	}
+		    // };
 
-		    var pusher = new Pusher('1bc9b80b828a5ca33f9a');
-		    var channel = pusher.subscribe('notifications');
-		    channel.bind('count', function(data) {
-		      	alert(data.message);
-		    });
+            if(Config.user_id > 0)
+            {
+            	$.get(Config.routes.notificationsCount);
+
+			    var pusher = new Pusher('1bc9b80b828a5ca33f9a');
+			    var channel = pusher.subscribe('notifications');
+			    var original_title = document.title;
+			    channel.bind('count', function(data) {
+			      	var nCount = parseInt(data.count);
+			      	if(nCount > 0)
+			      	{
+			      	    $('#notification-count').text(nCount);
+			      	    $('#notification-count').hasClass('badge-important') || $('#notification-count').addClass('badge-important');
+			      	    document.title = '('+nCount+')'+original_title;
+			      	}
+			      	else
+			      	{
+			      	    document.title =  original_title;
+			      	    $('#notification-count').text(0);
+			      	    $('#notification-count').addClass('badge-fade');
+			      	    $('#notification-count').removeClass('badge-important');
+			      	}
+			    });
+			}
 	  	</script>
 		@yield('javascript')
 

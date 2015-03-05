@@ -10,11 +10,12 @@ class NotificationsController extends \BaseController {
     {
         // die(json_encode(Auth::user()->notification_count));
         $count = Auth::user()->notification_count;
+        $count = 9;
 
         Queue::push(function($job) use ($count) {
 
 	        $pusher = new Pusher(Config::get('site.pusher_key'), Config::get('site.pusher_secret'), Config::get('site.pusher_app_id'));
-	        $pusher->trigger('reports', 'notifications', array('count' => $count));
+	        $pusher->trigger('notifications', 'count', array('count' => $count));
 
 	        $job->delete();
 	    });
