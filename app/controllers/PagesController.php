@@ -4,7 +4,10 @@ class PagesController extends BaseController {
 
 	public function showWelcome()
 	{
-		$topics = Topic::excellent()->recent()->limit(20)->get();
+		// $topics = Topic::excellent()->recent()->limit(20)->get();
+		$topics = Cache::remember('topics', 5, function(){
+			return Topic::excellent()->recent()->limit(20)->get();
+		});
 		
 		return View::make('theme::pages.index', compact('topics'));
 	}

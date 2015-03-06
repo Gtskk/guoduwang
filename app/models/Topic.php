@@ -1,10 +1,22 @@
 <?php
 
+use LaravelBook\Ardent\Ardent;
 use Laracasts\Presenter\PresentableTrait;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Topic extends \Eloquent
+class Topic extends Ardent
 {
+
+	/**
+	 * Ardent validation rules
+	 */
+	public static $rules = array(
+		'title' => 'required',
+		'body' => 'required',
+		'node_id' => 'required',
+		'member_id' => 'required',
+	);
+
 	// manually maintian
 	public $timestamps = false;
 

@@ -147,7 +147,9 @@ class NodesTableSeeder extends Seeder {
 		$top_nodes = array();
 		foreach ($node_array as $key => $value) {
 		    $top_nodes[] = [
-		        'name' => $key
+		        'name' => $key,
+		        'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
 		    ];
 		}
 		DB::table('nodes')->insert( $top_nodes );
@@ -162,6 +164,8 @@ class NodesTableSeeder extends Seeder {
 		            'name' => $snode,
 		            'slug' => $svalue['slug'],
 		            'description' => $svalue['description'],
+			        'created_at' => date('Y-m-d H:i:s'),
+	                'updated_at' => date('Y-m-d H:i:s'),
 		        ];
 		    }
 		}

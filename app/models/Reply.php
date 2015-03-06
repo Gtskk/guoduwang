@@ -1,6 +1,17 @@
 <?php
 
-class Reply extends Eloquent {
+use LaravelBook\Ardent\Ardent;
+
+class Reply extends Ardent {
+
+    /**
+     * Ardent validation rules
+     */
+    public static $rules = array(
+        'body' => 'required',
+        'topic_id' => 'required',
+        'member_id' => 'required',
+    );
 
 	protected $fillable = [
 		'body',
