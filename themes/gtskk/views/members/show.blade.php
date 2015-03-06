@@ -9,10 +9,18 @@
 
 	<div class="main-col col-md-9 left-col">
 
+		@include('flash::message')
+
 		@if ($member->introduction)
-			<div class="box text-center">
-				<span class="pull-left">{{ lang('profile') }}</span>
-				<p class="pull-right">{{{ $member->introduction }}}</p>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title text-center">
+						<h4>{{ lang('profile') }}</h4>
+					</div>
+				</div>
+				<div class="panel-body">
+					<p>{{{ $member->introduction }}}</p>
+				</div>
 			</div>
 		@endif
 

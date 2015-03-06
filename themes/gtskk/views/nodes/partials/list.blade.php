@@ -4,7 +4,7 @@
 	<h3 class="panel-title text-center">{{ lang('All Nodes') }}</h3>
 	</div>
 
-	<div class="panel-body remove-padding-vertically remove-padding-bottom">
+	<div class="panel-body">
 	<dl class="dl-horizontal">
 		@foreach ($nodes['top'] as $index => $top_node)
 		<dt>{{{ $top_node->name }}}</dt>

@@ -132,4 +132,5 @@ return array (
     'profile' => 'Personal Profile',
     'recommend' => 'Recommend',
     'top' => 'Top',
+    'not_authorized' => 'Permission Denied',
 );

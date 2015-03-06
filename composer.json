@@ -30,7 +30,8 @@
         "pusher/pusher-php-server": "dev-master"
 	},
 	"require-dev": {
-		"fzaninotto/faker": "1.4.*"
+		"fzaninotto/faker": "1.4.*",
+		"mockery/mockery": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

@@ -130,4 +130,5 @@ return array(
     'profile' => '个人简介',
     'recommend' => '推荐',
     'top' => '置顶',
+    'not_authorized' => '无权限',
 );

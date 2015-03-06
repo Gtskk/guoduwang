@@ -8,6 +8,9 @@ return array(
 		'author' => '哥特式KK'
 	),
 
+	// 会员页面显示数目
+	'members_count' => 48,
+
 	//主菜单
 	//menu 2 type are available single or dropdown and it must be a route
     'main_menu' => array(

@@ -1,19 +1,25 @@
 <?php
 
 use Gtskk\Listeners\LoginAuthenticatorListener;
+use Gtskk\Storage\Member\MemberRepository as Member;
 
 class MembersController extends BaseController implements LoginAuthenticatorListener
 {
 
+    public function __construct(Member $member)
+    {
+        $this->member = $member;
+    }
+
     public function index()
     {
-        $members = Member::recent()->take(48)->get();
+        $members = $this->member->limitAll();
         return View::make('theme::members.index', compact('members'));
     }
 
     public function show($id)
     {
-        $member = Member::findOrFail($id);
+        $member = $this->member->findOrFail($id);
         $topics = Topic::whose($member->id)->recent()->limit(10)->get();
         $replies = Reply::whose($member->id)->recent()->limit(10)->get();
         return View::make('theme::members.show', compact('member', 'topics', 'replies'));
@@ -94,7 +100,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
      */
     public function edit($id)
     {
-        $member = Member::findOrFail($id);
+        $member = $this->member->findOrFail($id);
         if($this->authorOrAdminPermissioinRequire($id))
         {
             return View::make('theme::members.edit', compact('member'));
@@ -113,14 +119,20 @@ class MembersController extends BaseController implements LoginAuthenticatorList
      */
     public function update($id)
     {
-        $member = Member::findOrFail($id);
-        $this->authorOrAdminPermissioinRequire($id);
-        $data = Input::only('real_name', 'github_name', 'city', 'company', 'personal_website', 'signature', 'introduction');
-        App::make('Gtskk\Forms\MemberUpdateForm')->validate($data);
+        $member = $this->member->findOrFail($id);
+        if($this->authorOrAdminPermissioinRequire($id))
+        {
+            $data = Input::only('real_name', 'github_name', 'city', 'company', 'personal_website', 'signature', 'introduction');
+            App::make('Gtskk\Forms\MemberUpdateForm')->validate($data);
 
-        $member->update($data);
+            $member->update($data);
 
-        Flash::success(lang('Operation succeeded.'));
+            Flash::success(lang('Operation succeeded.'));
+            return Redirect::route('members.show', $id);
+        }
+        
+        Flash::error(lang('not_authorized.'));
+
         return Redirect::route('members.show', $id);
     }
 
@@ -145,7 +157,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
         {
             return Redirect::to('/');
         }
-        return View::make('members.memberbanned');
+        return View::make('theme::members.memberbanned');
     }
 
 
@@ -247,7 +259,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
      */
     public function replies($id)
     {
-        $member = Member::findOrFail($id);
+        $member = $this->member->findOrFail($id);
         $replies = Reply::whose($id)->recent()->paginate(15);
         return View::make('theme::members.replies', compact('member', 'replies'));
     }
@@ -259,7 +271,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
      */
     public function topics($id)
     {
-        $member = Member::findOrFail($id);
+        $member = $this->member->findOrFail($id);
         $topics = Topic::whose($id)->recent()->paginate(15);
         return View::make('theme::members.topics', compact('member', 'topics'));
     }
@@ -271,7 +283,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
      */
     public function favorites($id)
     {
-        $member = Member::findOrFail($id);
+        $member = $this->member->findOrFail($id);
         $topics = $member->favoriteTopics()->paginate(15);
         return View::make('theme::members.topics', compact('member', 'topics'));
     }
@@ -303,7 +315,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
         } else {
             $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
         }
-        Log::info($err_msg);
+
         return Redirect::action('MembersController@login')
             ->withInput(Input::except('password'))
             ->with('error', $err_msg);
