@@ -29,7 +29,7 @@ class BaseController extends Controller {
 
 	public function authorOrAdminPermissioinRequire($author_id)
 	{
-		if (! Entrust::can('manage_topics') && $author_id != Confide::user()->id)
+		if (!Entrust::can('manage_topics') || $author_id != Confide::user()->id)
 		{
 			return false;
 		}

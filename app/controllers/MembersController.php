@@ -62,8 +62,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
         {
             $inputData = array_merge(Session::get('ghostlogindata'), $inputData);
         }
-        $repo = App::make('MemberRepository');
-        $user = $repo->signup($inputData);
+        $user = $this->member->create($inputData);
 
         if ($user->id) {
             $message = Lang::get('confide::confide.alerts.account_created');
@@ -82,12 +81,12 @@ class MembersController extends BaseController implements LoginAuthenticatorList
                 $message .= Lang::get('confide::confide.alerts.not_confirmed');
             }
 
-            return Redirect::action('MembersController@login')
+            return Redirect::route('login-required')
                 ->with('notice', $message);
         } else {
             $error = $user->errors()->all(':message');
 
-            return Redirect::action('MembersController@create')
+            return Redirect::route('members.create')
                 ->withInput(Input::except('password'))
                 ->with('error', $error);
         }

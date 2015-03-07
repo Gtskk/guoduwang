@@ -13,4 +13,12 @@ class EloquentMemberRepository implements MemberRepository
 	{
 		return Member::findOrFail($id);
 	}
+
+	public function create($input)
+	{
+		$repo = \App::make('MemberRepository');
+        $user = $repo->signup($input);
+
+        return $user;
+	}
 }

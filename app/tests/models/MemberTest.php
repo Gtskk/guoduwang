@@ -22,7 +22,7 @@ class MemberTest extends TestCase {
 		$errors = $memeber->errors()->all();
 		$this->assertCount(1, $errors);
 
-		$this->assertEquals($errors[0], 'email必填。');
+		$this->assertEquals($errors[0], '邮箱必填。');
 	}
 
 }
