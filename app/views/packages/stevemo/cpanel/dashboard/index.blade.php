@@ -2,13 +2,13 @@
 
 @section('header')
     <h1>
-        Dashboard
+        {{ trans('cpanel::common.dashboard') }}
     </h1>
 @stop
 
 @section('breadcrumb')
 <li class="active">
     <i class="fa fa-dashboard"></i>
-    Dashboard
+    {{ trans('cpanel::common.dashboard') }}
 </li>
 @stop

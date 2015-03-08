@@ -1,7 +1,7 @@
 @extends('cpanel::layouts')
 
 @section('header')
-<h1> Users Throttling</h1>
+<h1> {{ trans('cpanel::users.user_throttling') }}</h1>
 @stop
 
 @section('breadcrumb')
@@ -9,10 +9,10 @@
 <li>
     <a href="{{route('cpanel.users.index')}}">
         <i class="fa fa-user"></i>
-        Users
+        {{ trans('cpanel::common.users') }}
     </a>
 </li>
-<li class="active">Throttling</li>
+<li class="active">{{ trans('cpanel::users.throttling') }}</li>
 @stop
 
 @section('content')
@@ -22,22 +22,22 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{{ $user->first_name }}&nbsp; {{ $user->last_name }} Throttling Status</h3>
+                <h3 class="panel-title">{{ $user->first_name }}&nbsp; {{ $user->last_name }} {{ trans('cpanel::users.throttling_status') }}</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>Feature</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>{{ trans('cpanel::users.feature') }}</th>
+                        <th>{{ trans('cpanel::users.status') }}</th>
+                        <th>{{ trans('cpanel::common.action') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     @if ($throttle->isBanned())
                     <tr>
-                        <td><strong>Ban Status</strong></td>
-                        <td>This is user is Banned</td>
+                        <td><strong>{{ trans('cpanel::users.ban_status') }}</strong></td>
+                        <td>{{ trans('cpanel::users.user_banned') }}</td>
                         <td>
                             <a href="{{ route('cpanel.users.throttling.update',array($user->id,'unban')) }}"
                                class="btn btn-primary" rel="tooltip" title="UnBan User"
@@ -49,14 +49,14 @@
                     </tr>
                     @else
                     <tr>
-                        <td><strong>Ban Status</strong></td>
-                        <td>This is user is not Banned</td>
+                        <td><strong>{{ trans('cpanel::users.ban_status') }}</strong></td>
+                        <td>{{ trans('cpanel::users.user_not_banned') }}</td>
                         <td>
                             <a href="{{ route('cpanel.users.throttling.update',array($user->id,'ban')) }}"
-                               class="btn btn-danger" rel="tooltip" title="Ban User"
-                               data-method="put" data-message="Ban this user?">
+                               class="btn btn-danger" rel="tooltip" title="{{ trans('cpanel::users.ban_user') }}"
+                               data-method="put" data-message="{{ trans('cpanel::users.ban_this_user') }}">
                                 <i class="fa fa-ban"></i>
-                                Ban User
+                                {{ trans('cpanel::users.ban_user') }}
                             </a>
                         </td>
                     </tr>
@@ -64,27 +64,27 @@
 
                     @if ($throttle->isSuspended())
                     <tr>
-                        <td><strong>Suspension status</strong></td>
-                        <td>This user is suspended</td>
+                        <td><strong>{{ trans('cpanel::users.suspension_status') }}</strong></td>
+                        <td>{{ trans('cpanel::users.user_suspended') }}</td>
                         <td>
                             <a href="{{ route('cpanel.users.throttling.update',array($user->id,'unsuspend')) }}"
-                               class="btn btn-primary" rel="tooltip" title="UnBan User"
-                               data-method="put" data-message="Unsuspend this user?">
+                               class="btn btn-primary" rel="tooltip" title="{{ trans('cpanel::users.unsuspend_user') }}"
+                               data-method="put" data-message="{{ trans('cpanel::users.unsuspend_this_user') }}">
                                 <i class="fa fa-check"></i>
-                                Unsuspend User
+                                {{ trans('cpanel::users.unsuspend_user') }}
                             </a>
                         </td>
                     </tr>
                     @else
                     <tr>
-                        <td><strong>Suspension status</strong></td>
-                        <td>This user is not suspended</td>
+                        <td><strong>{{ trans('cpanel::users.suspension_status') }}</strong></td>
+                        <td>{{ trans('cpanel::users.user_not_suspended') }}</td>
                         <td>
                             <a href="{{ route('cpanel.users.throttling.update',array($user->id,'suspend')) }}"
-                               class="btn btn-danger" rel="tooltip" title="Ban User"
-                               data-method="put" data-message="Suspend this user?">
+                               class="btn btn-danger" rel="tooltip" title="{{ trans('cpanel::users.suspend_user') }}"
+                               data-method="put" data-message="{{ trans('cpanel::users.suspend_this_user') }}">
                                 <i class="fa fa-ban"></i>
-                                Suspend User
+                                {{ trans('cpanel::users.suspend_user') }}
                             </a>
                         </td>
                     </tr>

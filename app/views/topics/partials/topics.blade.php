@@ -1,6 +1,6 @@
 @if (count($topics))
 
-<ul class="list-group row topic-list">
+<ul class="list-group row @if($column)topic-list @endif">
     @foreach ($topics as $topic)
     <li class="list-group-item media {{ !$column ?:'col-sm-6'; }}" style="margin-top: 0px;">
 
@@ -17,12 +17,15 @@
         <div class="infos">
 
             <div class="media-heading">
+                @if ($topic->is_excellent)
+                <span class="label label-danger">{{ lang('recommend') }}</span>
+                @endif
+                @if ($topic->order > 0 && !Input::get('filter'))
+                <span class="label label-success">{{ lang('top') }}</span>
+                @endif
                 <a href="{{ route('topics.show', [$topic->id]) }}" title="{{{ $topic->title }}}">
                     {{{ $topic->title }}}
                 </a>
-                @if ($topic->order > 0 && !Input::get('filter') && Route::currentRouteName() != 'home' )
-                    <i class="fa fa-thumb-tack" style="color:#969595;padding-left: 2px;"></i>
-                @endif
             </div>
             <div class="media-body meta">
 

@@ -51,7 +51,7 @@
                             <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
                             <p>
                                 {{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
-                                <small>Member since {{ Sentry::getUser()->created_at->format('M. Y') }}</small>
+                                <small>{{ trans('cpanel::common.member_since') }} {{ Sentry::getUser()->created_at->format('Y-m-d') }}</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -59,10 +59,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{route('cpanel.users.show',array(Sentry::getUser()->id))}}" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{route('cpanel.users.show',array(Sentry::getUser()->id))}}" class="btn btn-default btn-flat">{{ trans('cpanel::common.profile') }}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{route('cpanel.logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{route('cpanel.logout')}}" class="btn btn-default btn-flat">{{ trans('cpanel::common.sign_out') }}</a>
                             </div>
                         </li>
                     </ul>
@@ -84,7 +84,7 @@
                     <img src="{{asset('packages/stevemo/cpanel/adminlte/img/user.jpg')}}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>Hello, {{ Sentry::getUser()->first_name }}</p>
+                    <p>{{ trans('cpanel::common.hello') }}, {{ Sentry::getUser()->first_name }}</p>
                 </div>
             </div>
 
@@ -92,25 +92,25 @@
             <ul class="sidebar-menu">
                 <li class="{{ Request::is($cpanel['prefix']) ? 'active' : '' }}">
                     <a href="{{route('cpanel.home')}}">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <i class="fa fa-dashboard"></i> <span>{{ trans('cpanel::common.dashboard') }}</span>
                     </a>
                 </li>
                 <li class="{{ Request::is($cpanel['prefix'].'/users*') ? 'active' : '' }}">
                     <a href="{{route('cpanel.users.index')}}">
                         <i class="fa fa-user"></i>
-                        <span>Users</span>
+                        <span>{{ trans('cpanel::common.users') }}</span>
                     </a>
                 </li>
                 <li class="{{ Request::is($cpanel['prefix'].'/groups*') ? 'active' : '' }}">
                     <a href="{{route('cpanel.groups.index')}}">
                         <i class="fa fa-group"></i>
-                        <span>Groups</span>
+                        <span>{{ trans('cpanel::common.groups') }}</span>
                     </a>
                 </li>
                 <li class="{{ Request::is($cpanel['prefix'].'/permissions*') ? 'active' : '' }}">
                     <a href="{{route('cpanel.permissions.index')}}">
                         <i class="fa fa-ban"></i>
-                        <span>Permissions</span>
+                        <span>{{ trans('cpanel::common.permissions') }}</span>
                     </a>
                 </li>
 
@@ -128,7 +128,7 @@
                 @section('breadcrumb')
                 <li><a href="{{route('cpanel.home')}}">
                         <i class="fa fa-dashboard"></i>
-                        Dashboard
+                        {{ trans('cpanel::common.dashboard') }}
                     </a>
                 </li>
                 @show

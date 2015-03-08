@@ -25,7 +25,7 @@
 	@if ($member->github_name)
 	<dt><label>Github:</label></dt>
 	<dd>
-		<a href="{{ $member->github_url }}">
+		<a href="{{ $member->github_url or 'https://github.com/'.$member->github_name }}">
 			<i class="fa fa-github-alt"></i> {{ $member->github_name }}
 		</a>
 	</dd>

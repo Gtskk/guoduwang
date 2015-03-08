@@ -1,7 +1,7 @@
 @extends('cpanel::layouts')
 
 @section('header')
-<h1>Users</h1>
+<h1>{{ trans('cpanel::common.users') }}</h1>
 @stop
 
 @section('breadcrumb')
@@ -9,7 +9,7 @@
 <li>
     <a href="{{route('cpanel.users.index')}}">
         <i class="fa fa-user"></i>
-        Users
+        {{ trans('cpanel::common.users') }}
     </a>
 </li>
 <li class="active">Create</li>

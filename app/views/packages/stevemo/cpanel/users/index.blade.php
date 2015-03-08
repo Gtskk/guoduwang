@@ -1,12 +1,12 @@
 @extends('cpanel::layouts')
 
 @section('header')
-    <h1>Users</h1>
+    <h1>{{ trans('cpanel::common.users') }}</h1>
 @stop
 
 @section('breadcrumb')
     @parent
-    <li class="active"><i class="fa fa-user"></i> Users</li>
+    <li class="active"><i class="fa fa-user"></i> {{ trans('cpanel::common.users') }}</li>
 @stop
 
 @section('content')
@@ -21,7 +21,7 @@
                             <a href="{{ route('cpanel.users.create') }}" class="btn btn-primary"
                                data-toggle="tooltip" title="Create New User">
                                 <i class="fa fa-plus"></i>
-                                New User
+                                {{ trans('cpanel::users.new_user') }}
                             </a>
                         </div>
                     </h3>
@@ -30,12 +30,12 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th class="hidden-xs">Email</th>
-                            <th class="hidden-xs">Active</th>
-                            <th class="hidden-xs">Joined</th>
-                            <th class="hidden-xs">Last Visit</th>
-                            <th>Action</th>
+                            <th>{{ trans('common.name') }}</th>
+                            <th class="hidden-xs">{{ trans('common.email') }}</th>
+                            <th class="hidden-xs">{{ trans('cpanel::users.active') }}</th>
+                            <th class="hidden-xs">{{ trans('cpanel::users.joined') }}</th>
+                            <th class="hidden-xs">{{ trans('cpanel::users.last_visit') }}</th>
+                            <th>{{ trans('cpanel::common.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -49,30 +49,30 @@
                             <td>
                                 <div class="btn-group">
                                     <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                                        Action
+                                        {{ trans('cpanel::common.action') }}
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="{{ route('cpanel.users.show', array($user->id)) }}">
-                                                <i class="fa fa-info-circle"></i>&nbsp;View User
+                                                <i class="fa fa-info-circle"></i>&nbsp;{{ trans('cpanel::common.view_something', array('thing'=>trans('cpanel::users.user'))) }}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('cpanel.users.edit', array($user->id)) }}">
-                                                <i class="fa fa-edit"></i>&nbsp;Edit User
+                                                <i class="fa fa-edit"></i>&nbsp;{{ trans('cpanel::common.edit_something', array('thing'=>trans('cpanel::users.user'))) }}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('cpanel.users.permissions', array($user->id)) }}">
-                                                <i class="fa fa-ban"></i>&nbsp;Permissions
+                                                <i class="fa fa-ban"></i>&nbsp;{{ trans('cpanel::common.permissions') }}
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('cpanel.users.destroy', array($user->id)) }}"
                                                data-method="delete"
                                                data-message="delete this User?">
-                                                <i class="fa fa-trash-o"></i>&nbsp;Delete User
+                                                <i class="fa fa-trash-o"></i>&nbsp;{{ trans('cpanel::common.delete_something', array('thing'=>trans('cpanel::users.user'))) }}
                                             </a>
                                         </li>
                                         <li class="divider"></li>
@@ -81,20 +81,20 @@
                                             <a href="{{ route('cpanel.users.deactivate', array($user->id)) }}"
                                                data-method="put"
                                                data-message="Deactivate this User?">
-                                                <i class="fa fa-minus-circle"></i>&nbsp;Deactivate
+                                                <i class="fa fa-minus-circle"></i>&nbsp;{{ trans('cpanel::users.deactivate') }}
                                             </a>
                                             @else
                                             <a href="{{ route('cpanel.users.activate', array($user->id)) }}"
                                                data-method="put"
                                                data-message="Activate this User?">
-                                                <i class="fa fa-check"></i>&nbsp;Activate
+                                                <i class="fa fa-check"></i>&nbsp;{{ trans('cpanel::users.activate') }}
                                             </a>
                                             @endif
                                         </li>
                                         <li class="divider"></li>
                                         <li>
                                             <a href="{{ route('cpanel.users.throttling', array($user->id)) }}">
-                                                <i class="fa fa-key"></i>&nbsp;Throttling
+                                                <i class="fa fa-key"></i>&nbsp;{{ trans('cpanel::users.throttling') }}
                                             </a>
                                         </li>
                                     </ul>

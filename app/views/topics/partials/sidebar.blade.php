@@ -37,15 +37,16 @@
 		</div>
 	@endif
 
-	@if (Route::currentRouteName() == 'topics.index')
+	@if (is_array($resources = Config::get('site.recommend_resources')))
 		<div class="panel panel-default corner-radius">
 			<div class="panel-heading text-center">
 				<h3 class="panel-title">{{ lang('Recomended Resources') }}</h3>
 			</div>
 			<div class="panel-body">
 				<ul class="list">
-					<li><a href="http://laravel-china.org/">Laravel 4.2 文档</a></li>
-					<li><a href="http://wulijun.github.io/php-the-right-way/">PHP The Right Way 中文版</a></li>
+					@foreach(array_rand($resources, 2) as $res)
+					<li><a href="{{{ $resources[$res]['url'] }}}">{{{ $resources[$res]['name'] }}}</a></li>
+					@endforeach
 				</ul>
 			</div>
 		</div>

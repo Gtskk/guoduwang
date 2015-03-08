@@ -10,6 +10,7 @@ return array(
 	'have_membership' 	=> 'I already have a membership',
 	'first_name'		=> 'First Name',
 	'last_name'			=> 'Last Name',
+	'name'				=> 'Name',
 	'email'				=> 'Email',
 	'password'			=> 'Password',
 	'retype_password'	=> 'Retype Password',

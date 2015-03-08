@@ -10,6 +10,7 @@ return array(
 	'have_membership' 	=> '已有账号',
 	'first_name'		=> '姓',
 	'last_name'			=> '名',
+	'name' 				=> '姓名',
 	'username'			=> '用户名',
 	'email'				=> '邮箱',
 	'password'			=> '密码',

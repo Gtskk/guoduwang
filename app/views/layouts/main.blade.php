@@ -17,6 +17,7 @@
             Config = {
                 'user_id': {{ isset($currentUser) ? $currentUser->id : 0 }},
                 'routes': {
+                	'site_url': '{{ url('/') }}',
                 	'topic_url': '{{ route('topics.index') }}',
                 	'login_url': '{{ route('login-required') }}',
                     'upload_image' : '{{ route('upload_image') }}',
@@ -35,10 +36,10 @@
 	<body>
 
 		<div id="wrap">
-		    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		    <nav class="navbar navbar-inverse navbar-fixed-top">
 		        <div class="container">
 		            <div class="navbar-header">
-		                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		                <button type="button" class="navbar-toggle" data-target="#navbar">
 		                    <span class="sr-only">Toggle navigation</span>
 		                    <span class="icon-bar"></span>
 		                    <span class="icon-bar"></span>
@@ -47,7 +48,7 @@
 		                <a class="navbar-brand" href="{{ URL::to('/') }}">{{ Config::get('site.site_config.site_name') }}</a>
 		            </div>
 
-		            <div id="navbar" class="navbar-collapse collapse">
+		            <div id="navbar" class="collapse navbar-collapse">
 		                <ul class="nav navbar-nav">
 		                    <?php $num = count(Config::get('site.main_menu'));?>
 		                    @foreach (Config::get('site.main_menu') as $title => $args)
@@ -83,12 +84,12 @@
 						
 						<div class="navbar-right">
 			                <!-- 搜索 -->
-			                <form class="navbar-form navbar-left" action="{{ URL::to('search') }}" accetp-charset="UTF-8">
+			                <form class="navbar-form navbar-left" action="{{ URL::to('search') }}" accetp-charset="UTF-8" role="search">
 					            <input id="searchkey" type="text" class="form-control" placeholder="搜索" name="q">
 					        </form>
 
 			                @if(Auth::check())
-			                <ul class="nav navbar-nav">
+			                <ul class="nav navbar-nav navbar-right">
 			                    <li>
 			                  	<a href="{{ route('notifications.index') }}" class="text-warning">
 			                      	<span class="badge badge-fade" id="notification-count">0</span>
@@ -137,6 +138,39 @@
 		</div>
 		
 		<script type="text/javascript" src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
+		<!--<script type="text/javascript">
+		    // Enable pusher logging - don't include this in production
+		    // Pusher.log = function(message) {
+		    //   	if (window.console && window.console.log) {
+		    //     	window.console.log(message);
+		    // 	}
+		    // };
+
+            if(Config.user_id > 0)
+            {
+            	$.get(Config.routes.notificationsCount);
+
+			    var pusher = new Pusher('1bc9b80b828a5ca33f9a');
+			    var channel = pusher.subscribe('notifications');
+			    var original_title = document.title;
+			    channel.bind('count', function(data) {
+			      	var nCount = parseInt(data.count);
+			      	if(nCount > 0)
+			      	{
+			      	    $('#notification-count').text(nCount);
+			      	    $('#notification-count').hasClass('badge-important') || $('#notification-count').addClass('badge-important');
+			      	    document.title = '('+nCount+')'+original_title;
+			      	}
+			      	else
+			      	{
+			      	    document.title =  original_title;
+			      	    $('#notification-count').text(0);
+			      	    $('#notification-count').addClass('badge-fade');
+			      	    $('#notification-count').removeClass('badge-important');
+			      	}
+			    });
+			}
+	  	</script>-->
 		@yield('javascript')
 
 	</body>
