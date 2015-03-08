@@ -1,15 +1,29 @@
 <?php
+
 use Stevemo\Cpanel\Controllers\BaseController;
-class AdminPostsController extends BaseController {
-	public $type;
-	public function __construct(){
-		if(Input::has('type')){
+
+class AdminTopicsController extends BaseController {
+
+	private $type;
+
+	public function __construct()
+	{
+
+		if(Input::has('type'))
+		{
 			$this->type = Input::get('type');
-		}else{
+		}
+		else
+		{
 			$this->type = 'post';
 		}
 
-		View::composer(array('admin.posts.index', 'admin.posts.show', 'admin.posts.create', 'admin.posts.edit'), function($view){
+		View::composer(array(
+			'theme::admin.topics.index', 
+			'theme::admin.topics.show', 
+			'theme::admin.topics.create', 
+			'admin.topics.edit'), function($view)
+		{
 			$view->with('type', Input::get('type'));
 		});
 	}
@@ -21,8 +35,8 @@ class AdminPostsController extends BaseController {
 	 */
 	public function index()
 	{
-		$posts = Post::where('type', $this->type)->paginate(20);
-        return View::make('admin.posts.index', compact('posts'));
+		$topics = Post::where('type', $this->type)->paginate(20);
+        return View::make('theme::admin.topics.index', compact('topics'));
 	}
 
 	/**
@@ -32,7 +46,7 @@ class AdminPostsController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('admin.posts.create');
+        return View::make('theme::admin.topics.create');
 	}
 
 	/**
@@ -42,7 +56,7 @@ class AdminPostsController extends BaseController {
 	 */
 	public function store()
 	{
-		$img = $this->save_file(Input::file('thumbnail'), 60, 25, 'posts');
+		$img = $this->save_file(Input::file('thumbnail'), 60, 25, 'topics');
 
 		$inputs = Input::except('slug', 'thumbnail');
 		$inputs['slug'] = Str::slug(Input::get('slug'));
@@ -51,8 +65,8 @@ class AdminPostsController extends BaseController {
 		$post = Post::create($inputs);
         if ( !$post->errors()->all() )
         {
-            return Redirect::route('admin.posts.index', array('type' => $this->type))
-                ->with('success', Lang::get('cpanel::posts.create_success'));
+            return Redirect::route('admin.topics.index', array('type' => $this->type))
+                ->with('success', Lang::get('cpanel::topics.create_success'));
         }
 
         return Redirect::back()
@@ -69,7 +83,7 @@ class AdminPostsController extends BaseController {
 	public function show($id)
 	{
 		$post = Post::find($id);
-        return View::make('admin.posts.show', compact('post'));
+        return View::make('theme::admin.topics.show', compact('post'));
 	}
 
 	/**
@@ -82,7 +96,7 @@ class AdminPostsController extends BaseController {
 	{
 		$post = Post::find($id);
 
-        return View::make('admin.posts.edit', compact('post'));
+        return View::make('theme::admin.topics.edit', compact('post'));
 	}
 
 	/**
@@ -95,7 +109,7 @@ class AdminPostsController extends BaseController {
 	{
 		$post = Post::find($id);
 		
-		$img = $this->save_file(Input::file('thumbnail'), 60, 25, 'posts');
+		$img = $this->save_file(Input::file('thumbnail'), 60, 25, 'topics');
 		if($img == ''){
 			$img = $post->thumbnail;
 		}
@@ -106,8 +120,8 @@ class AdminPostsController extends BaseController {
 
         if( $post->update($credentials) )
         {
-            return Redirect::route('admin.posts.index', array('type' => $this->type))
-                ->with('success', Lang::get('cpanel::posts.update_success'));
+            return Redirect::route('admin.topics.index', array('type' => $this->type))
+                ->with('success', Lang::get('cpanel::topics.update_success'));
         }
 
         return Redirect::back()
@@ -125,8 +139,8 @@ class AdminPostsController extends BaseController {
 	{
         Post::destroy($id);
 
-        return Redirect::route('admin.posts.index', array('type' => $this->type))
-            ->with('success',Lang::get('cpanel::posts.delete_success'));
+        return Redirect::route('admin.topics.index', array('type' => $this->type))
+            ->with('success',Lang::get('cpanel::topics.delete_success'));
 	}
 
 }

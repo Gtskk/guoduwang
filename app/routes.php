@@ -177,10 +177,52 @@ Route::group(['before' => 'manage_users'], function(){
 
 //后台路由
 Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'=>'cache'), function(){
-	Route::resource('posts', 'AdminPostsController');
-	Route::resource('comments', 'AdminCommentsController');
-	Route::resource('products', 'AdminProductsController', array('except' => array('show')));
-	Route::resource('categories', 'AdminCategoriesController', array('except' => array('show')));
+	/*
+	|--------------------------------------------------------------------------
+	| Admin Topics Routes
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+	Route::get('topics', array(
+	    'as'     => 'admin.topics.index',
+	    'uses'   => 'AdminTopicsController@index',
+	));
+	Route::post('topics', array(
+	    'as'     => 'admin.topics.store',
+	    'uses'   => 'AdminTopicsController@store',
+	));
+	Route::get('topics/create', array(
+	    'as'     => 'admin.topics.create',
+	    'uses'   => 'AdminTopicsController@create',
+	));
+	Route::get('topics/{id}', array(
+	    'as'     => 'admin.topics.show',
+	    'uses'   => 'AdminTopicsController@show',
+	));
+	Route::get('topics/{id}/edit', array(
+	    'as'     => 'admin.topics.edit',
+	    'uses'   => 'AdminTopicsController@edit',
+	));
+	Route::put('topics/{id}', array(
+	    'as'     => 'admin.topics.update',
+	    'uses'   => 'AdminTopicsController@update',
+	));
+	Route::delete('topics/{id}', array(
+	    'as'     => 'admin.topics.destroy',
+	    'uses'   => 'AdminTopicsController@destroy',
+	));
+	Route::put('topics/{topics}/activate', array(
+	    'as'     => 'admin.topics.activate',
+	    'uses'   => 'AdminTopicsController@putActivate',
+	));
+
+	Route::put('topics/{topics}/deactivate', array(
+	    'as'     => 'admin.topics.deactivate',
+	    'uses'   => 'AdminTopicsController@putDeactivate',
+	));
+
+	// Route::resource('members', 'AdminMembersController');
 });
 //自定义404
 App::missing(function($exception)

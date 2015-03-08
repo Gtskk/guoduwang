@@ -9,6 +9,7 @@ return array (
     'Login' => 'Login',
     'Logout' => 'Logout',
     'New Topic' => 'New Topic',
+    'no_topics' => 'No Topics',
     'Links' => 'Links',
     'Same Node Topics' => 'Same Node Topics',
     'Tips and Tricks' => 'Tips and Tricks',

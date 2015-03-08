@@ -9,6 +9,7 @@ return array(
     'Login' => '登 录',
     'Logout' => '退出',
     'New Topic' => '发 布 新 帖',
+    'no_topics' => '暂无话题',
     'Links' => '友情社区',
     'Same Node Topics' => '节点下其他主题',
     'Tips and Tricks' => '小贴士',
