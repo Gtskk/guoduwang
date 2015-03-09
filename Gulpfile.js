@@ -52,7 +52,7 @@ var paths = {
 gulp.task('css', function() {
 
     // Cleanup old assets
-    del.sync(['public/assets/css/styles-*.css']);
+    del.sync(['public/css/styles-*.css']);
 
     // Prefix, compress and concat the CSS assets
     // Afterwards add the MD5 hash to the filename
@@ -61,14 +61,14 @@ gulp.task('css', function() {
         .pipe(rev())
         .pipe(filename({ bundleName: 'frontend.styles' })) // This will create/update the assets.json file
         .pipe(minifycss())
-        .pipe(gulp.dest('public/assets/css'));
+        .pipe(gulp.dest('public/css'));
 });
 
 // JavaScript task
 gulp.task('js', function() {
 
     // Cleanup old assets
-    del.sync(['public/assets/js/scripts-*.js']);
+    del.sync(['public/js/scripts-*.js']);
 
     // Concat and uglify the JavaScript assets
     // Afterwards add the MD5 hash to the filename
@@ -77,7 +77,7 @@ gulp.task('js', function() {
         .pipe(uglify())
         .pipe(rev())
         .pipe(filename({ bundleName: 'frontend.scripts' })) // This will create/update the assets.json file
-        .pipe(gulp.dest('public/assets/js'));
+        .pipe(gulp.dest('public/js'));
 });
 
 /*// Font task

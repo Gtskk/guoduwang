@@ -10,8 +10,9 @@
 		<meta name="keywords" content="{{ Config::get('site.site_config.keywords') }}" />
 		<title>{{ Config::get('site.site_config.site_name') }}</title>
 
-		<link rel="stylesheet" href="{{ asset('assets/css/'.get_css_js_file('frontend.styles')) }}">
+		<!-- <link rel="stylesheet" href="{{ asset('assets/css/'.get_css_js_file('frontend.styles')) }}"> -->
 		@yield('styles')
+		{{ stylesheet_link_tag() }}
 
 		<script>
             Config = {
@@ -137,7 +138,7 @@
 		    </div>
 		</div>
 		
-		<script type="text/javascript" src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>
+		<!--<script type="text/javascript" src="{{ asset('assets/js/'.get_css_js_file('frontend.scripts')) }}"></script>-->
 		<!--<script type="text/javascript">
 		    // Enable pusher logging - don't include this in production
 		    // Pusher.log = function(message) {
@@ -172,6 +173,7 @@
 			}
 	  	</script>-->
 		@yield('javascript')
+		{{ javascript_include_tag() }}
 
 	</body>
 </html>

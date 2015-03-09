@@ -126,6 +126,7 @@ return array(
 		'Laracasts\Flash\FlashServiceProvider',
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Thujohn\Rss\RssServiceProvider',
+		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
 		'Gtskk\Storage\Member\StorageServiceProvider',
 
 	),

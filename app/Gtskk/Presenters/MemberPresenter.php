@@ -10,7 +10,7 @@ class MemberPresenter extends Presenter
      */
     public function gravatar($size = 80)
     {
-        return asset('assets/img/avatarDefault.jpg');
+        return asset('img/avatarDefault.jpg');
     }
 
     public function userinfoNavActive($anchor)
