@@ -13,4 +13,7 @@ return array(
     'view_something' => 'View :thing',
     'edit_something' => 'Edit :thing',
     'delete_something' => 'Delete :thing',
+    'members' => 'Members',
+    'delete_success' => 'Delete Successfully',
+    'operate_failed' => 'Operation Failed',
 );

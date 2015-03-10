@@ -11,8 +11,8 @@
 		<title>{{ Config::get('site.site_config.site_name') }}</title>
 
 		<!-- <link rel="stylesheet" href="{{ asset('assets/css/'.get_css_js_file('frontend.styles')) }}"> -->
-		@yield('styles')
 		{{ stylesheet_link_tag() }}
+		@yield('styles')
 
 		<script>
             Config = {
@@ -172,8 +172,8 @@
 			    });
 			}
 	  	</script>-->
-		@yield('javascript')
 		{{ javascript_include_tag() }}
+		@yield('javascript')
 
 	</body>
 </html>

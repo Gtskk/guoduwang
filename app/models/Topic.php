@@ -109,19 +109,19 @@ class Topic extends Ardent
 	{
 		switch ($filter) {
 			case 'noreply':
-				return $this->where('reply_count', 0)->recent();
+				return $this->where('reply_count', 0)->recent()->whereNull('deleted_at');
 				break;
 			case 'vote':
-				return $this->orderBy('vote_count', 'desc')->recent();
+				return $this->orderBy('vote_count', 'desc')->recent()->whereNull('deleted_at');
 				break;
 			case 'excellent':
-				return $this->excellent()->recent();
+				return $this->excellent()->recent()->whereNull('deleted_at');
 				break;
 			case 'recent':
-				return $this->recent();
+				return $this->recent()->whereNull('deleted_at');
 				break;
 			default:
-				return $this->pin()->recentReply();
+				return $this->pin()->recentReply()->whereNull('deleted_at');
 				break;
 		}
 	}

@@ -188,41 +188,46 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	    'as'     => 'admin.topics.index',
 	    'uses'   => 'AdminTopicsController@index',
 	));
-	Route::post('topics', array(
-	    'as'     => 'admin.topics.store',
-	    'uses'   => 'AdminTopicsController@store',
-	));
-	Route::get('topics/create', array(
-	    'as'     => 'admin.topics.create',
-	    'uses'   => 'AdminTopicsController@create',
-	));
-	Route::get('topics/{id}', array(
-	    'as'     => 'admin.topics.show',
-	    'uses'   => 'AdminTopicsController@show',
-	));
-	Route::get('topics/{id}/edit', array(
-	    'as'     => 'admin.topics.edit',
-	    'uses'   => 'AdminTopicsController@edit',
-	));
-	Route::put('topics/{id}', array(
-	    'as'     => 'admin.topics.update',
-	    'uses'   => 'AdminTopicsController@update',
-	));
 	Route::delete('topics/{id}', array(
 	    'as'     => 'admin.topics.destroy',
 	    'uses'   => 'AdminTopicsController@destroy',
 	));
-	Route::put('topics/{topics}/activate', array(
-	    'as'     => 'admin.topics.activate',
-	    'uses'   => 'AdminTopicsController@putActivate',
+	Route::delete('topics', array(
+	    'as'     => 'admin.topics.destroyMany',
+	    'uses'   => 'AdminTopicsController@destroyMany',
 	));
 
-	Route::put('topics/{topics}/deactivate', array(
-	    'as'     => 'admin.topics.deactivate',
-	    'uses'   => 'AdminTopicsController@putDeactivate',
+	/*
+	|--------------------------------------------------------------------------
+	| Admin Members Routes
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+	Route::get('members', array(
+	    'as'     => 'admin.members.index',
+	    'uses'   => 'AdminMembersController@index',
 	));
-
-	// Route::resource('members', 'AdminMembersController');
+	Route::post('members', array(
+	    'as'     => 'admin.members.store',
+	    'uses'   => 'AdminMembersController@store',
+	));
+	Route::get('members/create', array(
+	    'as'     => 'admin.members.create',
+	    'uses'   => 'AdminMembersController@create',
+	));
+	Route::get('members/{id}/edit', array(
+	    'as'     => 'admin.members.edit',
+	    'uses'   => 'AdminMembersController@edit',
+	));
+	Route::put('members/{id}', array(
+	    'as'     => 'admin.members.update',
+	    'uses'   => 'AdminMembersController@update',
+	));
+	Route::delete('members/{id}', array(
+	    'as'     => 'admin.members.destroy',
+	    'uses'   => 'AdminMembersController@destroy',
+	));
 });
 //自定义404
 App::missing(function($exception)

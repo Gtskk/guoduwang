@@ -16,11 +16,12 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <div class="btn-toolbar">
-                            <a href="{{ route('admin.topics.create') }}" class="btn btn-primary"
-                               data-toggle="tooltip" title="{{ trans('gtskk.New Topic') }}">
-                                <i class="fa fa-plus"></i>
-                                {{ trans('gtskk.New Topic') }}
-                            </a>
+                            <form action="" class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="{{ trans('cpanel::topics.search_for') }}...">
+                                    <button class="btn btn-primary" type="button">Go!</button>
+                                </div>
+                            </form>
                         </div>
                     </h3>
                 </div>
@@ -29,45 +30,37 @@
                         @if(count($topics))
                         <thead>
                         <tr>
-                            <th>{{ trans('common.name') }}</th>
-                            <th class="hidden-xs">{{ trans('common.email') }}</th>
-                            <th class="hidden-xs">{{ trans('cpanel::users.active') }}</th>
-                            <th class="hidden-xs">{{ trans('cpanel::users.joined') }}</th>
-                            <th class="hidden-xs">{{ trans('cpanel::users.last_visit') }}</th>
+                            <th>&nbsp;</th>
+                            <th>{{ trans('cpanel::topics.title') }}</th>
+                            <th>{{ trans('cpanel::topics.excerpt') }}</th>
+                            <th>{{ trans('cpanel::topics.node') }}</th>
+                            <th>{{ trans('cpanel::topics.author') }}</th>
+                            <th>{{ trans('cpanel::topics.is_excellent') }}</th>
+                            <th>{{ trans('cpanel::topics.reply_count') }}</th>
+                            <th>{{ trans('cpanel::topics.view_count') }}</th>
+                            <th>{{ trans('cpanel::topics.favorite_count') }}</th>
+                            <th>{{ trans('cpanel::topics.vote_count') }}</th>
                             <th>{{ trans('cpanel::common.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($topics as $topic)
                             <tr>
-                                <td>{{ HTML::linkRoute('admin.topics.show',e($topic->title), array($topic->id)) }}</td>
-                                <td>{{{ $topic->slug }}}</td>
-                                <td>{{ date('Y-m-d', strtotime($topic->pubdate)) }}</td>
+                                <td><input type="checkbox" name="delete[]" value="{{ $topic->id }}" /></td>
+                                <td>{{ HTML::linkRoute('topics.show',e($topic->title), array($topic->id), array('target'=>'_blank')) }}</td>
+                                <td title="{{{ $topic->excerpt }}}">{{{ str_limit($topic->excerpt, 20) }}}</td>
+                                <td>{{ HTML::linkRoute('nodes.show',e($topic->node->name), array($topic->node->id), array('target'=>'_blank')) }}</td>
+                                <td>{{ $topic->member->username }}</td>
+                                <td>{{ $topic->is_excellent ? '是' : '否' }}</td>
+                                <td>{{ $topic->reply_count }}</td>
+                                <td>{{ $topic->view_count }}</td>
+                                <td>{{ $topic->favorite_count }}</td>
+                                <td>{{ $topic->vote_count }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                                            {{ trans('cpanel::common.action') }}
-                                            <span class="caret"></span>
+                                        <a class="btn btn-primary" href="{{ route('admin.topics.destroy', array($topic->id)) }}" data-method="delete" data-message="{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}">
+                                           <i class="fa fa-trash-o"></i>&nbsp;{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}
                                         </a>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a href="{{ route('admin.topics.show', array($topic->id, 'type' => $type)) }}">
-                                                    <i class="icon-info-sign"></i>&nbsp;{{ trans('cpanel::common.view_thing', array('name' => trans('cpanel::topics.topic'))) }}
-                                                </a>
-                                            </li>
-                                            <li>
-                                               <a href="{{ route('admin.topics.edit', array($topic->id, 'type' => $type)) }}">
-                                                   <i class="icon-edit"></i>&nbsp;{{ trans('cpanel::common.edit_thing', array('name' => trans('cpanel::topics.topic'))) }}
-                                               </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('admin.topics.destroy', array($topic->id)) }}"
-                                                   data-method="delete"
-                                                   data-modal-text="{{ trans('cpanel::common.delete_ensure', array('name' => trans('cpanel::topics.topic'))) }}">
-                                                   <i class="icon-trash"></i>&nbsp;{{ trans('cpanel::common.delete_thing', array('name' => trans('cpanel::topics.topic'))) }}
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </td>
                             </tr>
@@ -80,9 +73,66 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="panel-footer">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="quanxuan" />
+                            &nbsp;全选 / 全不选
+                        </label>
+                        <label>
+                            <input type="checkbox" id="fanxuan" />
+                            &nbsp;反选
+                        </label>
+
+                        <a href="{{ route('admin.topics.destroyMany') }}" data-method="delete" data-special="true" data-message="{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">批量删除</a>
+                    </div>
+
+                </div>
             </div>
 
         </div>
     </div>
 
+@stop
+
+@section('javascript')
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        var deletes = $("input[name='delete[]']");
+        // 全选或者全不选
+        $('#quanxuan').on('ifChanged', function(){
+            if($(this).prop("checked") === true)
+            { //全选
+                deletes.each(function()
+                {
+                    $(this).iCheck('check');
+                });
+            }
+            else
+            {// 全不选
+                deletes.each(function()
+                {
+                    $(this).iCheck("uncheck");
+                });
+            }
+        });
+
+        // 反选
+        $('#fanxuan').on('ifChanged', function(){
+            deletes.each(function(){
+                if($(this).prop('checked') === true)
+                {
+                    $(this).iCheck('uncheck');
+                }
+                else
+                {
+                    $(this).iCheck('check');
+                }
+            });
+        });
+    });
+    
+</script>
 @stop

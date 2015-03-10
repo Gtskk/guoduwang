@@ -134,4 +134,12 @@ return array (
     'recommend' => 'Recommend',
     'top' => 'Top',
     'not_authorized' => 'Permission Denied',
+    'Please fill in the content' => 'Please fill in the content',
+    'username_or_email' => 'Username / Email',
+    'username_not_null' => 'Username or email can not be null',
+    'password_not_null' => 'Password can not be null',
+    'email_not_valid' => 'Please supply valid email address',
+    'url_not_valid' => 'Please supply valid url',
+    'password_not_valid' => 'Password must be between 6 and 15',
+    'password_not_pair' => 'Password mismatched',
 );

@@ -13,4 +13,7 @@ return array(
     'view_something' => '查看:thing',
     'edit_something' => '编辑:thing',
     'delete_something' => '删除:thing',
+    'members' => '会员',
+    'delete_success' => '删除成功',
+    'operate_failed' => '操作失败',
 );

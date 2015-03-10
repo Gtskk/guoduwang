@@ -2,7 +2,7 @@
 
 return array(
 
-	'remember' 			=> 'Remember'
+	'remember' 			=> 'Remember',
 	'sign_in'  			=> 'Sign In',
 	'error'    			=> 'Error',
 	'forgot_passwd' 	=> 'Forgot Password ?',

@@ -132,4 +132,12 @@ return array(
     'recommend' => '推荐',
     'top' => '置顶',
     'not_authorized' => '无权限',
+    'Please fill in the content' => '请填写内容',
+    'username_or_email' => '用户名/邮箱',
+    'username_not_null' => '用户名或者邮箱不能为空',
+    'password_not_null' => '密码不能为空',
+    'email_not_valid' => '请输入合法的邮箱地址',
+    'url_not_valid' => '请输入合法的URL地址',
+    'password_not_valid' => '密码范围在6~15位之间',
+    'password_not_pair' => '您两次输入的账号密码不一致',
 );
