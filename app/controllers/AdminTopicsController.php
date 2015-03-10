@@ -24,6 +24,18 @@ class AdminTopicsController extends BaseController {
 	}
 
 	/**
+	 * 回收站页面
+	 *
+	 * @return Response
+	 */
+	public function topicsTrash()
+	{
+		$filter = $this->topic->present()->getTopicFilter();
+        $topics = $this->topic->getTrashTopicsWithFilter($filter);
+        return View::make('theme::admin.topics.trash', compact('topics'));
+	}
+
+	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id

@@ -11,4 +11,5 @@ return array(
 	'favorite_count' => 'Favorite',
 	'vote_count' => 'Vote',
 	'search_for' => 'Search for',
+	'trash' => 'Trash',
 );

@@ -2,8 +2,8 @@
 
 @section('header')
     <h3>
-        <span class="glyphicon glyphicon-list-alt"></span>
-        {{ trans('gtskk.Topics') }}
+        <span class="glyphicon glyphicon-trash"></span>
+        {{ trans('cpanel::topics.trash') }}
     </h3>
 @stop
 
@@ -22,8 +22,6 @@
                                     <button class="btn btn-primary" type="button">Go!</button>
                                 </div>
                             </form>
-
-                            <a href="{{ route('admin.topics.topicsTrash') }}" class="navbar-right btn btn-lg btn-primary">{{ trans('cpanel::topics.trash') }}</a>
                         </div>
                     </h3>
                 </div>
@@ -49,7 +47,7 @@
                         @foreach ($topics as $topic)
                             <tr>
                                 <td><input type="checkbox" name="delete[]" value="{{ $topic->id }}" /></td>
-                                <td>{{ HTML::linkRoute('topics.show',e($topic->title), array($topic->id), array('target'=>'_blank')) }}</td>
+                                <td>{{{ $topic->title }}}</td>
                                 <td title="{{{ $topic->excerpt }}}">{{{ str_limit($topic->excerpt, 20) }}}</td>
                                 <td>{{ HTML::linkRoute('nodes.show',e($topic->node->name), array($topic->node->id), array('target'=>'_blank')) }}</td>
                                 <td>{{ $topic->member->username }}</td>

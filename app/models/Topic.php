@@ -97,6 +97,14 @@ class Topic extends Ardent
 					->paginate($limit);
 	}
 
+	public function getTrashTopicsWithFilter($filter, $limit = 13)
+	{
+		return $this->applyFilter($filter)
+					->with('member', 'node')
+					->onlyTrashed()
+					->paginate($limit);
+	}
+
 	public function getNodeTopicsWithFilter($filter, $node_id, $limit = 13)
 	{
 		return $this->applyFilter($filter)
@@ -109,19 +117,19 @@ class Topic extends Ardent
 	{
 		switch ($filter) {
 			case 'noreply':
-				return $this->where('reply_count', 0)->recent()->whereNull('deleted_at');
+				return $this->where('reply_count', 0)->recent();
 				break;
 			case 'vote':
-				return $this->orderBy('vote_count', 'desc')->recent()->whereNull('deleted_at');
+				return $this->orderBy('vote_count', 'desc')->recent();
 				break;
 			case 'excellent':
-				return $this->excellent()->recent()->whereNull('deleted_at');
+				return $this->excellent()->recent();
 				break;
 			case 'recent':
-				return $this->recent()->whereNull('deleted_at');
+				return $this->recent();
 				break;
 			default:
-				return $this->pin()->recentReply()->whereNull('deleted_at');
+				return $this->pin()->recentReply();
 				break;
 		}
 	}
