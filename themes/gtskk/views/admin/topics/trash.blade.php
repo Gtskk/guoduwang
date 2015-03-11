@@ -58,8 +58,8 @@
                                 <td>{{ $topic->vote_count }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-primary" href="{{ route('admin.topics.destroy', array($topic->id)) }}" data-method="delete" data-message="{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}">
-                                           <i class="fa fa-trash-o"></i>&nbsp;{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}
+                                        <a class="btn btn-primary" href="{{ route('admin.topics.restore', array($topic->id)) }}" data-method="put" data-message="{{ trans('cpanel::common.restore') }}？">
+                                           <i class="fa fa-trash-o"></i>&nbsp;{{ trans('cpanel::common.restore') }}
                                         </a>
                                     </div>
                                 </td>
@@ -81,14 +81,14 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="quanxuan" />
-                            &nbsp;全选 / 全不选
+                            &nbsp;{{ trans('cpanel::common.allselect_or') }}
                         </label>
                         <label>
                             <input type="checkbox" id="fanxuan" />
-                            &nbsp;反选
+                            &nbsp;{{ trans('cpanel::common.uncheck') }}
                         </label>
 
-                        <a href="{{ route('admin.topics.destroyMany') }}" data-method="delete" data-special="true" data-message="{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">批量删除</a>
+                        <a href="{{ route('admin.topics.destroyMany') }}" data-method="delete" data-special="true" data-message="{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">{{ trans('cpanel::common.bulk_restore') }}</a>
                     </div>
 
                 </div>

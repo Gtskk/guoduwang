@@ -69,4 +69,19 @@ class AdminTopicsController extends BaseController {
             ->with('error',Lang::get('cpanel::common.operate_failed'));
 	}
 
+	/**
+	 * 还原话题
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function restore($id)
+	{
+        $topic = Topic::onlyTrashed()->findOrFail($id);
+        $topic->restore();
+
+        return Redirect::route('admin.topics.index')
+            ->with('error',Lang::get('cpanel::common.operate_succeed'));
+	}
+
 }

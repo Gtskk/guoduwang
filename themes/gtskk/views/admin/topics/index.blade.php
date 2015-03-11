@@ -83,14 +83,14 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="quanxuan" />
-                            &nbsp;全选 / 全不选
+                            &nbsp;{{ trans('cpanel::common.allselect_or') }}
                         </label>
                         <label>
                             <input type="checkbox" id="fanxuan" />
-                            &nbsp;反选
+                            &nbsp;{{ trans('cpanel::common.uncheck') }}
                         </label>
 
-                        <a href="{{ route('admin.topics.destroyMany') }}" data-method="delete" data-special="true" data-message="{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">批量删除</a>
+                        <a href="{{ route('admin.topics.destroyMany') }}" data-method="delete" data-special="true" data-message="{{ trans('cpanel::common.delete_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">{{ trans('cpanel::common.bulk_delete') }}</a>
                     </div>
 
                 </div>

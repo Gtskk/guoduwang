@@ -15,5 +15,11 @@ return array(
     'delete_something' => '删除:thing',
     'members' => '会员',
     'delete_success' => '删除成功',
+    'operate_succeed' => '操作成功',
     'operate_failed' => '操作失败',
+    'allselect_or' => '全选 / 全不选',
+    'uncheck' => '反选',
+    'bulk_delete' => '批量删除',
+    'restore' => '还原',
+    'bulk_restore' => '批量还原',
 );

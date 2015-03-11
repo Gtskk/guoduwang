@@ -15,5 +15,11 @@ return array(
     'delete_something' => 'Delete :thing',
     'members' => 'Members',
     'delete_success' => 'Delete Successfully',
+    'operate_succeed' => 'Operation Succeed',
     'operate_failed' => 'Operation Failed',
+    'allselect_or' => 'All Check / All Discheck',
+    'uncheck' => 'Uncheck',
+    'bulk_delete' => 'Bulk Delete',
+    'restore' => 'Restore',
+    'bulk_restore' => 'Bulk Restore',
 );

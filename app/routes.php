@@ -192,6 +192,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	    'as'     => 'admin.topics.topicsTrash',
 	    'uses'   => 'AdminTopicsController@topicsTrash',
 	));
+	Route::put('topics/{id}', array(
+	    'as'     => 'admin.topics.restore',
+	    'uses'   => 'AdminTopicsController@restore',
+	));
 	Route::delete('topics/{id}', array(
 	    'as'     => 'admin.topics.destroy',
 	    'uses'   => 'AdminTopicsController@destroy',
