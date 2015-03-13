@@ -2,7 +2,6 @@
 /vendor
 /public/uploads
 /public/packages
-/app/assets/images
 composer.phar
 composer.lock
 .DS_Store
@@ -10,5 +9,5 @@ Thumbs.db
 .env.*
 /node_modules
 asset_manifest.json
-/public/assets/js/scripts-*.js
-/public/assets/css/styles-*.css
+/public/js/scripts-*.js
+/public/css/styles-*.css

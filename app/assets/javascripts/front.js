@@ -95,7 +95,7 @@
          */
         initEmoji: function(){
             emojify.setConfig({
-                img_dir : Config.routes.site_url + '/assets/img/emoji',
+                img_dir : Config.routes.site_url + '/img/emoji',
                 ignored_tags : {
                     'SCRIPT'  : 1,
                     'TEXTAREA': 1,
@@ -115,7 +115,7 @@
                         }));
                     },
                     template: function (value) {
-                        return '<img class="emoji" src="' + Config.routes.site_url + '/assets/img/emoji/' + value + '.png"></img>' + value;
+                        return '<img class="emoji" src="' + Config.routes.site_url + '/img/emoji/' + value + '.png"></img>' + value;
                     },
                     replace: function (value) {
                         return ':' + value + ': ';
@@ -453,7 +453,7 @@
                     // 改变背景图片
                     if($bgImg)
                     {
-                        $('body').css('background', '#ccc url(../assets/img/weather/'+$bgImg+') no-repeat');
+                        $('body').css('background', '#ccc url(../img/weather/'+$bgImg+') no-repeat');
                         $('body').css('background-size', '100% 100%');
                     }
                 }
