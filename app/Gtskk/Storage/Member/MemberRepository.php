@@ -7,4 +7,8 @@ interface MemberRepository
 	public function findOrFail($id);
 
 	public function create($input);
+
+	public function destroy($id);
+
+	public function paginateSelect($limit);
 }

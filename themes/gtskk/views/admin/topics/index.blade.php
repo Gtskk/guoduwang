@@ -3,7 +3,7 @@
 @section('header')
     <h3>
         <span class="glyphicon glyphicon-list-alt"></span>
-        {{ trans('gtskk.Topics') }}
+        {{ lang('Topics') }}
     </h3>
 @stop
 
@@ -18,12 +18,12 @@
                         <div class="btn-toolbar">
                             <form action="" class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="{{ trans('cpanel::topics.search_for') }}...">
-                                    <button class="btn btn-primary" type="button">Go!</button>
+                                    <input type="text" class="form-control" placeholder="{{ trans('cpanel::common.search_for') }}...">
                                 </div>
+                                <button class="btn btn-primary" type="button">Go!</button>
                             </form>
 
-                            <a href="{{ route('admin.topics.topicsTrash') }}" class="navbar-right btn btn-lg btn-primary">{{ trans('cpanel::topics.trash') }}</a>
+                            <a href="{{ route('admin.topics.topicsTrash') }}" class="navbar-right btn btn-lg btn-primary navbar-right">{{ trans('cpanel::common.trash') }}</a>
                         </div>
                     </h3>
                 </div>
@@ -69,7 +69,7 @@
                         @endforeach
                         @else
                             <tr>
-                                <td>{{ trans('gtskk.no_topics') }}</td>
+                                <td>{{ lang('no_topics') }}</td>
                             </tr>
                         @endif
                         </tbody>

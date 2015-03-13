@@ -13,6 +13,7 @@ return array(
     'view_something' => '查看:thing',
     'edit_something' => '编辑:thing',
     'delete_something' => '删除:thing',
+    'restore_something' => '批量还原:thing',
     'members' => '会员',
     'delete_success' => '删除成功',
     'operate_succeed' => '操作成功',
@@ -22,4 +23,6 @@ return array(
     'bulk_delete' => '批量删除',
     'restore' => '还原',
     'bulk_restore' => '批量还原',
+    'search_for' => '搜索',
+    'trash' => '回收站',
 );

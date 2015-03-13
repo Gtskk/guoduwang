@@ -10,6 +10,4 @@ return array(
 	'view_count' => '查看',
 	'favorite_count' => '收藏',
 	'vote_count' => '顶',
-	'search_for' => '搜索',
-	'trash' => '回收站',
 );

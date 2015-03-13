@@ -38,4 +38,8 @@ return array(
     'unsuspend_user'             => '启用用户',
     'suspend_this_user'          => '确定暂停该用户？',
     'unsuspend_this_user'        => '确定启用该用户？',
+    'form_validation_fail'       => '表单验证失败:',
+    'change_things_and_submit'   => '修改之后并重新提交。',
+    'well_done'                  => '干的不错！',
+    'warning'                    => '警告！',
 );

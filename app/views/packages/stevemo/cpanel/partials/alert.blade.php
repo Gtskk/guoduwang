@@ -2,7 +2,7 @@
 <div class="alert alert-danger fade in">
     <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
     <p>
-        <strong>Form Validation Failed : </strong> Change a few things up and try submitting again.
+        <strong>{{ trans('cpanel::users.form_validation_fail') }} </strong> {{ trans('cpanel::users.change_things_and_submit') }}
     </p>
     <ul>
         @foreach ($errors->all() as $error)
@@ -16,7 +16,7 @@
 
 <div class="alert alert-success fade in">
     <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
-    <strong>Well done!</strong>
+    <strong>{{ trans('cpanel::users.well_done') }}</strong>
     {{ Session::get('success') }}
 </div>
 
@@ -26,7 +26,7 @@
 
 <div class="alert alert-warning fade in">
     <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
-    <strong>Warning!</strong>
+    <strong>{{ trans('cpanel::users.warning') }}</strong>
     {{ Session::get('warning') }}
 </div>
 

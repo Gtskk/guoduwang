@@ -21,4 +21,14 @@ class EloquentMemberRepository implements MemberRepository
 
         return $user;
 	}
+
+	public function destroy($id)
+	{
+		return Member::destroy($id);
+	}
+
+	public function paginateSelect($limit = 15)
+	{
+		return Member::where('id', '<>', 1)->paginate($limit);
+	}
 }

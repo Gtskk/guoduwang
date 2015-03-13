@@ -36,7 +36,7 @@ class AdminTopicsController extends BaseController {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * 删除话题
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -50,9 +50,8 @@ class AdminTopicsController extends BaseController {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * 批量删除话题
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroyMany()
@@ -66,7 +65,7 @@ class AdminTopicsController extends BaseController {
         }
 
         return Redirect::route('admin.topics.index')
-            ->with('error',Lang::get('cpanel::common.operate_failed'));
+            ->with('warning',Lang::get('cpanel::common.operate_failed'));
 	}
 
 	/**
@@ -81,7 +80,29 @@ class AdminTopicsController extends BaseController {
         $topic->restore();
 
         return Redirect::route('admin.topics.index')
-            ->with('error',Lang::get('cpanel::common.operate_succeed'));
+            ->with('warning',Lang::get('cpanel::common.operate_succeed'));
+	}
+
+	/**
+	 * 批量还原话题
+	 *
+	 * @return Response
+	 */
+	public function restoreMany()
+	{
+		$ids = Input::get('delete');
+		if($ids)
+        {
+        	$topics = Topic::onlyTrashed()->whereIn('id', $ids)->get();
+        	$topics->each(function($topic){
+        		$topic->restore();
+        	});
+        	return Redirect::route('admin.topics.index')
+            ->with('success',Lang::get('cpanel::common.operate_succeed'));
+        }
+
+        return Redirect::route('admin.topics.index')
+            ->with('warning',Lang::get('cpanel::common.operate_failed'));
 	}
 
 }

@@ -192,17 +192,21 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	    'as'     => 'admin.topics.topicsTrash',
 	    'uses'   => 'AdminTopicsController@topicsTrash',
 	));
-	Route::put('topics/{id}', array(
-	    'as'     => 'admin.topics.restore',
-	    'uses'   => 'AdminTopicsController@restore',
-	));
 	Route::delete('topics/{id}', array(
 	    'as'     => 'admin.topics.destroy',
 	    'uses'   => 'AdminTopicsController@destroy',
 	));
-	Route::delete('topics', array(
+	Route::delete('topicsDestroy', array(
 	    'as'     => 'admin.topics.destroyMany',
 	    'uses'   => 'AdminTopicsController@destroyMany',
+	));
+	Route::put('topics/{id}', array(
+	    'as'     => 'admin.topics.restore',
+	    'uses'   => 'AdminTopicsController@restore',
+	));
+	Route::delete('topicsRestore', array(
+	    'as'     => 'admin.topics.restoreMany',
+	    'uses'   => 'AdminTopicsController@restoreMany',
 	));
 
 	/*
@@ -216,25 +220,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	    'as'     => 'admin.members.index',
 	    'uses'   => 'AdminMembersController@index',
 	));
-	Route::post('members', array(
-	    'as'     => 'admin.members.store',
-	    'uses'   => 'AdminMembersController@store',
-	));
-	Route::get('members/create', array(
-	    'as'     => 'admin.members.create',
-	    'uses'   => 'AdminMembersController@create',
-	));
-	Route::get('members/{id}/edit', array(
-	    'as'     => 'admin.members.edit',
-	    'uses'   => 'AdminMembersController@edit',
-	));
-	Route::put('members/{id}', array(
-	    'as'     => 'admin.members.update',
-	    'uses'   => 'AdminMembersController@update',
+	Route::get('membersTrash', array(
+	    'as'     => 'admin.members.membersTrash',
+	    'uses'   => 'AdminMembersController@membersTrash',
 	));
 	Route::delete('members/{id}', array(
 	    'as'     => 'admin.members.destroy',
 	    'uses'   => 'AdminMembersController@destroy',
+	));
+	Route::delete('membersDestroy', array(
+	    'as'     => 'admin.members.destroyMany',
+	    'uses'   => 'AdminMembersController@destroyMany',
 	));
 });
 //自定义404

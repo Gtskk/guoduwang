@@ -13,6 +13,7 @@ return array(
     'view_something' => 'View :thing',
     'edit_something' => 'Edit :thing',
     'delete_something' => 'Delete :thing',
+    'restore_something' => 'Bulk restore :thing',
     'members' => 'Members',
     'delete_success' => 'Delete Successfully',
     'operate_succeed' => 'Operation Succeed',
@@ -22,4 +23,6 @@ return array(
     'bulk_delete' => 'Bulk Delete',
     'restore' => 'Restore',
     'bulk_restore' => 'Bulk Restore',
+    'search_for' => 'Search for',
+    'trash' => 'Trash',
 );

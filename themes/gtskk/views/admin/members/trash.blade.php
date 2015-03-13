@@ -19,8 +19,8 @@
                             <form action="" class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="{{ trans('cpanel::topics.search_for') }}...">
+                                    <button class="btn btn-primary" type="button">Go!</button>
                                 </div>
-                                <button class="btn btn-primary" type="button">Go!</button>
                             </form>
                         </div>
                     </h3>

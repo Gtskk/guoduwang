@@ -38,4 +38,8 @@ return array(
     'unsuspend_user'             => 'Unsuspend User',
     'suspend_this_user'          => 'Suspend this user?',
     'unsuspend_this_user'        => 'Unsuspend this user?',
+    'form_validation_fail'       => 'Form Validation Failed :',
+    'change_things_and_submit'   => 'Change a few things up and try submitting again.',
+    'well_done'                  => 'Well done!',
+    'warning'                    => 'Warning!',
 );
