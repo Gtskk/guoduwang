@@ -204,7 +204,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	    'as'     => 'admin.topics.restore',
 	    'uses'   => 'AdminTopicsController@restore',
 	));
-	Route::delete('topicsRestore', array(
+	Route::put('topicsRestore', array(
 	    'as'     => 'admin.topics.restoreMany',
 	    'uses'   => 'AdminTopicsController@restoreMany',
 	));
@@ -231,6 +231,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	Route::delete('membersDestroy', array(
 	    'as'     => 'admin.members.destroyMany',
 	    'uses'   => 'AdminMembersController@destroyMany',
+	));
+	Route::put('members/{id}', array(
+	    'as'     => 'admin.members.restore',
+	    'uses'   => 'AdminMembersController@restore',
+	));
+	Route::put('membersRestore', array(
+	    'as'     => 'admin.members.restoreMany',
+	    'uses'   => 'AdminMembersController@restoreMany',
 	));
 });
 //自定义404

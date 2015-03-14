@@ -2,8 +2,8 @@
 
 @section('header')
     <h3>
-        <span class="glyphicon glyphicon-trash"></span>
-        {{ trans('cpanel::topics.trash') }}
+        <span class="glyphicon glyphicon-user"></span>
+        {{ trans('cpanel::common.thing_trash', array('thing'=>lang('Members'))) }}
     </h3>
 @stop
 
@@ -18,7 +18,7 @@
                         <div class="btn-toolbar">
                             <form action="" class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="{{ trans('cpanel::topics.search_for') }}...">
+                                    <input type="text" class="form-control" placeholder="{{ trans('cpanel::common.search_for') }}...">
                                     <button class="btn btn-primary" type="button">Go!</button>
                                 </div>
                             </form>
@@ -27,38 +27,32 @@
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped">
-                        @if(count($topics))
+                        @if(count($members))
                         <thead>
                         <tr>
                             <th>&nbsp;</th>
-                            <th>{{ trans('cpanel::topics.title') }}</th>
-                            <th>{{ trans('cpanel::topics.excerpt') }}</th>
-                            <th>{{ trans('cpanel::topics.node') }}</th>
-                            <th>{{ trans('cpanel::topics.author') }}</th>
-                            <th>{{ trans('cpanel::topics.is_excellent') }}</th>
-                            <th>{{ trans('cpanel::topics.reply_count') }}</th>
-                            <th>{{ trans('cpanel::topics.view_count') }}</th>
-                            <th>{{ trans('cpanel::topics.favorite_count') }}</th>
-                            <th>{{ trans('cpanel::topics.vote_count') }}</th>
+                            <th>{{ lang('Username') }}</th>
+                            <th>{{ lang('Email') }}</th>
+                            <th>{{ lang('Phone') }}</th>
+                            <th>{{ lang('Avatar') }}</th>
+                            <th>{{ lang('Total Topic Count') }}</th>
+                            <th>{{ lang('Total Reply Count') }}</th>
                             <th>{{ trans('cpanel::common.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($topics as $topic)
+                        @foreach ($members as $member)
                             <tr>
-                                <td><input type="checkbox" name="delete[]" value="{{ $topic->id }}" /></td>
-                                <td>{{{ $topic->title }}}</td>
-                                <td title="{{{ $topic->excerpt }}}">{{{ str_limit($topic->excerpt, 20) }}}</td>
-                                <td>{{ HTML::linkRoute('nodes.show',e($topic->node->name), array($topic->node->id), array('target'=>'_blank')) }}</td>
-                                <td>{{ $topic->member->username }}</td>
-                                <td>{{ $topic->is_excellent ? '是' : '否' }}</td>
-                                <td>{{ $topic->reply_count }}</td>
-                                <td>{{ $topic->view_count }}</td>
-                                <td>{{ $topic->favorite_count }}</td>
-                                <td>{{ $topic->vote_count }}</td>
+                                <td><input type="checkbox" name="delete[]" value="{{ $member->id }}" /></td>
+                                <td>{{{ $member->username }}}</td>
+                                <td>{{ HTML::mailto($member->email, e($member->email)) }}</td>
+                                <td>{{ $member->phone }}</td>
+                                <td><img id="avatar-src" src="{{ $member->image_url or $member->present()->gravatar(50) }}" class="img-thumbnail users-show-avatar" style="width: 50px;margin: 4px 4px 15px;min-height:50px"></td>
+                                <td>{{ $member->topic_count }}</td>
+                                <td>{{ $member->reply_count }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-primary" href="{{ route('admin.topics.restore', array($topic->id)) }}" data-method="put" data-message="{{ trans('cpanel::common.restore') }}？">
+                                        <a class="btn btn-primary" href="{{ route('admin.members.restore', array($member->id)) }}" data-method="put" data-message="{{ trans('cpanel::common.restore') }}">
                                            <i class="fa fa-trash-o"></i>&nbsp;{{ trans('cpanel::common.restore') }}
                                         </a>
                                     </div>
@@ -67,7 +61,7 @@
                         @endforeach
                         @else
                             <tr>
-                                <td>{{ trans('gtskk.no_topics') }}</td>
+                                <td>{{ lang('no_members') }}</td>
                             </tr>
                         @endif
                         </tbody>
@@ -76,7 +70,7 @@
 
                 <div class="panel-footer">
                     <!-- Pager -->
-                    {{ $topics->appends(Request::except('page', '_pjax'))->links(); }}
+                    {{ $members->appends(Request::except('page', '_pjax'))->links(); }}
 
                     <div class="checkbox">
                         <label>
@@ -88,7 +82,7 @@
                             &nbsp;{{ trans('cpanel::common.uncheck') }}
                         </label>
 
-                        <a href="{{ route('admin.topics.restoreMany') }}" data-method="delete" data-special="true" data-message="{{ trans('cpanel::common.restore_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">{{ trans('cpanel::common.bulk_restore') }}</a>
+                        <a href="{{ route('admin.members.restoreMany') }}" data-method="put" data-special="true" data-message="{{ trans('cpanel::common.restore_something', array('thing'=>lang('Members'))) }}" class="btn btn-primary">{{ trans('cpanel::common.bulk_restore') }}</a>
                     </div>
 
                 </div>

@@ -10,5 +10,11 @@ interface MemberRepository
 
 	public function destroy($id);
 
+	public function restore($id);
+
+	public function restoreMany($ids);
+
 	public function paginateSelect($limit);
+
+	public function paginateDelete($limit);
 }

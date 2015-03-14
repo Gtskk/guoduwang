@@ -80,7 +80,7 @@ class AdminTopicsController extends BaseController {
         $topic->restore();
 
         return Redirect::route('admin.topics.index')
-            ->with('warning',Lang::get('cpanel::common.operate_succeed'));
+            ->with('success',Lang::get('cpanel::common.operate_succeed'));
 	}
 
 	/**

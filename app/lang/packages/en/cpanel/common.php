@@ -25,4 +25,5 @@ return array(
     'bulk_restore' => 'Bulk Restore',
     'search_for' => 'Search for',
     'trash' => 'Trash',
+    'thing_trash' => ':thing Trash',
 );

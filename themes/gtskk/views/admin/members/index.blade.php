@@ -2,7 +2,7 @@
 
 @section('header')
     <h3>
-        <span class="glyphicon glyphicon-list-alt"></span>
+        <span class="glyphicon glyphicon-user"></span>
         {{ lang('Members') }}
     </h3>
 @stop
@@ -47,7 +47,7 @@
                             <tr>
                                 <td><input type="checkbox" name="delete[]" value="{{ $member->id }}" /></td>
                                 <td>{{ HTML::linkRoute('members.show',e($member->username), array($member->id), array('target'=>'_blank')) }}</td>
-                                <td>{{ HTML::mailto(e($member->username), e($member->username), array('target'=>'_blank')) }}</td>
+                                <td>{{ HTML::mailto($member->email, e($member->email)) }}</td>
                                 <td>{{ $member->phone }}</td>
                                 <td><img id="avatar-src" src="{{ $member->image_url or $member->present()->gravatar(50) }}" class="img-thumbnail users-show-avatar" style="width: 50px;margin: 4px 4px 15px;min-height:50px"></td>
                                 <td>{{ $member->topic_count }}</td>

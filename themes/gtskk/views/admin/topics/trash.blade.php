@@ -3,7 +3,7 @@
 @section('header')
     <h3>
         <span class="glyphicon glyphicon-trash"></span>
-        {{ trans('cpanel::topics.trash') }}
+        {{ trans('cpanel::common.thing_trash', array('thing'=>lang('Topics'))) }}
     </h3>
 @stop
 
@@ -18,7 +18,7 @@
                         <div class="btn-toolbar">
                             <form action="" class="navbar-form navbar-left" role="search">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="{{ trans('cpanel::topics.search_for') }}...">
+                                    <input type="text" class="form-control" placeholder="{{ trans('cpanel::common.search_for') }}...">
                                 </div>
                                 <button class="btn btn-primary" type="button">Go!</button>
                             </form>

@@ -25,4 +25,5 @@ return array(
     'bulk_restore' => '批量还原',
     'search_for' => '搜索',
     'trash' => '回收站',
+    'thing_trash' => ':thing回收站',
 );

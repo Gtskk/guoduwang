@@ -27,8 +27,26 @@ class EloquentMemberRepository implements MemberRepository
 		return Member::destroy($id);
 	}
 
+	public function restore($id)
+	{
+		return Member::onlyTrashed()->findOrFail($id)->restore();
+	}
+
+	public function restoreMany($ids)
+	{
+		$members = Member::onlyTrashed()->whereIn('id', $ids)->get();
+    	$members->each(function($topic){
+    		$topic->restore();
+    	});
+	}
+
 	public function paginateSelect($limit = 15)
 	{
 		return Member::where('id', '<>', 1)->paginate($limit);
+	}
+
+	public function paginateDelete($limit = 15)
+	{
+		return Member::onlyTrashed()->paginate($limit);
 	}
 }

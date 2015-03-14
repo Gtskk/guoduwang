@@ -31,8 +31,8 @@ class AdminMembersController extends BaseController {
 	 */
 	public function membersTrash()
 	{
-		$members = $this->member->recent()->paginate(20);
-        return View::make('theme::admin.members.index', compact('members'));
+		$members = $this->member->paginateDelete();
+        return View::make('theme::admin.members.trash', compact('members'));
 	}
 
 	/**
@@ -63,6 +63,43 @@ class AdminMembersController extends BaseController {
         	$this->member->destroy($ids);
         	return Redirect::route('admin.members.index')
             ->with('success',Lang::get('cpanel::common.delete_success'));
+        }
+
+        return Redirect::route('admin.members.index')
+            ->with('warning',Lang::get('cpanel::common.operate_failed'));
+	}
+
+	/**
+	 * 还原会员
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function restore($id)
+	{
+        if($this->member->restore($id))
+        {
+        	return Redirect::route('admin.members.index')
+                ->with('success',Lang::get('cpanel::common.operate_succeed'));
+        }
+
+        return Redirect::route('admin.members.index')
+            ->with('warning',Lang::get('cpanel::common.operate_failed'));
+	}
+
+	/**
+	 * 批量还原话题
+	 *
+	 * @return Response
+	 */
+	public function restoreMany()
+	{
+		$ids = Input::get('delete');
+		if($ids)
+        {
+        	$this->member->restoreMany($ids);
+        	return Redirect::route('admin.members.index')
+            ->with('success',Lang::get('cpanel::common.operate_succeed'));
         }
 
         return Redirect::route('admin.members.index')
