@@ -49,4 +49,9 @@ class EloquentMemberRepository implements MemberRepository
 	{
 		return Member::onlyTrashed()->paginate($limit);
 	}
+
+	public function getRecentMembers($limit)
+	{
+		return Member::recent()->take($limit)->get();
+	}
 }

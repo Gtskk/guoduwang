@@ -115,13 +115,13 @@
                 </li>
                 <li class="{{ Request::is($cpanel['prefix'].'/topics*') ? 'active' : '' }}">
                     <a href="{{route('admin.topics.index')}}">
-                        <i class="fa fa-ban"></i>
+                        <span class="glyphicon glyphicon-list-alt"></span>
                         <span>{{ lang('Topics') }}</span>
                     </a>
                 </li>
                 <li class="{{ Request::is($cpanel['prefix'].'/members*') ? 'active' : '' }}">
                     <a href="{{route('admin.members.index')}}">
-                        <i class="fa fa-ban"></i>
+                        <span class="glyphicon glyphicon-user"></span>
                         <span>{{ trans('cpanel::common.members') }}</span>
                     </a>
                 </li>

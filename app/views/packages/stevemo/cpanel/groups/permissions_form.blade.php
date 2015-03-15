@@ -2,17 +2,17 @@
 
     <ul class="nav nav-pills" id="tabPermission">
         <li class="active">
-            <a href="#generic" data-toggle="tab">Generic Permissions</a>
+            <a href="#generic" data-toggle="tab">{{ trans('cpanel::permissions.general_perm') }}</a>
         </li>
         <li>
-            <a href="#module" data-toggle="tab">Modules Permissions</a>
+            <a href="#module" data-toggle="tab">{{ trans('cpanel::permissions.module_perm') }}</a>
         </li>
     </ul>
 
     <div class="tab-content">
         <div class="tab-pane active" id="generic">
 
-            <legend>Generic Permissions</legend>
+            <legend>{{ trans('cpanel::permissions.general_perm') }}</legend>
             @foreach( $genericPermissions as $perm)
             <div class="form-group">
                 <label for="permissions[$perm]" class="col-sm-2 control-label">{{$perm}}</label>
@@ -20,7 +20,7 @@
                     {{
                         Form::select(
                         "permissions[$perm]",
-                        array('1' => 'Allow','0' => 'Deny'),
+                        array('1' => trans('cpanel::common.allow'),'0' => trans('cpanel::common.deny')),
                         array_key_exists($perm,$groupPermissions) ? $groupPermissions[$perm] : 0,
                         array('class'=>'select2 form-control','id'=>str_random(5)))
                     }}
@@ -43,7 +43,7 @@
                             {{
                             Form::select(
                             "permissions[$perm]",
-                            array('1' => 'Allow','0' => 'Deny'),
+                            array('1' => trans('cpanel::common.allow'),'0' => trans('cpanel::common.deny')),
                             array_key_exists($perm,$groupPermissions) ? $groupPermissions[$perm] : 0,
                             array('class'=>'select2 form-control','id'=>str_random(5)))
                             }}

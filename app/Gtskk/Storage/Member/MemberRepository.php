@@ -17,4 +17,6 @@ interface MemberRepository
 	public function paginateSelect($limit);
 
 	public function paginateDelete($limit);
+
+	public function getRecentMembers($limit);
 }

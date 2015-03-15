@@ -1,7 +1,7 @@
 @extends('cpanel::layouts')
 
 @section('header')
-<h1>Groups <small>Create a new group</small></h1>
+<h1>{{ trans('cpanel::groups.Groups') }} <small>{{ trans('cpanel::common.new_something', array('thing'=>trans('cpanel::groups.Group'))) }}</small></h1>
 @stop
 
 @section('breadcrumb')
@@ -9,10 +9,10 @@
 <li>
     <a href="{{route('cpanel.groups.index')}}">
         <i class="fa fa-users"></i>
-        Groups
+        {{ trans('cpanel::groups.Groups') }}
     </a>
 </li>
-<li class="active">Create</li>
+<li class="active">{{ trans('cpanel::common.Create') }}</li>
 @stop
 
 @section('content')
@@ -27,18 +27,18 @@ $option = array(
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Group Informations</h3>
+                <h3 class="panel-title">{{ trans('cpanel::groups.group_info') }}</h3>
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="name">Name</label>
+                    <label class="col-sm-2 control-label" for="name">{{ trans('cpanel::groups.name') }}</label>
                     <div class="col-md-4">
-                        {{Form::text('name',null,array('class'=>'form-control','placeholder'=>'Group Name'))}}
+                        {{Form::text('name',null,array('class'=>'form-control','placeholder'=>trans('cpanel::groups.name')))}}
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">{{ trans('cpanel::common.Create') }}</button>
                     </div>
                 </div>
             </div>
@@ -49,13 +49,13 @@ $option = array(
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Group Permissions</h3>
+                <h3 class="panel-title">{{ trans('cpanel::groups.group_perm') }}</h3>
             </div>
             <div class="panel-body">
                 @include('cpanel::groups.permissions_form')
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">{{ trans('cpanel::common.Create') }}</button>
                     </div>
                 </div>
             </div>

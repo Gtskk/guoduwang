@@ -88,7 +88,7 @@
                             &nbsp;{{ trans('cpanel::common.uncheck') }}
                         </label>
 
-                        <a href="{{ route('admin.topics.restoreMany') }}" data-method="delete" data-special="true" data-message="{{ trans('cpanel::common.restore_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">{{ trans('cpanel::common.bulk_restore') }}</a>
+                        <a href="{{ route('admin.topics.restoreMany') }}" data-method="put" data-special="true" data-message="{{ trans('cpanel::common.restore_something', array('thing'=>lang('Topics'))) }}" class="btn btn-primary">{{ trans('cpanel::common.bulk_restore') }}</a>
                     </div>
 
                 </div>

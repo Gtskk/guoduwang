@@ -1,10 +1,19 @@
 <?php
 
+use Gtskk\Storage\Topic\TopicRepository as Topic;
+
 class PagesController extends BaseController {
+
+	private $topic;
+
+	public function __construct(Topic $topic)
+	{
+		$this->topic = $topic;
+	}
 
 	public function showWelcome()
 	{
-		$topics = Topic::excellent()->recent()->limit(20)->get();
+		$topics = $this->topic->getRecentTopics(20);
 		
 		return View::make('theme::pages.index', compact('topics'));
 	}
@@ -33,7 +42,7 @@ class PagesController extends BaseController {
 	 */
 	public function feed()
 	{
-		$topics = Topic::excellent()->recent()->limit(20)->get();
+		$topics = $this->topic->getRecentTopics(20);
 		$channel = array(
 			'title' => Config::get('site.site_config.site_name').'-'.Config::get('site.site_config.keywords'),
 			'description' => Config::get('site.site_config.description'),

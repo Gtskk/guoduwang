@@ -8,4 +8,8 @@ return array(
    'delete_success'  => 'Module Permissions deleted.',
    'no_permission'   => 'No Permissions found.',
    'access_denied'   => 'You do not have sufficient permissions to view this page.',
+   'general_perm'	 => 'Generic Permissions',
+   'module_perm'	 => 'Modules Permissions',
+   'super_user'		 => 'Super User',
+   'access_ever'	 => 'Access Everything',
 );

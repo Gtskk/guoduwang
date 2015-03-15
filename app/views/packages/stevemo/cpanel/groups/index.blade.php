@@ -1,12 +1,12 @@
 @extends('cpanel::layouts')
 
 @section('header')
-<h1>Groups</h1>
+<h1>{{ trans('cpanel::groups.Groups') }}</h1>
 @stop
 
 @section('breadcrumb')
 @parent
-<li class="active"><i class="fa fa-users"></i> Groups</li>
+<li class="active"><i class="fa fa-users"></i> {{ trans('cpanel::groups.Groups') }}</li>
 @stop
 
 @section('content')
@@ -16,9 +16,9 @@
             <div class="panel-heading">
                 <h3 class="panel-title">
                     <div class="btn-toolbar">
-                        <a href="{{ URL::route('cpanel.groups.create') }}" class="btn btn-primary" data-toggle="tooltip" title="Create New Group">
+                        <a href="{{ URL::route('cpanel.groups.create') }}" class="btn btn-primary" data-toggle="tooltip" title="{{ trans('cpanel::common.new_something', array('thing'=>trans('cpanel::groups.Groups'))) }}">
                             <i class="fa fa-plus"></i>
-                            New group
+                            {{ trans('cpanel::common.new_something', array('thing'=>trans('cpanel::groups.Groups'))) }}
                         </a>
                     </div>
                 </h3>
@@ -32,7 +32,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>{{ trans('cpanel::groups.name') }}</th>
                             <th class="span4"></th>
                         </tr>
                         </thead>
@@ -42,12 +42,12 @@
                             <td>{{{ $group->name }}}</td>
                             <td>
                                 <a href="{{ route('cpanel.groups.edit', array($group->id)) }}"
-                                   class="btn btn-warning" data-toggle="tooltip" title="Edit Group">
+                                   class="btn btn-warning" data-toggle="tooltip" title="{{ trans('cpanel::common.edit_something', array('thing'=>trans('cpanel::groups.group'))) }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="{{ route('cpanel.groups.destroy', array($group->id)) }}"
-                                   class="btn btn-danger" data-toggle="tooltip" title="Delete Group" data-method="delete"
-                                   data-message="delete this group?">
+                                   class="btn btn-danger" data-toggle="tooltip" title="{{ trans('cpanel::common.delete_something', array('thing'=>trans('cpanel::groups.group'))) }}" data-method="delete"
+                                   data-message="{{ trans('cpanel::common.delete_ensure', array('thing'=>trans('cpanel::groups.group'))) }}">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>

@@ -145,4 +145,5 @@ return array (
     'url_not_valid' => 'Please supply valid url',
     'password_not_valid' => 'Password must be between 6 and 15',
     'password_not_pair' => 'Password mismatched',
+    'Submit' => 'Submit',
 );

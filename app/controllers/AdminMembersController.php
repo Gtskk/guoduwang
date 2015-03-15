@@ -2,15 +2,32 @@
 
 use Stevemo\Cpanel\Controllers\BaseController;
 use Gtskk\Storage\Member\MemberRepository as Member;
+use Gtskk\Storage\Topic\TopicRepository as Topic;
 
 class AdminMembersController extends BaseController {
 
 	private $member;
+	private $topic;
 
-	public function __construct(Member $member)
+	public function __construct(Member $member, Topic $topic)
 	{
 
 		$this->member = $member;
+		$this->topic = $topic;
+	}
+
+
+	/**
+	 * 显示dashboard
+	 *
+	 * 
+	 * @return Response
+	 */
+	public function dashboard()
+	{
+		$recentTopics = $this->topic->getRecentTopics(20);
+		$recentMembers = $this->member->getRecentMembers(20);
+		return View::make('cpanel::dashboard.index', compact('recentTopics', 'recentMembers'));
 	}
 
 	/**

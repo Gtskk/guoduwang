@@ -8,4 +8,8 @@ return array(
    'delete_success'  => '模块权限删除成功',
    'no_permission'   => '未找到权限',
    'access_denied'   => '没有足够的权限浏览该页面',
+   'general_perm'	 => '一般权限',
+   'module_perm'	 => '模块权限',
+   'super_user'		 => '超级用户',
+   'access_ever'	 => '所有权限',
 );

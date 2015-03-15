@@ -76,7 +76,14 @@ class Member extends Eloquent implements ConfideUserInterface {
     }
 
 
+    /** 获取器和修改器 */
+    public function getImageUrlAttribute($value)
+    {
+        return $value ?: $this->present()->gravatar(180);
+    }
 
+
+    /** 范围查询 */
 	public function scopeRecent($query)
     {
         return $query->orderBy('created_at', 'desc');

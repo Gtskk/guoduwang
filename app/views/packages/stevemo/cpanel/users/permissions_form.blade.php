@@ -2,31 +2,31 @@
 
     <ul class="nav nav-pills" id="tabPermission">
         <li class="active">
-            <a href="#generic" data-toggle="tab">Generic Permissions</a>
+            <a href="#generic" data-toggle="tab">{{ trans('cpanel::permissions.general_perm') }}</a>
         </li>
         <li>
-            <a href="#module" data-toggle="tab">Modules Permissions</a>
+            <a href="#module" data-toggle="tab">{{ trans('cpanel::permissions.module_perm') }}</a>
         </li>
     </ul>
 
     <div class="tab-content margin-top-10">
         <div class="tab-pane active" id="generic">
 
-            <legend>Super User <small>Access Everything</small></legend>
+            <legend>{{ trans('cpanel::permissions.super_user') }} <small>{{ trans('cpanel::permissions.access_ever') }}</small></legend>
             <div class="form-group">
-                <label for="permissions[superuser]" class="col-sm-2 control-label">Super User</label>
+                <label for="permissions[superuser]" class="col-sm-2 control-label">{{ trans('cpanel::permissions.super_user') }}</label>
                 <div class="col-md-2">
                     {{
                         Form::select(
                             'permissions[superuser]',
-                            array('0' => 'No','1' => 'Yes'),
+                            array('0' => trans('cpanel::common.no'),'1' => trans('cpanel::common.yes')),
                             $user->isSuperUser() ? 1 : 0,
                             array('class'=>'select2 form-control'))
                     }}
                 </div>
             </div>
 
-            <legend>Generic Permissions</legend>
+            <legend>{{ trans('cpanel::permissions.general_perm') }}</legend>
             @foreach( $genericPermissions as $perm)
             <div class="form-group">
                 <label for="permissions[$perm]" class="col-sm-2 control-label">{{$perm}}</label>
@@ -34,7 +34,7 @@
                 {{
                     Form::select(
                         "permissions[$perm]",
-                        array('0' => 'Inherit','1' => 'Allow','-1' => 'Deny'),
+                        array('0' => trans('cpanel::common.inherit'),'1' => trans('cpanel::common.allow'),'-1' => trans('cpanel::common.deny')),
                         array_key_exists($perm,$userPermissions) ? $userPermissions[$perm] : 0,
                         array('class'=>'select2 form-control','id'=>str_random(5)))
                 }}
@@ -58,7 +58,7 @@
                             {{
                             Form::select(
                             "permissions[$perm]",
-                            array('0' => 'Inherit','1' => 'Allow','-1' => 'Deny'),
+                             array('0' => trans('cpanel::common.inherit'),'1' => trans('cpanel::common.allow'),'-1' => trans('cpanel::common.deny')),
                             array_key_exists($perm,$userPermissions) ? $userPermissions[$perm] : 0,
                             array('class'=>'select2 form-control','id'=>str_random(5)))
                             }}

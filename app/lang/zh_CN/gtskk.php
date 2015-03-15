@@ -143,4 +143,5 @@ return array(
     'url_not_valid' => '请输入合法的URL地址',
     'password_not_valid' => '密码范围在6~15位之间',
     'password_not_pair' => '您两次输入的账号密码不一致',
+    'Submit' => '提交',
 );

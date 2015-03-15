@@ -19,7 +19,7 @@
                     <h3 class="panel-title">
                         <div class="btn-toolbar">
                             <a href="{{ route('cpanel.users.create') }}" class="btn btn-primary"
-                               data-toggle="tooltip" title="Create New User">
+                               data-toggle="tooltip" title="{{ trans('cpanel::users.new_user') }}">
                                 <i class="fa fa-plus"></i>
                                 {{ trans('cpanel::users.new_user') }}
                             </a>

@@ -177,6 +177,19 @@ Route::group(['before' => 'manage_users'], function(){
 
 //后台路由
 Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'=>'cache'), function(){
+
+	/*
+	|--------------------------------------------------------------------------
+	| Cpanel Dashboard Routes
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+	Route::get('/', array(
+	    'as'     => 'admin.dashboard.home',
+	    'uses'   => 'AdminMembersController@dashboard',
+	));
+
 	/*
 	|--------------------------------------------------------------------------
 	| Admin Topics Routes
