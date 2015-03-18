@@ -13,7 +13,17 @@ class PagesController extends BaseController {
 
 	public function showWelcome()
 	{
-		$topics = $this->topic->getRecentTopics(20);
+		
+		$indexTopics = unserialize(Redis::get('indexTopics'));
+		if($indexTopics)
+		{
+			$topics = $indexTopics;
+		}
+		else
+		{
+			$topics = $this->topic->getRecentTopics(20);
+			Redis::set('indexTopics', serialize($topics));
+		}
 		
 		return View::make('theme::pages.index', compact('topics'));
 	}

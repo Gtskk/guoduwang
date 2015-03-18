@@ -7,6 +7,10 @@ class EloquentTopicRepository implements TopicRepository
 
 	public function getRecentTopics($limit = 10)
 	{
-		return Topic::excellent()->recent()->limit($limit)->get();
+		return Topic::with('member', 'node')
+				->excellent()
+				->recent()
+				->limit($limit)
+				->get();
 	}
 }
