@@ -5,4 +5,6 @@ interface TopicRepository
 
 	public function getRecentTopics($limit);
 
+	public function getRecentUserTopics($id, $limit, $withPaginate);
+
 }

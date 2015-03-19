@@ -13,17 +13,7 @@ class PagesController extends BaseController {
 
 	public function showWelcome()
 	{
-		
-		$indexTopics = unserialize(Redis::get('indexTopics'));
-		if($indexTopics)
-		{
-			$topics = $indexTopics;
-		}
-		else
-		{
-			$topics = $this->topic->getRecentTopics(20);
-			Redis::set('indexTopics', serialize($topics));
-		}
+		$topics = $this->topic->getRecentTopics(20);
 		
 		return View::make('theme::pages.index', compact('topics'));
 	}
@@ -44,7 +34,7 @@ class PagesController extends BaseController {
 	public function search()
 	{
 		$query = Purifier::clean(Input::get('q'));
-		return Redirect::away('https://www.google.com/search?q=site:phphub.org ' . $query, 301);
+		return Redirect::away('https://www.google.com/search?q=site:guoduwang.net ' . $query, 301);
 	}
 
 	/**

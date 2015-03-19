@@ -2,13 +2,15 @@
 
 use Gtskk\Listeners\LoginAuthenticatorListener;
 use Gtskk\Storage\Member\MemberRepository as Member;
+use Gtskk\Storage\Topic\TopicRepository as Topic;
 
 class MembersController extends BaseController implements LoginAuthenticatorListener
 {
 
-    public function __construct(Member $member)
+    public function __construct(Member $member, Topic $topic)
     {
         $this->member = $member;
+        $this->topic = $topic;
     }
 
     public function index()
@@ -20,7 +22,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
     public function show($id)
     {
         $member = $this->member->findOrFail($id);
-        $topics = Topic::whose($member->id)->recent()->limit(10)->get();
+        $topics = $this->topic->getRecentUserTopics($id);
         $replies = Reply::whose($member->id)->recent()->limit(10)->get();
         return View::make('theme::members.show', compact('member', 'topics', 'replies'));
     }
@@ -271,7 +273,7 @@ class MembersController extends BaseController implements LoginAuthenticatorList
     public function topics($id)
     {
         $member = $this->member->findOrFail($id);
-        $topics = Topic::whose($id)->recent()->paginate(15);
+        $topics = $this->topic->getRecentUserTopics($id, 15, true);
         return View::make('theme::members.topics', compact('member', 'topics'));
     }
 

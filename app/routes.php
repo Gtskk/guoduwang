@@ -133,7 +133,10 @@ Route::get('feed', array(
 	'uses' => 'PagesController@feed'
 ));
 
-Route::resource('nodes', 'NodesController');
+Route::get('nodes/{id}', array(
+	'as' => 'nodes.show',
+	'uses' => 'NodesController@show'
+));
 
 /** Reply Routes */
 Route::resource('replies', 'RepliesController', ['only' => ['store']]);
