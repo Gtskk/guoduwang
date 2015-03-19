@@ -31,7 +31,7 @@
 		<div class="panel panel-default">
 			@include('theme::members.partials.infonav', ['current' => 'basicinfo'])
 			@if($member->github_name)
-			<iframe src="https://dn-phphub.qbox.me/github-card.html?user={{ $member->github_name }}&client_id={{ getenv('client_id') }}&client_secret={{ getenv('client_secret') }}&target=blank" frameborder="0" scrolling="0" width="100%" height="146px" allowtransparency></iframe>
+			{{ $member->present()->githubCard }}
 			@endif
 		</div>
 

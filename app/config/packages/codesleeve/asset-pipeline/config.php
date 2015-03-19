@@ -204,7 +204,7 @@ return array(
 	| of minification stuff on each page refresh)
 	|
 	*/
-	'concat' => array('production'),
+	'concat' => array('production', 'local'),
 
 	/*
 	|--------------------------------------------------------------------------

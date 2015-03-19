@@ -257,6 +257,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.cpanel|cache', 'after'
 	    'uses'   => 'AdminMembersController@restoreMany',
 	));
 });
+
 //自定义404
 App::missing(function($exception)
 {

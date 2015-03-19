@@ -4,7 +4,7 @@
 <div class="panel panel-default login_require">
     <div class="panel-heading text-center">{{ trans('common.register') }}</div>
     <div class="panel-body">
-        <form method="POST" action="{{ route('members.store') }}" accept-charset="UTF-8">
+        <form method="POST" action="{{ route('members.store') }}" accept-charset="UTF-8" id="signupform">
             <div class="body bg-gray">
                 @if (Session::get('error'))
                     <div class="alert alert-error alert-danger">
@@ -13,10 +13,10 @@
                         @endif
                     </div>
                 @endif
-
                 @if (Session::get('notice'))
                     <div class="alert">{{ Session::get('notice') }}</div>
                 @endif
+
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 
                 @if (isset($member['image_url']))
@@ -41,19 +41,19 @@
                 @endif
                 <div class="form-group">
                     <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
-                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ $member['username'] or Input::old('username') }}}">
+                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ $member['username'] or Input::old('username') }}}" datatype="*" nullmsg="{{ lang('username_not_null') }}">
                 </div>
                 <div class="form-group">
                     <label for="email">{{{ Lang::get('confide::confide.e_mail') }}} <!-- <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small> --></label>
-                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ $member['email'] or Input::old('email') }}}" @if(isset($member['github_name']) or isset($member['ghost_name']))readonly='readonly' @endif>
+                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ $member['email'] or Input::old('email') }}}" datatype="e" nullmsg="{{ lang('username_not_null') }}" errormsg="{{ lang('email_not_valid') }}" @if(isset($member['github_name']) or isset($member['ghost_name']))readonly='readonly' @endif>
                 </div>
                 <div class="form-group">
                     <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
-                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password">
+                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password" datatype="*6-15" nullmsg="{{ lang('password_not_null') }}" errormsg="{{ lang('password_not_valid') }}">
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation">{{{ Lang::get('confide::confide.password_confirmation') }}}</label>
-                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation">
+                    <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation" datatype="*" recheck="password" errormsg="{{ lang('password_not_pair') }}">
                 </div>
 
                 <div class="form-actions form-group">
@@ -63,4 +63,11 @@
         </form>
     </div>
 </div>
+@stop
+
+@section('javascript')
+<script type="text/javascript">
+    /** 登录表单验证 */
+    $("#signupform").Validform();
+</script>
 @stop

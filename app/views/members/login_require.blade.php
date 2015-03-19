@@ -4,9 +4,9 @@
 <div class="panel panel-default login_require">
     <div class="panel-heading text-center">{{ trans('common.sign_in') }}</div>
     <div class="panel-body">
-        <form action="{{ URL::action('MembersController@doLogin') }}" method="post">
+        <form action="{{ URL::action('MembersController@doLogin') }}" method="post" id="loginform">
             <div class="body bg-gray">
-                @if (  Session::has('error') )
+                @if ( Session::has('error') )
                 <div class="alert alert-danger">
                     {{ Session::get('error') }}
                 </div>
@@ -15,10 +15,10 @@
                     <div class="alert">{{ Session::get('notice') }}</div>
                 @endif
                 <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="{{ trans('common.username') }}"/>
+                    <input type="text" name="username" class="form-control" placeholder="{{ lang('username_or_email') }}" datatype="*" nullmsg="{{ lang('username_not_null') }}" />
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="{{ trans('common.password') }}"/>
+                    <input type="password" name="password" class="form-control" placeholder="{{ trans('common.password') }}" datatype="*" nullmsg="{{ lang('password_not_null') }}" />
                 </div>
                 <div class="form-group">
                     <input type="checkbox" name="remember" /> {{ trans('common.remember') }}
@@ -34,4 +34,11 @@
         </form>            
     </div>
 </div>
+@stop
+
+@section('javascript')
+<script type="text/javascript">
+    /** 登录表单验证 */
+    $("#loginform").Validform();
+</script>
 @stop

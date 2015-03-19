@@ -21,7 +21,7 @@
 			@endif
 
 			<div class="form-group">
-				<select class="selectpicker form-control" name="node_id" >
+				<select class="selectpicker form-control" name="node_id" datatype="*" nullmsg='{{ lang('Pick a node') }}'>
 
 					<option value="" disabled {{ App::make('Topic')->present()->haveDefaultNode($node, null) ?: 'selected'; }}>{{ lang('Pick a node') }}</option>
 
@@ -39,7 +39,9 @@
 				{{ Form::text('title', null, [
 					'class' => 'form-control', 
 					'id' => 'topic-title', 
-					'placeholder' => lang('Please write down a topic')
+					'placeholder' => lang('Please write down a topic'),
+					'datatype' => '*',
+					'nullmsg' => lang('Please write down a topic'),
 					]) 
 				}}
 			</div>
@@ -52,7 +54,9 @@
 					'rows' => 20,
 					'style' => "overflow:hidden",
 					'id' => 'reply_content',
-					'placeholder' => lang('Please using markdown.')
+					'placeholder' => lang('Please using markdown.'),
+					'datatype' => '*',
+					'nullmsg' => lang('Please fill in the content'),
 					]) 
 				}}
 			</div>
@@ -123,4 +127,10 @@
 	</div>
 </div>
 
+@stop
+
+@section('javascript')
+<script type="text/javascript">
+	$("#topic-create-form").Validform();
+</script>
 @stop

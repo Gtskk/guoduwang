@@ -20,7 +20,7 @@
 
 				@include('theme::layouts.errors')
 
-				{{ Form::model($member, ['route' => ['members.update', $member->id], 'method' => 'patch']) }}
+				{{ Form::model($member, ['route' => ['members.update', $member->id], 'method' => 'patch', 'id' => 'memberEdit']) }}
 
 					<div class="form-group">
 						{{ Form::text('real_name', null, ['class' => 'form-control', 'placeholder' => lang('Real Name')]) }}
@@ -39,7 +39,13 @@
 					</div>
 
 					<div class="form-group">
-						{{ Form::text('personal_website', null, ['class' => 'form-control', 'placeholder' => lang('personal_website_placebolder')]) }}
+						{{ Form::text('personal_website', null, [
+							'class' => 'form-control', 
+							'placeholder' => lang('personal_website_placebolder'),
+							'datatype' => 'url',
+							'ignore' => 'ignore',
+							'errormsg' => {{ lang('url_not_valid') }}
+							]) }}
 					</div>
 
 					<div class="form-group">
@@ -72,4 +78,11 @@
 
 </div>
 
+@stop
+
+@section('javascript')
+<script type="text/javascript">
+    /** 登录表单验证 */
+    $("#memberEdit").Validform();
+</script>
 @stop

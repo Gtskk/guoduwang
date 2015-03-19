@@ -37,7 +37,9 @@ var paths = {
             'app/assets/stylesheets/font-awesome.min.css',
             'app/assets/stylesheets/dropzone.css',
             'app/assets/stylesheets/style.css',
-            'app/assets/stylesheets/nprogress.css'
+            'app/assets/stylesheets/nprogress.css',
+            'app/assets/stylesheets/markdown.css',
+            'app/assets/stylesheets/prism.css',
         ],
         fonts: [
             'app/assets/fonts/**/*'

@@ -9,10 +9,10 @@
 		<div id="sign"></div>
 		<div id="rain"></div> 
 	</div>
-	{{ HTML::style('assets/css/404.css') }}
+	{{ HTML::style('css/404.css') }}
 </div>
 @overwrite
 
 @section('javascript')
-{{ HTML::script('assets/js/404.js') }}
+{{ HTML::script('js/404.js') }}
 @stop
