@@ -2,6 +2,11 @@
 
 class NodesController extends BaseController {
 
+	public function __construct(Topic $topic)
+	{
+		$this->topic = $topic;
+	}
+
 	public function show($id)
 	{
 		$node = Node::findOrFail($id);

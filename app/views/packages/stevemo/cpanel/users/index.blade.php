@@ -30,8 +30,8 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>{{ trans('common.name') }}</th>
-                            <th class="hidden-xs">{{ trans('common.email') }}</th>
+                            <th>{{ lang('Username') }}</th>
+                            <th class="hidden-xs">{{ lang('Email') }}</th>
                             <th class="hidden-xs">{{ trans('cpanel::users.active') }}</th>
                             <th class="hidden-xs">{{ trans('cpanel::users.joined') }}</th>
                             <th class="hidden-xs">{{ trans('cpanel::users.last_visit') }}</th>
