@@ -54,4 +54,9 @@ class EloquentMemberRepository implements MemberRepository
 	{
 		return Member::recent()->take($limit)->get();
 	}
+
+	public function search($q)
+	{
+		return Member::where('username', 'like', '%'.$q.'%')->get(array('id', 'username', 'image_url', 'email'));
+	}
 }

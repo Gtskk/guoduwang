@@ -146,4 +146,5 @@ return array (
     'password_not_valid' => 'Password must be between 6 and 15',
     'password_not_pair' => 'Password mismatched',
     'Submit' => 'Submit',
+    'search_no_results' => 'Don\'t have any data yet',
 );

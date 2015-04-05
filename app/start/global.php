@@ -100,7 +100,7 @@ require app_path().'/filters.php';
 | Add add the theme functions.
 |
 */
-$theme = Config::get('site.theme', 'default');
+$theme = Config::get('site.theme', '');
 View::addNamespace('theme', [
     base_path().'/themes/'.$theme.'/views',
     app_path().'/views'

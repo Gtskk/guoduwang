@@ -15,9 +15,9 @@
 Route::pattern('id', '[0-9]+');
 
 //前台路由
-
 Route::get('/', 'PagesController@showWelcome');
-Route::get('/about', array(
+Route::get('search', 'PagesController@search');
+Route::get('about', array(
 	'as' => 'about',
 	'uses' => 'PagesController@about'
 ));

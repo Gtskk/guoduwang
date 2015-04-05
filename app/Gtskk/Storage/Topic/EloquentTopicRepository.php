@@ -40,4 +40,9 @@ class EloquentTopicRepository implements TopicRepository
 
 		return $topics;
 	}
+
+	public function search($q)
+	{
+		return Topic::where('title', 'like', '%'.$q.'%')->orWhere('body', 'like', '%'.$q.'%')->get(array('id', 'title', 'reply_count'));
+	}
 }

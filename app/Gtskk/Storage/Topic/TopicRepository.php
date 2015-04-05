@@ -7,4 +7,6 @@ interface TopicRepository
 
 	public function getRecentUserTopics($id, $limit, $withPaginate);
 
+	public function search($q);
+
 }
