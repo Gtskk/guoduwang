@@ -20,7 +20,7 @@ return array(
     ),
 
     // 网站主题
-    'theme' => 'gtskk',
+    // 'theme' => 'gtskk',
 
     /****************************  推荐资源 *********************/
     'recommend_resources' => array(

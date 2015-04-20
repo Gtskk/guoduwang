@@ -1,20 +1,20 @@
 <?php
 
 use Gtskk\Storage\Topic\TopicRepository as Topic;
+use Gtskk\Storage\Member\MemberRepository as Member;
 
 class PagesController extends BaseController {
 
-	private $topic;
-
-	public function __construct(Topic $topic)
+	public function __construct(Topic $topic, Member $member)
 	{
 		$this->topic = $topic;
+		$this->member = $member;
 	}
 
 	public function showWelcome()
 	{
 		$topics = $this->topic->getRecentTopics(20);
-		
+
 		return View::make('theme::pages.index', compact('topics'));
 	}
 
@@ -29,12 +29,17 @@ class PagesController extends BaseController {
 
 
 	/**
-	 * 搜索，使用google的
+	 * 搜索
 	 */
 	public function search()
 	{
 		$query = Purifier::clean(Input::get('q'));
-		return Redirect::away('https://www.google.com/search?q=site:guoduwang.net ' . $query, 301);
+		// 从会员中进行搜索
+		$members = $this->member->search($query);
+		// 从话题中进行搜索
+		$topics = $this->topic->search($query);
+
+		return View::make('theme::pages.search', compact('members', 'topics'));
 	}
 
 	/**
