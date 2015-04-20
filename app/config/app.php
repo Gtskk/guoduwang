@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost/guoduwang/public',
+	'url' => 'http://guoduwang.net/public',
 
 	/*
 	|--------------------------------------------------------------------------
