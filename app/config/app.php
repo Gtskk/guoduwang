@@ -113,6 +113,7 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Former\FormerServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
+		'Dingo\Api\Provider\ApiServiceProvider',
 		'Stevemo\Cpanel\CpanelServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Torann\Currency\CurrencyServiceProvider',
@@ -127,6 +128,9 @@ return array(
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Thujohn\Rss\RssServiceProvider',
 		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+		'LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider',
+		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider',
 		'Gtskk\Storage\StorageServiceProvider',
 
 	),
@@ -207,6 +211,8 @@ return array(
         'Flash' 		  => 'Laracasts\Flash\Flash',
         'OAuth' 		  => 'Artdarek\OAuth\Facade\OAuth',
         'Rss' 			  => 'Thujohn\Rss\RssFacade',
+		'API'             => 'Dingo\Api\Facade\API',
+		'Authorizer'      => 'LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade',
 
 	),
 

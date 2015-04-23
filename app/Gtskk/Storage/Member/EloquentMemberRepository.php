@@ -40,9 +40,20 @@ class EloquentMemberRepository implements MemberRepository
     	});
 	}
 
-	public function paginateSelect($limit = 15)
+	public function paginateSelect($page = 1, $limit = 15)
 	{
-		return Member::where('id', '<>', 1)->paginate($limit);
+		$result = new \StdClass;
+		$result->page = $page;
+		$result->limit = $limit;
+		$result->totalItems = 0;
+		$result->items = array();
+
+		$articles = Member::where('id', '<>', 1)
+			->skip($limit * ($page -1))
+			->take($limit)
+			->get();
+
+		$result->items = $articles->all();
 	}
 
 	public function paginateDelete($limit = 15)

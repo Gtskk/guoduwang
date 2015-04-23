@@ -18,7 +18,7 @@
                     <input type="text" name="username" class="form-control" placeholder="{{ lang('username_or_email') }}" datatype="*" nullmsg="{{ lang('username_not_null') }}" />
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="{{ trans('common.password') }}" datatype="*" nullmsg="{{ lang('password_not_null') }}" />
+                    <input type="password" name="password" class="form-control" placeholder="{{ trans('cpanel::users.password') }}" datatype="*" nullmsg="{{ lang('password_not_null') }}" />
                 </div>
                 <div class="form-group">
                     <input type="checkbox" name="remember" /> {{ trans('common.remember') }}

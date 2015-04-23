@@ -28,7 +28,10 @@
         "artdarek/oauth-4-laravel": "dev-master",
         "thujohn/rss": "~1.0",
         "pusher/pusher-php-server": "dev-master",
-        "codesleeve/asset-pipeline": "dev-master"
+        "codesleeve/asset-pipeline": "dev-master",
+		"barryvdh/laravel-ide-helper": "~1.11",
+		"lucadegasperi/oauth2-server-laravel": "3.*",
+		"dingo/api": "0.8.*"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "1.4.*",

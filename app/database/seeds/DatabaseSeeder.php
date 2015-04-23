@@ -15,10 +15,17 @@ class DatabaseSeeder extends Seeder {
      * @var array
      */
     protected $seeders = [
-    	'MemberTableSeeder',
+    	/*'MemberTableSeeder',
         'TopicsTableSeeder',
         'RepliesTableSeeder',
-        'FrontRolesTableSeeder'
+        'FrontRolesTableSeeder',*/
+	    'ClientsTableSeeder',
+		'GrantsTableSeeder',
+		'ScopesTableSeeder',
+		'SessionsTableSeeder',
+		'AuthCodesTableSeeder',
+		'AccessTokensTableSeeder',
+		'RefreshTokensTableSeeder',
     ];
 
 	/**
@@ -30,7 +37,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->cleanDatabase();
+//		$this->cleanDatabase();
 
 		foreach($this->seeders as $seedClass)
         {

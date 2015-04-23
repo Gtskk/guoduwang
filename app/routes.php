@@ -265,3 +265,91 @@ App::missing(function($exception)
 });
 // 获取天气接口
 // Route::get('api/weather', 'ApiController@weather');
+
+
+
+
+/*******************   接口有关  *****************/
+Route::api(['version' => 'v1', 'protected' => true], function () {
+	Route::get('users', 'Api\MembersApiController@all');
+	Route::get('users/me', 'Api\MembersApiController@showMe');
+	Route::get('users/{id}', 'Api\MembersApiController@show');
+	Route::post('users', function () {
+		$rules = [
+			'username' => ['required', 'alpha'],
+			'password' => ['required', 'min:7']
+		];
+
+		$payload = Input::only('username', 'password');
+
+		$validator = Validator::make($payload, $rules);
+
+		if ($validator->fails()) {
+			throw new Dingo\Api\Exception\StoreResourceFailedException('Could not create new user.', $validator->errors());
+		}
+
+		// Create user as per usual.
+	});
+	Route::put('users/{id}', function($id){
+		$member = User::find($id);
+
+		if ($member->updated_at > Input::get('last_updated')) {
+			throw new Symfony\Component\HttpKernel\Exception\ConflictHttpException('User was updated prior to your request.');
+		}
+	});
+
+	Route::get('user', function () {
+		$user = API::user();
+
+		return $user;
+	});
+
+});
+
+
+/**
+ * User Credentials方式
+ *
+ * 调用方式：POST http://guoduwang.net/api/oauth/access_token
+ * Headers   Accept: application/vnd.guoduwang.v1+json
+ * x-www-form-urlencoded    grant_type=password
+ *                          client_id=...
+ *                          client_secret=...
+ *                          username=...
+ *                          password=...
+ *
+ */
+Route::post('api/oauth/access_token', function() {
+	return Response::json(Authorizer::issueAccessToken());
+});
+
+/*
+// authorization_code方式
+// 调用方式： GET http://guoduwang.net/api/oauth/authorize?client_id=...&redirect_uri=...&response_type=code
+
+Route::get('oauth/authorize', ['before' => 'check-authorization-params', function() {
+	// display a form where the user can authorize the client to access it's data
+	return View::make('oauth/authorization-form', Authorizer::getAuthCodeRequestParams());
+}]);
+Route::post('oauth/authorize', ['as' => 'oauth', 'before' => 'csrf|check-authorization-params|auth', function() {
+
+	$params['user_id'] = Auth::user()->id;
+
+	$redirectUri = '';
+
+	// if the user has allowed the client to access its data, redirect back to the client with an auth code
+	if (Input::get('approve') !== null) {
+		$redirectUri = Authorizer::issueAuthCode('user', $params['user_id'], $params);
+	}
+
+	// if the user has denied the client to access its data, redirect back to the client with an error message
+	if (Input::get('deny') !== null) {
+		$redirectUri = Authorizer::authCodeRequestDeniedRedirectUri();
+	}
+
+	return Redirect::to($redirectUri);
+}]);
+Route::post('oauth/access_token', function() {
+	return Response::json(Authorizer::issueAccessToken());
+});
+*/
