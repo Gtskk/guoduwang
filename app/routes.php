@@ -285,7 +285,7 @@ Route::api(['version' => 'v1', 'protected' => true], function () {
 		$validator = Validator::make($payload, $rules);
 
 		if ($validator->fails()) {
-			throw new Dingo\Api\Exception\StoreResourceFailedException('Could not create new user.', $validator->errors());
+			throw new Dingo\Api\Exception\StoreResourceFailedException('不能创建新用户，错误：', $validator->errors());
 		}
 
 		// Create user as per usual.

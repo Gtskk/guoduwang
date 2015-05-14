@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-03-04 14:31:01
+-- Generation Time: 2015-04-23 07:33:08
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 INSERT INTO `members` (`id`, `username`, `email`, `phone`, `image_url`, `topic_count`, `reply_count`, `password`, `confirmation_code`, `remember_token`, `is_banned`, `confirmed`, `real_name`, `github_name`, `github_url`, `github_id`, `ghost_id`, `ghost_name`, `company`, `city`, `personal_website`, `signature`, `introduction`, `created_at`, `updated_at`, `deleted_at`, `notification_count`) VALUES
-(1, 'gtskk', 'tttt6399998@126.com', '15212230025', NULL, 0, 5, '$2y$10$Uz8Vvxy66Q5KoPgr9N0Ctu4iwUgwC/SlwXVNMCxJpTRDFw8vp7AnC', '6707b1779a7898496a5a906bfef822bc', 'Nl7pz8bZfIs2FBqpNnsB3ae0qKfd5hdBLPgwEGddn0u22Od0wF4QU665drD5', 0, 0, '', '', NULL, NULL, NULL, '', '', '', '', '', '', '2015-03-03 07:19:32', '2015-03-03 09:30:14', NULL, 0);
+(1, 'gtskk', 'tttt6399998@126.com', '15212230025', NULL, 0, 5, '$2y$10$Uz8Vvxy66Q5KoPgr9N0Ctu4iwUgwC/SlwXVNMCxJpTRDFw8vp7AnC', '6707b1779a7898496a5a906bfef822bc', 'QjOAnRlThIZoDm6scIcwMisMFvrQG5R3nAe4iZVdwMLHgo5xyoAbuF0rBCBX', 0, 0, '', '', NULL, NULL, NULL, '', '', '', '', '', '', '2015-03-03 07:19:32', '2015-04-22 11:00:38', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -320,7 +320,21 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2015_02_09_132636_add_github_fields_to_members_table', 15),
 ('2015_02_10_163953_add_excerpt_field_to_topics_table', 16),
 ('2015_02_12_095401_add_ghost_fields_to_members_table', 17),
-('2015_03_04_142446_create_failed_jobs_table', 18);
+('2015_03_04_142446_create_failed_jobs_table', 18),
+('2015_04_22_141459_create_oauth_scopes_table', 19),
+('2015_04_22_141500_create_oauth_grants_table', 19),
+('2015_04_22_141501_create_oauth_grant_scopes_table', 19),
+('2015_04_22_141502_create_oauth_clients_table', 19),
+('2015_04_22_141504_create_oauth_client_endpoints_table', 19),
+('2015_04_22_141505_create_oauth_client_scopes_table', 19),
+('2015_04_22_141506_create_oauth_client_grants_table', 19),
+('2015_04_22_141507_create_oauth_sessions_table', 19),
+('2015_04_22_141508_create_oauth_session_scopes_table', 19),
+('2015_04_22_141509_create_oauth_auth_codes_table', 19),
+('2015_04_22_141510_create_oauth_auth_code_scopes_table', 19),
+('2015_04_22_141511_create_oauth_access_tokens_table', 19),
+('2015_04_22_141512_create_oauth_access_token_scopes_table', 19),
+('2015_04_22_141513_create_oauth_refresh_tokens_table', 19);
 
 -- --------------------------------------------------------
 
@@ -409,6 +423,328 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   KEY `notifications_topic_id_index` (`topic_id`),
   KEY `notifications_reply_id_index` (`reply_id`),
   KEY `notifications_type_index` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_access_tokens`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
+  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `session_id` int(10) unsigned NOT NULL,
+  `expire_time` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `oauth_access_tokens_id_session_id_unique` (`id`,`session_id`),
+  KEY `oauth_access_tokens_session_id_index` (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `oauth_access_tokens`
+--
+
+INSERT INTO `oauth_access_tokens` (`id`, `session_id`, `expire_time`, `created_at`, `updated_at`) VALUES
+('HOnFOHwcGKNLdExtfvaGOaBmRT6rq4dbtmFGtBPR', 3, 1429763739, '2015-04-23 03:35:39', '2015-04-23 03:35:39'),
+('MlaioZfooROtCTpL4PmelKF0SjZRkVx6PRw4vU8w', 5, 1429768788, '2015-04-23 04:59:48', '2015-04-23 04:59:48'),
+('totallyanaccesstoken1', 1, 1429699878, '2015-04-22 10:50:18', '2015-04-22 10:50:18'),
+('totallyanaccesstoken2', 2, 1429699938, '2015-04-22 10:50:18', '2015-04-22 10:50:18'),
+('vHuBTQO8LaSSHvYyDwxMN2SsAQ4XtpDMfYNqsOTy', 4, 1429764546, '2015-04-23 03:49:06', '2015-04-23 03:49:06');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_access_token_scopes`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_access_token_scopes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `access_token_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_access_token_scopes_access_token_id_index` (`access_token_id`),
+  KEY `oauth_access_token_scopes_scope_id_index` (`scope_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_auth_codes`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_auth_codes` (
+  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `session_id` int(10) unsigned NOT NULL,
+  `redirect_uri` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `expire_time` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_auth_codes_session_id_index` (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `oauth_auth_codes`
+--
+
+INSERT INTO `oauth_auth_codes` (`id`, `session_id`, `redirect_uri`, `expire_time`, `created_at`, `updated_at`) VALUES
+('totallyanauthcode1', 1, 'https://example1.com/', 1429699878, '2015-04-22 10:50:18', '2015-04-22 10:50:18'),
+('totallyanauthcode2', 2, 'https://example2.com/', 1429699938, '2015-04-22 10:50:18', '2015-04-22 10:50:18');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_auth_code_scopes`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_auth_code_scopes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `auth_code_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_auth_code_scopes_auth_code_id_index` (`auth_code_id`),
+  KEY `oauth_auth_code_scopes_scope_id_index` (`scope_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_clients`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_clients` (
+  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `secret` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `oauth_clients_id_secret_unique` (`id`,`secret`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `oauth_clients`
+--
+
+INSERT INTO `oauth_clients` (`id`, `secret`, `name`, `created_at`, `updated_at`) VALUES
+('client1id', 'client1secret', 'client1', '2015-04-22 10:50:17', '2015-04-22 10:50:17'),
+('client2id', 'client2secret', 'client2', '2015-04-22 10:50:17', '2015-04-22 10:50:17');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_client_endpoints`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_client_endpoints` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `redirect_uri` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `oauth_client_endpoints_client_id_redirect_uri_unique` (`client_id`,`redirect_uri`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `oauth_client_endpoints`
+--
+
+INSERT INTO `oauth_client_endpoints` (`id`, `client_id`, `redirect_uri`, `created_at`, `updated_at`) VALUES
+(1, 'client1id', 'http://guoduwang.net/api', '2015-04-22 10:50:17', '2015-04-22 10:50:17'),
+(2, 'client2id', 'http://example2.com/callback', '2015-04-22 10:50:17', '2015-04-22 10:50:17');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_client_grants`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_client_grants` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `grant_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_client_grants_client_id_index` (`client_id`),
+  KEY `oauth_client_grants_grant_id_index` (`grant_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `oauth_client_grants`
+--
+
+INSERT INTO `oauth_client_grants` (`id`, `client_id`, `grant_id`, `created_at`, `updated_at`) VALUES
+(1, 'client1id', 'grant1', '2015-04-22 10:50:17', '2015-04-22 10:50:17'),
+(2, 'client2id', 'grant2', '2015-04-22 10:50:17', '2015-04-22 10:50:17');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_client_scopes`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_client_scopes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_client_scopes_client_id_index` (`client_id`),
+  KEY `oauth_client_scopes_scope_id_index` (`scope_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `oauth_client_scopes`
+--
+
+INSERT INTO `oauth_client_scopes` (`id`, `client_id`, `scope_id`, `created_at`, `updated_at`) VALUES
+(1, 'client1id', 'scope1', '2015-04-22 10:50:17', '2015-04-22 10:50:17'),
+(2, 'client2id', 'scope2', '2015-04-22 10:50:17', '2015-04-22 10:50:17');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_grants`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_grants` (
+  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `oauth_grants`
+--
+
+INSERT INTO `oauth_grants` (`id`, `created_at`, `updated_at`) VALUES
+('grant1', '2015-04-22 10:50:17', '2015-04-22 10:50:17'),
+('grant2', '2015-04-22 10:50:17', '2015-04-22 10:50:17');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_grant_scopes`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_grant_scopes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `grant_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_grant_scopes_grant_id_index` (`grant_id`),
+  KEY `oauth_grant_scopes_scope_id_index` (`scope_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `oauth_grant_scopes`
+--
+
+INSERT INTO `oauth_grant_scopes` (`id`, `grant_id`, `scope_id`, `created_at`, `updated_at`) VALUES
+(1, 'grant1', 'scope1', '2015-04-22 10:50:17', '2015-04-22 10:50:17'),
+(2, 'grant2', 'scope2', '2015-04-22 10:50:17', '2015-04-22 10:50:17');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_refresh_tokens`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_refresh_tokens` (
+  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `access_token_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `expire_time` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`access_token_id`),
+  UNIQUE KEY `oauth_refresh_tokens_id_unique` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `oauth_refresh_tokens`
+--
+
+INSERT INTO `oauth_refresh_tokens` (`id`, `access_token_id`, `expire_time`, `created_at`, `updated_at`) VALUES
+('totallyarefreshtoken1', 'totallyanaccesstoken1', 1429699878, '2015-04-22 10:50:18', '2015-04-22 10:50:18');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_scopes`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_scopes` (
+  `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 转存表中的数据 `oauth_scopes`
+--
+
+INSERT INTO `oauth_scopes` (`id`, `description`, `created_at`, `updated_at`) VALUES
+('scope1', 'Scope 1 Description', '2015-04-22 10:50:17', '2015-04-22 10:50:17'),
+('scope2', 'Scope 2 Description', '2015-04-22 10:50:17', '2015-04-22 10:50:17');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_sessions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `owner_type` enum('client','user') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'user',
+  `owner_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `client_redirect_uri` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_sessions_client_id_owner_type_owner_id_index` (`client_id`,`owner_type`,`owner_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `oauth_sessions`
+--
+
+INSERT INTO `oauth_sessions` (`id`, `client_id`, `owner_type`, `owner_id`, `client_redirect_uri`, `created_at`, `updated_at`) VALUES
+(1, 'client1id', 'user', '1', NULL, '2015-04-22 10:50:18', '2015-04-22 10:50:18'),
+(2, 'client2id', 'user', '2', NULL, '2015-04-22 10:50:18', '2015-04-22 10:50:18'),
+(3, 'client1id', 'user', '1', NULL, '2015-04-23 03:35:39', '2015-04-23 03:35:39'),
+(4, 'client1id', 'user', '1', NULL, '2015-04-23 03:49:06', '2015-04-23 03:49:06'),
+(5, 'client1id', 'user', '1', NULL, '2015-04-23 04:59:48', '2015-04-23 04:59:48');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `oauth_session_scopes`
+--
+
+CREATE TABLE IF NOT EXISTS `oauth_session_scopes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `session_id` int(10) unsigned NOT NULL,
+  `scope_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `oauth_session_scopes_session_id_index` (`session_id`),
+  KEY `oauth_session_scopes_scope_id_index` (`scope_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -691,6 +1027,78 @@ ALTER TABLE `front_assigned_roles`
 ALTER TABLE `front_permission_role`
   ADD CONSTRAINT `front_permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `front_permissions` (`id`),
   ADD CONSTRAINT `front_permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `front_roles` (`id`);
+
+--
+-- 限制表 `oauth_access_tokens`
+--
+ALTER TABLE `oauth_access_tokens`
+  ADD CONSTRAINT `oauth_access_tokens_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `oauth_sessions` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `oauth_access_token_scopes`
+--
+ALTER TABLE `oauth_access_token_scopes`
+  ADD CONSTRAINT `oauth_access_token_scopes_scope_id_foreign` FOREIGN KEY (`scope_id`) REFERENCES `oauth_scopes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `oauth_access_token_scopes_access_token_id_foreign` FOREIGN KEY (`access_token_id`) REFERENCES `oauth_access_tokens` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `oauth_auth_codes`
+--
+ALTER TABLE `oauth_auth_codes`
+  ADD CONSTRAINT `oauth_auth_codes_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `oauth_sessions` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `oauth_auth_code_scopes`
+--
+ALTER TABLE `oauth_auth_code_scopes`
+  ADD CONSTRAINT `oauth_auth_code_scopes_scope_id_foreign` FOREIGN KEY (`scope_id`) REFERENCES `oauth_scopes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `oauth_auth_code_scopes_auth_code_id_foreign` FOREIGN KEY (`auth_code_id`) REFERENCES `oauth_auth_codes` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `oauth_client_endpoints`
+--
+ALTER TABLE `oauth_client_endpoints`
+  ADD CONSTRAINT `oauth_client_endpoints_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `oauth_clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `oauth_client_grants`
+--
+ALTER TABLE `oauth_client_grants`
+  ADD CONSTRAINT `oauth_client_grants_grant_id_foreign` FOREIGN KEY (`grant_id`) REFERENCES `oauth_grants` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `oauth_client_grants_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `oauth_clients` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- 限制表 `oauth_client_scopes`
+--
+ALTER TABLE `oauth_client_scopes`
+  ADD CONSTRAINT `oauth_client_scopes_scope_id_foreign` FOREIGN KEY (`scope_id`) REFERENCES `oauth_scopes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `oauth_client_scopes_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `oauth_clients` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `oauth_grant_scopes`
+--
+ALTER TABLE `oauth_grant_scopes`
+  ADD CONSTRAINT `oauth_grant_scopes_scope_id_foreign` FOREIGN KEY (`scope_id`) REFERENCES `oauth_scopes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `oauth_grant_scopes_grant_id_foreign` FOREIGN KEY (`grant_id`) REFERENCES `oauth_grants` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `oauth_refresh_tokens`
+--
+ALTER TABLE `oauth_refresh_tokens`
+  ADD CONSTRAINT `oauth_refresh_tokens_access_token_id_foreign` FOREIGN KEY (`access_token_id`) REFERENCES `oauth_access_tokens` (`id`) ON DELETE CASCADE;
+
+--
+-- 限制表 `oauth_sessions`
+--
+ALTER TABLE `oauth_sessions`
+  ADD CONSTRAINT `oauth_sessions_client_id_foreign` FOREIGN KEY (`client_id`) REFERENCES `oauth_clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- 限制表 `oauth_session_scopes`
+--
+ALTER TABLE `oauth_session_scopes`
+  ADD CONSTRAINT `oauth_session_scopes_scope_id_foreign` FOREIGN KEY (`scope_id`) REFERENCES `oauth_scopes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `oauth_session_scopes_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `oauth_sessions` (`id`) ON DELETE CASCADE;
 
 --
 -- 限制表 `votes`
