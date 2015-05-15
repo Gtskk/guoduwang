@@ -1,6 +1,6 @@
 <?php namespace Api;
 
-use Gtskk\Storage\Member\MemberRepository as Member;
+use Gtskk\Storage\Member\MemberInterface as Member;
 use Gtskk\Transformers\MemberTransformer as MemberTransformer;
 
 class MembersApiController extends BaseController {

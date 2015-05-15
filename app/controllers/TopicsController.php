@@ -2,6 +2,7 @@
 
 use Gtskk\Core\CreatorListener;
 use Gtskk\FormValidators\TopicCreationForm;
+use Gtskk\Storage\Topic\TopicInterface as Topic;
 
 class TopicsController extends BaseController implements CreatorListener
 {
@@ -17,9 +18,17 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function index()
     {
-        $filter = $this->topic->present()->getTopicFilter();
-        $topics = $this->topic->getTopicsWithFilter($filter);
-        $nodes  = Node::allLevelUp();
+        $page = Input::get('page', 1);
+        $perPage = Config::get('site.topic_per_page');
+
+        $filter = $this->topic->getTopicFilter();
+        $pagiData = $this->topic->getTopicsWithFilter($filter, $page);
+        $topics = Paginator::make(
+            $pagiData->items,
+            $pagiData->totalItems,
+            $perPage
+        );
+        $nodes = Node::allLevelUp();
 
         return View::make('theme::topics.index', compact('topics', 'nodes'));
     }
@@ -39,19 +48,14 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function show($id)
     {
-        $topic = Topic::findOrFail($id);
-        $replies = $topic->getRepliesWithLimit(80);
-        $node = $topic->node;
-        $nodeTopics = $topic->getSameNodeTopics();
+        $data = $this->topic->showTopicDetail($id);
 
-        $topic->increment('view_count', 1);
-
-        return View::make('theme::topics.show', compact('topic', 'replies', 'nodeTopics', 'node'));
+        return View::make('theme::topics.show', $data);
     }
 
     public function edit($id)
     {
-        $topic = Topic::findOrFail($id);
+        $topic = $this->topic->findOrFail($id);
         $this->authorOrAdminPermissioinRequire($topic->user_id);
         $nodes = Node::allLevelUp();
         $node = $topic->node;
@@ -63,7 +67,7 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function update($id)
     {
-        $topic = Topic::findOrFail($id);
+        $topic = $this->topic->findOrFail($id);
         $data = Input::only('title', 'body', 'node_id');
 
         $this->authorOrAdminPermissioinRequire($topic->user_id);
@@ -71,7 +75,7 @@ class TopicsController extends BaseController implements CreatorListener
         $markdown = new Markdown;
         $data['body_original'] = $data['body'];
         $data['body'] = $markdown->convertMarkdownToHtml($data['body']);
-        $data['excerpt'] = Topic::makeExcerpt($data['body']);
+        $data['excerpt'] = $this->topic->makeExcerpt($data['body']);
 
         // Validation
         App::make('Gtskk\Forms\TopicCreationForm')->validate($data);
@@ -93,7 +97,7 @@ class TopicsController extends BaseController implements CreatorListener
         if(Request::ajax())
         {
             $resp = array();
-            $topic = Topic::find($id);
+            $topic = $this->topic->findOrFail($id);
             if(Confide::user()->id == $topic->member_id)
             {
                 $resp['status'] = 'fail';
@@ -113,7 +117,7 @@ class TopicsController extends BaseController implements CreatorListener
     public function downvote($id)
     {
         $resp = array();
-        $topic = Topic::find($id);
+        $topic = $this->topic->findOrFail($id);
         if(Confide::user()->id == $topic->member_id)
         {
             $resp['status'] = 'fail';
@@ -137,7 +141,7 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function recomend($id)
     {
-        $topic = Topic::findOrFail($id);
+        $topic = $this->findOrFail($id);
         $topic->is_excellent = (!$topic->is_excellent);
         $topic->save();
         Notification::notify('topic_mark_excellent', Confide::user(), $topic->member, $topic);
@@ -146,21 +150,21 @@ class TopicsController extends BaseController implements CreatorListener
 
     public function pin($id)
     {
-        $topic = Topic::findOrFail($id);
+        $topic = $this->findOrFail($id);
         ($topic->order > 0) ? $topic->decrement('order', 1) : $topic->increment('order', 1);
         die(json_encode(array('status'=>'success', 'message'=>'')));
     }
 
     public function sink($id)
     {
-        $topic = Topic::findOrFail($id);
+        $topic = $this->findOrFail($id);
         ($topic->order >= 0) ? $topic->decrement('order', 1) : $topic->increment('order', 1);
         die(json_encode(array('status'=>'success', 'message'=>'')));
     }
 
     public function destroy($id)
     {
-        $topic = Topic::findOrFail($id);
+        $topic = $this->findOrFail($id);
         $topic->delete();
         die(json_encode(array('status'=>'success', 'message'=>'')));
     }
@@ -212,6 +216,7 @@ class TopicsController extends BaseController implements CreatorListener
         }
         return $data;
     }
+    
 
     /**
      * ----------------------------------------

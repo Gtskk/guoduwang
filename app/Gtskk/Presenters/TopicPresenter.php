@@ -29,17 +29,6 @@ class TopicPresenter extends Presenter
         return 'href="' . $link . '"' . $selected;
     }
 
-    public function getTopicFilter()
-    {
-        $filters = ['noreply', 'vote', 'excellent','recent'];
-        $request_filter = Input::get('filter');
-        if ( in_array($request_filter, $filters) )
-        {
-            return $request_filter;
-        }
-        return 'default';
-    }
-
     public function haveDefaultNode($node, $snode)
     {
         if (count($node) && ($snode && $node->id == $snode->id ))

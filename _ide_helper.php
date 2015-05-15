@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.2.17 on 2015-04-21.
+ * Generated for Laravel 4.2.17 on 2015-05-14.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -10085,6 +10085,158 @@ namespace {
     class Route extends \Illuminate\Support\Facades\Route{
         
         /**
+         * Register an API group.
+         *
+         * @param array|string $options
+         * @param callable $callback
+         * @throws \BadMethodCallException
+         * @return void 
+         * @static 
+         */
+        public static function api($options, $callback){
+            \Dingo\Api\Routing\Router::api($options, $callback);
+        }
+        
+        /**
+         * Add an existing collection of routes.
+         *
+         * @param \Illuminate\Routing\RouteCollection $routes
+         * @return void 
+         * @static 
+         */
+        public static function addExistingRoutes($routes){
+            \Dingo\Api\Routing\Router::addExistingRoutes($routes);
+        }
+        
+        /**
+         * Dispatch the request to the application and return either a regular response
+         * or an API response.
+         *
+         * @param \Illuminate\Http\Request $request
+         * @throws \Exception
+         * @return \Illuminate\Http\Response|\Dingo\Api\Http\Response 
+         * @static 
+         */
+        public static function dispatch($request){
+            return \Dingo\Api\Routing\Router::dispatch($request);
+        }
+        
+        /**
+         * Determine if the request is an API request.
+         *
+         * @param \Illuminate\Http\Request $request
+         * @return bool 
+         * @static 
+         */
+        public static function isApiRequest($request){
+            return \Dingo\Api\Routing\Router::isApiRequest($request);
+        }
+        
+        /**
+         * Get the current API format.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getCurrentFormat(){
+            return \Dingo\Api\Routing\Router::getCurrentFormat();
+        }
+        
+        /**
+         * Get the current API version.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getCurrentVersion(){
+            return \Dingo\Api\Routing\Router::getCurrentVersion();
+        }
+        
+        /**
+         * Get a controller inspector instance.
+         *
+         * @return \Dingo\Api\Routing\ControllerInspector 
+         * @static 
+         */
+        public static function getInspector(){
+            return \Dingo\Api\Routing\Router::getInspector();
+        }
+        
+        /**
+         * Set the current request.
+         *
+         * @param \Illuminate\Http\Request $request
+         * @return void 
+         * @static 
+         */
+        public static function setCurrentRequest($request){
+            \Dingo\Api\Routing\Router::setCurrentRequest($request);
+        }
+        
+        /**
+         * Set the current route.
+         *
+         * @param \Illuminate\Routing\Route $route
+         * @return void 
+         * @static 
+         */
+        public static function setCurrentRoute($route){
+            \Dingo\Api\Routing\Router::setCurrentRoute($route);
+        }
+        
+        /**
+         * Get the API groups collection containing the API routes.
+         *
+         * @return \Dingo\Api\Routing\GroupCollection 
+         * @static 
+         */
+        public static function getApiGroups(){
+            return \Dingo\Api\Routing\Router::getApiGroups();
+        }
+        
+        /**
+         * Determine if conditional requests are enabled.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function requestsAreConditional(){
+            return \Dingo\Api\Routing\Router::requestsAreConditional();
+        }
+        
+        /**
+         * Enable or disable conditional requests.
+         *
+         * @param bool $conditionalRequest
+         * @return void 
+         * @static 
+         */
+        public static function setConditionalRequest($conditionalRequest){
+            \Dingo\Api\Routing\Router::setConditionalRequest($conditionalRequest);
+        }
+        
+        /**
+         * Determine if the request should be treated as strict.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function isStrict(){
+            return \Dingo\Api\Routing\Router::isStrict();
+        }
+        
+        /**
+         * Enable or disable strict mode.
+         *
+         * @param bool $strict
+         * @return void 
+         * @static 
+         */
+        public static function setStrict($strict){
+            \Dingo\Api\Routing\Router::setStrict($strict);
+        }
+        
+        /**
          * Register a new GET route with the router.
          *
          * @param string $uri
@@ -10093,7 +10245,8 @@ namespace {
          * @static 
          */
         public static function get($uri, $action){
-            return \Illuminate\Routing\Router::get($uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::get($uri, $action);
         }
         
         /**
@@ -10105,7 +10258,8 @@ namespace {
          * @static 
          */
         public static function post($uri, $action){
-            return \Illuminate\Routing\Router::post($uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::post($uri, $action);
         }
         
         /**
@@ -10117,7 +10271,8 @@ namespace {
          * @static 
          */
         public static function put($uri, $action){
-            return \Illuminate\Routing\Router::put($uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::put($uri, $action);
         }
         
         /**
@@ -10129,7 +10284,8 @@ namespace {
          * @static 
          */
         public static function patch($uri, $action){
-            return \Illuminate\Routing\Router::patch($uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::patch($uri, $action);
         }
         
         /**
@@ -10141,7 +10297,8 @@ namespace {
          * @static 
          */
         public static function delete($uri, $action){
-            return \Illuminate\Routing\Router::delete($uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::delete($uri, $action);
         }
         
         /**
@@ -10153,7 +10310,8 @@ namespace {
          * @static 
          */
         public static function options($uri, $action){
-            return \Illuminate\Routing\Router::options($uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::options($uri, $action);
         }
         
         /**
@@ -10165,7 +10323,8 @@ namespace {
          * @static 
          */
         public static function any($uri, $action){
-            return \Illuminate\Routing\Router::any($uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::any($uri, $action);
         }
         
         /**
@@ -10178,7 +10337,8 @@ namespace {
          * @static 
          */
         public static function match($methods, $uri, $action){
-            return \Illuminate\Routing\Router::match($methods, $uri, $action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::match($methods, $uri, $action);
         }
         
         /**
@@ -10189,7 +10349,8 @@ namespace {
          * @static 
          */
         public static function controllers($controllers){
-            \Illuminate\Routing\Router::controllers($controllers);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::controllers($controllers);
         }
         
         /**
@@ -10202,7 +10363,8 @@ namespace {
          * @static 
          */
         public static function controller($uri, $controller, $names = array()){
-            \Illuminate\Routing\Router::controller($uri, $controller, $names);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::controller($uri, $controller, $names);
         }
         
         /**
@@ -10215,7 +10377,8 @@ namespace {
          * @static 
          */
         public static function resource($name, $controller, $options = array()){
-            \Illuminate\Routing\Router::resource($name, $controller, $options);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::resource($name, $controller, $options);
         }
         
         /**
@@ -10226,7 +10389,8 @@ namespace {
          * @static 
          */
         public static function getResourceUri($resource){
-            return \Illuminate\Routing\Router::getResourceUri($resource);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::getResourceUri($resource);
         }
         
         /**
@@ -10237,7 +10401,8 @@ namespace {
          * @static 
          */
         public static function getResourceWildcard($value){
-            return \Illuminate\Routing\Router::getResourceWildcard($value);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::getResourceWildcard($value);
         }
         
         /**
@@ -10249,7 +10414,8 @@ namespace {
          * @static 
          */
         public static function group($attributes, $callback){
-            \Illuminate\Routing\Router::group($attributes, $callback);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::group($attributes, $callback);
         }
         
         /**
@@ -10260,7 +10426,8 @@ namespace {
          * @static 
          */
         public static function mergeWithLastGroup($new){
-            return \Illuminate\Routing\Router::mergeWithLastGroup($new);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::mergeWithLastGroup($new);
         }
         
         /**
@@ -10272,18 +10439,8 @@ namespace {
          * @static 
          */
         public static function mergeGroup($new, $old){
-            return \Illuminate\Routing\Router::mergeGroup($new, $old);
-        }
-        
-        /**
-         * Dispatch the request to the application.
-         *
-         * @param \Illuminate\Http\Request $request
-         * @return \Illuminate\Http\Response 
-         * @static 
-         */
-        public static function dispatch($request){
-            return \Illuminate\Routing\Router::dispatch($request);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::mergeGroup($new, $old);
         }
         
         /**
@@ -10294,7 +10451,8 @@ namespace {
          * @static 
          */
         public static function dispatchToRoute($request){
-            return \Illuminate\Routing\Router::dispatchToRoute($request);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::dispatchToRoute($request);
         }
         
         /**
@@ -10305,7 +10463,8 @@ namespace {
          * @static 
          */
         public static function matched($callback){
-            \Illuminate\Routing\Router::matched($callback);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::matched($callback);
         }
         
         /**
@@ -10316,7 +10475,8 @@ namespace {
          * @static 
          */
         public static function before($callback){
-            \Illuminate\Routing\Router::before($callback);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::before($callback);
         }
         
         /**
@@ -10327,7 +10487,8 @@ namespace {
          * @static 
          */
         public static function after($callback){
-            \Illuminate\Routing\Router::after($callback);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::after($callback);
         }
         
         /**
@@ -10339,7 +10500,8 @@ namespace {
          * @static 
          */
         public static function filter($name, $callback){
-            \Illuminate\Routing\Router::filter($name, $callback);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::filter($name, $callback);
         }
         
         /**
@@ -10352,7 +10514,8 @@ namespace {
          * @static 
          */
         public static function when($pattern, $name, $methods = null){
-            \Illuminate\Routing\Router::when($pattern, $name, $methods);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::when($pattern, $name, $methods);
         }
         
         /**
@@ -10365,7 +10528,8 @@ namespace {
          * @static 
          */
         public static function whenRegex($pattern, $name, $methods = null){
-            \Illuminate\Routing\Router::whenRegex($pattern, $name, $methods);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::whenRegex($pattern, $name, $methods);
         }
         
         /**
@@ -10379,7 +10543,8 @@ namespace {
          * @static 
          */
         public static function model($key, $class, $callback = null){
-            \Illuminate\Routing\Router::model($key, $class, $callback);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::model($key, $class, $callback);
         }
         
         /**
@@ -10391,7 +10556,8 @@ namespace {
          * @static 
          */
         public static function bind($key, $binder){
-            \Illuminate\Routing\Router::bind($key, $binder);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::bind($key, $binder);
         }
         
         /**
@@ -10402,7 +10568,8 @@ namespace {
          * @static 
          */
         public static function createClassBinding($binding){
-            return \Illuminate\Routing\Router::createClassBinding($binding);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::createClassBinding($binding);
         }
         
         /**
@@ -10414,7 +10581,8 @@ namespace {
          * @static 
          */
         public static function pattern($key, $pattern){
-            \Illuminate\Routing\Router::pattern($key, $pattern);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::pattern($key, $pattern);
         }
         
         /**
@@ -10425,7 +10593,8 @@ namespace {
          * @static 
          */
         public static function patterns($patterns){
-            \Illuminate\Routing\Router::patterns($patterns);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::patterns($patterns);
         }
         
         /**
@@ -10437,7 +10606,8 @@ namespace {
          * @static 
          */
         public static function callRouteBefore($route, $request){
-            return \Illuminate\Routing\Router::callRouteBefore($route, $request);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::callRouteBefore($route, $request);
         }
         
         /**
@@ -10448,7 +10618,8 @@ namespace {
          * @static 
          */
         public static function findPatternFilters($request){
-            return \Illuminate\Routing\Router::findPatternFilters($request);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::findPatternFilters($request);
         }
         
         /**
@@ -10461,7 +10632,8 @@ namespace {
          * @static 
          */
         public static function callRouteAfter($route, $request, $response){
-            return \Illuminate\Routing\Router::callRouteAfter($route, $request, $response);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::callRouteAfter($route, $request, $response);
         }
         
         /**
@@ -10476,7 +10648,8 @@ namespace {
          * @static 
          */
         public static function callRouteFilter($filter, $parameters, $route, $request, $response = null){
-            return \Illuminate\Routing\Router::callRouteFilter($filter, $parameters, $route, $request, $response);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::callRouteFilter($filter, $parameters, $route, $request, $response);
         }
         
         /**
@@ -10487,7 +10660,8 @@ namespace {
          * @static 
          */
         public static function withoutFilters($callback){
-            \Illuminate\Routing\Router::withoutFilters($callback);
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::withoutFilters($callback);
         }
         
         /**
@@ -10497,7 +10671,8 @@ namespace {
          * @static 
          */
         public static function enableFilters(){
-            \Illuminate\Routing\Router::enableFilters();
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::enableFilters();
         }
         
         /**
@@ -10507,7 +10682,8 @@ namespace {
          * @static 
          */
         public static function disableFilters(){
-            \Illuminate\Routing\Router::disableFilters();
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::disableFilters();
         }
         
         /**
@@ -10519,7 +10695,8 @@ namespace {
          * @static 
          */
         public static function input($key, $default = null){
-            return \Illuminate\Routing\Router::input($key, $default);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::input($key, $default);
         }
         
         /**
@@ -10529,7 +10706,8 @@ namespace {
          * @static 
          */
         public static function getCurrentRoute(){
-            return \Illuminate\Routing\Router::getCurrentRoute();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::getCurrentRoute();
         }
         
         /**
@@ -10539,7 +10717,8 @@ namespace {
          * @static 
          */
         public static function current(){
-            return \Illuminate\Routing\Router::current();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::current();
         }
         
         /**
@@ -10550,7 +10729,8 @@ namespace {
          * @static 
          */
         public static function has($name){
-            return \Illuminate\Routing\Router::has($name);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::has($name);
         }
         
         /**
@@ -10560,7 +10740,8 @@ namespace {
          * @static 
          */
         public static function currentRouteName(){
-            return \Illuminate\Routing\Router::currentRouteName();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::currentRouteName();
         }
         
         /**
@@ -10571,7 +10752,8 @@ namespace {
          * @static 
          */
         public static function is(){
-            return \Illuminate\Routing\Router::is();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::is();
         }
         
         /**
@@ -10582,7 +10764,8 @@ namespace {
          * @static 
          */
         public static function currentRouteNamed($name){
-            return \Illuminate\Routing\Router::currentRouteNamed($name);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::currentRouteNamed($name);
         }
         
         /**
@@ -10592,7 +10775,8 @@ namespace {
          * @static 
          */
         public static function currentRouteAction(){
-            return \Illuminate\Routing\Router::currentRouteAction();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::currentRouteAction();
         }
         
         /**
@@ -10603,7 +10787,8 @@ namespace {
          * @static 
          */
         public static function uses(){
-            return \Illuminate\Routing\Router::uses();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::uses();
         }
         
         /**
@@ -10614,7 +10799,8 @@ namespace {
          * @static 
          */
         public static function currentRouteUses($action){
-            return \Illuminate\Routing\Router::currentRouteUses($action);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::currentRouteUses($action);
         }
         
         /**
@@ -10624,7 +10810,8 @@ namespace {
          * @static 
          */
         public static function getCurrentRequest(){
-            return \Illuminate\Routing\Router::getCurrentRequest();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::getCurrentRequest();
         }
         
         /**
@@ -10634,7 +10821,8 @@ namespace {
          * @static 
          */
         public static function getRoutes(){
-            return \Illuminate\Routing\Router::getRoutes();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::getRoutes();
         }
         
         /**
@@ -10644,7 +10832,8 @@ namespace {
          * @static 
          */
         public static function getControllerDispatcher(){
-            return \Illuminate\Routing\Router::getControllerDispatcher();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::getControllerDispatcher();
         }
         
         /**
@@ -10655,17 +10844,8 @@ namespace {
          * @static 
          */
         public static function setControllerDispatcher($dispatcher){
-            \Illuminate\Routing\Router::setControllerDispatcher($dispatcher);
-        }
-        
-        /**
-         * Get a controller inspector instance.
-         *
-         * @return \Illuminate\Routing\ControllerInspector 
-         * @static 
-         */
-        public static function getInspector(){
-            return \Illuminate\Routing\Router::getInspector();
+            //Method inherited from \Illuminate\Routing\Router            
+            \Dingo\Api\Routing\Router::setControllerDispatcher($dispatcher);
         }
         
         /**
@@ -10675,7 +10855,8 @@ namespace {
          * @static 
          */
         public static function getPatterns(){
-            return \Illuminate\Routing\Router::getPatterns();
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::getPatterns();
         }
         
         /**
@@ -10688,7 +10869,8 @@ namespace {
          * @static 
          */
         public static function handle($request, $type = 1, $catch = true){
-            return \Illuminate\Routing\Router::handle($request, $type, $catch);
+            //Method inherited from \Illuminate\Routing\Router            
+            return \Dingo\Api\Routing\Router::handle($request, $type, $catch);
         }
         
     }
@@ -11598,13 +11780,32 @@ namespace {
     class URL extends \Illuminate\Support\Facades\URL{
         
         /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function action($action, $parameters = array(), $absolute = true){
+            return \Dingo\Api\Routing\UrlGenerator::action($action, $parameters, $absolute);
+        }
+        
+        /**
+         * {@inheritDoc}
+         *
+         * @static 
+         */
+        public static function route($name, $parameters = array(), $absolute = true, $route = null){
+            return \Dingo\Api\Routing\UrlGenerator::route($name, $parameters, $absolute, $route);
+        }
+        
+        /**
          * Get the full URL for the current request.
          *
          * @return string 
          * @static 
          */
         public static function full(){
-            return \Illuminate\Routing\UrlGenerator::full();
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::full();
         }
         
         /**
@@ -11614,7 +11815,8 @@ namespace {
          * @static 
          */
         public static function current(){
-            return \Illuminate\Routing\UrlGenerator::current();
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::current();
         }
         
         /**
@@ -11624,7 +11826,8 @@ namespace {
          * @static 
          */
         public static function previous(){
-            return \Illuminate\Routing\UrlGenerator::previous();
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::previous();
         }
         
         /**
@@ -11637,7 +11840,8 @@ namespace {
          * @static 
          */
         public static function to($path, $extra = array(), $secure = null){
-            return \Illuminate\Routing\UrlGenerator::to($path, $extra, $secure);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::to($path, $extra, $secure);
         }
         
         /**
@@ -11649,7 +11853,8 @@ namespace {
          * @static 
          */
         public static function secure($path, $parameters = array()){
-            return \Illuminate\Routing\UrlGenerator::secure($path, $parameters);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::secure($path, $parameters);
         }
         
         /**
@@ -11661,7 +11866,8 @@ namespace {
          * @static 
          */
         public static function asset($path, $secure = null){
-            return \Illuminate\Routing\UrlGenerator::asset($path, $secure);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::asset($path, $secure);
         }
         
         /**
@@ -11672,7 +11878,8 @@ namespace {
          * @static 
          */
         public static function secureAsset($path){
-            return \Illuminate\Routing\UrlGenerator::secureAsset($path);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::secureAsset($path);
         }
         
         /**
@@ -11683,35 +11890,8 @@ namespace {
          * @static 
          */
         public static function forceSchema($schema){
-            \Illuminate\Routing\UrlGenerator::forceSchema($schema);
-        }
-        
-        /**
-         * Get the URL to a named route.
-         *
-         * @param string $name
-         * @param mixed $parameters
-         * @param bool $absolute
-         * @param \Illuminate\Routing\Route $route
-         * @return string 
-         * @throws \InvalidArgumentException
-         * @static 
-         */
-        public static function route($name, $parameters = array(), $absolute = true, $route = null){
-            return \Illuminate\Routing\UrlGenerator::route($name, $parameters, $absolute, $route);
-        }
-        
-        /**
-         * Get the URL to a controller action.
-         *
-         * @param string $action
-         * @param mixed $parameters
-         * @param bool $absolute
-         * @return string 
-         * @static 
-         */
-        public static function action($action, $parameters = array(), $absolute = true){
-            return \Illuminate\Routing\UrlGenerator::action($action, $parameters, $absolute);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            \Dingo\Api\Routing\UrlGenerator::forceSchema($schema);
         }
         
         /**
@@ -11722,7 +11902,8 @@ namespace {
          * @static 
          */
         public static function forceRootUrl($root){
-            \Illuminate\Routing\UrlGenerator::forceRootUrl($root);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            \Dingo\Api\Routing\UrlGenerator::forceRootUrl($root);
         }
         
         /**
@@ -11733,7 +11914,8 @@ namespace {
          * @static 
          */
         public static function isValidUrl($path){
-            return \Illuminate\Routing\UrlGenerator::isValidUrl($path);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::isValidUrl($path);
         }
         
         /**
@@ -11743,7 +11925,8 @@ namespace {
          * @static 
          */
         public static function getRequest(){
-            return \Illuminate\Routing\UrlGenerator::getRequest();
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            return \Dingo\Api\Routing\UrlGenerator::getRequest();
         }
         
         /**
@@ -11754,7 +11937,8 @@ namespace {
          * @static 
          */
         public static function setRequest($request){
-            \Illuminate\Routing\UrlGenerator::setRequest($request);
+            //Method inherited from \Illuminate\Routing\UrlGenerator            
+            \Dingo\Api\Routing\UrlGenerator::setRequest($request);
         }
         
     }
@@ -14029,6 +14213,404 @@ namespace {
          */
         public static function save($filename){
             return \Thujohn\Rss\Rss::save($filename);
+        }
+        
+    }
+
+
+    class API extends \Dingo\Api\Facade\API{
+        
+        /**
+         * Attach files to be uploaded.
+         *
+         * @param array $files
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function attach($files){
+            return \Dingo\Api\Dispatcher::attach($files);
+        }
+        
+        /**
+         * Internal request will be authenticated as the given user.
+         *
+         * @param \Illuminate\Auth\GenericUser|\Illuminate\Database\Eloquent\Model $user
+         * @throws \RuntimeException
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function be($user){
+            return \Dingo\Api\Dispatcher::be($user);
+        }
+        
+        /**
+         * Send a JSON payload in the request body.
+         *
+         * @param string|array $content
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function json($content){
+            return \Dingo\Api\Dispatcher::json($content);
+        }
+        
+        /**
+         * Sets the domain to be used for the request.
+         *
+         * @param string $domain
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function on($domain){
+            return \Dingo\Api\Dispatcher::on($domain);
+        }
+        
+        /**
+         * Return the raw response object once request is dispatched.
+         *
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function raw(){
+            return \Dingo\Api\Dispatcher::raw();
+        }
+        
+        /**
+         * Only authenticate with the given user for a single request.
+         *
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function once(){
+            return \Dingo\Api\Dispatcher::once();
+        }
+        
+        /**
+         * Set the version of the API for the next request.
+         *
+         * @param string $version
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function version($version){
+            return \Dingo\Api\Dispatcher::version($version);
+        }
+        
+        /**
+         * Set the parameters to be sent on the next API request.
+         *
+         * @param string|array $parameters
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function with($parameters){
+            return \Dingo\Api\Dispatcher::with($parameters);
+        }
+        
+        /**
+         * Set a header to be sent on the next API request.
+         *
+         * @param string $key
+         * @param string $value
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function header($key, $value){
+            return \Dingo\Api\Dispatcher::header($key, $value);
+        }
+        
+        /**
+         * Set a cookie to be sent on the next API request.
+         *
+         * @param \Symfony\Component\HttpFoundation\Cookie $cookie
+         * @return \Dingo\Api\Dispatcher 
+         * @static 
+         */
+        public static function cookie($cookie){
+            return \Dingo\Api\Dispatcher::cookie($cookie);
+        }
+        
+        /**
+         * Perform an API request to a named route.
+         *
+         * @param string $name
+         * @param string|array $parameters
+         * @param string|array $requestParameters
+         * @return mixed 
+         * @static 
+         */
+        public static function route($name, $parameters = array(), $requestParameters = array()){
+            return \Dingo\Api\Dispatcher::route($name, $parameters, $requestParameters);
+        }
+        
+        /**
+         * Perform an API request to a controller action.
+         *
+         * @param string $action
+         * @param string|array $parameters
+         * @param string|array $requestParameters
+         * @return mixed 
+         * @static 
+         */
+        public static function action($action, $parameters = array(), $requestParameters = array()){
+            return \Dingo\Api\Dispatcher::action($action, $parameters, $requestParameters);
+        }
+        
+        /**
+         * Perform API GET request.
+         *
+         * @param string $uri
+         * @param string|array $parameters
+         * @return mixed 
+         * @static 
+         */
+        public static function get($uri, $parameters = array()){
+            return \Dingo\Api\Dispatcher::get($uri, $parameters);
+        }
+        
+        /**
+         * Perform API POST request.
+         *
+         * @param string $uri
+         * @param string|array $parameters
+         * @param string $content
+         * @return mixed 
+         * @static 
+         */
+        public static function post($uri, $parameters = array(), $content = ''){
+            return \Dingo\Api\Dispatcher::post($uri, $parameters, $content);
+        }
+        
+        /**
+         * Perform API PUT request.
+         *
+         * @param string $uri
+         * @param string|array $parameters
+         * @param string $content
+         * @return mixed 
+         * @static 
+         */
+        public static function put($uri, $parameters = array(), $content = ''){
+            return \Dingo\Api\Dispatcher::put($uri, $parameters, $content);
+        }
+        
+        /**
+         * Perform API PATCH request.
+         *
+         * @param string $uri
+         * @param string|array $parameters
+         * @param string $content
+         * @return mixed 
+         * @static 
+         */
+        public static function patch($uri, $parameters = array(), $content = ''){
+            return \Dingo\Api\Dispatcher::patch($uri, $parameters, $content);
+        }
+        
+        /**
+         * Perform API DELETE request.
+         *
+         * @param string $uri
+         * @param string|array $parameters
+         * @param string $content
+         * @return mixed 
+         * @static 
+         */
+        public static function delete($uri, $parameters = array(), $content = ''){
+            return \Dingo\Api\Dispatcher::delete($uri, $parameters, $content);
+        }
+        
+    }
+
+
+    class Authorizer extends \LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade{
+        
+        /**
+         * 
+         *
+         * @return \League\OAuth2\Server\AuthorizationServer 
+         * @static 
+         */
+        public static function getIssuer(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getIssuer();
+        }
+        
+        /**
+         * 
+         *
+         * @return \League\OAuth2\Server\ResourceServer 
+         * @static 
+         */
+        public static function getChecker(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getChecker();
+        }
+        
+        /**
+         * Issue an access token if the request parameters are valid
+         *
+         * @return array a response object for the protocol in use
+         * @static 
+         */
+        public static function issueAccessToken(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::issueAccessToken();
+        }
+        
+        /**
+         * Get the Auth Code request parameters
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getAuthCodeRequestParams(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getAuthCodeRequestParams();
+        }
+        
+        /**
+         * Get a single parameter from the auth code request parameters
+         *
+         * @param $key
+         * @param null $default
+         * @return mixed 
+         * @static 
+         */
+        public static function getAuthCodeRequestParam($key, $default = null){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getAuthCodeRequestParam($key, $default);
+        }
+        
+        /**
+         * Check the validity of the auth code request
+         *
+         * @return null a response appropriate for the protocol in use
+         * @static 
+         */
+        public static function checkAuthCodeRequest(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::checkAuthCodeRequest();
+        }
+        
+        /**
+         * Issue an auth code
+         *
+         * @param string $ownerType the auth code owner type
+         * @param string $ownerId the auth code owner id
+         * @param array $params additional parameters to merge
+         * @return string the auth code redirect url
+         * @static 
+         */
+        public static function issueAuthCode($ownerType, $ownerId, $params = array()){
+            return \LucaDegasperi\OAuth2Server\Authorizer::issueAuthCode($ownerType, $ownerId, $params);
+        }
+        
+        /**
+         * Generate a redirect uri when the auth code request is denied by the user
+         *
+         * @return string a correctly formed url to redirect back to
+         * @static 
+         */
+        public static function authCodeRequestDeniedRedirectUri(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::authCodeRequestDeniedRedirectUri();
+        }
+        
+        /**
+         * get the RedirectUri generator instance
+         *
+         * @return \LucaDegasperi\OAuth2Server\RedirectUri 
+         * @static 
+         */
+        public static function getRedirectUriGenerator(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getRedirectUriGenerator();
+        }
+        
+        /**
+         * Set the RedirectUri generator instance
+         *
+         * @param $redirectUri
+         * @static 
+         */
+        public static function setRedirectUriGenerator($redirectUri){
+            return \LucaDegasperi\OAuth2Server\Authorizer::setRedirectUriGenerator($redirectUri);
+        }
+        
+        /**
+         * Validate a request with an access token in it
+         *
+         * @param bool $httpHeadersOnly whether or not to check only the http headers of the request
+         * @param string|null $accessToken an access token to validate
+         * @return mixed 
+         * @static 
+         */
+        public static function validateAccessToken($httpHeadersOnly = false, $accessToken = null){
+            return \LucaDegasperi\OAuth2Server\Authorizer::validateAccessToken($httpHeadersOnly, $accessToken);
+        }
+        
+        /**
+         * get the scopes associated with the current request
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getScopes(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getScopes();
+        }
+        
+        /**
+         * Check if the current request has all the scopes passed
+         *
+         * @param string $scope the scope to check for existence
+         * @return bool 
+         * @static 
+         */
+        public static function hasScope($scope){
+            return \LucaDegasperi\OAuth2Server\Authorizer::hasScope($scope);
+        }
+        
+        /**
+         * Get the resource owner ID of the current request
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getResourceOwnerId(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getResourceOwnerId();
+        }
+        
+        /**
+         * Get the resource owner type of the current request (client or user)
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getResourceOwnerType(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getResourceOwnerType();
+        }
+        
+        /**
+         * get the client id of the current request
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getClientId(){
+            return \LucaDegasperi\OAuth2Server\Authorizer::getClientId();
+        }
+        
+        /**
+         * Set the request to use on the issuer and checker
+         *
+         * @param \Symfony\Component\HttpFoundation\Request $request
+         * @static 
+         */
+        public static function setRequest($request){
+            return \LucaDegasperi\OAuth2Server\Authorizer::setRequest($request);
+        }
+        
+        /**
+         * Set the token type to use
+         *
+         * @param \League\OAuth2\Server\TokenType\TokenTypeInterface $tokenType
+         * @static 
+         */
+        public static function setTokenType($tokenType){
+            return \LucaDegasperi\OAuth2Server\Authorizer::setTokenType($tokenType);
         }
         
     }

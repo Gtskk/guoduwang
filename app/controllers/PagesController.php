@@ -1,7 +1,7 @@
 <?php
 
-use Gtskk\Storage\Topic\TopicRepository as Topic;
-use Gtskk\Storage\Member\MemberRepository as Member;
+use Gtskk\Storage\Topic\TopicInterface as Topic;
+use Gtskk\Storage\Member\MemberInterface as Member;
 
 class PagesController extends BaseController {
 

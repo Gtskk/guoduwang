@@ -3,7 +3,9 @@
 
         init: function(){
             var self = this;
-            $(document).pjax('a:not(a[target="_blank"])', 'body');
+            $(document).pjax('a:not(a[target="_blank"])', 'body', {
+                timeout: 3000
+            });
             $(document).on('pjax:send', function() {
                 NProgress.start();
             });

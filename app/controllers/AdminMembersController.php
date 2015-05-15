@@ -1,8 +1,8 @@
 <?php
 
 use Stevemo\Cpanel\Controllers\BaseController;
-use Gtskk\Storage\Member\MemberRepository as Member;
-use Gtskk\Storage\Topic\TopicRepository as Topic;
+use Gtskk\Storage\Member\MemberInterface as Member;
+use Gtskk\Storage\Topic\TopicInterface as Topic;
 
 class AdminMembersController extends BaseController {
 
@@ -37,7 +37,16 @@ class AdminMembersController extends BaseController {
 	 */
 	public function index()
 	{
-		$members = $this->member->paginateSelect();
+		$page = Input::get('page', 1);
+        $perPage = Config::get('site.topic_per_page');
+
+        $pagiData = $this->member->paginateSelect($page, $perPage);
+        $members = Paginator::make(
+            $pagiData->items,
+            $pagiData->totalItems,
+            $perPage
+        );
+
         return View::make('theme::admin.members.index', compact('members'));
 	}
 

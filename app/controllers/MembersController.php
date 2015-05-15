@@ -1,8 +1,8 @@
 <?php
 
 use Gtskk\Listeners\LoginAuthenticatorListener;
-use Gtskk\Storage\Member\MemberRepository as Member;
-use Gtskk\Storage\Topic\TopicRepository as Topic;
+use Gtskk\Storage\Member\MemberInterface as Member;
+use Gtskk\Storage\Topic\TopicInterface as Topic;
 
 class MembersController extends BaseController implements LoginAuthenticatorListener
 {

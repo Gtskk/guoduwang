@@ -1,6 +1,9 @@
 <?php namespace Gtskk\Storage;
 
+use Member, Topic;
 use Illuminate\Support\ServiceProvider;
+use Gtskk\Storage\Topic\EloquentTopicRepository;
+use Gtskk\Storage\Member\EloquentMemberRepository;
 
 class StorageServiceProvider extends ServiceProvider
 {
@@ -8,9 +11,15 @@ class StorageServiceProvider extends ServiceProvider
 
 	public function register()
 	{
-		$this->app->bind('Gtskk\Storage\Topic\TopicRepository', 'Gtskk\Storage\Topic\EloquentTopicRepository');
+		$this->app->bind('Gtskk\Storage\Topic\TopicInterface', function($app)
+		{
+			return new EloquentTopicRepository(new Topic);
+		});
 
-		$this->app->bind('Gtskk\Storage\Member\MemberRepository', 'Gtskk\Storage\Member\EloquentMemberRepository');
+		$this->app->bind('Gtskk\Storage\Member\MemberInterface', function($app)
+		{
+			return new EloquentMemberRepository(new Member);
+		});
 	}
 
 	/**
@@ -21,8 +30,8 @@ class StorageServiceProvider extends ServiceProvider
 	public function provides()
 	{
 		return array(
-			'Gtskk\Storage\Member\MemberRepository',
-			'Gtskk\Storage\Topic\TopicRepository'
+			'Gtskk\Storage\Member\MemberInterface',
+			'Gtskk\Storage\Topic\TopicInterface'
 		);
 	}
 }

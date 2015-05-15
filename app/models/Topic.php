@@ -90,48 +90,12 @@ class Topic extends Ardent
 					->paginate($limit);
 	}
 
-	public function getTopicsWithFilter($filter, $limit = 13)
-	{
-		return $this->applyFilter($filter)
-					->with('member', 'node', 'lastReplyUser')
-					->paginate($limit);
-	}
-
-	public function getTrashTopicsWithFilter($filter, $limit = 13)
-	{
-		return $this->applyFilter($filter)
-					->with('member', 'node')
-					->onlyTrashed()
-					->paginate($limit);
-	}
-
 	public function getNodeTopicsWithFilter($filter, $node_id, $limit = 13)
 	{
 		return $this->applyFilter($filter)
 					->where('node_id', '=', $node_id)
 					->with('member', 'node', 'lastReplyUser')
 					->paginate($limit);
-	}
-
-	public function applyFilter($filter)
-	{
-		switch ($filter) {
-			case 'noreply':
-				return $this->where('reply_count', 0)->recent();
-				break;
-			case 'vote':
-				return $this->orderBy('vote_count', 'desc')->recent();
-				break;
-			case 'excellent':
-				return $this->excellent()->recent();
-				break;
-			case 'recent':
-				return $this->recent();
-				break;
-			default:
-				return $this->pin()->recentReply();
-				break;
-		}
 	}
 
 	/**
@@ -169,12 +133,5 @@ class Topic extends Ardent
     public function scopeExcellent($query)
     {
         return $query->where('is_excellent', '=', true);
-    }
-
-    public static function makeExcerpt($body)
-    {
-        $html = $body;
-        $excerpt = trim(preg_replace('/\s\s+/', ' ', strip_tags($html)));
-        return str_limit($excerpt, 200);
     }
 }

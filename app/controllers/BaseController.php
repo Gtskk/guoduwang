@@ -27,6 +27,11 @@ class BaseController extends Controller {
 		View::share('currentUser', Confide::user());
 	}
 
+	/**
+	 * 验证权限
+	 * @param  int $author_id 用户ID
+	 * @return boolean   是否具有权限
+	 */
 	public function authorOrAdminPermissioinRequire($author_id)
 	{
 		if (!Entrust::can('manage_topics') || $author_id != Confide::user()->id)

@@ -1,40 +1,65 @@
 <?php namespace Gtskk\Storage\Member;
 
-use Member;
+use Illuminate\Database\Eloquent\Model;
 
-class EloquentMemberRepository implements MemberRepository
+/**
+ * Eloquent会员库
+ */
+class EloquentMemberRepository implements MemberInterface
 {
+
+	protected $member;
+
+	public function __construct(Model $member)
+	{
+		$this->member = $member;
+	}
+
+	/**
+	 * 获取指定数目的会员
+	 * @return Collection 会员Collection
+	 */
 	public function limitAll()
 	{
-		return Member::recent()->take(\Config::get('site.members_count'))->get();
+		return $this->member->recent()->take(\Config::get('site.members_count'))->get();
 	}
 
+	/**
+	 * 查询指定id的会员，查不到就抛出错误
+	 * @param  int $id 会员ID
+	 * @return Member  会员对象
+	 */
 	public function findOrFail($id)
 	{
-		return Member::findOrFail($id);
+		return $this->member->findOrFail($id);
 	}
 
+	/**
+	 * 创建新会员
+	 * @param  array $input 注册有关数据数组
+	 * @return Member  会员对象
+	 */
 	public function create($input)
 	{
 		$repo = \App::make('MemberRepository');
-        $user = $repo->signup($input);
+        $member = $repo->signup($input);
 
-        return $user;
+        return $member;
 	}
 
 	public function destroy($id)
 	{
-		return Member::destroy($id);
+		return $this->member->destroy($id);
 	}
 
 	public function restore($id)
 	{
-		return Member::onlyTrashed()->findOrFail($id)->restore();
+		return $this->member->onlyTrashed()->findOrFail($id)->restore();
 	}
 
 	public function restoreMany($ids)
 	{
-		$members = Member::onlyTrashed()->whereIn('id', $ids)->get();
+		$members = $this->member->onlyTrashed()->whereIn('id', $ids)->get();
     	$members->each(function($topic){
     		$topic->restore();
     	});
@@ -48,26 +73,34 @@ class EloquentMemberRepository implements MemberRepository
 		$result->totalItems = 0;
 		$result->items = array();
 
-		$articles = Member::where('id', '<>', 1)
+		$members = $this->member->where('id', '<>', 1)
 			->skip($limit * ($page -1))
 			->take($limit)
 			->get();
 
-		$result->items = $articles->all();
+		$result->items = $members->all();
+		$result->totalItems = $this->totalMembers();
+
+		return $result;
 	}
 
 	public function paginateDelete($limit = 15)
 	{
-		return Member::onlyTrashed()->paginate($limit);
+		return $this->member->onlyTrashed()->paginate($limit);
 	}
 
 	public function getRecentMembers($limit)
 	{
-		return Member::recent()->take($limit)->get();
+		return $this->member->recent()->take($limit)->get();
 	}
 
 	public function search($q)
 	{
-		return Member::where('username', 'like', '%'.$q.'%')->get(array('id', 'username', 'image_url', 'email'));
+		return $this->member->where('username', 'like', '%'.$q.'%')->get(array('id', 'username', 'image_url', 'email'));
+	}
+
+	protected function totalMembers()
+	{
+		return $this->member->count();
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Stevemo\Cpanel\Controllers\BaseController;
+use Gtskk\Storage\Topic\TopicInterface as Topic;
 
 class AdminTopicsController extends BaseController {
 
@@ -18,8 +19,17 @@ class AdminTopicsController extends BaseController {
 	 */
 	public function index()
 	{
-		$filter = $this->topic->present()->getTopicFilter();
-        $topics = $this->topic->getTopicsWithFilter($filter);
+		$page = Input::get('page', 1);
+        $perPage = Config::get('site.topic_per_page');
+
+        $filter = $this->topic->getTopicFilter();
+        $pagiData = $this->topic->getTopicsWithFilter($filter, $page);
+        $topics = Paginator::make(
+            $pagiData->items,
+            $pagiData->totalItems,
+            $perPage
+        );
+
         return View::make('theme::admin.topics.index', compact('topics'));
 	}
 
@@ -30,8 +40,17 @@ class AdminTopicsController extends BaseController {
 	 */
 	public function topicsTrash()
 	{
-		$filter = $this->topic->present()->getTopicFilter();
-        $topics = $this->topic->getTrashTopicsWithFilter($filter);
+		$page = Input::get('page', 1);
+        $perPage = Config::get('site.topic_per_page');
+
+        $filter = $this->topic->getTopicFilter();
+        $pagiData = $this->topic->getTrashTopicsWithFilter($filter, $page);
+        $topics = Paginator::make(
+            $pagiData->items,
+            $pagiData->totalItems,
+            $perPage
+        );
+
         return View::make('theme::admin.topics.trash', compact('topics'));
 	}
 
@@ -43,7 +62,7 @@ class AdminTopicsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-        Topic::destroy($id);
+        \Topic::destroy($id);
 
         return Redirect::route('admin.topics.index')
             ->with('success',Lang::get('cpanel::common.delete_success'));
@@ -59,7 +78,7 @@ class AdminTopicsController extends BaseController {
         $ids = Input::get('delete');
         if($ids)
         {
-        	Topic::destroy($ids);
+        	\Topic::destroy($ids);
         	return Redirect::route('admin.topics.index')
             ->with('success',Lang::get('cpanel::common.delete_success'));
         }
@@ -76,7 +95,7 @@ class AdminTopicsController extends BaseController {
 	 */
 	public function restore($id)
 	{
-        $topic = Topic::onlyTrashed()->findOrFail($id);
+        $topic = \Topic::onlyTrashed()->findOrFail($id);
         $topic->restore();
 
         return Redirect::route('admin.topics.index')
@@ -93,7 +112,7 @@ class AdminTopicsController extends BaseController {
 		$ids = Input::get('delete');
 		if($ids)
         {
-        	$topics = Topic::onlyTrashed()->whereIn('id', $ids)->get();
+        	$topics = \Topic::onlyTrashed()->whereIn('id', $ids)->get();
         	$topics->each(function($topic){
         		$topic->restore();
         	});
